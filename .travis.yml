@@ -1,0 +1,9 @@
+sudo: required
+dist: trusty
+addons:
+  apt_packages:
+    - pandoc
+
+
+script:
+  - ./scripts/build-book.sh
