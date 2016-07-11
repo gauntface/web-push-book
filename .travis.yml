@@ -4,6 +4,7 @@ addons:
   apt_packages:
     - pandoc
     - texlive-latex-base
+    - texlive-fonts-recommended
 
 
 script:
