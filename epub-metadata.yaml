@@ -1,0 +1,11 @@
+---
+title:
+- type: main
+  text: Push Book
+- type: subtitle
+  text: A guide to adding push notifications to your web site.
+creator:
+- role: author
+  text: Matt Gaunt
+rights: © 2016 Matt Gaunt
+...

@@ -14,6 +14,6 @@ do
 done
 
 pandoc $PWD/**/*.md -o $PWD/build/push-book.pdf
-pandoc $PWD/**/*.md -o $PWD/build/push-book.epub
+pandoc $PWD/**/*.md -o $PWD/build/push-book.epub --epub-metadata $PWD/epub-metadata.yaml --epub-cover-image $PWD/images/cover-photo.png
 
 $PWD/third_party/kindlegen/kindlegen $PWD/build/push-book.epub -o push-book.mobi
