@@ -5,6 +5,7 @@ addons:
   apt_packages:
     - pandoc
     - texlive-full
+    - inkscape
 
 script:
   - ./scripts/build-book.sh
