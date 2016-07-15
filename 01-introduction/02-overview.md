@@ -24,7 +24,7 @@ you'll need to send and store on your servers.
 A `PushSubscription` contains all the information you need to know to send that
 device a push message.
 
-![Once a user is subscribed, the browser will give you a PushSubscription which you need to send and store on your server](build/images/browser-to-server.png)
+![Once a user is subscribed, the browser will give you a PushSubscription which you need to send and store on your server.](build/images/browser-to-server.png)
 
 ## Server Side
 
@@ -51,15 +51,15 @@ make an API call to it's `endpoint`, giving the request a specific format
 which is known as the **Web Push Protocol**. It basically defines what
 headers and format the body of the request should have.
 
-![When your server wishes to send a push message, it makes a web push protocol request to a push service](build/images/server-to-push-service.png)
+![When your server wishes to send a push message, it makes a web push protocol request to a push service.](build/images/server-to-push-service.png)
 
-## Service Worker Code
+## Background JavaScript Code
 
-When a push message is received by a browser, the browser dispatches an event
-to a JavaScript file known as a Service Worker, which we'll cover in the next
-section.
+When a push message is received by a browser, the browser dispatches a `push`
+event to a special JavaScript file known as a Service Worker. Inside this event
+the developer can receive the notification, perform any background tasks and
+ultimately show a notification to the user. We'll look more closely at how
+to do this in a later section.
 
-It's inside the `push` event that you'll need to show a notification
-to the user.
 
-// TODO: Diagram of Browser -> Notification
+![When a push message is sent from a push service to a users device, your service worker receives a push event.](build/images/push-service-to-sw-event.svg)
