@@ -62,4 +62,4 @@ ultimately show a notification to the user. We'll look more closely at how
 to do this in a later section.
 
 
-![When a push message is sent from a push service to a users device, your service worker receives a push event.](build/images/push-service-to-sw-event.svg)
+![When a push message is sent from a push service to a users device, your service worker receives a push event.](build/images/push-service-to-sw-event.png)
