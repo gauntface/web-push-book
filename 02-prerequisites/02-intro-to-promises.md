@@ -161,5 +161,10 @@ pass the result onto the next step rather than nest Promise chains.
 ## Intro to Service Worker
 
 Final thing I wanted to cover was service workers and this will really be a
-high level run through as I'll be mentioning service workers **a lot** later
-on in this book.
+high level run through as I'll be mentioning service workers **a lot**
+throughout this book.
+
+Every developer is (or eventually becomes) happy with the notion that
+JavaScript runs inside of a web page.
+
+![A browser with a web page loaded and JavaScript running inside of that page](build/images/browser-with-javascript.png)
