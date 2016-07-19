@@ -168,3 +168,24 @@ Every developer is (or eventually becomes) happy with the notion that
 JavaScript runs inside of a web page.
 
 ![A browser with a web page loaded and JavaScript running inside of that page](build/images/browser-with-javascript.png)
+
+What the service work API does is it gives you a way to make the browser
+aware of "special" JavaScript files that run seperate from the page. These
+JavaScript files can run while your web page is closed or even when the
+users browser window is closed.
+
+![A browser a service worker running seperate from the page or running while the browser is closed](build/images/browser-with-serviceworker.png)
+
+With this, browsers have been able to add new API's to service worker files,
+including:
+
+- Push notifications (of course)
+- Support for network interception and manipulation (i.e. offline support)
+- Background Sync (ability to make a network request if the initial
+  request fails due to being offline)
+
+Ultimately, serviceworkers are a type of JavaScript worker and as a result
+have many of the API's you'd have in a worker.
+
+Like I said, we'll cover this in more detail later on in the book, just
+remember that a service worker script can run without your page being open.
