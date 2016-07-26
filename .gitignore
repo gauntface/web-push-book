@@ -1,2 +1,5 @@
 push-book.pdf
 push-book.epub
+inlined/
+build/
+node_modules/
