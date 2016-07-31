@@ -41,7 +41,7 @@ console.log(seperator);
 
 function inlineSourceCode(relativePath, fileContents) {
   let inlineCount = 0;
-
+  let regexResult = null;
   while(regexResult =
     /<%\s*include\(\s*['|"](.*)['|"]\s*\)\s*%>/g.exec(fileContents)) {
     const fullRegexString = regexResult[0];
