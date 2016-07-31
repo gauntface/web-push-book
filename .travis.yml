@@ -11,5 +11,8 @@ addons:
     - texlive-full
     - inkscape
 
+install:
+  - npm install
+
 script:
   - ./scripts/build-book.sh
