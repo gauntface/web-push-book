@@ -30,13 +30,7 @@ device a push message.
 
 A `PushSubscription` will have the following structure:
 
-    {
-      endpoint: 'https://my-push-service.com/some-kind-of-unique-id-1234',
-      keys: {
-        "p256dh" : "BNcRdreALRFXTkOOUHK1EtK2wtaz5Ry4YfYCA_0QTpQtUbVlUls0VJXg7A8u-Ts1XbjhazAkj7I99e8QcYP7DkM=",
-        "auth"   : "tBHItJI5svbpez7KI4CCXg=="
-      }
-    }
+<% include('./code-samples/example-subscription.md') %>
 
 The `endpoint` is the URL of the **push service**, which is essentially the
 service the will take requests to send push messages and deliver them to the

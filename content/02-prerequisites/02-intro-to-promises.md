@@ -21,34 +21,24 @@ them.
 
 A normal function is:
 
-    function() {
-      // Do codez here
-    }
+<% include('./code-samples/es2015/js-function.js') %>
 
 The equivalent fat arrow function is:
 
-    () => {
-      // Do codez here
-    }
+<% include('./code-samples/es2015/fat-arrow-function.js') %>
 
 If you have multiple arguments passed in, you go from:
 
-    function(arg1, arg2) {
-      // Do codez here
-    }
+<% include('./code-samples/es2015/js-function-with-args.js') %>
 
 To fat arrow this:
 
-    (arg1, arg2) => {
-      // Do codez here
-    }
+<% include('./code-samples/es2015/fat-arrow-function-with-args.js') %>
 
 The last final thing to master, if there is only one argument, you don't need
 the brackets:
 
-    arg1 => {
-      // Do codes here
-    }
+<% include('./code-samples/es2015/fat-arrow-function-single-arg.js') %>
 
 ### var vs const and let
 
@@ -72,14 +62,7 @@ callbacks.
 
 You might be used to code that looks like this:
 
-    someAPI(function((err, result) {
-      if (err) {
-        // Do something with the error
-        return;
-      }
-
-      // Do something with the result
-    });
+<% include('./code-samples/promises/callback-function.js') %>
 
 This was easy to use and worked well. The only downside is that error cases
 weren't standardardised and it can lead to heavy nesting of function calls.
@@ -88,13 +71,7 @@ Promises is essentially a standardised why of approaching asynchronous method
 that can simplify APIS. Te equivalent promise of the code above is as
 follows:
 
-    someAPI()
-    .then(result => {
-      // Do something with the result
-    })
-    .catch(err => {
-      // Do something with the error
-    })
+<% include('./code-samples/promises/basic-promise.js') %>
 
 The difference is minor, the result and error are seperated via the `then` and
 `catch` method, both passing in a callback function.
@@ -103,38 +80,15 @@ The major benefit of promises is that your can *chain* promises together by
 returning a promise inside of a promises callback.
 
 Let's say we were making waiting for a browser event and afterwards we wanted
-to make a network request, if we were using callbacks, we would do the
+to make a network request,. Using callbacks, we would do the
 following:
 
-    waitForBrowserEvent(function(err) {
-      if (err) {
-        // Handle error
-        return;
-      }
-
-      makeNetworkRequest(function(err, result) {
-        if (err) {
-          // Handle error
-          return;
-        }
-
-        // Do something with network result
-      });
-    });
+<% include('./code-samples/promises/callback-chain.js') %>
 
 With promises we can chain them by returning a promise inside of a  promise
 callback:
 
-    waitForBrowserEvent()
-    .then(() => {
-      return makeNetworkRequest();
-    })
-    .then(result => {
-      // Do something with network result
-    })
-    .catch(err => {
-      // Handle error
-    })
+<% include('./code-samples/promises/promise-chain.js') %>
 
 This should be enough on promises to get you through the reast of this book,
 but it's not clear, I strongly recommend Jake Archibalds introduction to
@@ -144,16 +98,7 @@ usecases^[https://developers.google.com/web/fundamentals/primers/promises/].
 On a personal note, I found it really helpful to flatten my promise chains.
 By this, what I mean is that even though you can do this:
 
-    waitForBrowserEvent()
-    .then(() => {
-        return makeNetworkRequest()
-        .then(result => {
-          // Do something with the network request
-        });  
-    })
-    .catch(err => {
-      // Handle error
-    });
+<% include('./code-samples/promises/nested-promise-chain.js') %>
 
 Generally I've found it cleaner and easier to follow a Promise chaing, if you
 pass the result onto the next step rather than nest Promise chains.

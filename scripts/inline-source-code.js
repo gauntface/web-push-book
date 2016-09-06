@@ -6,16 +6,26 @@ const glob = require('glob');
 const mkdirp = require('mkdirp');
 const chalk = require('chalk');
 
+const DEBUG = false;
+
+const log = () => {
+  if (!DEBUG) {
+    return;
+  }
+
+  console.log(arguments);
+};
+
 const filePaths = glob.sync(path.join(__dirname, '..', 'content') + '/**/*.md');
 
 const seperator = chalk.grey('------------------------------------------');
 
 filePaths.forEach(filePath => {
-  console.log(seperator);
-  console.log();
+  log(seperator);
+  log();
 
-  console.log(chalk.blue('  File Path:') + ' ' + filePath);
-  console.log();
+  log(chalk.blue('  File Path:') + ' ' + filePath);
+  log();
 
   const fileContents = fs.readFileSync(filePath).toString();
 
@@ -27,16 +37,16 @@ filePaths.forEach(filePath => {
   const contentsRelativePath = path.relative(path.join(rootOfProject, 'content'), filePath);
   const outputPath = path.join(__dirname, '..', 'inlined', contentsRelativePath);
 
-  console.log(chalk.blue('  Output Path:') + ' ' + outputPath);
+  log(chalk.blue('  Output Path:') + ' ' + outputPath);
 
   mkdirp.sync(path.parse(outputPath).dir);
 
   fs.writeFileSync(outputPath, inlinedContents);
 
-  console.log();
+  log();
 });
 
-console.log(seperator);
+log(seperator);
 
 
 function inlineSourceCode(relativePath, fileContents) {
@@ -48,21 +58,22 @@ function inlineSourceCode(relativePath, fileContents) {
     const fileToInline = regexResult[1];
 
     const fileToInlinePath = path.join(__dirname, '..', relativePath, fileToInline);
-    console.log(chalk.magenta('  File to Inline:') + ' ' + fileToInlinePath);
+    log(chalk.magenta('  File to Inline:') + ' ' + fileToInlinePath);
 
     let codeContent = fs.readFileSync(fileToInlinePath).toString();
-    console.log('before', codeContent);
+    log('before', codeContent);
     codeContent = codeContent.replace(/^\s+|\s+$/g, '');
-    console.log('after');
+    log('after');
 
-    fileContents = fileContents.slice(0, regexResult.index) + codeContent +
+    fileContents = fileContents.slice(0, regexResult.index) + '``` javascript\n' +
+      codeContent + '\n```' +
       fileContents.slice(regexResult.index + fullRegexString.length, fileContents.length);
 
     inlineCount ++;
   }
 
   if (inlineCount === 0) {
-    console.log(chalk.magenta('  No Code Samples'));
+    log(chalk.magenta('  No Code Samples'));
   }
 
   return fileContents;
