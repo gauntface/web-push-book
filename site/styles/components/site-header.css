@@ -1,0 +1,53 @@
+.site-header {
+  --site-header-height: calc(var(--padding) * 18);
+
+  height: var(--site-header-height);
+
+  display: flex;
+  position: relative;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #37474f;
+  color: white;
+
+  padding: 0;
+}
+
+.site-header__heading {
+  display: flex;
+
+  flex-direction: column;
+
+  text-align: center;
+}
+
+.site-header__heading h1, .site-header__heading h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.site-header__heading h2 {
+  opacity: 0.6
+}
+
+.site-header .menu-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: var(--menu-button-height);
+  height: var(--menu-button-height);
+  min-width: auto;
+  background: none;
+  border: none;
+
+  padding: calc(calc(var(--menu-button-height) - var(--menu-button-svg-size)) / 2);
+}
+
+.site-header .menu-btn svg {
+  width: var(--menu-button-svg-size);
+  height: var(--menu-button-svg-size);
+}

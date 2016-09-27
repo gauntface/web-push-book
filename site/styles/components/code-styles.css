@@ -1,0 +1,73 @@
+@import "../../third_party/prism/prism.css";
+
+figure.highlight {
+  margin: 0;
+}
+
+pre, code, pre[class*="language-"], code[class*="language-"] {
+  background-color: rgba(0,0,0,.06);
+  border-radius: 3px;
+  white-space: pre-wrap;
+  text-shadow: none;
+}
+
+pre, pre[class*="language-"] {
+  padding: var(--padding);
+}
+
+code, code[class*="language-"] {
+  display: inline-block;
+  font-size: 12px;
+}
+
+/* Prism only highlighted code */
+code[class*=language-], pre[class*=language-] {
+  color: rgba(0,0,0,0.87);
+}
+
+code::before, code::after, code[class*="language-"]::before, code[class*="language-"]::after {
+  letter-spacing: -.2em;
+  content: "\00a0";
+}
+
+pre code, pre[class*="language-"] code[class*="language-"] {
+  width: 100%;
+
+  font-size: inherit;
+  background-color: transparent;
+
+  padding: 0;
+  box-sizing: border-box;
+  word-break: break-word;
+}
+
+pre code::before, pre code::after {
+  content: none;
+}
+
+/* Prism and code blocks styling and overrides */
+.token.attr-name, .token.builtin, .token.selector, .token.string {
+  color: #E91E63;
+}
+.token.boolean, .token.constant, .token.number, .token.property, .token.symbol, .token.tag {
+  color: #9D1DB3;
+}
+.token.atrule, .token.attr-value, .token.keyword {
+  color: #00BCD4;
+}
+.token.cr:before,
+.token.lf:before {
+  display: none;
+}
+.language-css .token.string,
+.style .token.string,
+.token.entity,
+.token.operator,
+.token.url,
+.token.variable {
+  color: #9D1DB3;
+  background: none;
+}
+
+.token.function {
+  color: #009688;
