@@ -1,0 +1,37 @@
+{% for staticFile in site.static_files %}
+{% if staticFile.path contains 'downloads/' %}
+
+{% if staticFile.path contains '.pdf' %}
+{% assign pdfDownload = staticFile.path %}
+{% endif %}
+
+{% if staticFile.path contains '.epub' %}
+{% assign epubDownload = staticFile.path %}
+{% endif %}
+
+{% if staticFile.path contains '.mobi' %}
+{% assign mobiDownload = staticFile.path %}
+{% endif %}
+
+{% endif %}
+{% endfor %}
+
+<footer>
+  <section>
+    <div class="downloads">
+      <h6>Download</h6>
+      <ul>
+        <li>
+          <a href="{{site.baseurl}}{{ pdfDownload }}">PDF</a>
+        </li>
+        <li>
+          <a href="{{site.baseurl}}{{ mobiDownload }}">mobi</a>
+        </li>
+        <li>
+          <a href="{{site.baseurl}}{{ epubDownload }}">epub</a>
+        </li>
+      </ul>
+    </div>
+    <p class="author">Matt Gaunt</p>
+  </section>
+</footer>

@@ -6,6 +6,10 @@
 @import "./components/footer.css";
 @import "./components/code-styles.css";
 
+html {
+  height: 100%;
+}
+
 html, body {
   width:100%;
 
@@ -14,6 +18,7 @@ html, body {
 }
 
 body {
+  min-height: 100%;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -21,8 +26,8 @@ body {
   color: var(--primary-font-color);
 }
 
-main {
-  max-width: 720px;
+main, footer section {
+  max-width: var(--page-content-max-width);
   padding: var(--vertical-padding) var(--horizontal-padding);
   box-sizing: border-box;
   margin-left: auto;
@@ -194,4 +199,24 @@ main > h1:first-of-type {
   width: 0;
   height: 0;
   visibility: hidden;
+}
+
+
+.front-page header {
+  padding: calc(var(--vertical-padding) * 3) var(--horizontal-padding);
+}
+
+.front-page header h1, .front-page header h2 {
+  max-width: calc(var(--page-content-max-width) - calc(var(--horizontal-padding) * 2));
+  font-weight: 700;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  background-color: var(--primary-bg-highlight-color);
+  font-size: 4rem;
+  line-height: 4.4rem;
+}
+
+.front-page .author {
+  text-align: center;
 }

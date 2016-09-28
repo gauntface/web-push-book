@@ -1,21 +1,15 @@
 ---
-layout: page
-title: Welcome to the Web Push Book.
+layout: front
+title: Web Push Book
 ---
-# What is this for?
+# Hello
 
-# Who is this for?
+This website has a whole mess of content on implementing push for the web.
 
-# Start Reading
+Push messaging was enabled on the web fairly recently now that the API has
+had some time to settle, it's time to cover how to use it.
 
-- View the Website
-- Get PDF
-- Get the ePub
-- Get the Kindle Version
+You can read about push here on this site *or* grab a copy of this content
+via one of the download links below.
 
-
-
-## On Website TODO
-
-- Download the book for offline
-- Register for push events on book changes / updates
+<a href="{{ site.content[1].url }}">Read Online</a>
