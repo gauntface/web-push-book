@@ -21,3 +21,8 @@ defaults:
       path: ""
     values:
       layout: "default"
+
+collections:
+  content:
+    output: true
+    permalink: /:path/

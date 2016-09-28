@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-CONTENT_PATH=$PWD/content
+CONTENT_PATH=$PWD/_content
 BUILD_PATH=$PWD/downloads
 IMAGES_PATH="$PWD/images"
 PNG_PATH="$IMAGES_PATH/png-version"

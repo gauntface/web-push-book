@@ -6,17 +6,22 @@ const glob = require('glob');
 const mkdirp = require('mkdirp');
 const chalk = require('chalk');
 
-const DEBUG = false;
+const DEBUG = true;
 
-const log = () => {
+const log = msg => {
   if (!DEBUG) {
     return;
   }
 
-  console.log(arguments);
+  if (!msg) {
+    msg = '';
+  }
+
+  console.log(msg);
 };
 
-const filePaths = glob.sync(path.join(__dirname, '..', 'content') + '/**/*.md');
+const folderName = '_content';
+const filePaths = glob.sync(path.join(__dirname, '..', folderName) + '/**/*.md');
 
 const seperator = chalk.grey('------------------------------------------');
 
@@ -34,7 +39,7 @@ filePaths.forEach(filePath => {
 
   const inlinedContents = inlineSourceCode(relativePath, fileContents);
 
-  const contentsRelativePath = path.relative(path.join(rootOfProject, 'content'), filePath);
+  const contentsRelativePath = path.relative(path.join(rootOfProject, folderName), filePath);
   const outputPath = path.join(__dirname, '..', '_inlined', contentsRelativePath);
 
   log(chalk.blue('  Output Path:') + ' ' + outputPath);

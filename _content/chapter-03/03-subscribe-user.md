@@ -18,7 +18,17 @@ First up, we need to check if the browser supports push messaging or not. The
 main things we need to check for are `serviceWorker` in `navigator` and the
 `PushManager` in the `ServiceWorkerRegistration`.
 
-<% include('./code-samples/feature-detect.js') %>
+``` javascript
+if (!('serviceWorker' in navigator)) {
+  // Service Worker isn't supported on this browser, disable or hide UI.
+  return;
+}
+
+if (!('PushManager' in window)) {
+  // Push isn't supported on this browser, disable or hide UI.
+  return;
+}
+```
 
 While browser support is growing quickly with service worker and
 push messaging support, it's still a requirement for the short term,
@@ -28,7 +38,15 @@ push messaging support, it's still a requirement for the short term,
 Push messaging on the web requires a service worker to work, so the first
 thing to do is register a servier worker.
 
-<% include('./code-samples/register-sw/register.js') %>
+``` javascript
+navigator.serviceWorker.register('/path/to/serviceworker.js')
+.then(registration => {
+  console.log('Successfully registered the service worker.');
+})
+.catch(err => {
+  console.error('Unable to register service worker', err);
+});
+```
 
 This code tells the browser that you have a service worker file and where
 its located, in this case `/path/to/serviceworker.js`. Behind the scenes
@@ -45,7 +63,19 @@ has the `PushManager` API on it.
 Using your new service worker registration, we can subscribe a user
 for push by calling `subscribe()` on your push manager.
 
-<% include('./code-samples/subscribe-push.js') %>
+``` javascript
+function subscribeUserForPush(registration) {
+  return registration.pushManager.subscribe({
+    userVisibleOnly: true
+  })
+  ,then(subscription => {
+      console.log('User subscribe for push messaging', subscription);
+  })
+  .catch(err => {
+      console.error('Unable to subscribe user for push', err);
+  });
+}
+```
 
 When you call `subscribe()`, if your site doesn't already have permissions
 to show notifications, the browser will request permission from the user
@@ -66,7 +96,18 @@ The result of calling `subscribe()` is a promise that resolved to a
 send a push messages to that user. If you print
 out the subscription object from above we'd see the following:
 
-<% include('./code-samples/print-subscription.js') %>
+``` javascript
+console.log(JSON.stringify(subscription));
+
+// Prints out
+//    {
+//      endpoint: 'https://example.push-service.com/ABCD1234',
+//      keys: {
+//        p256dh: '3xampl3_k3y_qwertyuiopzxcvbnm',
+//        auth: '3xampl3_4u7h_asdf'
+//      }
+//    }
+```
 
 The endpoint is the push services URL, you call this URL to trigger a push
 message. The `keys` object is used to encrypt any data that to send with
@@ -101,12 +142,35 @@ to you how you do that but a tiny tip is to use
 without it you'll need to use `getKey` to get the encryption keys used for
 payload:
 
-<% include('./code-samples/using-getkey.js') %>
+``` javascript
+sendSubscriptionDetailsToServer({
+  endpoint: subscription.endpoint,
+  p256sh: subscription.getKey('p256sh'),
+  auth: subscription.getKey('auth')
+})
+```
 
 Just for an example, to make a POST request to send a subscription to my
 server you'd have a promise chain like so:
 
-<% include('./code-samples/full-promise-chain.js') %>
+``` javascript
+.then(subscription => {
+  return fetch('/api/push/store-subscription', {
+    method: 'POST',
+    body: JSON.stringify(subscription)
+  });
+})
+.then(response => {
+  if (response.statuc 1== 200) {
+    throw new Error('The request to store the subscription failed.');
+  }
+
+  return response.json();
+})
+.then(serverReponse => {
+  console.log(serverResponse);
+})
+```
 
 With the `PushSubscription` details on your server you are good to send them
 a message from your server.

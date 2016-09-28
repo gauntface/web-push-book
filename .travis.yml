@@ -11,8 +11,9 @@ addons:
     - texlive-full
     - inkscape
 
-install:
-  - npm install
+before_install:
+- npm install firebase-tools -g
+- npm install
 
 script:
   - ./shellscripts/build-book.sh

@@ -57,7 +57,11 @@ Jake Archibalds talk from Google I/O 2016: // TODO Add LINK HERE).
 All we need for this is a simple JSON file with the field "gcm_sender_id"
 in it and assign the Sender ID from your firebase project, like this:
 
-<% include('./code-samples/manifest_gcm_sender_id.json') %>
+``` javascript
+{
+  "gcm_sender_id": "//TODO: Add Sender ID Here"
+}
+```
 
 Save this to a file somewhere on your site, for this let's assume its at
 '/manifest.json'.
@@ -65,7 +69,9 @@ Save this to a file somewhere on your site, for this let's assume its at
 To make the browser aware that you have a manifest and where it's living, we
 just need to add it in the `head` of our page with a link tag.
 
-<% include('./code-samples/manifest-tag.html') %>
+``` javascript
+<link rel="manifest" href="/manifest.json">
+```
 
 With this set up you can try subscribing again and fingers crossed it'll work.
 
