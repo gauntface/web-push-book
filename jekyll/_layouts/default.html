@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+  {% include html-head.html %}
+
+  <body>
+    <header>
+      <h1>{{page.title}}</h1>
+    </header>
+
+    <main>
+      {{ content }}
+    </main>
+
+  </body>
+
+  <script src="{{ project_root_url }}/jekyll/scripts/detabinator.js"></script>
+  <script src="{{ project_root_url }}/jekyll/scripts/side-nav.js"></script>
+</html>

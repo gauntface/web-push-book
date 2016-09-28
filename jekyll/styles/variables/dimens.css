@@ -2,6 +2,7 @@
   --padding: 16px;
   --vertical-padding: calc(var(--padding) * 2);
   --horizontal-padding: calc(var(--padding) * 2.5);
+  --page-content-max-width: 720px;
 
   --menu-button-height: 64px;
   --menu-button-svg-size: 24px;

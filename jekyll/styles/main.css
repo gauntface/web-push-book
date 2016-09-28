@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
-
 @import "./variables/dimens.css";
 @import "./variables/colors.css";
 
@@ -16,16 +14,16 @@ html, body {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: 13px;
-  line-height: 2em;
+  font-size: 16px;
+  line-height: 1.8rem;
   color: var(--primary-font-color);
 }
 
 main {
   max-width: 720px;
-  padding: var(--horizontal-padding);
+  padding: var(--vertical-padding) var(--horizontal-padding);
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
@@ -38,7 +36,7 @@ p {
 
 a {
   color: var(--primary-link-color);
-  text-decoration: none;
+  text-decoration: underline;
   font-weight: 500;
 }
 
@@ -68,10 +66,12 @@ ol, ul {
   line-height: calc(var(--padding) * 1.5);
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Comfortaa', cursive;
+}
+
 h1 {
-  font-size: 16px;
-  font-weight: 500;
-  text-transform: uppercase;
+  font-weight: normal;
 
   padding-right: 60px;
   margin: var(--horizontal-padding) 0;
@@ -167,4 +167,31 @@ td code {
 .side-nav__container .subheading {
   display: block;
   padding: 0 var(--padding);
+}
+
+header {
+  width: 100%;
+  background-color: var(--primary-bg-highlight-color);
+  box-sizing: border-box;
+  padding: calc(var(--vertical-padding) * 2) var(--horizontal-padding);
+  color: var(--primary-highlight-color);
+}
+
+header h1, header h2, header h3 {
+  max-width: calc(var(--page-content-max-width) - calc(var(--horizontal-padding) * 2));
+  margin: 0 auto;
+  padding: 0;
+}
+
+header h1 {
+  font-size: 2.4rem;
+  line-height: 2.6rem;
+}
+
+
+main > h1:first-of-type {
+  display: none;
+  width: 0;
+  height: 0;
+  visibility: hidden;
 }

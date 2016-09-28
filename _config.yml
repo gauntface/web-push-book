@@ -1,6 +1,6 @@
 source: .
-layouts_dir: ./site/_layouts/
-includes_dir: ./site/_includes/
+layouts_dir: ./jekyll/_layouts/
+includes_dir: ./jekyll/_includes/
 
 exclude:
   - README.md
@@ -14,3 +14,10 @@ exclude:
   - third_party/
   - node_modules/
   - shellscripts/
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"

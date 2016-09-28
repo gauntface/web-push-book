@@ -1,0 +1,10 @@
+:root {
+  --primary-font-color: #757575;
+  --primary-link-color: var(--primary-highlight-color);
+  --button-text-color: #fff;
+  --callout: #37474f;
+  --callout-text-color: #fff;
+
+  --primary-bg-highlight-color: #222;
+  --primary-highlight-color: #fc0f69;
+}
