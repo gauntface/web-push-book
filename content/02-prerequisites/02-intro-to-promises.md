@@ -114,14 +114,14 @@ throughout this book.
 Every developer is (or eventually becomes) happy with the notion that
 JavaScript runs inside of a web page.
 
-![A browser with a web page loaded and JavaScript running inside of that page](build/images/browser-with-javascript.png)
+![A browser with a web page loaded and JavaScript running inside of that page](images/png-version/browser-with-javascript.png)
 
 What the service work API does is it gives you a way to make the browser
 aware of "special" JavaScript files that run seperate from the page. These
 JavaScript files can run while your web page is closed or even when the
 users browser window is closed.
 
-![A browser a service worker running seperate from the page or running while the browser is closed](build/images/browser-with-serviceworker.png)
+![A browser a service worker running seperate from the page or running while the browser is closed](images/png-version/browser-with-serviceworker.png)
 
 With this, browsers have been able to add new API's to service worker files,
 including:

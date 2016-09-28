@@ -1,6 +1,4 @@
-push-book.pdf
-push-book.epub
-inlined/
-build/
+downloads/
+_inlined/
 node_modules/
 _site/

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "code-inlining": "node scripts/inline-source-code.js"
+    "code-inlining": "node _scripts/inline-source-code.js"
   },
   "dependencies": {
   },

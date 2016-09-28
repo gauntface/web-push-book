@@ -26,7 +26,7 @@ you'll need to send and store on your servers.
 A `PushSubscription` contains all the information you need to know to send that
 device a push message.
 
-![Once a user is subscribed, the browser will give you a PushSubscription which you need to send and store on your server.](build/images/browser-to-server.png)
+![Once a user is subscribed, the browser will give you a PushSubscription which you need to send and store on your server.](images/png-version/browser-to-server.png)
 
 ## Server Side
 
@@ -47,7 +47,7 @@ make an API call to it's `endpoint`, giving the request a specific format
 which is known as the **Web Push Protocol**. It basically defines what
 headers and format the body of the request should have.
 
-![When your server wishes to send a push message, it makes a web push protocol request to a push service.](build/images/server-to-push-service.png)
+![When your server wishes to send a push message, it makes a web push protocol request to a push service.](images/png-version/server-to-push-service.png)
 
 ## Background JavaScript Code
 
@@ -58,4 +58,4 @@ ultimately show a notification to the user. We'll look more closely at how
 to do this in a later section.
 
 
-![When a push message is sent from a push service to a users device, your service worker receives a push event.](build/images/push-service-to-sw-event.png)
+![When a push message is sent from a push service to a users device, your service worker receives a push event.](images/png-version/push-service-to-sw-event.png)

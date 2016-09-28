@@ -6,10 +6,11 @@ exclude:
   - README.md
   - WRITING.md
   - firebase.json
+  - database.rules.json
   - Gemfile*
   - LICENSE
   - package.json
-  - test
-  - third_party
-  - node_modules
-  - _inlined/
+  - test/
+  - third_party/
+  - node_modules/
+  - shellscripts/
