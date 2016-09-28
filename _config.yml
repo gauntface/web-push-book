@@ -1,0 +1,15 @@
+source: .
+layouts_dir: ./site/_layouts/
+includes_dir: ./site/_includes/
+
+exclude:
+  - README.md
+  - WRITING.md
+  - firebase.json
+  - Gemfile*
+  - LICENSE
+  - package.json
+  - test
+  - third_party
+  - node_modules
+  - _inlined/

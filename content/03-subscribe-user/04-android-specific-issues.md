@@ -1,3 +1,5 @@
+---
+---
 # Differences Between browsers
 
 If you run the code in the previous section, at the time of writing, it will
