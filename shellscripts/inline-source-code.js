@@ -6,7 +6,7 @@ const glob = require('glob');
 const mkdirp = require('mkdirp');
 const chalk = require('chalk');
 
-const DEBUG = true;
+const DEBUG = false;
 
 const log = msg => {
   if (!DEBUG) {

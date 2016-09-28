@@ -12,8 +12,11 @@ addons:
     - inkscape
 
 before_install:
-- npm install firebase-tools -g
-- npm install
+  - npm install firebase-tools -g
+  - npm install
+
+install:
+  - gem install jekyll
 
 script:
   - ./shellscripts/build-book.sh
