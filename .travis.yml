@@ -16,7 +16,10 @@ before_install:
   - npm install
 
 install:
-  - gem install jekyll
+  - rvm install ruby-2.2.0
+  - rvm --default use 2.2.0
+  - gem install bundler
+  - rvm . do bundle install
 
 script:
   - ./shellscripts/build-book.sh

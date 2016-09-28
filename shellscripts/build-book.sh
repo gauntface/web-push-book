@@ -30,6 +30,6 @@ pandoc $INLINED_MD/**/*.md -o $BUILD_PATH/push-book.epub --epub-metadata $CONTEN
 $PWD/third_party/kindlegen/kindlegen $BUILD_PATH/push-book.epub -o push-book.mobi
 
 # Run Jekyll to build
-jekyll build
+bundle exec jekyll build
 
 rm -rf $INLINED_MD
