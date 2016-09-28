@@ -12,4 +12,4 @@ had some time to settle, it's time to cover how to use it.
 You can read about push here on this site *or* grab a copy of this content
 via one of the download links below.
 
-<a href="{{ site.content[1].url }}">Read Online</a>
+<a href="{{ site.content[0].url }}">Read Online</a>

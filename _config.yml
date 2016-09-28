@@ -14,6 +14,7 @@ exclude:
   - third_party/
   - node_modules/
   - shellscripts/
+  - _content/chapter-01/00-info.md
 
 defaults:
   -
