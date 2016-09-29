@@ -1,6 +1,7 @@
 ---
+title: Sending Push Messages
 ---
-# Triggering Push Messages
+# Sending Push Messages
 
 When it comes to sending a push message it can be relatively simple if you use
 a library or you can write the server side completely on your own which can be

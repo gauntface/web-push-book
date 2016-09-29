@@ -1,0 +1,17 @@
+{% for links in site.content  %}
+  {% if links.title == page.title %}
+    {% unless forloop.last %}
+      {% assign next = site.content[forloop.index] %}
+    {% endunless %}
+    {% break %}
+  {% endif %}
+  {% assign prev = links %}
+{% endfor %}
+
+{% if prev %}
+<a class="page-nav-prev" href="{{prev.url}}" title="Previous Page"><img src="{{site.baseurl}}/jekyll/images/left-arrow.svg" alt="Previous Page Arrow" /></a>
+{% endif %}
+
+{% if next %}
+<a class="page-nav-next" href="{{next.url}}" title="Next Page"><img src="{{site.baseurl}}/jekyll/images/right-arrow.svg" alt="Next Page Arrow" /></a>
+{% endif %}

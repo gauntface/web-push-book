@@ -25,6 +25,9 @@ const filePaths = glob.sync(path.join(__dirname, '..', folderName) + '/**/*.md')
 
 const seperator = chalk.grey('------------------------------------------');
 
+const rootOfProject = path.join(__dirname, '..');
+const contentPath = path.join(rootOfProject, folderName);
+
 filePaths.forEach(filePath => {
   log(seperator);
   log();
@@ -33,19 +36,18 @@ filePaths.forEach(filePath => {
   log();
 
   const fileContents = fs.readFileSync(filePath).toString();
-
-  const rootOfProject = path.join(__dirname, '..');
   const relativePath = path.parse(path.relative(rootOfProject, filePath)).dir;
 
-  const inlinedContents = inlineSourceCode(relativePath, fileContents);
+  let inlinedContents = inlineSourceCode(relativePath, fileContents);
 
-  const contentsRelativePath = path.relative(path.join(rootOfProject, folderName), filePath);
+  // This warps all images to use 'images/' instead of '/images/'
+  inlinedContents = inlinedContents.replace(/\(\/images\//g, '(images/');
+
+  // Write new File
+  const contentsRelativePath = path.relative(contentPath, filePath);
   const outputPath = path.join(__dirname, '..', '_inlined', contentsRelativePath);
-
   log(chalk.blue('  Output Path:') + ' ' + outputPath);
-
   mkdirp.sync(path.parse(outputPath).dir);
-
   fs.writeFileSync(outputPath, inlinedContents);
 
   log();

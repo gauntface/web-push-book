@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="178.1944mm"
-   height="58.020336mm"
-   viewBox="0 0 631.39748 205.58387"
+   width="226.07335mm"
+   height="62.217323mm"
+   viewBox="0 0 801.04731 220.45508"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -25,16 +25,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="396.08513"
-     inkscape:cy="6.5328564"
+     inkscape:zoom="0.7"
+     inkscape:cx="392.87084"
+     inkscape:cy="77.832633"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="3200"
-     inkscape:window-height="1671"
+     inkscape:window-width="2560"
+     inkscape:window-height="1016"
      inkscape:window-x="0"
-     inkscape:window-y="55"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      fit-margin-top="10"
      fit-margin-left="10"
@@ -56,11 +56,17 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-28.670504,-768.90273)"
+     transform="translate(-28.670506,-768.90273)"
      style="display:inline">
     <g
+       transform="matrix(3,0,0,3,212.35146,804.3358)"
+       id="g14684">
+      <g
+         id="g14686" />
+    </g>
+    <g
        id="g11291"
-       transform="matrix(2.88,0,0,2.88,307.7054,806.1358)">
+       transform="matrix(2.88,0,0,2.88,273.95712,806.1358)">
       <g
          id="g11293">
         <circle
@@ -792,9 +798,26 @@
            style="fill:#231f20" />
       </g>
     </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="316.23917"
+       y="923.58173"
+       id="text14946"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="316.23917"
+         y="923.58173"
+         id="tspan14950"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic'">Web Push Protocol</tspan><tspan
+         sodipodi:role="line"
+         x="316.23917"
+         y="948.58173"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic'"
+         id="tspan4342">Request</tspan></text>
     <g
        id="g14246"
-       transform="matrix(3,0,0,3,83.79826,804.3358)">
+       transform="matrix(3,0,0,3,83.798254,804.3358)">
       <g
          id="g14248">
         <g
@@ -864,29 +887,6 @@
            inkscape:connector-curvature="0" />
       </g>
     </g>
-    <g
-       transform="matrix(3,0,0,3,212.35146,804.3358)"
-       id="g14684">
-      <g
-         id="g14686" />
-    </g>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="344.20786"
-       y="909.93243"
-       id="text14946"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         x="344.20786"
-         y="909.93243"
-         id="tspan14950"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic'">Web Push Protocol</tspan><tspan
-         sodipodi:role="line"
-         x="344.20786"
-         y="934.93243"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic'"
-         id="tspan4342">Request</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -901,7 +901,7 @@
          style="font-size:22.5px">Your Server</tspan></text>
     <g
        id="g6292"
-       transform="translate(22.992576,0)">
+       transform="translate(-20.093784,3.0439215)">
       <g
          transform="matrix(3,0,0,3,486.42875,801.29188)"
          id="g4635">
@@ -976,21 +976,95 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="481.99945"
-       y="925.28339"
+       x="438.91309"
+       y="925.48114"
        id="text14942-3"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan14944-6"
-         x="481.99945"
-         y="925.28339"
+         x="438.91309"
+         y="925.48114"
          style="font-size:22.5px">Push Service</tspan></text>
+    <g
+       id="XMLID_49_"
+       transform="matrix(2.4000001,0,0,2.4000001,667.70242,813.3358)">
+      <g
+         id="XMLID_535_">
+        <path
+           d="m 20.5,30 -11,0 C 7.6,30 6,28.4 6,26.5 L 6,3.5 C 6,1.6 7.6,0 9.5,0 l 11,0 C 22.4,0 24,1.6 24,3.5 l 0,23 C 24,28.4 22.4,30 20.5,30 Z M 9.5,1 C 8.1,1 7,2.1 7,3.5 l 0,23 C 7,27.9 8.1,29 9.5,29 l 11,0 c 1.4,0 2.5,-1.1 2.5,-2.5 l 0,-23 C 23,2.1 21.9,1 20.5,1 l -11,0 z"
+           id="XMLID_522_"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         id="XMLID_50_">
+        <path
+           d="M 23.5,5 6.5,5 C 6.2,5 6,4.8 6,4.5 6,4.2 6.2,4 6.5,4 l 17,0 C 23.8,4 24,4.2 24,4.5 24,4.8 23.8,5 23.5,5 Z"
+           id="XMLID_521_"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         id="XMLID_51_">
+        <path
+           d="M 23,25 7,25 C 6.7,25 6.5,24.8 6.5,24.5 6.5,24.2 6.7,24 7,24 l 16,0 c 0.3,0 0.5,0.2 0.5,0.5 0,0.3 -0.2,0.5 -0.5,0.5 z"
+           id="XMLID_520_"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         id="XMLID_53_">
+        <path
+           d="m 17.5,3 -5,0 C 12.2,3 12,2.8 12,2.5 12,2.2 12.2,2 12.5,2 l 5,0 C 17.8,2 18,2.2 18,2.5 18,2.8 17.8,3 17.5,3 Z"
+           id="XMLID_519_"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         id="XMLID_54_">
+        <path
+           d="M 20.5,3 C 20.2,3 20,2.8 20,2.5 20,2.2 20.2,2 20.5,2 l 0,0 C 20.8,2 21,2.2 21,2.5 21,2.8 20.8,3 20.5,3 Z"
+           id="XMLID_518_"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         id="XMLID_2_">
+        <circle
+           r="1"
+           cy="27"
+           cx="15"
+           id="XMLID_517_" />
+      </g>
+    </g>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4660"
+       y="925.48114"
+       x="703.15314"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         style="font-size:22.5px;text-align:center;text-anchor:middle"
+         y="925.48114"
+         x="703.15314"
+         id="tspan4662"
+         sodipodi:role="line">Message Arrives</tspan><tspan
+         style="font-size:22.5px;text-align:center;text-anchor:middle"
+         y="953.60614"
+         x="703.15314"
+         sodipodi:role="line"
+         id="tspan4664">on the Device</tspan></text>
+    <g
+       id="g5318"
+       transform="matrix(1.3126079,0,0,1.3126079,587.89521,829.61387)">
+      <path
+         id="path5320"
+         d="m 8,29.5 c -0.1,0 -0.3,0 -0.4,-0.1 -0.2,-0.2 -0.2,-0.5 0,-0.7 L 21.3,15 7.6,1.4 C 7.4,1.2 7.4,0.9 7.6,0.7 7.8,0.5 8.1,0.5 8.3,0.7 l 14,14 c 0.2,0.2 0.2,0.5 0,0.7 l -14,14 c 0,0.1 -0.2,0.1 -0.3,0.1 z"
+         class="st0"
+         inkscape:connector-curvature="0"
+         style="fill:#231f20" />
+    </g>
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Opera"
-     transform="translate(63.548437,-21.597013)"
+     transform="translate(63.548435,-21.59701)"
      style="display:inline" />
   <style
      id="style9651"
@@ -999,6 +1073,11 @@
 </style>
   <style
      id="style11289"
+     type="text/css">
+	.st0{fill:#231F20;}
+</style>
+  <style
+     id="style5316"
      type="text/css">
 	.st0{fill:#231F20;}
 </style>

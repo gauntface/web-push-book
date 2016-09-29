@@ -1,6 +1,7 @@
 ---
+title: Browser Differences
 ---
-# Differences Between browsers
+# Browser Differences
 
 If you run the code in the previous section, at the time of writing, it will
 only work in Firefox. The reason for which is a little messy, so bare with

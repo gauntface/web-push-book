@@ -1,6 +1,7 @@
 ---
+title: UX of Push on the Web
 ---
-# UX of Push
+# UX of Push on the Web
 
 Before I moved on to how to send a push to the user, this feels like the right
 time to briefly cover the UX when subscribing a user to push.

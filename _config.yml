@@ -15,13 +15,14 @@ exclude:
   - node_modules/
   - shellscripts/
   - _content/chapter-01/00-info.md
+  - _content/epub-metadata.yaml
 
 defaults:
   -
     scope:
       path: ""
     values:
-      layout: "default"
+      layout: "book-page"
 
 collections:
   content:

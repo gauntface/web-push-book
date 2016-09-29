@@ -66,6 +66,10 @@ button, .button {
   cursor: pointer;
 }
 
+img {
+  max-width: 100%;
+}
+
 ol, ul {
   padding-left: 20px;
   line-height: calc(var(--padding) * 1.5);
@@ -219,4 +223,34 @@ main > h1:first-of-type {
 
 .front-page .author {
   text-align: center;
+}
+
+.book-toc {
+  list-style: none;
+}
+
+.book-toc li {
+  margin-bottom: 1rem;
+}
+
+.book-toc li a {
+  text-decoration: none;
+}
+
+.page-nav-next, .page-nav-prev {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: var(--horizontal-padding);
+  height: 60%;
+  top: 20%;
+  justify-content: center;
+}
+
+.page-nav-next {
+  right: 0;
+}
+
+.page-nav-prev {
+  left: 0;
 }

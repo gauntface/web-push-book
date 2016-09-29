@@ -1,22 +1,19 @@
 ---
+title: Subscribing a User
 ---
 # Subscribing a User
 
-The very first step towards sending your users push messages is to get them
-to subscribe for push messages.
+The first step we need to take is getting permission for the user to send
+them push messages and then our hands on a `PushSubscription`.
 
-For the most part this just means getting permission from the user that they
-want to receive push messages from you. The browser will also manage signing
-the user up with a push service which will manage the sending of push messages
-to that browser.
-
-Let's look at the typical flow of getting a user subscribed.
+The JavaScript API to do this is pretty straight forward, so let's go through
+the flow.
 
 ## Feature Detection
 
-First up, we need to check if the browser supports push messaging or not. The
-main things we need to check for are `serviceWorker` in `navigator` and the
-`PushManager` in the `ServiceWorkerRegistration`.
+Before we ask the user for permission, we should check if the current browser
+supports push messaging or not. The main things we need to check for are
+the `serviceWorker` API in `navigator` and `PushManager` in `window`.
 
 ``` javascript
 if (!('serviceWorker' in navigator)) {
@@ -30,33 +27,44 @@ if (!('PushManager' in window)) {
 }
 ```
 
-While browser support is growing quickly with service worker and
-push messaging support, it's still a requirement for the short term,
+While browser support is growing quickly for both service worker and
+push messaging support, it's always a good idea to feature detect and
+progressively enhance like this.
 
 ## Register a Service Worker
 
-Push messaging on the web requires a service worker to work, so the first
-thing to do is register a servier worker.
+Knowing that service worker and Push is supported, we need to tell the browser
+where our special service worker file is (this is the JavaScript file
+that will be called when a message is received).
+
+You'd create a file JavaScript on your web server and simply call
+`navigator.serviceWorker.register()` passing in the path to your file,
+like so:
 
 ``` javascript
-navigator.serviceWorker.register('/path/to/serviceworker.js')
-.then(registration => {
+navigator.serviceWorker.register('/service-worker.js')
+.then(function(registration) {
   console.log('Successfully registered the service worker.');
 })
-.catch(err => {
+.catch(function(err) {
   console.error('Unable to register service worker', err);
 });
 ```
 
 This code tells the browser that you have a service worker file and where
-its located, in this case `/path/to/serviceworker.js`. Behind the scenes
-the browser will fetch your service worker file, run it and if everything
-went well, the promise it returns will resolve, if there was an error of
-any kind, the promise rejects. Common reasons for the promise to reject are
-the script couldn't be downloaded by the browser or the script has errors in it.
+its located, in this case `/service-worker.js`. Behind the scenes
+the browser will download your service worker file, run it and if everything
+went well, the promise it returns will resolve. If there are any errors, of
+any kind, the promise will reject. If your service worker does reject, double
+check your JavaScript and make sure nothing is causing an error to be thrown.
 
-When `register()` resolves, it returns a `ServiceWorkerRegistration` which
-has the `PushManager` API on it.
+Once `register()` resolves, it returns a `ServiceWorkerRegistration` which
+we'll use to get the `PushSubscript`, but first we need to get permission from
+the user.
+
+## Requesting Permission
+
+
 
 ## Subscribe a User with PushManager
 
