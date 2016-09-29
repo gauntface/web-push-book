@@ -75,9 +75,10 @@ function inlineSourceCode(relativePath, fileContents) {
   let inlineCount = 0;
   let regexResult = null;
   while(regexResult =
-    /<%\s*include\(\s*['|"](.*)['|"]\s*\)\s*%>/g.exec(fileContents)) {
+    /<%\s*include\(\s*'([^']*)'\s*(?:,\s*'([^']*)'\s*)?\)\s*%>/g.exec(fileContents)) {
     const fullRegexString = regexResult[0];
     const fileToInline = regexResult[1];
+    const snippetToInline = regexResult[2];
 
     const fileToInlinePath = path.join(__dirname, '..', relativePath, fileToInline);
     log(chalk.magenta('  File to Inline:') + ' ' + fileToInlinePath);
@@ -99,6 +100,14 @@ function inlineSourceCode(relativePath, fileContents) {
         break;
       default:
         log(chalk.red('Unknown file extension: ' + fileExtension));
+    }
+
+    if (snippetToInline) {
+      log();
+      log('SNIPPPETTTTT');
+      log(snippetToInline);
+      log();
+      const snippetRegex = /\/\*\*\*\* START (.*) \*\*\*\*\/[\n]?(.|\s)*\/\*\*\*\* END \1 \*\*\*\*\/[\n]?/g;
     }
 
     fileContents = fileContents.slice(0, regexResult.index) + '``` ' + highlightValue + '\n' +

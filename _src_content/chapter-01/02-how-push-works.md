@@ -65,7 +65,7 @@ a subscription is tied to, you can't decide or change it.
 
 As an example, when you get a push subscription, it has these values:
 
-<% include('./code-samples/example-subscription.json') %>
+<% include('./code-samples/example-subscription.json', 'feature-detect') %>
 
 The **endpoint**, in this case *https://random-push-service.com/...*, is the
 push service you need to send the message to. On the end of the URL is a
