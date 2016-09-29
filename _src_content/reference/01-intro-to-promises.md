@@ -29,6 +29,7 @@ function() {
   // Do codez here
 }
 ```
+<% include('./code-samples/es2015/js-function.js') %>
 
 The equivalent fat arrow function is:
 
@@ -37,6 +38,7 @@ The equivalent fat arrow function is:
   // Do codez here
 }
 ```
+<% include('./code-samples/es2015/fat-arrow-function.js') %>
 
 If you have multiple arguments passed in, you go from:
 
@@ -45,6 +47,7 @@ function(arg1, arg2) {
   // Do codez here
 }
 ```
+<% include('./code-samples/es2015/js-function-with-args.js') %>
 
 To fat arrow this:
 
@@ -53,6 +56,7 @@ To fat arrow this:
   // Do codez here
 }
 ```
+<% include('./code-samples/es2015/fat-arrow-function-with-args.js') %>
 
 The last final thing to master, if there is only one argument, you don't need
 the brackets:
@@ -62,6 +66,7 @@ arg1 => {
   // Do codes here
 }
 ```
+<% include('./code-samples/es2015/fat-arrow-function-single-arg.js') %>
 
 ### var vs const and let
 
@@ -95,6 +100,7 @@ someAPI(function((err, result) {
   // Do something with the result
 });
 ```
+<% include('./code-samples/promises/callback-function.js') %>
 
 This was easy to use and worked well. The only downside is that error cases
 weren't standardardised and it can lead to heavy nesting of function calls.
@@ -112,6 +118,7 @@ someAPI()
   // Do something with the error
 })
 ```
+<% include('./code-samples/promises/basic-promise.js') %>
 
 The difference is minor, the result and error are seperated via the `then` and
 `catch` method, both passing in a callback function.
@@ -140,6 +147,7 @@ waitForBrowserEvent(function(err) {
   });
 });
 ```
+<% include('./code-samples/promises/callback-chain.js') %>
 
 With promises we can chain them by returning a promise inside of a  promise
 callback:
@@ -156,6 +164,7 @@ waitForBrowserEvent()
   // Handle error
 })
 ```
+<% include('./code-samples/promises/promise-chain.js') %>
 
 This should be enough on promises to get you through the reast of this book,
 but it's not clear, I strongly recommend Jake Archibalds introduction to
@@ -177,6 +186,7 @@ waitForBrowserEvent()
   // Handle error
 });
 ```
+<% include('./code-samples/promises/nested-promise-chain.js') %>
 
 Generally I've found it cleaner and easier to follow a Promise chaing, if you
 pass the result onto the next step rather than nest Promise chains.

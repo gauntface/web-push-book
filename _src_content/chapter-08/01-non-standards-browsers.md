@@ -63,6 +63,7 @@ in it and assign the Sender ID from your firebase project, like this:
   "gcm_sender_id": "//TODO: Add Sender ID Here"
 }
 ```
+<% include('./code-samples/manifest_gcm_sender_id.json') %>
 
 Save this to a file somewhere on your site, for this let's assume its at
 '/manifest.json'.
@@ -73,6 +74,7 @@ just need to add it in the `head` of our page with a link tag.
 ``` javascript
 <link rel="manifest" href="/manifest.json">
 ```
+<% include('./code-samples/manifest-tag.html') %>
 
 With this set up you can try subscribing again and fingers crossed it'll work.
 

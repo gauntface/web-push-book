@@ -2,3 +2,5 @@ downloads/
 _inlined/
 node_modules/
 _site/
+_ebook/
+_content/

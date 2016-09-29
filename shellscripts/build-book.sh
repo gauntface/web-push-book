@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 
-CONTENT_PATH=$PWD/_content
+CONTENT_PATH=$PWD/_src_content
 BUILD_PATH=$PWD/downloads
 IMAGES_PATH="$PWD/images"
 PNG_PATH="$IMAGES_PATH/png-version"
-INLINED_MD="$PWD/_inlined"
+INLINED_MD="$PWD/_ebook"
 
 rm -rf "${BUILD_PATH}"
 
@@ -32,4 +32,4 @@ $PWD/third_party/kindlegen/kindlegen $BUILD_PATH/push-book.epub -o push-book.mob
 # Run Jekyll to build
 bundle exec jekyll build
 
-rm -rf $INLINED_MD
+# rm -rf $INLINED_MD
