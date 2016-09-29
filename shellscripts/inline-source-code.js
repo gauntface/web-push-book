@@ -83,9 +83,6 @@ function inlineSourceCode(relativePath, fileContents) {
     const fileToInlinePath = path.join(__dirname, '..', relativePath, fileToInline);
     log(chalk.magenta('  File to Inline:') + ' ' + fileToInlinePath);
 
-    let codeContent = fs.readFileSync(fileToInlinePath).toString();
-    codeContent = codeContent.replace(/^\s+|\s+$/g, '');
-
     let highlightValue = '';
     const fileExtension = path.parse(fileToInlinePath).ext;
     switch(fileExtension) {
@@ -102,12 +99,24 @@ function inlineSourceCode(relativePath, fileContents) {
         log(chalk.red('Unknown file extension: ' + fileExtension));
     }
 
+    let codeContent = fs.readFileSync(fileToInlinePath).toString();
+    codeContent = codeContent.replace(/^\s+|\s+$/g, '');
+
     if (snippetToInline) {
-      log();
-      log('SNIPPPETTTTT');
-      log(snippetToInline);
-      log();
-      const snippetRegex = /\/\*\*\*\* START (.*) \*\*\*\*\/[\n]?(.|\s)*\/\*\*\*\* END \1 \*\*\*\*\/[\n]?/g;
+      // const snippetRegex = /\/\*\*\*\* START (.*) \*\*\*\*\/[\n]?((?:.|\s)*)\/\*\*\*\* END \1 \*\*\*\*\/[\n]?/g;
+      const regexString = `\\/\\*\\*\\*\\* START ${snippetToInline} \\*\\*\\*\\*\\/[\\n]?((?:.|\\s)*)\\/\\*\\*\\*\\* END ${snippetToInline} \\*\\*\\*\\*\\/[\\n]?`;
+      const snippetRegex = new RegExp(regexString, 'g');
+      const snippetResult = snippetRegex.exec(codeContent);
+      if (!snippetResult) {
+        throw new Error('Unable to find snippet: ' + snippetToInline);
+      }
+
+      codeContent = snippetResult[1].trimRight();
+
+      let cleanupResult = null;
+      while (cleanupResult = /.*\/\*\*\*\* (?:START|END) (.*) \*\*\*\*\/[\n]/g.exec(codeContent)) {
+        codeContent = codeContent.replace(cleanupResult[0], '');
+      };
     }
 
     fileContents = fileContents.slice(0, regexResult.index) + '``` ' + highlightValue + '\n' +

@@ -20,11 +20,15 @@ window.onload = function() {
   /**** START feature-detect ****/
   if (!('serviceWorker' in navigator) || ) {
     // Service Worker isn't supported on this browser, disable or hide UI.
+    /**** START seriously ****/
     return;
   }
+  /**** END uber-test ****/
 
+  /**** START feature-test ****/
   if (!('PushManager' in window)) {
     // Push isn't supported on this browser, disable or hide UI.
+    /**** END seriously ****/
     return;
   }
   /**** END feature-detect ****/

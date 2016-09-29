@@ -15,7 +15,7 @@ Before we ask the user for permission, we should check if the current browser
 supports push messaging or not. The main things we need to check for are
 the *serviceWorker* API in *navigator* and *PushManager* in *window*.
 
-<% include('./code-samples/feature-detect.js') %>
+<% include('../../demo/app.js', 'feature-detect') %>
 
 While browser support is growing quickly for both service worker and
 push messaging support, it's always a good idea to feature detect and
