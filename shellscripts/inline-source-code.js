@@ -112,12 +112,12 @@ function inlineSourceCode(relativePath, fileContents) {
       }
 
       codeContent = snippetResult[1].trimRight();
-
-      let cleanupResult = null;
-      while (cleanupResult = /.*\/\*\*\*\* (?:START|END) (.*) \*\*\*\*\/[\n]/g.exec(codeContent)) {
-        codeContent = codeContent.replace(cleanupResult[0], '');
-      };
     }
+
+    let cleanupResult = null;
+    while (cleanupResult = /.*\/\*\*\*\* (?:START|END) (.*) \*\*\*\*\/[\n]/g.exec(codeContent)) {
+      codeContent = codeContent.replace(cleanupResult[0], '');
+    };
 
     fileContents = fileContents.slice(0, regexResult.index) + '``` ' + highlightValue + '\n' +
       codeContent + '\n```' +
