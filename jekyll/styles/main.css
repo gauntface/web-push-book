@@ -241,8 +241,9 @@ main > h1:first-of-type {
   display: flex;
   flex-direction: column;
   position: fixed;
-  width: var(--horizontal-padding);
+  width: calc(var(--horizontal-padding) - 16px);
   height: 60%;
+  padding: 8px;
   top: 20%;
   justify-content: center;
 }
