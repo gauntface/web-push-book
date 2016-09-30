@@ -120,6 +120,16 @@ function subscribeUserToPush() {
     .then(function(subscription) {
       if (subscription) {
         // TODO: Send subscription to server
+        return fetch('/api/save-subscription/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(subscription)
+        })
+        .then(function() {
+          return subscription;
+        })
       }
       return subscription;
     })

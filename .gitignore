@@ -5,3 +5,4 @@ _site/
 _ebook/
 _content/
 .vscode/
+demo/node-server/subscription-store.db
