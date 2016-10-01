@@ -28,6 +28,19 @@ function saveSubscriptionToDatabase(subscription) {
   });
 };
 
+function getSubscriptionsFromDatabase() {
+  return new Promise(function(resolve, reject) {
+    db.find({}, function(err, docs) {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      resolve(docs);
+    })
+  });
+}
+
 const app = express();
 app.use(express.static(path.join(__dirname, '..', 'web-app')));
 app.use(bodyParser.json());
@@ -58,6 +71,54 @@ app.post('/api/save-subscription/', function (req, res) {
       error: {
         id: 'unable-to-save-subscription',
         message: 'The subscription was received but we were unable to save it to our database.'
+      }
+    }));
+  });
+});
+
+app.all('/api/get-subscriptions/', function (req, res) {
+  // TODO: This should be secured / not available publicly.
+  //       this is for demo purposes only.
+
+  return getSubscriptionsFromDatabase()
+  .then(function(subscriptions) {
+    if (req.method === 'GET') {
+      console.log(subscriptions);
+      const tableHeading = '<tr><th>ID</th><th>Endpoint</th><th>p256dh Key</th><th>Auth Secret</th></tr>';
+      let tableContent = '';
+      for (let i = 0; i < subscriptions.length; i++) {
+        const subscription = subscriptions[i];
+        tableContent += '<tr>\n';
+        tableContent += '<td>' + subscription._id + '</td>\n';
+        tableContent += '<td>' + subscription.endpoint + '</td>\n';
+        
+        if (subscription.keys && subscription.keys.p256dh) {
+          tableContent += '<td>' + subscription.keys.p256dh + '</td>\n';
+        } else {
+          tableContent += '<td>No Key</td>\n';
+        }
+
+        if (subscription.keys && subscription.keys.auth) {
+          tableContent += '<td>' + subscription.keys.auth + '</td>\n';
+        } else {
+          tableContent += '<td>No Auth</td>\n';
+        }
+        
+        tableContent += '</tr>\n\n';
+      }
+      res.send('<table>' + tableHeading + tableContent + '</table>');
+    } else {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify({ data: { subscriptions: subscriptions } }));
+    }
+  })
+  .catch(function(err) {
+    res.status(500);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({
+      error: {
+        id: 'unable-to-get-subscriptions',
+        message: 'We were unable to get the subscriptions from our database.'
       }
     }));
   });

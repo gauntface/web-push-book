@@ -99,30 +99,40 @@ function inlineSourceCode(relativePath, fileContents) {
         log(chalk.red('Unknown file extension: ' + fileExtension));
     }
 
+    console.log('Step 1');
     let codeContent = fs.readFileSync(fileToInlinePath).toString();
+    console.log('Step 2');
     codeContent = codeContent.replace(/^\s+|\s+$/g, '');
-
+    console.log('Step 3');
     if (snippetToInline) {
+      console.log('Step 4');
       // const snippetRegex = /\/\*\*\*\* START (.*) \*\*\*\*\/[\n]?((?:.|\s)*)\/\*\*\*\* END \1 \*\*\*\*\/[\n]?/g;
-      const regexString = `\\/\\*\\*\\*\\* START ${snippetToInline} \\*\\*\\*\\*\\/[\\n]?((?:.|\\s)*)\\/\\*\\*\\*\\* END ${snippetToInline} \\*\\*\\*\\*\\/[\\n]?`;
+      // const regexString = `\\/\\*\\*\\*\\* START ${snippetToInline} \\*\\*\\*\\*\\/[\\n]?((?:.|\\s)*)\\/\\*\\*\\*\\* END ${snippetToInline} \\*\\*\\*\\*\\/[\\n]?`;
+      const regexString = `\\/\\*\\*\\*\\* START ${snippetToInline} \\*\\*\\*\\*\\/[\\n]?([^]*)\\/\\*\\*\\*\\* END ${snippetToInline} \\*\\*\\*\\*\\/[\\n]?`;
+      console.log('Step 4.1');
       const snippetRegex = new RegExp(regexString, 'g');
+      console.log('Step 4.2', codeContent);
       const snippetResult = snippetRegex.exec(codeContent);
+      console.log('Step 5');
       if (!snippetResult) {
         throw new Error('Unable to find snippet: ' + snippetToInline);
       }
-
+      console.log('Step 6');
       codeContent = snippetResult[1].trimRight();
+      console.log('Step 7');
     }
-
+    console.log('Step 8');
     let cleanupResult = null;
     while (cleanupResult = /.*\/\*\*\*\* (?:START|END) (.*) \*\*\*\*\/[\n]/g.exec(codeContent)) {
+      console.log('Looping');
       codeContent = codeContent.replace(cleanupResult[0], '');
     };
+    console.log('Step 9');
 
     fileContents = fileContents.slice(0, regexResult.index) + '``` ' + highlightValue + '\n' +
       codeContent + '\n```' +
       fileContents.slice(regexResult.index + fullRegexString.length, fileContents.length);
-
+    console.log('Step 10');
     inlineCount ++;
   }
 

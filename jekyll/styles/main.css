@@ -77,6 +77,7 @@ ol, ul {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Comfortaa', cursive;
+  color: var(--primary-highlight-color);
 }
 
 h1 {
@@ -87,7 +88,8 @@ h1 {
 }
 
 h2 {
-  font-size: 16px;
+  font-size: 1.8rem;
+  line-height: 1;
   font-weight: 500;
 
   padding-right: 60px;
@@ -95,8 +97,8 @@ h2 {
 }
 
 h3 {
-  font-size: 15px;
-  line-height: 25px;
+  font-size: 1.4rem;
+  line-height: 1;
   font-weight: 500;
 
   padding-right: 60px;
@@ -104,8 +106,8 @@ h3 {
 }
 
 h4 {
-  font-size: 15px;
-  line-height: 25px;
+  font-size: 1.2rem;
+  line-height: 1;
   font-weight: 500;
 
   padding-right: 60px;
@@ -114,8 +116,8 @@ h4 {
 }
 
 h5 {
-  font-size: 12px;
-  line-height: 25px;
+  font-size: 1rem;
+  line-height: 1;
   font-weight: bold;
 
   padding-right: 60px;
@@ -124,8 +126,8 @@ h5 {
 }
 
 h6 {
-  font-size: 12px;
-  line-height: 25px;
+  font-size: 0.8rem;
+  line-height: 1;
   font-weight: bold;
 
   padding-right: 60px;
