@@ -3,88 +3,196 @@ title: UX of Push on the Web
 ---
 # UX of Push on the Web
 
-Before I moved on to how to send a push to the user, this feels like the right
-time to briefly cover the UX when subscribing a user to push.
+Before we move on to how to trigger a push message we should look at some
+best practice for the UX of requesting permission for a user.
 
-I don't know if you've ever visited Google on your device and been confronted
-with this experience.
+## The Worst UX
 
-    // TODO Add image of Google showing geolocation permission
+The very worst thing you can do is instantly show the permission dialog as
+soon as the user lands on your website.
 
-I hate this. When I land on a web page I normally have an intention, in the
-case of Google, doing a search. Instead of being allowed to do that, this
-brick wall is put up asking for permission, it just sucks from a user
-perspective.
+They have zero context on why they are being asked for a permission, they
+may not even know what your website is, does or offers and just landing on a
+site, they could block you just out of frustration from being bombarded with
+a pop-up.
 
-With the `Notification` API you can control when the user is shown this
-permission prompt and you should give some consideration to when you show. If
-you display it and the user selects 'block', you will never be able to ask for
-permission again. Instead the user has to find the right UI (often hidden and
-not intuitive) to re-enable the permissions.
+As I mentioned before, if the user *blocks* the permission request, your
+web app can't ask for permission again and it's pretty difficult for a user
+to change the permission after they've blocked it as well.
 
-    // TODO: Show image of the UI for enabling notifications on Desktop and Mobile
+No matter what, don't just ask for permission as soon as the user opens your
+site, instead consider something else that makes sense for your user.
 
 ## Common Patterns
 
-Here are some common patterns that are good recommendations when asking the
+Here are some common patterns that are good approaches when asking the
 user for permission.
-
-### Relevant Location
-
-I think one of the easiest ways to offer push to a user is to have a button
-or toggle to enable / disable push messages to the user in a location
-on your page that makes sense.
-
-Facebook asks for push in the messaging tray of their web app.
-
-    // TODO: Add screenshot of Facebook push
-
-This is a nice pattern as given the context, users can guess / assume what
-they are signing up for.
 
 ### Value Proposition
 
-One great option for getting a user to subscribe for push is by giving a
-clear incentive at an opportune time.
+Encouraging a user to subscribe to push messaging at a time where the benefit
+is obvious given the current context is a fantastic way to get users to grant
+permission.
 
-If a user has just bought an item, you can offer push notification updates
-on the delivery status.
+For example, a user has just bought an item on your and finished the checkout
+flow, you can offer push notification updates on the delivery status.
 
-A user bidding on an auction can get updates on new bids and close to
-the closing of the bids.
-
-Purchasing a flight ticket can result in offering status updates in case the
-flight is delayed etc.
+But these kind of situations can be common:
+- A particular item is out of stock, would you like to notified when it's next
+available?
+- This breaking new story will be regularly updated, would you like to be
+notified as the story develop?
+- You're the highest bidder of this item, would you like to be notified if you
+are outbid?
 
 These are all points where the user has invested in your service and there
-is a value you can offer to the user.
+is a clear value proposition to them if they enable push notifications.
 
-// TODO: Example of Value Proposition UI
+Owen Campbell-Moore put this perfectly with a mock scenario of an airline's
+web site.
 
-### Guided flow
+The first example is of the **bad UX**, requesting permission as soon as a user
+lands on an airlines website.
 
-A common pattern to avoid having your permission blocked permenantly is to
-ask the user if they would like to enable push notification using a custom
-UI in your web page, before actually requesting the browser permission. This
-way if the user doesn't allow your UI, you can simply not show the Notification
-permission and you won't be blocked.
+![Owen Campbell-Moore's example of bad UX for push.](/images/ux-examples/owen/owen-bad-ux.png)
 
-// TODO Example of custom UI
+The alternative is to offer a value proposition, like asking the user if they
+want notifications in case of flight delays.
 
-## Offer a Way Out
+![Owen Campbell-Moore's example of good UX for push.](/images/ux-examples/owen/owen-good-example.png)
 
-Aside from UX to subscribe a user to push, please consider how a user can
-unsubscribe. The number of sites that simply don't allow users to disable
-push notificiations is astounding.
+Finally, a nice example of managing the user experience by covering up the
+sites content with a semi-transparent cover forces the user to focus on the
+permission prompt.
 
-I'm a big fan of always offering the user a way to disable push notifcations
-in the same place they enabled them, but that's largely because I'm a simple
-person who likes things to be simple. Telling your users they can disable push
-in a settings panel or some other common location should be something
-you offer. Again the alternative is the user taking the nuclear option and
-revoking permissions, which is the worst experience for the user, blocks
-your site from getting push in the future and reflects poorly on the service.
+![Owen Campbell-Moore's example of good UX for the permission prompt.](/images/ux-examples/owen/owen-permission-prompt.png)
 
-Ultimately, all I ask is that you don't just call `registration.subscribe()`
-or `Notification.requestPermission()` when the page first loads up and that
-you offer a way to undo that if the user wants to.
+### Double Permission
+
+You may feel that your site has a clear benefit to push messaging as soon
+as a user has signed up for your service. If that's the case, it's worth
+considering the double permission of push.
+
+With this approach you display custom permission prompt in your web
+app that asks the user to enable notifications. By
+doing this the user can say enable or disable without the website being
+permanently blockedsince they are only using the websites UI. If
+the user selects enable on the custom UI, display the actual permission prompt.
+
+A good example of this is [Slack](https://slack.com/), they show a prompt at
+the top of their page asking if you'd like to enable notifications.
+
+![Example of slack.com showing custom banner for permission to show notifications.](/images/ux-examples/slack/slack-permission-banner.png)
+
+If the user clicks accept, the actual permission prompt is shown:
+
+![Actual permission prompt on slack.com.](/images/ux-examples/slack/slack-permission-prompt.png)
+
+It's also worth calling out slacks cute notification they display when they
+enabled.
+
+![Cute "It's working" notification from slack.com.](/images/ux-examples/slack/slack-welcome-notification.png)
+
+### Settings Panel
+
+You can move notifications into a settings panel, giving users an easy way
+to enable and disable push messaging, without the need of cluttering your
+web apps UI.
+
+A good example of this is [Google I/O's 2016](
+https://events.google.com/io2016/) website. Under the menu setting
+they include a clear UI for users to enable notifications and once selected
+the permission dialog is shown.
+
+When you first load up the Google I/O site, you aren't asked to do anything,
+the user is left to explore the site.
+
+![When you first load the page, no prompt, just calm on Google IO.](/images/ux-examples/google-io/google-io-first-load.png)
+
+Click the menu item on the right reveals the panel for setting up and managing
+notifications.
+
+![Settings panel on Google IO's web app for push messaging.](/images/ux-examples/google-io/google-io-settings-panel.png)
+
+Click on the checkbox displays the permission prompt, which you'd expect given
+the explanation around the checkbox, no hidden surprises.
+
+![Google IO's web app displaying the permission prompt.](/images/ux-examples/google-io/google-io-permission-prompt.png)
+
+After that the UI is simple checked and the user is good to go. The great thing
+about this UX is that it's the same location to disable push as it is to sign
+up for push.
+
+This is also something Slack does well, they offer a host of options for
+notifications allowing the user to custom what notifications they get as well
+as options like the sound made when a notification is received.
+
+![The notification preferences on slack.com easily found under settings drop down.](/images/ux-examples/slack/slack-prefs-dropdown.png)
+
+![The settings panel for notifications on slack.com.](/images/ux-examples/slack/slack-notification-settings.png)
+
+### Passive Approach
+
+One of the easiest ways to offer push to a user is to have a button
+or toggle switch that enables / disables push messages in a location
+on the page that in consistent throughout your site.
+
+This is unlikely to drive users to enable push notifications, but consistency
+and allowing users to opt in and out easily without constant nudging gives
+users a way to engage more with your brand if and when they want. For sites
+like blogs that might have some regular viewers as well as high bounce rates,
+this is a solid option.
+
+On my personal site I have a footer the has a toggle switch for push messaging.
+
+![Example of Gauntface.com push notification toggle in footer.](/images/ux-examples/gauntface/gauntface-intro.png)
+
+It's fairly out of the way, but for regular visitors it should get enough
+attention that anyone wanting to get updates will sign up and people
+just landing on my site for some information are completely unaffected.
+
+If you grant permission the state of the toggle switch simply changes, being
+another example of the same location for enabling and disabling push.
+
+![Example of Gauntface.com with notifications enabled.](/images/ux-examples/gauntface/gauntface-enabled.png)
+
+### Offer a Way Out
+
+Aside from UX to subscribe a user to push, **please** consider how a user
+should unsubscribe / opt out of push messaging.
+
+The number of sites that simply ask for permission as soon as the page loads
+and as a result have no UI in their web app to disable push notificiations
+is astounding.
+
+[Vice news](https://news.vice.com/) is an example of this practice. (p.s. sorry
+Vice for using you as an example, you were first site I recalled doing this.)
+
+![Vice news instantly asks for permission.](/images/ux-examples/vice/vice-instant-notification.png)
+
+![Vice news after granting permission.](/images/ux-examples/vice/vice-no-opt-out.png)
+
+The reason this is such a bad UX is because the responsibility is shifted
+onto the browser, which frankly has an awful UX, well awful in Chromes at least.
+As a result, your brand is getting users signed up, then forcing them to
+trial and error ways of disabling push notifications.
+
+The UX for disabling permission while your page is open isn't too bad, but it's
+hidden, most users won't know that the drop down in the URL bar exists.
+
+![Chrome Notification Permissions from URL Bar.](/images/ux-examples/vice/vice-disable-url-bar.png)
+
+More commonly is for users to click the cog on the notification, which takes
+the user to this page.
+
+![Chrome Notification Permissions from URL Bar.](/images/ux-examples/vice/vice-disable-in-chrome.png)
+
+Telling your users they can disable push in a settings panel or some other
+common location should be something you offer. Again the alternative is
+the user taking the nuclear option and revoking permissions, which is
+the worst experience for the user, most likely blocks your site from requesting
+push again in the future and reflects poorly on the brand / service.
+
+All I ask is that you don't just call `registration.subscribe()`
+or `Notification.requestPermission()` as soon the page loads up and that
+you offer an easy way users to change their minds.

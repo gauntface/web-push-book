@@ -101,6 +101,7 @@ function unsubscribeUserFromPush() {
     });
 }
 
+/**** START send-subscription-to-server ****/
 function sendSubscriptionToBackEnd(subscription) {
   return fetch('/api/save-subscription/', {
     method: 'POST',
@@ -118,11 +119,12 @@ function sendSubscriptionToBackEnd(subscription) {
     return response.json();
   })
   .then(function(responseData) {
-    if (!(responseData.data && responseData.data.succes)) {
+    if (!(responseData.data && responseData.data.success)) {
       throw new Error('Bad response from server.');
     }
   });
 }
+/**** END send-subscription-to-server ****/
 
 /**** START subscribe-user ****/
 function subscribeUserToPush() {
@@ -138,7 +140,7 @@ function subscribeUserToPush() {
     return registration.pushManager.subscribe(subscribeOptions);
   })
   .then(function(subscription) {
-    console.log('Received subscription: ', subscription);
+    console.log('Received subscription: ', JSON.stringify(subscription));
     return subscription;
   });
 }

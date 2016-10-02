@@ -33,8 +33,15 @@ to that user, you can loosely think of this as a ID for that users device.
 
 This is all done in JavaScript with a simple API.
 
+One thing you'll want to do before subscribing a user is generate a set of
+"application server keys" (We'll show how to generate them later on).
+
+The application server keys, also known as VAPID keys, are designed to be
+unique to your server and allow a push service to know who subscribed the user
+and ensure that it's the same application sending messages.
+
 Once you've subscribe the user the only thing left to do, is to send the
-`PushSubscription` to your backend so that when you want to send a push message,
+`PushSubscription` to your backend / server so that when you want to send a push message,
 you retrieve the subscription and send send a message with it.
 
 ![Make sure you send the PushSubscription to your backend.](/images/png-version/browser-to-server.png)

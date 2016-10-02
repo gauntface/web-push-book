@@ -135,6 +135,14 @@ h6 {
   margin-bottom: 0;
 }
 
+blockquote {
+  font-style: italic;
+  margin: var(--vertical-padding) calc(var(--horizontal-padding) / 2);
+  padding: 0 calc(var(--horizontal-padding) / 2);
+  border-left: solid;
+  border-color: var(--primary-highlight-color);
+}
+
 table {
   width: 100%;
 
