@@ -42,7 +42,7 @@ and ensure that it's the same application sending messages.
 
 Once you've subscribe the user the only thing left to do, is to send the
 `PushSubscription` to your backend / server so that when you want to send a push message,
-you retrieve the subscription and send send a message with it.
+you retrieve the subscription and send a message with it.
 
 ![Make sure you send the PushSubscription to your backend.](/images/png-version/browser-to-server.png)
 
