@@ -257,7 +257,7 @@ to retrieve details used to make a *PushSubscription*.
 
 All push services will have the same API available for you to use.
 
-This common API is called the `web push protocol` and described the network
+This common API is called the `web push protocol` and describes the network
 request your server will need to make to trigger a push message.
 
 > If I subscribe a user on their desktop, are they subscribed on their phone
