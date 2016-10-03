@@ -87,7 +87,7 @@ unique, so how do we send a message?
 I briefly mentioned that every push service on the web has the same API. That
 API is called the [**Web Push Protocol**](https://tools.ietf.org/html/draft-ietf-webpush-protocol).
 
-It's a IETF standard that defines how you make an API call to the *endpoint*
+It's an IETF standard that defines how you make an API call to the *endpoint*
 on a `PushSubscription`. Basically, you need to make a network request to
 the *endpoint*.
 
