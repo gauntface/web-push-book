@@ -151,7 +151,7 @@ public application server key.
 1. The browser then makes a network request to a push service who will generate
 an endpoint, associate that endpoint with that public key and return the
 endpoint to the browser.
-1. The will then use to form part of the *PushSubscription* which is then passed
+1. The endpoint will then be used to form part of the *PushSubscription* which is then passed
 back to your web app as the result of the *subscribe()* call.
 
 ![Illustration of the public application server key is used in subscribe method.](/images/png-version/application-server-key-subscribe.png)
