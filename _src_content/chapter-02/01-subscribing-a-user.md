@@ -133,7 +133,7 @@ based on the use of your web app.
 ### aplicationServerKey Option
 
 We briefly mentioned that application server keys are used by a push service
-to know what application is subscribing and user and ensuring that the same
+to know what application is subscribing a user and ensuring that the same
 application is subscribing that user, but we didn't explain how that's done.
 
 Application server keys have a public and private key pair where the private
