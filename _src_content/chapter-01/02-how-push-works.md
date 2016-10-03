@@ -114,7 +114,7 @@ push service removes it from it's queue / drops the message.
 
 When the push service can delivery a message the browser will receive it and
 call a JavaScript file for you site and dispatch a `push` event. It's inside
-this event that you can performa any background tasks you want and show a
+this event that you can perform any background tasks you want and show a
 notification to your user.
 
 The JavaScript file the browser runs is a special file called a
