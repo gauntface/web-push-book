@@ -123,7 +123,7 @@ pushes, you'll get this error:
 > Chrome currently only supports the Push API for subscriptions that
 > will result in user-visible messages. You can indicate this by
 > calling pushManager.subscribe({userVisibleOnly: true}) instead.
-> See [https://goo.gl/yqv4Q4]() for more details.
+> See [https://goo.gl/yqv4Q4](https://goo.gl/yqv4Q4) for more details.
 
 It's currently looking like blanket silent push will never be implemented,
 but instead some kind of budget API will be used to give web apps a certain
