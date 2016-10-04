@@ -1,10 +1,12 @@
-sudo: required
-dist: trusty
-
+sudo: false
 language: node_js
 node_js:
   - "6"
-
+cache:
+    apt: true
+    bundler: true
+    directories:
+      - node_modules
 addons:
   apt_packages:
     - pandoc
