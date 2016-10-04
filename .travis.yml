@@ -24,5 +24,5 @@ install:
   - npm install
 
 script:
-  - ./shellscripts/build-book.sh
+  - ./utils/build-book.sh
   - if [[ "$TRAVIS_BRANCH" = "master" && "$TRAVIS_OS_NAME" = "linux" && "$TRAVIS_PULL_REQUEST" = "false" ]]; then firebase deploy --token "$FIREBASE_TOKEN" --project default --non-interactive; fi
