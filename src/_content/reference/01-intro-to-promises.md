@@ -76,8 +76,8 @@ use `const` and `let` instead.
 `let` is the same as var. It's a variable that can be re-assigned as many
 times as you like.
 
-`const` is a variable that can only be assigned once. The object it self can
-be mutated and altered, it just can be re-assigned.
+`const` is a variable that can only be assigned once. The object itself can
+be mutated and altered, it just can't be re-assigned.
 
 The subtleties of this were covered in an excellent article by Mathias Bynens
 that I'd strongly recommend you check out for more
