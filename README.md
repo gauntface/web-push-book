@@ -10,6 +10,8 @@ proof reading or much focus), so if you spot or have feedback please raise
 an issue (or better yet, a pull request) and I'll do my best to address it
 when I can.
 
+Otherwise get <a href="https://web-push-book.firebaseapp.com ">early access here.</a>
+
 Cheers,
 Matt
 
