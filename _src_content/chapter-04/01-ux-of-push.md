@@ -168,31 +168,37 @@ is astounding.
 [Vice news](https://news.vice.com/) is an example of this practice. (p.s. sorry
 Vice for using you as an example, you were first site I recalled doing this.)
 
+When you land on Vice news you'll get the permission prompt. This isn't the end
+of the world, but it does offend the senses if your just browsing.
+
 ![Vice news instantly asks for permission.](/images/ux-examples/vice/vice-instant-notification.png)
+
+*If* you allow notifications, where do you go to disable them? The UI after
+click allow changes in no way shape or form.
 
 ![Vice news after granting permission.](/images/ux-examples/vice/vice-no-opt-out.png)
 
-The reason this is such a bad UX is because the responsibility is shifted
-onto the browser, which frankly has an awful UX, well awful in Chromes at least.
+This bad UX pushes the responsibility onto the browser, which frankly has an
+awful UX, well in Chromes at least.
 As a result, your brand is getting users signed up, then forcing them to
-trial and error ways of disabling push notifications.
+trial and error their way through the browser UX to disable notifications.
 
-The UX for disabling permission while your page is open isn't too bad, but it's
-hidden, most users won't know that the drop down in the URL bar exists.
+The UX for disabling permission while your web page is open is OK, but it's
+hidden and I doubt many users will be able to find it.
 
 ![Chrome Notification Permissions from URL Bar.](/images/ux-examples/vice/vice-disable-url-bar.png)
 
-More commonly is for users to click the cog on the notification, which takes
-the user to this page.
+The more common approach will be users clicking the cog on a notification,
+which takes the user to this page.
 
 ![Chrome Notification Permissions from URL Bar.](/images/ux-examples/vice/vice-disable-in-chrome.png)
 
-Telling your users they can disable push in a settings panel or some other
+Explaing how users can disable push via a settings panel or some other
 common location should be something you offer. Again the alternative is
 the user taking the nuclear option and revoking permissions, which is
-the worst experience for the user, most likely blocks your site from requesting
-push again in the future and reflects poorly on the brand / service.
+the worst experience for the user and reflects poorly on the brand / service.
 
-All I ask is that you don't just call `registration.subscribe()`
-or `Notification.requestPermission()` as soon the page loads up and that
-you offer an easy way users to change their minds.
+All I ask of you is to no call `registration.subscribe()`
+or `Notification.requestPermission()` as soon the page loads up and to
+you offer an easy way users to opt out of notifications if the
+change their minds.
