@@ -6,7 +6,7 @@ const glob = require('glob');
 const mkdirp = require('mkdirp');
 const chalk = require('chalk');
 
-const DEBUG = true;
+const DEBUG = false;
 const seperator = chalk.grey('------------------------------------------');
 const rootOfProject = path.join(__dirname, '..');
 const contentPath = path.join(rootOfProject, 'src', '_content');

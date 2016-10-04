@@ -20,17 +20,25 @@
   <div class="footer-content">
     <section class="footer-top-row">
       <div class="downloads">
+        {% if pdfDownload or mobiDownload or epubDownload%}
         <h6>Download</h6>
+        {% endif %}
         <ul>
+          {% if pdfDownload %}
           <li>
             <a href="{{site.baseurl}}{{ pdfDownload }}">PDF</a>
           </li>
+          {% endif %}
+          {% if mobiDownload %}
           <li>
             <a href="{{site.baseurl}}{{ mobiDownload }}">mobi</a>
           </li>
+          {% endif %}
+          {% if epubDownload %}
           <li>
             <a href="{{site.baseurl}}{{ epubDownload }}">epub</a>
           </li>
+          {% endif %}
         </ul>
       </div>
       <a href="https://gauntface.com">
