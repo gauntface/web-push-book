@@ -62,7 +62,7 @@ restriction is that it should be less than
 // TODO: Check with the spec the current push payload limit
 
 Other than that do as you please, but most developers will find JSON the
-best approach is it's flexible enough to store any data and easy to parse in
+best approach as it's flexible enough to store any data and easy to parse in
 most languages. In our node example this would like:
 
     const payload = {
