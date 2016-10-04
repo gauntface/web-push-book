@@ -198,7 +198,7 @@ common location should be something you offer. Again the alternative is
 the user taking the nuclear option and revoking permissions, which is
 the worst experience for the user and reflects poorly on the brand / service.
 
-All I ask of you is to no call `registration.subscribe()`
+All I ask of you is not to call `registration.subscribe()`
 or `Notification.requestPermission()` as soon the page loads up and to
-you offer an easy way users to opt out of notifications if the
+offer an easy way for users to opt out of notifications if they
 change their minds.
