@@ -123,7 +123,7 @@ pushes, you'll get this error:
 > Chrome currently only supports the Push API for subscriptions that
 > will result in user-visible messages. You can indicate this by
 > calling pushManager.subscribe({userVisibleOnly: true}) instead.
-> See [https://goo.gl/yqv4Q4]() for more details.
+> See [https://goo.gl/yqv4Q4](https://goo.gl/yqv4Q4) for more details.
 
 It's currently looking like blanket silent push will never be implemented,
 but instead some kind of budget API will be used to give web apps a certain
@@ -133,7 +133,7 @@ based on the use of your web app.
 ### aplicationServerKey Option
 
 We briefly mentioned that application server keys are used by a push service
-to know what application is subscribing and user and ensuring that the same
+to know what application is subscribing a user and ensuring that the same
 application is subscribing that user, but we didn't explain how that's done.
 
 Application server keys have a public and private key pair where the private
@@ -151,7 +151,7 @@ public application server key.
 1. The browser then makes a network request to a push service who will generate
 an endpoint, associate that endpoint with that public key and return the
 endpoint to the browser.
-1. The will then use to form part of the *PushSubscription* which is then passed
+1. The endpoint will then be used to form part of the *PushSubscription* which is then passed
 back to your web app as the result of the *subscribe()* call.
 
 ![Illustration of the public application server key is used in subscribe method.](/images/png-version/application-server-key-subscribe.png)
@@ -257,7 +257,7 @@ to retrieve details used to make a *PushSubscription*.
 
 All push services will have the same API available for you to use.
 
-This common API is called the `web push protocol` and described the network
+This common API is called the `web push protocol` and describes the network
 request your server will need to make to trigger a push message.
 
 > If I subscribe a user on their desktop, are they subscribed on their phone

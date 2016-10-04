@@ -42,7 +42,7 @@ and ensure that it's the same application sending messages.
 
 Once you've subscribe the user the only thing left to do, is to send the
 `PushSubscription` to your backend / server so that when you want to send a push message,
-you retrieve the subscription and send send a message with it.
+you retrieve the subscription and send a message with it.
 
 ![Make sure you send the PushSubscription to your backend.](/images/png-version/browser-to-server.png)
 
@@ -87,7 +87,7 @@ unique, so how do we send a message?
 I briefly mentioned that every push service on the web has the same API. That
 API is called the [**Web Push Protocol**](https://tools.ietf.org/html/draft-ietf-webpush-protocol).
 
-It's a IETF standard that defines how you make an API call to the *endpoint*
+It's an IETF standard that defines how you make an API call to the *endpoint*
 on a `PushSubscription`. Basically, you need to make a network request to
 the *endpoint*.
 
@@ -114,7 +114,7 @@ push service removes it from it's queue / drops the message.
 
 When the push service can delivery a message the browser will receive it and
 call a JavaScript file for you site and dispatch a `push` event. It's inside
-this event that you can performa any background tasks you want and show a
+this event that you can perform any background tasks you want and show a
 notification to your user.
 
 The JavaScript file the browser runs is a special file called a
