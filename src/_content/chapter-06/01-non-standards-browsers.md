@@ -51,9 +51,9 @@ The way you give these browsers the sernder ID is via a Web App Manifest.
 ### Adding a Web App Manifest
 
 A web app manifest is a JSON file browsers can use to gain extra information
-about your web app, this includes meta data like your web app / sites name,
-icons, theme colors and other goodies (To learn more about these checkout
-Jake Archibalds talk from Google I/O 2016: // TODO Add LINK HERE).
+about your web app, this includes meta data like your web app / site's name,
+icons, theme colors and other goodies (To learn more about these, check out
+Jake Archibald's talk from Google I/O 2016: // TODO Add LINK HERE).
 
 All we need for this is a simple JSON file with the field "gcm_sender_id"
 in it and assign the Sender ID from your firebase project, like this:
