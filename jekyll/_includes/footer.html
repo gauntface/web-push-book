@@ -17,21 +17,29 @@
 {% endfor %}
 
 <footer>
-  <section>
-    <div class="downloads">
-      <h6>Download</h6>
-      <ul>
-        <li>
-          <a href="{{site.baseurl}}{{ pdfDownload }}">PDF</a>
-        </li>
-        <li>
-          <a href="{{site.baseurl}}{{ mobiDownload }}">mobi</a>
-        </li>
-        <li>
-          <a href="{{site.baseurl}}{{ epubDownload }}">epub</a>
-        </li>
-      </ul>
-    </div>
-    <p class="author">Matt Gaunt</p>
-  </section>
+  <div class="footer-content">
+    <section class="footer-top-row">
+      <div class="downloads">
+        <h6>Download</h6>
+        <ul>
+          <li>
+            <a href="{{site.baseurl}}{{ pdfDownload }}">PDF</a>
+          </li>
+          <li>
+            <a href="{{site.baseurl}}{{ mobiDownload }}">mobi</a>
+          </li>
+          <li>
+            <a href="{{site.baseurl}}{{ epubDownload }}">epub</a>
+          </li>
+        </ul>
+      </div>
+      <a href="https://gauntface.com">
+        <img class="gf-logo" src="/images/gf-logo.svg" />
+      </a>
+    </section>
+
+    <section class="footer-bottom-row">
+      <p><a href="https://web-push-book.firebaseapp.com/">Web Push Book</a> by <a href="https://gauntface.com/">Matt Gaunt</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.</p>
+    </section>
+  </div>
 </footer>

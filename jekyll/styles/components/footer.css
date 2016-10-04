@@ -1,11 +1,29 @@
-footer section {
+footer .footer-content {
+  border-top-style: solid;
+  border-width: 1px
+}
+
+footer .footer-top-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
 
-  border-top-style: solid;
-  border-width: 1px
+footer .gf-logo {
+  width: 36px;
+  height: 36px;
+}
+
+footer .footer-bottom-row {
+  text-align:center;
+  font-size: 0.8rem;
+}
+
+footer .footer-bottom-row a {
+  color: var(--primary-text-color);
+  text-decoration: none;
+  font-style: italic;
 }
 
 footer .downloads h6 {

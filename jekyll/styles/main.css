@@ -28,10 +28,9 @@ body {
 
 main, footer section {
   max-width: var(--page-content-max-width);
-  padding: var(--vertical-padding) var(--horizontal-padding);
+  padding: 0 var(--horizontal-padding);
   box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
+  margin: var(--vertical-padding) auto;
 }
 
 p {
