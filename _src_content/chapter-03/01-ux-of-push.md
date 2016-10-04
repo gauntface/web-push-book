@@ -54,7 +54,7 @@ web site.
 The first example is of the **bad UX**, requesting permission as soon as a user
 lands on an airlines website.
 
-<img src="/images/ux-examples/owen/owen-bad-ux.png" alt="Owen Campbell-Moore's example of bad UX for push." class="mobile-device-image" />
+![Owen Campbell-Moore's example of bad UX for push.](/images/ux-examples/owen/owen-bad-ux.png)
 
 The alternative is to offer a value proposition, like asking the user if they
 want notifications in case of flight delays.
