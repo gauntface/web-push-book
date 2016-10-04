@@ -24,9 +24,6 @@ done
 
 # Optimise the generated files
 gulp build:prod
-# Run Jekyll to build
-bundle exec jekyll build
-
 
 
 # Create downloads path
@@ -37,3 +34,7 @@ pandoc $EBOOK_TRANSFORM_MD/**/*.md -o $DOWNLOADS_PATH/push-book.pdf
 pandoc $EBOOK_TRANSFORM_MD/**/*.md -o $DOWNLOADS_PATH/push-book.epub --epub-metadata $CONTENT_PATH/_epub-metadata.yaml --epub-cover-image $IMAGES_PATH/cover-photo.png
 # Build Kindle Format
 $PWD/third_party/kindlegen/kindlegen $DOWNLOADS_PATH/push-book.epub -o push-book.mobi
+
+
+# Run Jekyll to build site + downloads
+bundle exec jekyll build
