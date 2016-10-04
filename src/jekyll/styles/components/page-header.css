@@ -1,6 +1,6 @@
-.page-header {
-  --page-header-height: calc(var(--padding) * 4);
+@import "../variables/dimens.css";
 
+.page-header {
   height: var(--page-header-height);
 
   display: flex;

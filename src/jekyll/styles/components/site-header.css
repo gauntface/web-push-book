@@ -1,6 +1,6 @@
-.site-header {
-  --site-header-height: calc(var(--padding) * 18);
+@import "../variables/dimens.css";
 
+.site-header {
   height: var(--site-header-height);
 
   display: flex;

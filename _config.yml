@@ -1,19 +1,9 @@
-source: .
+source: ./build
+destination: ./build/_site/
 layouts_dir: ./jekyll/_layouts/
 includes_dir: ./jekyll/_includes/
 
 exclude:
-  - README.md
-  - WRITING.md
-  - firebase.json
-  - database.rules.json
-  - Gemfile*
-  - LICENSE
-  - package.json
-  - test/
-  - third_party/
-  - node_modules/
-  - shellscripts/
   - _content/chapter-01/00-info.md
   - _content/epub-metadata.yaml
 

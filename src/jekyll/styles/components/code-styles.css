@@ -1,4 +1,4 @@
-@import "../../third_party/prism/prism.css";
+@import "../variables/dimens.css";
 
 figure.highlight {
   margin: 0;

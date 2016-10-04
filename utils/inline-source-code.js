@@ -7,6 +7,9 @@ const mkdirp = require('mkdirp');
 const chalk = require('chalk');
 
 const DEBUG = true;
+const seperator = chalk.grey('------------------------------------------');
+const rootOfProject = path.join(__dirname, '..');
+const contentPath = path.join(rootOfProject, 'src', '_content');
 
 const log = msg => {
   if (!DEBUG) {
@@ -20,58 +23,7 @@ const log = msg => {
   console.log(msg);
 };
 
-const folderName = '_src_content';
-const filePaths = glob.sync(path.join(__dirname, '..', folderName) + '/**/*.md');
-
-const seperator = chalk.grey('------------------------------------------');
-
-const rootOfProject = path.join(__dirname, '..');
-const contentPath = path.join(rootOfProject, folderName);
-
-filePaths.forEach(filePath => {
-  log(seperator);
-  log();
-
-  log(chalk.blue('  File Path:') + ' ' + filePath);
-  log();
-
-  const fileContents = fs.readFileSync(filePath).toString();
-  const relativePath = path.parse(path.relative(rootOfProject, filePath)).dir;
-  const contentsRelativePath = path.relative(contentPath, filePath);
-  const ebookOutputPath = path.join(__dirname, '..', '_ebook', contentsRelativePath);
-  const jekyllOutputPath = path.join(__dirname, '..', '_content', contentsRelativePath);
-
-  if (ebookOutputPath === filePath) {
-    throw new Error('[inline-source-code.js] EBook output path is the same as the ' +
-      'source file.');
-  }
-
-  if (jekyllOutputPath === filePath) {
-    throw new Error('[inline-source-code.js] Jekyll output path is the same as the ' +
-      'source file.');
-  }
-
-  let inlinedContents = inlineSourceCode(relativePath, fileContents);
-
-  log(chalk.blue('  Jekyll Output Path:') + ' ' + jekyllOutputPath);
-  mkdirp.sync(path.parse(jekyllOutputPath).dir);
-  fs.writeFileSync(jekyllOutputPath, inlinedContents);
-
-  // This warps all images to use 'images/' instead of '/images/'
-  inlinedContents = inlinedContents.replace(/\(\/images\//g, '(images/');
-
-  // Write new File
-  log(chalk.blue('  Ebook Output Path:') + ' ' + ebookOutputPath);
-  mkdirp.sync(path.parse(ebookOutputPath).dir);
-  fs.writeFileSync(ebookOutputPath, inlinedContents);
-
-  log();
-});
-
-log(seperator);
-
-
-function inlineSourceCode(relativePath, fileContents) {
+const inlineSourceCode = (relativePath, fileContents) => {
   let inlineCount = 0;
   let regexResult = null;
   while(regexResult =
@@ -129,3 +81,63 @@ function inlineSourceCode(relativePath, fileContents) {
 
   return fileContents;
 }
+
+const parseSingleFile = (filePath, ebookBuildPath, jekyllBuildPath) => {
+  const fileContents = fs.readFileSync(filePath).toString();
+  const relativePath = path.parse(path.relative(rootOfProject, filePath)).dir;
+  const contentsRelativePath = path.relative(contentPath, filePath);
+
+  const ebookOutputPath = path.join(ebookBuildPath, contentsRelativePath);
+  const jekyllOutputPath = path.join(jekyllBuildPath, contentsRelativePath);
+
+  if (ebookOutputPath === filePath) {
+    throw new Error('[inline-source-code.js] EBook output path is the same as the ' +
+      'source file.');
+  }
+
+  if (jekyllOutputPath === filePath) {
+    throw new Error('[inline-source-code.js] Jekyll output path is the same as the ' +
+      'source file.');
+  }
+
+  let inlinedContents = inlineSourceCode(relativePath, fileContents);
+
+  log(chalk.blue('  Jekyll Output Path:') + ' ' + jekyllOutputPath);
+  mkdirp.sync(path.parse(jekyllOutputPath).dir);
+  fs.writeFileSync(jekyllOutputPath, inlinedContents);
+
+  // This warps all images to use 'images/' instead of '/images/'
+  inlinedContents = inlinedContents.replace(/\/images\//g, 'build/images/');
+
+  // Write new File
+  log(chalk.blue('  Ebook Output Path:') + ' ' + ebookOutputPath);
+  mkdirp.sync(path.parse(ebookOutputPath).dir);
+  fs.writeFileSync(ebookOutputPath, inlinedContents);
+
+  log();
+};
+
+const parseContent = (ebookBuildPath, jekyllBuildPath) => {
+  console.log();
+  console.log(chalk.magenta('EBook Build Path: ') + ebookBuildPath);
+  console.log(chalk.magenta('Jekyll Build Path: ') + jekyllBuildPath);
+  console.log();
+  console.log();
+
+  let filePaths = glob.sync(path.join(contentPath, '/**/*.md'));
+  filePaths.forEach(filePath => {
+    log(seperator);
+    log();
+
+    log(chalk.blue('  File Path:') + ' ' + filePath);
+    log();
+
+    parseSingleFile(filePath, ebookBuildPath, jekyllBuildPath);
+
+    log(seperator);
+  });
+
+  return Promise.resolve();
+}
+
+module.exports = parseContent;

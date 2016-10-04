@@ -1,3 +1,5 @@
+@import "../variables/colors.css";
+
 footer .footer-content {
   border-top-style: solid;
   border-width: 1px
@@ -21,7 +23,7 @@ footer .footer-bottom-row {
 }
 
 footer .footer-bottom-row a {
-  color: var(--primary-text-color);
+  color: var(--primary-font-color);
   text-decoration: none;
   font-style: italic;
 }
