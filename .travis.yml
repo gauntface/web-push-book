@@ -12,14 +12,14 @@ addons:
     - inkscape
 
 before_install:
-  - npm install firebase-tools -g
-  - npm install
-
-install:
   - rvm install ruby-2.2.0
   - rvm --default use 2.2.0
   - gem install bundler
   - rvm . do bundle install
+
+install:
+  - npm install firebase-tools -g
+  - npm install
 
 script:
   - ./shellscripts/build-book.sh
