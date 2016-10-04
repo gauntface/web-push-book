@@ -1,5 +1,5 @@
 ---
-layout: front
+layout: plain
 title: Web Push Book
 ---
 # Hello
