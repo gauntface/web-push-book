@@ -67,7 +67,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('jekyll', () => {
-  spawn('jekyll', ['serve'], {
+  spawn('jekyll', ['serve', '--incremental', '--watch', '--force_polling'], {
     stdio: 'inherit'
   });
 });
