@@ -21,8 +21,8 @@ user.
 The format of the network request is known as the [Web Push Protocol](https://tools.ietf.org/html/draft-ietf-webpush-protocol). This
 protocol is a standard that all push services must adhere to.
 
-Let's look at what pieces of information we need to make one of these
-Web Push Protocol requests.
+Let's look at what pieces of information we need add as headers to make a
+Web Push Protocol request.
 
 <table>
   <tr>
@@ -47,7 +47,8 @@ Web Push Protocol requests.
   </tr>
   <tr>
     <th>Encryption</th>
-    <td></td>
+    <td>The encryption header is used to send the *salt* value that was
+    used when encrypting your payload.</td>
   </tr>
   <tr>
     <th>Content-Type</th>
@@ -73,20 +74,69 @@ Web Push Protocol requests.
   <tr>
     <th>TTL (Time to Live)</th>
     <td>
-      Time to live is an optional parameter that can be used to define how long
+      Time to live is a required parameter that can be used to define how long
       a message should stay on the push service before it should be marked
-      as expired. For example, if you sent a message to a user who's phone was
-      off and you set a TTL of 10 minutes (which would be XXX) and the user
-      don't turn their phone on within 10 minutes, they'll never receive the
-      message. If they do turn on their phone within 10 minutes, they'll get.
-      A TTL of 0 means the push should only be delivered if it can be delivered
-      immediately, otherwise it's immediately marked as expired and dropped.
+      as expired (in seconds) after which the push service will not send the
+      message. A TTL of 0 means the message should only be delivered if it can
+      be delivered immediately.
+    </td>
+  </tr>
+  <tr>
+    <th>Topic</th>
+    <td>
+      The topic header allows you to group messages that you send to the push
+      service such that the push service can replace any pending messages with
+      the latest message. For example, we request a message be sent with
+      'example-topic' and later on you send a second message with the same
+      topic name, the push service will expire / drop the first message if
+      it's still pending and only the second message will be sent. Sidenote:
+      A topic must be less than or equal to 32 characters.
+    </td>
+  </tr>
+  <tr>
+    <th>Urgency</th>
+    <td>
+      **[Experimental]** Urgency allows you to determine if the message you're
+      sending is vital or not on some scale, this can be used by the push
+      service to conserve energy on the users device. You can send a value of
+      "very-low" | "low" | "normal" | "high" and the default is "normal". At
+      the time of writing (October 2016) I'm not sure what the support for this
+      feature is like.
     </td>
   </tr>
 </table>
-// Cover Input
 
-// Cover Output
+We'll look into how to make all of the values in a minute, but first, what
+gets returned when we make one of these requests?
+
+The main thing to consider when you get a response is the status code.
+
+<table>
+  <tr>
+    <th>Status Code</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>201</td>
+    <td>Created. The request to send a push message was received and accepted.
+    </td>
+  </tr>
+  <tr>
+    <td>429</td>
+    <td>Too many requests. Maining the application server has reached a rate
+    limit with a push service. The push service include a 'Retry-After' header
+    to indicate how long the before you can make another request.</td>
+  </tr>
+  <tr>
+    <td>400</td>
+    <td>Invalid request. This is generally means one of your headers is Invalid
+    or poorly formed.</td>
+  </tr>
+  <tr>
+    <td>400</td>
+    <td>Invalid request.</td>
+  </tr>
+</table>
 
 ### Application Server Keys
 
