@@ -124,20 +124,24 @@ const parseContent = (ebookBuildPath, jekyllBuildPath) => {
   console.log();
   console.log();
 
-  let filePaths = glob.sync(path.join(contentPath, '/**/*.md'));
-  filePaths.forEach(filePath => {
-    log(seperator);
-    log();
+  try {
+    let filePaths = glob.sync(path.join(contentPath, '/**/*.md'));
+    filePaths.forEach(filePath => {
+      log(seperator);
+      log();
 
-    log(chalk.blue('  File Path:') + ' ' + filePath);
-    log();
+      log(chalk.blue('  File Path:') + ' ' + filePath);
+      log();
 
-    parseSingleFile(filePath, ebookBuildPath, jekyllBuildPath);
+      parseSingleFile(filePath, ebookBuildPath, jekyllBuildPath);
 
-    log(seperator);
-  });
+      log(seperator);
+    });
 
-  return Promise.resolve();
+    return Promise.resolve();
+  } catch(err) {
+    return Promise.reject(err);
+  }
 }
 
 module.exports = parseContent;

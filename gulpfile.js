@@ -67,7 +67,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('jekyll', () => {
-  spawn('jekyll', ['serve', '--incremental', '--watch', '--force_polling'], {
+  spawn('jekyll', ['serve', '--incremental', '--force_polling'], {
     stdio: 'inherit'
   });
 });
@@ -100,6 +100,7 @@ gulp.task('build:dev',
       'copy',
       () => parseContent(
         BUILD_OUTPUT_PATH + '/_ebook', BUILD_OUTPUT_PATH + '/_content')
+        .catch(() => {})
     )
   )
 );

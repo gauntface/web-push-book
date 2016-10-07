@@ -11,32 +11,22 @@ steps for you.
 library for sending push messages to browsers and for full-disclosure
 I've commited code to this project and it's totes the best.
 
-To use it in a new node project you'd first need to install it:
+> **Remember**: If you want a library for a different language, be sure to
+> checkout the [web-push-libs org on Github](https://github.com/web-push-libs/).
+
+To use it in a new node project, create a file `index.js` and install the
+web-push library:
 
     npm install web-push --save
 
-Then in your javascript file  you'd import it in like so:
+Then in your javascript file import it in like so:
 
-// TODO: Move to Demo
+<% include('../../demo/node-server/index.js', 'web-push-require') %>
 
-```javascript
-const webpush = require('web-push');
-```
+Now we can start getting ready for push. You'll want to set up your application
+server keys (or VAPID keys).
 
-You'll likely want to set up some default values that will be the same for
-all your users, like your GCM API key and your application server keys (or
-VAPID keys).
-
-// TODO: Move to Demo
-
-```javascript
-webpush.setGCMAPIKey('<TODO: Add Example API Key Here>');
-webpush.setVapidDetails(
-  'mailto:example@yourdomain.org',
-  vapidKeys.publicKey,
-  vapidKeys.privateKey
-);
-```
+<% include('../../demo/node-server/index.js', 'web-push-vapid') %>
 
 Then we'll need a user's subscription, normally pulled from a database on
 your server, but for now let's assume we just copied and pasted a
@@ -50,12 +40,22 @@ const subscriptionObject = {
     auth: '<TODO Some example auth>'
   }
 };
-webpush.sendNotification(subscriptionObject, 'hello');
+webpush.sendNotification(subscriptionObject, 'hello')
+.then(function(response) {
+  console.log('Message sent successfully.');
+})
+.catch(function(err) {
+  console.log('Message wasn\'t sent successfully.');
+});
 ```
 
-We can now run that script with the simple command:
+> **TIP:** If you do actually copy a subscription from your browser be careful
+> that the browser doesn't add '...' somewhere in the middle of the values.
+> This has happened to me and others far too many times.
 
-    node example.js
+We can now run your script with:
+
+    node index.js
 
 This will run the above JavaScript using Node.js and send a message to
 that users browser, which will wake up the service worker and dispatch
@@ -65,7 +65,7 @@ While this example is trivial, the only things we'd need to change to make this
 useful in a real world scenario is:
 
 1. The payload would be more helpful as a string of JSON.
-1. The subscriptions need to be saved and queried from a database.
+1. The subscriptions needs to be saved and queried from a database.
 
 ## Payload
 
@@ -74,20 +74,40 @@ restriction is that it should be less than <a href="https://tools.ietf.org/html/
 
 Most developers will find JSON to be best approach as it's flexible enough to
 store any data and easy to parse in most languages. In our node example
-we'd send JSON data like so:
+we're going to send JSON data like so:
 
-    const payload = {
-      title: 'This is the Title.',
-      body: 'This is the body text.',
-      icon: 'https://web-push-book.gaunt.io/notification-icon.png'
-    };
-    webpush.sendNotification(subscriptionObject, JSON.stringify(payload));
+```javascript
+const payload = {
+  title: 'This is the Title.',
+  body: 'This is the body text.',
+  icon: '/notification-icon.png'
+};
+webpush.sendNotification(subscriptionObject, JSON.stringify(payload));
+```
 
-## Saving and Querying Subscription
+## Saving a Subscription
 
 Saving and querying PushSubscriptions for a database will likely vary on your
-service side language and database choice but if it's useful to see an example
-of how it could be done, here's the snippets of code from the demo that stores
-and retrieves subscriptions in Node.
+server side language and database choice but it might be useful to see
+an example of how it could be done, here's the snippets of code from the
+demo that stores and retrieves subscriptions in Node.
 
-// TODO Fill in demo content here.
+The API that receives a subscription and saves it in the database is this.
+
+<% include('../../demo/node-server/index.js', 'save-sub-api') %>
+
+This code has a method `saveSubscriptionToDatabase()` which saves a
+subscription in a database, in this case [nedb](https://github.com/louischatriot/nedb).
+
+The following line of code:
+
+<% include('../../demo/node-server/index.js', 'save-sub-api-post') %>
+
+Tell's the *express* web server to create an endpoint for 'POST' requests
+on at `/api/save-subscription/`. This endpoint then calls the
+`saveSubscriptionToDatabase()` method and returns JSON as a result.
+
+## Querying Subscriptions
+
+// TODO include sample of sending message to all endpoints and managing dead
+// subscriptions
