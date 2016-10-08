@@ -131,7 +131,7 @@ app.all('/api/get-subscriptions/', function (req, res) {
  *
  */
 
-app.all('/api/get-subscriptions/', function (req, res) {
+app.all('/api/trigger-push-msg/', function (req, res) {
   // TODO: This endpoint should be secured, restricting access
 
   /**** START web-push-gcm ****/
@@ -151,6 +151,42 @@ app.all('/api/get-subscriptions/', function (req, res) {
     vapidKeys.privateKey
   );
   /**** END web-push-vapid ****/
+
+  return getSubscriptionsFromDatabase()
+  .then(function(subscriptions) {
+    const sendPromises = subscriptions.map(function(subscription) {
+      const payload = {
+        from: 'web-push-book',
+        time: Date.now()
+      };
+      return webpush.sendNotification(subscription, JSON.stringify(payload))
+      .then(function() {
+        console.log('Subscription was valid.');
+      },function(err) {
+        console.log('Subscription is no longer valid.');
+      });
+    });
+
+    return Promise.all(sendPromises);
+  })
+  .then(() => {
+    if (req.method === 'GET') {
+      res.send('<h1>Everything was sent</h1>');
+    } else {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify({ data: { success: true } }));
+    }
+  })
+  .catch(function(err) {
+    res.status(500);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({
+      error: {
+        id: 'unable-to-get-subscriptions',
+        message: 'We were unable to get the subscriptions from our database.'
+      }
+    }));
+  });
 });
 
 const server = app.listen(9012, function () {

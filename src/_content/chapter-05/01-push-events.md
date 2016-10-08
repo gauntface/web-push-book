@@ -78,10 +78,11 @@ could look like this:
 
 Here we are calling a function that returns a promise `pushReceivedTracking()`
 and also making a network request, getting the response and showing a
-notification. We make sure the service worker is kepts alive by passing
-a promise from *promise.all()* into `event.waitUntil()`. This way
-waitUntil won't do anything *until* both promises have finished and that
-means we will have shown a notification.
+notification. We make sure the service worker is kept alive by combining
+these promises with a promise from *promise.all()*. It's this promise
+that we pass into `event.waitUntil()` meaning the browser will  wait until
+both promises have finished before checking for a notification and terminating
+the service worker.
 
 > **Tip:** If you ever find your promise chains confusing or a little messy
 > I find that breaking things into functions help to reduce complication.
@@ -90,6 +91,25 @@ means we will have shown a notification.
 > The main point to take away is to play around with promises and experiment
 > with how they can be written to find a style that works for you.
 
-we got a push message in the browser - Woohoo *Internet High Fives*.
+The reason we should be concerned about waitUntil and using it correctly is
+that one of the most common issues developers when implementing push is when
+they get this default notifcation shown by Chrome.
+
+![An Image of the default notification in Chrome](/images/default-notification-mobile.png)
+
+Chrome will show the notification:
+
+> This site has been updated in the background.
+
+When a push is received but the push event in the service worker **does not**
+show a notification after the promise passed to *event.waitUntil()* has
+finished.
+
+The main reason developers get caught out by this is that their code will
+often call *self.registration.showNotification()* but they **aren't** doing
+anything with the promise it returns, resulting in sometimes the notification
+displaying in time and other times it doesn't, resulting in the notifcation
+above. Just rememeber - you see that notification, check your promise chains
+and *event.waitUntil()*.
 
 Time to actually look at notification styles.
