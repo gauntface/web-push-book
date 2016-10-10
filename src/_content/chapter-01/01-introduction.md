@@ -19,7 +19,7 @@ this [content lives](https://github.com/gauntface/push-book/).
 
 I'm pretty certain that areas of the push API will change and as they do
 I'll update this book and create another release which you'll be able to
-find under [Relases on Github](https://github.com/gauntface/push-book/releases),
+find under [Releases on Github](https://github.com/gauntface/push-book/releases),
 which also has an [RSS feed](https://github.com/gauntface/push-book/releases.atom).
 
 Finally, a massive thank you to [all the contributors]()
