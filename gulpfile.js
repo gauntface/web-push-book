@@ -100,7 +100,7 @@ gulp.task('build:dev',
       'copy',
       () => parseContent(
         BUILD_OUTPUT_PATH + '/_ebook', BUILD_OUTPUT_PATH + '/_content')
-        .catch(() => {})
+        .catch(err => console.log('Error Building Content: ', err))
     )
   )
 );
