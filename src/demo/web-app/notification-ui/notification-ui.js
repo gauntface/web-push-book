@@ -157,7 +157,8 @@ const actionsNotification = function(registration) {
       {
         action: 'example-action-2',
         title: 'Doughnut',
-        icon: '/notification-ui/action-2-128x128.png'
+        icon: '/notification-ui/Donut_24px.png'
+        // icon: '/notification-ui/action-2-128x128.png'
       },
       {
         action: 'example-action-3',

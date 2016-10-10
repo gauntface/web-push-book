@@ -22,28 +22,28 @@ Where the title is a string and options can be the following:
 ```
 {
   "//": "Visual Options",
-  body: <String>,
-  icon: <URL String>,
-  image: <URL String>,
-  badge: <URL String>,
-  vibrate: <Array of Integers>,
-  sound: <URL String>,
-  dir: <String of 'auto' | 'ltr' | 'rtl'>,
+  "body": "<String>",
+  "icon": "<URL String>",
+  "image": "<URL String>",
+  "badge": "<URL String>",
+  "vibrate": "<Array of Integers>",
+  "sound": "<URL String>",
+  "dir": "<String of 'auto' | 'ltr' | 'rtl'>",
 
   "//": "Behavioural Options",
-  tag: <String>,
-  data: <Anything>
-  requireInteraction: <boolean>,
-  renotify: <Boolean>,
-  silent: <Boolean>,
-  noscreen: <Boolean>,
-  sticky: <boolean>,
+  "tag": "<String>",
+  "data": "<Anything>",
+  "requireInteraction": "<boolean>",
+  "renotify": "<Boolean>",
+  "silent": "<Boolean>",
+  "noscreen": "<Boolean>",
+  "sticky": "<boolean>",
 
   "//": "Both Visual & Behavioural Options",
-  actions: <Array of Strings>
+  "actions": "<Array of Strings>",
 
   "//": "???????????????",
-  timestamp: <Long>
+  "timestamp": "<Long>"
 }
 ```
 
@@ -141,34 +141,92 @@ On Android, the only [guideline width](https://code.google.com/p/android/issues/
 
 An image of width >= 1350px would be a good bet.
 
-### Vibrate
-
-<% include('../../demo/web-app/notification-ui/notification-ui.js', 'vibrateNotification') %>
-
-// On Android you must have volume up to some extent
-// Doesn't do anything on desktop
-
 ### Actions
+
+Actions allow you to define buttons that are displayed with the notification and can be interacted with by the user.
 
 <% include('../../demo/web-app/notification-ui/notification-ui.js', 'actionsNotification') %>
 
-// Android N doesnt use Icons
-// Android M does use icons and colors them
-// Desktop uses icons but doesn't color them
+At the time of writing only Chrome and Opera for Android support actions.
+
+![Notification with Actions on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-actions.png)
+
+For each action you can define a title, an "action" (which is essentially an ID) and an icon.
+
+I've defined 4 actions in the sample code above to illustrate that only two actions are shown.
+
+In the image above the icons are colored differently. The coffee icon is colored to match the text of Chrome's text, #333333, while the doughtnut icon is bright pink.
+
+Why do two colors? Because on Android Marshmallow the icons colored to match the system like so:
+
+![Notification with Actions on Chrome for Android.](/images/notification-screenshots/mobile/chrome-actions-m.png)
+
+In Android Nougat the action icons aren't shown at all.
+
+It's also worth calling out that that icons look crisp on Android but **not** on desktop.
+
+The best size I could get to work on desktop Chrome was 24px x 24px. This sadly looks out of place on Android.
+
+The best practice we can draw from this:
+
+- Stick to a consistent color scheme for your icons as it may be displayed to the user.
+- Make sure they look work in monochrome as some platforms may display them in such a way.
+- Test the size and see what works for you. 128px x 128px works well on Android for me but was poor quality on desktop.
+- Expect your icons not to be displayed at all.
 
 ### Direction
 
+The "dir" parameter allows you to say what direction the text should be displayed, right-to-left or left-to-right.
+
+In testing it seemed that the direction was largely determined by the text rather than this parameter. Reading through the spec it calls out this this can be used to suggest to the browser how to layout options like actions, but I saw no difference.
+
+Probably best to define if you can, otherwise the browser should do the right thing.
+
 <% include('../../demo/web-app/notification-ui/notification-ui.js', 'dirRTLNotification') %>
 
-// Language plays a big part of this and setting `dir` is just a hint.
+The parameter should be set to either `auto`, `ltr` or `rtl`.
 
-// Can be auto, ltr or rtl
+A right-to-left language used on Chrome onm Linux looks like this:
+
+![Notification with Right-to-Left Language on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-rtl.png)
+
+On Firefox (while hovering over it) you'll get this:
+
+![Notification with Right-to-Left Language on Firefox on Linux.](/images/notification-screenshots/desktop/firefox-rtl-expanded.png)
+
+### Vibrate
+
+The vibrate option allows you to define a vibration pattern on a users devices when the notification is received, assuming the users current settings allow for vibrations.
+
+The format of the vibrate option should be an
+array of numbers that describe the number of milliseconds the device should vibrate followed by the number of milliseconds the device should *not* vibrate.
+
+<% include('../../demo/web-app/notification-ui/notification-ui.js', 'vibrateNotification') %>
+
+This only affects devices that support vibration.
 
 ### Sound
 
+The sound parameter allows you to define a sounds to play when the notification is received.
+
+Sadly at the time of writing no browser has support for the sound option.
+
 <% include('../../demo/web-app/notification-ui/notification-ui.js', 'soundNotification') %>
 
-// Not implemented in Chrome?
-// TODO: implemented in FF?
-
 ## UX Best Practices
+
+There are some [best practices over on the Google Developers site that you can check out](https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/good-notification) but all I want to add to it is that you should consider why you sent the push message in the first place and make sure all of the above parameters are geared towards that reason.
+
+To be honest, it's easy to see examples and think "I'll never make that mistake" but it's easier to fall into that trap than you might think.
+
+1. Don't put your website in the title or the body. Browsers include your domain no matter what so **don't duplicate it**.
+
+// TODO Image demo
+
+1. Use all information you have available to you. If you send a push message because someone sent a message to that user, rather than using a title of 'New Message' and body of 'Click here to read it.' use a title of 'John just sent a new message' and a body of part of the message.
+
+// TODO Image demo
+
+1. The icon can be more than just your logo. Obviously if there isn't anything you can use, a logo is a good fallback, but consider what else you have at your disposal.
+
+// TODO Image demo
