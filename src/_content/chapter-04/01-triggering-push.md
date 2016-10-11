@@ -3,7 +3,7 @@ title: Sending Push Messages
 ---
 # Sending Push Messages
 
-With your backend recieving *PushSubscriptions* it's time to think about how
+With your backend receiving *PushSubscriptions* it's time to think about how
 to send a push message to these users.
 
 In this chapter we're going to look how we use a subscription to trigger a
@@ -12,13 +12,13 @@ that request.
 
 ## Preface
 
-Before we get into the nitty gritty of this, it's worth calling **one very
+Before we get into the nitty-gritty of this, it's worth calling **one very
 important piece of information**......ready??
 
 **There are libraries that make this very easy**.
 
 The [web-push-libs org on Github](https://github.com/web-push-libs/) is the
-best place to go to find a library for your server side lanugage. At the moment
+best place to go to find a library for your server side language. At the moment
 there's
 [Node.js](https://github.com/web-push-libs/web-push), [PHP](https://github.com/web-push-libs/web-push-php), [Java](https://github.com/web-push-libs/webpush-java) & [Python](https://github.com/web-push-libs/pywebpush).
 
@@ -113,7 +113,7 @@ Web Push Protocol request.
     <td>
       **[Experimental]** Urgency allows you to determine if the message you're
       sending is vital or not on some scale, this can be used by the push
-      service to conserve energy on the users device. You can send a value of
+      service to conserve energy on the user's device. You can send a value of
       "very-low" | "low" | "normal" | "high" and the default is "normal". At
       the time of writing (October 2016) I'm not sure what the support for this
       feature is like.
@@ -138,7 +138,7 @@ The main thing to consider when you get a response is the status code.
   </tr>
   <tr>
     <td>429</td>
-    <td>Too many requests. Maining the application server has reached a rate
+    <td>Too many requests. Meaning the application server has reached a rate
     limit with a push service. The push service include a 'Retry-After' header
     to indicate how long the before you can make another request.</td>
   </tr>
@@ -169,7 +169,7 @@ application server so it knows the request to send a message is coming from
 the right place.
 
 Previously we saw this diagram of how the private application server key (or
-private VAPID key) is used to "Sign an Authorization header", thats what
+private VAPID key) is used to "Sign an Authorization header", that's what
 we're going to look at now.
 
 ![Illustration of how the private application server key is used when sending a message.](/images/png-version/application-server-key-send.png)
@@ -178,7 +178,7 @@ we're going to look at now.
 
 The value we pass in as the *Authorization* header is a JSON web token.
 
-A (JSON web token)[https://jwt.io/] (or JWT for short) is basically a way
+A [JSON web token](https://jwt.io/) (or JWT for short) is basically a way
 of sending a message to a third party in such a way that if they have your
 public key, they can decrypt part of your JWT and validate that it's from you
 because only you could sign it with your secret private key.
@@ -223,8 +223,8 @@ The 'aud' value is the "audience", i.e. who the JWT is for. For web push the
 JWT is for the push service, so we set it to the **origin of the push service**.
 
 The 'exp' value is the expiration of the JWT, this prevent snoopers from being
-able to use your JWT easily. The expiration is a timestamp in millseconds
-and must be within 24 hour from the when the push service receives your message.
+able to use your JWT easily. The expiration is a timestamp in milliseconds
+and must be within 24 hours from the when the push service receives your message.
 
 In Node.js we could safely set the expiration to
 `Math.floor(Date.now() / 1000) + (12 * 60 * 60)`.
@@ -333,7 +333,7 @@ This is an **optional header**.
 Topics are strings that can be used to replace any pending notifications with
 new notifications if they have matching topics.
 
-This is useful in scenarios where the users device might be offline while you've
+This is useful in scenarios where the user's device might be offline while you've
 sent three messages and you only want the user to receive one message when they
 turn their device back on.
 

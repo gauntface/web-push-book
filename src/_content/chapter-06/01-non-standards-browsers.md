@@ -46,7 +46,7 @@ There you have it, your 'Sender ID'.
 
     // Highlight the sender ID
 
-The way you give these browsers the sernder ID is via a Web App Manifest.
+The way you give these browsers the sender ID is via a Web App Manifest.
 
 ### Adding a Web App Manifest
 

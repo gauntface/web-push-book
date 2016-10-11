@@ -47,7 +47,7 @@ Most people use `json()` or `text()` depending on their app.
 That is the bare bones of the push event. Nice and easy. No matter whether your
 web app is open or not, the browser will wake up your service worker and
 dispatch a push event for you to handle. There is one thing to be careful
-of and thats how you use `event.waitUntil()`.
+of and that's how you use `event.waitUntil()`.
 
 ### Wait Until
 
@@ -68,7 +68,7 @@ Calling `self.registration.showNotification()` is the method that displays
 a notification to the user and returns a promise which resolves once it's done.
 This promise is assigned to the variable `promiseChain` which is then passed
 into `event.waitUntil()`. This is very verbose, but I've seen a number of
-issues that have revolved under mis-understanding what should be passed
+issues that have revolved under misunderstanding what should be passed
 into *waitUntil()* or simply broken promise chains.
 
 A more complicated example with network request for data and analytics event
@@ -93,7 +93,7 @@ the service worker.
 
 The reason we should be concerned about waitUntil and using it correctly is
 that one of the most common issues developers when implementing push is when
-they get this default notifcation shown by Chrome.
+they get this default notification shown by Chrome.
 
 ![An Image of the default notification in Chrome](/images/default-notification-mobile.png)
 
@@ -108,8 +108,8 @@ finished.
 The main reason developers get caught out by this is that their code will
 often call *self.registration.showNotification()* but they **aren't** doing
 anything with the promise it returns, resulting in sometimes the notification
-displaying in time and other times it doesn't, resulting in the notifcation
-above. Just rememeber - you see that notification, check your promise chains
+displaying in time and other times it doesn't, resulting in the notification
+above. Just remember - you see that notification, check your promise chains
 and *event.waitUntil()*.
 
 Time to actually look at notification styles.

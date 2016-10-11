@@ -155,7 +155,7 @@ For each action you can define a title, an "action" (which is essentially an ID)
 
 I've defined 4 actions in the sample code above to illustrate that only two actions are shown.
 
-In the image above the icons are colored differently. The coffee icon is colored to match the text of Chrome's text, #333333, while the doughtnut icon is bright pink.
+In the image above the icons are colored differently. The coffee icon is colored to match the text of Chrome's text, #333333, while the doughnut icon is bright pink.
 
 Why do two colors? Because on Android Marshmallow the icons colored to match the system like so:
 
@@ -178,7 +178,7 @@ The best practice we can draw from this:
 
 The "dir" parameter allows you to say what direction the text should be displayed, right-to-left or left-to-right.
 
-In testing it seemed that the direction was largely determined by the text rather than this parameter. Reading through the spec it calls out this this can be used to suggest to the browser how to layout options like actions, but I saw no difference.
+In testing it seemed that the direction was largely determined by the text rather than this parameter. Reading through the spec it calls out this can be used to suggest to the browser how to layout options like actions, but I saw no difference.
 
 Probably best to define if you can, otherwise the browser should do the right thing.
 
@@ -186,7 +186,7 @@ Probably best to define if you can, otherwise the browser should do the right th
 
 The parameter should be set to either `auto`, `ltr` or `rtl`.
 
-A right-to-left language used on Chrome onm Linux looks like this:
+A right-to-left language used on Chrome on Linux looks like this:
 
 ![Notification with Right-to-Left Language on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-rtl.png)
 
@@ -196,7 +196,7 @@ On Firefox (while hovering over it) you'll get this:
 
 ### Vibrate
 
-The vibrate option allows you to define a vibration pattern on a users devices when the notification is received, assuming the users current settings allow for vibrations.
+The vibrate option allows you to define a vibration pattern on a user's devices when the notification is received, assuming the user's current settings allow for vibrations.
 
 The format of the vibrate option should be an
 array of numbers that describe the number of milliseconds the device should vibrate followed by the number of milliseconds the device should *not* vibrate.
