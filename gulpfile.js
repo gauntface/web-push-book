@@ -24,7 +24,8 @@ gulp.task('clean', () => {
 gulp.task('copy', () => {
   return gulp.src([
     SRC_PATH + '/*.md',
-    SRC_PATH + '/**/*.html'
+    SRC_PATH + '/**/*.html',
+    './node_modules/anchor-js/anchor.min.js'
   ])
   .pipe(gulp.dest(BUILD_OUTPUT_PATH));
 });
