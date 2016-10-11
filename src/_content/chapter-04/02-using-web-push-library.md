@@ -9,7 +9,7 @@ steps for you.
 
 [web-push](https://github.com/web-push-libs/web-push) is a popular Node.js
 library for sending push messages to browsers and for full-disclosure
-I've commited code to this project and it's totes the best.
+I've committed code to this project and it's totes the best.
 
 > **Remember**: If you want a library for a different language, be sure to
 > checkout the [web-push-libs org on Github](https://github.com/web-push-libs/).
@@ -58,7 +58,7 @@ We can now run your script with:
     node index.js
 
 This will run the above JavaScript using Node.js and send a message to
-that users browser, which will wake up the service worker and dispatch
+that user's browser, which will wake up the service worker and dispatch
 a `push` event, which we are going to cover in the next section.
 
 While this example is trivial, the only things we'd need to change to make this

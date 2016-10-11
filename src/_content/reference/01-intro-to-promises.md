@@ -103,7 +103,7 @@ someAPI(function((err, result) {
 <% include('./code-samples/promises/callback-function.js') %>
 
 This was easy to use and worked well. The only downside is that error cases
-weren't standardardised and it can lead to heavy nesting of function calls.
+weren't standardised and it can lead to heavy nesting of function calls.
 
 Promises is essentially a standardised why of approaching asynchronous method
 that can simplify APIS. Te equivalent promise of the code above is as
@@ -120,14 +120,14 @@ someAPI()
 ```
 <% include('./code-samples/promises/basic-promise.js') %>
 
-The difference is minor, the result and error are seperated via the `then` and
+The difference is minor, the result and error are separated via the `then` and
 `catch` method, both passing in a callback function.
 
 The major benefit of promises is that your can *chain* promises together by
 returning a promise inside of a promises callback.
 
 Let's say we were making waiting for a browser event and afterwards we wanted
-to make a network request,. Using callbacks, we would do the
+to make a network request. Using callbacks, we would do the
 following:
 
 ``` javascript
@@ -166,7 +166,7 @@ waitForBrowserEvent()
 ```
 <% include('./code-samples/promises/promise-chain.js') %>
 
-This should be enough on promises to get you through the reast of this book,
+This should be enough on promises to get you through the rest of this book,
 but it's not clear, I strongly recommend Jake Archibalds introduction to
 Promises, he covers a tonne of examples and
 usecases^[https://developers.google.com/web/fundamentals/primers/promises/].
@@ -203,11 +203,11 @@ JavaScript runs inside of a web page.
 ![A browser with a web page loaded and JavaScript running inside of that page](/images/png-version/browser-with-javascript.png)
 
 What the service work API does is it gives you a way to make the browser
-aware of "special" JavaScript files that run seperate from the page. These
+aware of "special" JavaScript files that run separately from the page. These
 JavaScript files can run while your web page is closed or even when the
-users browser window is closed.
+user's browser window is closed.
 
-![A browser a service worker running seperate from the page or running while the browser is closed](/images/png-version/browser-with-serviceworker.png)
+![A browser a service worker running separate from the page or running while the browser is closed](/images/png-version/browser-with-serviceworker.png)
 
 With this, browsers have been able to add new API's to service worker files,
 including:
@@ -217,7 +217,7 @@ including:
 - Background Sync (ability to make a network request if the initial
   request fails due to being offline)
 
-Ultimately, serviceworkers are a type of JavaScript worker and as a result
+Ultimately, service workers are a type of JavaScript worker and as a result
 have many of the API's you'd have in a worker.
 
 Like I said, we'll cover this in more detail later on in the book, just

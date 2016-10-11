@@ -76,7 +76,7 @@ considering the double permission of push.
 With this approach you display custom permission prompt in your web
 app that asks the user to enable notifications. By
 doing this the user can say enable or disable without the website being
-permanently blockedsince they are only using the websites UI. If
+permanently blocked since they are only using the websites UI. If
 the user selects enable on the custom UI, display the actual permission prompt.
 
 A good example of this is [Slack](https://slack.com/), they show a prompt at
@@ -162,7 +162,7 @@ Aside from UX to subscribe a user to push, **please** consider how a user
 should unsubscribe / opt out of push messaging.
 
 The number of sites that simply ask for permission as soon as the page loads
-and as a result have no UI in their web app to disable push notificiations
+and as a result have no UI in their web app to disable push notifications
 is astounding.
 
 [Vice news](https://news.vice.com/) is an example of this practice. (p.s. sorry

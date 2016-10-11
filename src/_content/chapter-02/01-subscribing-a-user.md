@@ -79,7 +79,7 @@ otherwise we throw an error making the promise reject.
 
 The important thing to remember is that if the user clicks 'Block', your web
 app will not be able to ask the user for the Notification permission again until
-they reset the permission state, so think think carefully about how you
+they reset the permission state, so think carefully about how you
 ask the user. The good news is that most users are happy to give permission as
 long as it's asked in a way that they *know* why the permission is being asked.
 
@@ -101,9 +101,9 @@ Lets look at both of the options we've passed in.
 
 When push was first added to browsers there was uncertainty about whether
 developers should be able to send a push message and not let the user know
-about it, this is commonly reffered to as silent push.
+about it, this is commonly referred to as silent push.
 
-The concern was that developers could do nasty things like track a users
+The concern was that developers could do nasty things like track a user's
 location on an ongoing basis without the user knowing.
 
 To avoid this scenario and to give spec authors time to consider what to do

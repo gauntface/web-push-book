@@ -6,7 +6,7 @@ title: How Push Works
 Before getting into the API, it's useful to consider how everything
 fits together, from start to finish, so that as we step through individual
 topics or API's, you'll have an idea of how it fits in to the overall goal of
-implmenting push messages.
+implementing push messages.
 
 The three key steps to implementing push are:
 
@@ -15,9 +15,9 @@ The three key steps to implementing push are:
 1. The API call your backend / server will need to make to trigger a push
   message.
 1. The service worker JavaScript file that will receive a push event when the
-  push message is received on the users device.
+  push message is received on the user's device.
 
-Let's look at what each of these steps entail in a little more detail.
+Let's look at what each of these steps entails in a little more detail.
 
 ## Step 1: Client Side
 
@@ -25,11 +25,11 @@ Before you can send a push message to a user, you need to "subscribe" a user
 to push messaging.
 
 Subscribing the user for push is the process of getting
-**persmission** to send them push messages, followed by getting
+**permission** to send them push messages, followed by getting
 a `PushSubscription` from the browser.
 
 A `PushSubscription` contains all the information we need to send a push message
-to that user, you can loosely think of this as a ID for that users device.
+to that user, you can loosely think of this as a ID for that user's device.
 
 This is all done in JavaScript with a simple API.
 
@@ -79,7 +79,7 @@ push service you need to send the message to. On the end of the URL is a
 unique string that essentially acts as the "ID" for the user.
 
 This means we have a subscription and that gives us the URL for the push service
-that will deliver our message & the URL idenitifies the user because it's
+that will deliver our message & the URL identifies the user because it's
 unique, so how do we send a message?
 
 ### How Do We Send A Push Message?
