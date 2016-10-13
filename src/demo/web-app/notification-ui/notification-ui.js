@@ -176,6 +176,39 @@ const actionsNotification = function(registration) {
   /**** END actionsNotification ****/
 };
 
+const notificationTag = function(registration) {
+  /**** START tagNotificationOne ****/
+  const title = 'First Notification';
+  const options = {
+    body: 'With \'tag\' of \'message-group-1\'',
+    tag: 'message-group-1'
+  };
+  registration.showNotification(title, options);
+  /**** END tagNotificationOne ****/
+
+  setTimeout(() => {
+    /**** START tagNotificationTwo ****/
+    const title = 'Second Notification';
+    const options = {
+      body: 'With \'tag\' of \'message-group-2\'',
+      tag: 'message-group-2'
+    };
+    registration.showNotification(title, options);
+    /**** END tagNotificationTwo ****/
+  }, 2000);
+
+  setTimeout(() => {
+    /**** START tagNotificationThree ****/
+    const title = 'Third Notification';
+    const options = {
+      body: 'With \'tag\' of \'message-group-1\'',
+      tag: 'message-group-1'
+    };
+    registration.showNotification(title, options);
+    /**** END tagNotificationThree ****/
+  }, 4000);
+};
+
 const setUpNotificationButtons = function() {
   const configs = [
     {
@@ -221,6 +254,10 @@ const setUpNotificationButtons = function() {
     {
       className: 'js-notification-overview',
       cb: overviewNotification
+    },
+    {
+      className: 'js-notification-tag',
+      cb: notificationTag
     }
   ];
 
