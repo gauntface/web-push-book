@@ -1,3 +1,5 @@
+const NOTIFICATION_DELAY = 2500;
+
 function registerServiceWorker() {
   return navigator.serviceWorker.register('/service-worker.js')
   .then(function(registration) {
@@ -176,15 +178,25 @@ const actionsNotification = function(registration) {
   /**** END actionsNotification ****/
 };
 
-const notificationTag = function(registration) {
-  /**** START tagNotificationOne ****/
-  const title = 'First Notification';
+const defaultNotification = function(registration) {
+  const title = 'Default Notification';
   const options = {
-    body: 'With \'tag\' of \'message-group-1\'',
-    tag: 'message-group-1'
+    body: 'This notification has no behavioural options set.'
   };
   registration.showNotification(title, options);
-  /**** END tagNotificationOne ****/
+}
+
+const notificationTag = function(registration) {
+  setTimeout(() => {
+    /**** START tagNotificationOne ****/
+    const title = 'First Notification';
+    const options = {
+      body: 'With \'tag\' of \'message-group-1\'',
+      tag: 'message-group-1'
+    };
+    registration.showNotification(title, options);
+    /**** END tagNotificationOne ****/
+  }, NOTIFICATION_DELAY);
 
   setTimeout(() => {
     /**** START tagNotificationTwo ****/
@@ -195,7 +207,7 @@ const notificationTag = function(registration) {
     };
     registration.showNotification(title, options);
     /**** END tagNotificationTwo ****/
-  }, 2000);
+  }, NOTIFICATION_DELAY * 2);
 
   setTimeout(() => {
     /**** START tagNotificationThree ****/
@@ -206,7 +218,52 @@ const notificationTag = function(registration) {
     };
     registration.showNotification(title, options);
     /**** END tagNotificationThree ****/
-  }, 4000);
+  }, NOTIFICATION_DELAY * 3);
+};
+
+const renotifyNotification = function(registration) {
+  setTimeout(() => {
+    const title = 'First Notification';
+    const options = {
+      body: 'With "tag: \'renotify\'".',
+      tag: 'renotify'
+    };
+    registration.showNotification(title, options);
+  }, NOTIFICATION_DELAY);
+
+  setTimeout(() => {
+    /**** START renotifyNotification ****/
+    const title = 'Second Notification';
+    const options = {
+      body: 'With "renotify: true" and "tag: \'renotify\'".',
+      tag: 'renotify',
+      renotify: true
+    };
+    registration.showNotification(title, options);
+    /**** END renotifyNotification ****/
+  }, NOTIFICATION_DELAY * 2);
+};
+
+const silentNotification = function(registration) {
+  /**** START silentNotification ****/
+  const title = 'Silent Notification';
+  const options = {
+    body: 'With "silent: \'true\'".',
+    silent: true
+  };
+  registration.showNotification(title, options);
+  /**** END silentNotification ****/
+};
+
+const requiresInteractionNotification = function(registration) {
+  /**** START requireInteraction ****/
+  const title = 'Require Interaction Notification';
+  const options = {
+    body: 'With "requireInteraction: \'true\'".',
+    requireInteraction: true
+  };
+  registration.showNotification(title, options);
+  /**** END requireInteraction ****/
 };
 
 const setUpNotificationButtons = function() {
@@ -258,6 +315,22 @@ const setUpNotificationButtons = function() {
     {
       className: 'js-notification-tag',
       cb: notificationTag
+    },
+    {
+      className: 'js-notification-renotify',
+      cb: renotifyNotification
+    },
+    {
+      className: 'js-notification-default',
+      cb: defaultNotification
+    },
+    {
+      className: 'js-notification-silent',
+      cb: silentNotification
+    },
+    {
+      className: 'js-notification-require-interaction',
+      cb: requiresInteractionNotification
     }
   ];
 
