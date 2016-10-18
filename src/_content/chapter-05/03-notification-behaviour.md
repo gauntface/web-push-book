@@ -9,12 +9,33 @@ rather than the UI, like how multiple notifications should be treated.
 Be default, calling `showNotification()` with just visual options will have
 the following behaviours:
 
+1. Clicking on a notification does nothing.
 1. Each notification is shown, nothing is down in terms of collapsing
 notifications.
 1. Sound and Vibration may be played (depending on the platform).
 1. The notification itself is clickable but nothing else.
 1. On some platforms the notification will disappear after a short
 period of time.
+
+In this secion we are going to look at how we can alter these behaviours
+via the notification options available to use. These are arguably the easiest
+behaviours to alter / define. In the following section we'll look at the code
+to perform common tasks as well as implement more complex behaviours when
+showing a notification or handling interaction.
+
+### Notification Click Event
+
+When a user clicks on a notification the default behaviour is for nothing
+to happen, but the common practice is for the notification to close and
+perhaps perform some other logic (i.e. open a window or make some API
+call that will do some remotely).
+
+To this, we just need to define a 'notificationclick' event listener
+that will be called when ever a notification is clicked.
+
+<% include('../../demo/web-app/service-worker.js', 'simpleNotification') %>
+
+From this we can access the notification via 'event.notification'.
 
 ### Tag
 
@@ -86,7 +107,7 @@ behaviour of device vibration and sound.
 This is ideal if your notification doesn't require immediate attention
 from the user.
 
-<% include('../../demo/web-app/notification-ui/notification-ui.js', 'silentNoficiation') %>
+<% include('../../demo/web-app/notification-ui/notification-ui.js', 'silentNotification') %>
 
 // TODO: Test if this causes the screen to wake up.
 
@@ -112,8 +133,14 @@ doing can be pretty frustrating.
 
 Actions allow you to give users another level of interaction with your users.
 
+In the previous section you saw how to define actions:
 
+<% include('../../demo/web-app/notification-ui/notification-ui.js', 'actionsNotification') %>
 
-### Timestamp
+The behaviour of an action press is up to you, simply listen for the notification
+click event and check the event.action value, which will contain the 'action' value
+associated with the button.
 
-## UX Best Practices
+<% include('../../demo/web-app/service-worker.js', 'notificationClickEvent') %>
+
+![Logs for action button clicks and notification click.](/images/notification-screenshots/action-button-click-logs.png)

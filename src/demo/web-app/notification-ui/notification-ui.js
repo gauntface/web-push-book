@@ -146,29 +146,39 @@ const dirRTLNotification = function(registration) {
   /**** END dirRTLNotification ****/
 };
 
+const timestampNotification = function(registration) {
+  /**** START timestampNotification ****/
+  const title = 'Timestamp Notification';
+  const options = {
+    body: 'Timestamp is set to 14 days ago.',
+    timestamp: Date.now() - (14 * 24 * 60 * 60 * 1000)
+  };
+  registration.showNotification(title, options);
+  /**** END timestampNotification ****/
+};
+
 const actionsNotification = function(registration) {
   /**** START actionsNotification ****/
   const title = 'Actions Notification';
   const options = {
     actions: [
       {
-        action: 'example-action-1',
+        action: 'coffee-action',
         title: 'Coffee',
         icon: '/notification-ui/action-1-128x128.png'
       },
       {
-        action: 'example-action-2',
+        action: 'doughnut-action',
         title: 'Doughnut',
-        icon: '/notification-ui/Donut_24px.png'
-        // icon: '/notification-ui/action-2-128x128.png'
+        icon: '/notification-ui/action-2-128x128.png'
       },
       {
-        action: 'example-action-3',
+        action: 'gramophone-action',
         title: 'gramophone',
         icon: '/notification-ui/action-3-128x128.png'
       },
       {
-        action: 'example-action-4',
+        action: 'atom-action',
         title: 'Atom',
         icon: '/notification-ui/action-4-128x128.png'
       }
@@ -307,6 +317,10 @@ const setUpNotificationButtons = function() {
     {
       className: 'js-notification-dir-rtl',
       cb: dirRTLNotification
+    },
+    {
+      className: 'js-notification-timestamp',
+      cb: timestampNotification
     },
     {
       className: 'js-notification-overview',

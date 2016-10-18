@@ -213,6 +213,20 @@ Sadly at the time of writing no browser has support for the sound option.
 
 <% include('../../demo/web-app/notification-ui/notification-ui.js', 'soundNotification') %>
 
+### Timestamp
+
+Timestamp allows you to alter the time displayed on the notification.
+
+The timestamp should be the number of milliseconds since 00:00:00 UTC on
+1 January 1970 (i.e. the unix epoch).
+
+<% include('../../demo/web-app/notification-ui/notification-ui.js', 'timestampNotification') %>
+
+This information is not always shown but on older versions of Android it's
+displayed like so:
+
+// Need screenshot for Android M
+
 ## UX Best Practices
 
 There are some [best practices over on the Google Developers site that you can check out](https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/good-notification) but all I want to add to it is that you should consider why you sent the push message in the first place and make sure all of the above parameters are geared towards that reason.
@@ -220,13 +234,14 @@ There are some [best practices over on the Google Developers site that you can c
 To be honest, it's easy to see examples and think "I'll never make that mistake" but it's easier to fall into that trap than you might think.
 
 1. Don't put your website in the title or the body. Browsers include your domain no matter what so **don't duplicate it**.
+   Here's an example of Facebook doing this as a fallback message when you use the DevTools 'push' button. The important information is there's a new notification, not "Facebook".
 
-// TODO Image demo
+    ![Screenshot of Facebook's Default Notification](/images/notification-screenshots/desktop/facebook-fallback-notification.png)
 
 1. Use all information you have available to you. If you send a push message because someone sent a message to that user, rather than using a title of 'New Message' and body of 'Click here to read it.' use a title of 'John just sent a new message' and a body of part of the message.
 
-// TODO Image demo
+    Here's a better example from Facebook (when there is an actual push message).
 
-1. The icon can be more than just your logo. Obviously if there isn't anything you can use, a logo is a good fallback, but consider what else you have at your disposal.
+    ![Screenshot of a Facebook Message Notification](/images/notification-screenshots/desktop/facebook-message.png)  
 
-// TODO Image demo
+    It has information on the user who sent the message, the message content and the users profile photo, making the notification more relevant to the user.
