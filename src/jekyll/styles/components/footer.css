@@ -17,9 +17,10 @@ footer .gf-logo {
   height: 36px;
 }
 
-footer .footer-bottom-row {
+footer .footer-bottom-row p {
   text-align:center;
   font-size: 0.8rem;
+  margin-bottom: 0;
 }
 
 footer .footer-bottom-row a {

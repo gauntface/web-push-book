@@ -1,3 +1,0 @@
-() => {
-  // Do codez here
-}

@@ -16,14 +16,14 @@ const overviewNotification = function(registration) {
   const options = {
     body: 'This would be the body text of the notification.\n' +
       'It can hold two lines of text.',
-    icon: '/notification-ui/icon-512x512.png',
-    badge: '/notification-ui/badge-128x128.png',
-    image: '/notification-ui/Unsplash-Farzad Nazifi-1600x1100.jpg',
+    icon: '/images/icon-512x512.png',
+    badge: '/images/badge-128x128.png',
+    image: '/images/unsplash-farzad-nazifi-1600x1100.jpg',
     actions: [
       {
         action: 'download-book-action',
         title: 'Download Book',
-        icon: '/notification-ui/action-download-book-128x128.png'
+        icon: '/images/action-download-book-128x128.png'
       }
     ]
   };
@@ -62,7 +62,7 @@ const iconNotification = function(registration) {
   /**** START iconNotification ****/
   const title = 'Icon Notification';
   const options = {
-    icon: '/notification-ui/icon-512x512.png'
+    icon: '/images/icon-512x512.png'
   };
   registration.showNotification(title, options);
   /**** END iconNotification ****/
@@ -72,7 +72,7 @@ const badgeNotification = function(registration) {
   /**** START badgeNotification ****/
   const title = 'Badge Notification';
   const options = {
-    badge: '/notification-ui/badge-128x128.png'
+    badge: '/images/badge-128x128.png'
   };
   registration.showNotification(title, options);
   /**** END badgeNotification ****/
@@ -82,7 +82,7 @@ const imageNotification = function(registration) {
   /**** START imageNotification ****/
   const title = 'Image Notification';
   const options = {
-    image: '/notification-ui/Unsplash-Farzad Nazifi-1600x1100.jpg'
+    image: '/images/Unsplash-Farzad Nazifi-1600x1100.jpg'
   };
   registration.showNotification(title, options);
   /**** END imageNotification ****/
@@ -104,7 +104,7 @@ const soundNotification = function(registration) {
   /**** START soundNotification ****/
   const title = 'Sound Notification';
   const options = {
-    sound: '/notification-ui/notification-sound.mp3'
+    sound: '/audio/notification-sound.mp3'
   };
   registration.showNotification(title, options);
   /**** END soundNotification ****/
@@ -165,22 +165,22 @@ const actionsNotification = function(registration) {
       {
         action: 'coffee-action',
         title: 'Coffee',
-        icon: '/notification-ui/action-1-128x128.png'
+        icon: '/images/action-1-128x128.png'
       },
       {
         action: 'doughnut-action',
         title: 'Doughnut',
-        icon: '/notification-ui/action-2-128x128.png'
+        icon: '/images/action-2-128x128.png'
       },
       {
         action: 'gramophone-action',
         title: 'gramophone',
-        icon: '/notification-ui/action-3-128x128.png'
+        icon: '/images/action-3-128x128.png'
       },
       {
         action: 'atom-action',
         title: 'Atom',
-        icon: '/notification-ui/action-4-128x128.png'
+        icon: '/images/action-4-128x128.png'
       }
     ]
   };
@@ -197,16 +197,14 @@ const defaultNotification = function(registration) {
 }
 
 const notificationTag = function(registration) {
-  setTimeout(() => {
-    /**** START tagNotificationOne ****/
-    const title = 'First Notification';
-    const options = {
-      body: 'With \'tag\' of \'message-group-1\'',
-      tag: 'message-group-1'
-    };
-    registration.showNotification(title, options);
-    /**** END tagNotificationOne ****/
-  }, NOTIFICATION_DELAY);
+  /**** START tagNotificationOne ****/
+  const title = 'First Notification';
+  const options = {
+    body: 'With \'tag\' of \'message-group-1\'',
+    tag: 'message-group-1'
+  };
+  registration.showNotification(title, options);
+  /**** END tagNotificationOne ****/
 
   setTimeout(() => {
     /**** START tagNotificationTwo ****/
@@ -217,7 +215,7 @@ const notificationTag = function(registration) {
     };
     registration.showNotification(title, options);
     /**** END tagNotificationTwo ****/
-  }, NOTIFICATION_DELAY * 2);
+  }, NOTIFICATION_DELAY);
 
   setTimeout(() => {
     /**** START tagNotificationThree ****/
@@ -228,18 +226,16 @@ const notificationTag = function(registration) {
     };
     registration.showNotification(title, options);
     /**** END tagNotificationThree ****/
-  }, NOTIFICATION_DELAY * 3);
+  }, NOTIFICATION_DELAY * 2);
 };
 
 const renotifyNotification = function(registration) {
-  setTimeout(() => {
-    const title = 'First Notification';
-    const options = {
-      body: 'With "tag: \'renotify\'".',
-      tag: 'renotify'
-    };
-    registration.showNotification(title, options);
-  }, NOTIFICATION_DELAY);
+  const title = 'First Notification';
+  const options = {
+    body: 'With "tag: \'renotify\'".',
+    tag: 'renotify'
+  };
+  registration.showNotification(title, options);
 
   setTimeout(() => {
     /**** START renotifyNotification ****/
@@ -251,7 +247,7 @@ const renotifyNotification = function(registration) {
     };
     registration.showNotification(title, options);
     /**** END renotifyNotification ****/
-  }, NOTIFICATION_DELAY * 2);
+  }, NOTIFICATION_DELAY);
 };
 
 const silentNotification = function(registration) {

@@ -37,6 +37,24 @@ that will be called when ever a notification is clicked.
 
 From this we can access the notification via 'event.notification'.
 
+### Actions
+
+Actions allow you to give users another level of interaction with your users
+over just clicking the notification.
+
+In the previous section you saw how to define actions when calling
+`showNotification()`:
+
+<% include('../../demo/web-app/notification-ui/notification-ui.js', 'actionsNotification') %>
+
+The behavior of an action press is up to you, simply listen for the notification
+click event (just like above) and check the `event.action` value, which will
+contain the 'action' parameter you passed into `showNotification()`.
+
+<% include('../../demo/web-app/service-worker.js', 'notificationClickEvent') %>
+
+![Logs for action button clicks and notification click.](/images/notification-screenshots/action-button-click-logs.png)
+
 ### Tag
 
 The *tag* option is a essentially a String ID that "groups" notifications
@@ -88,9 +106,6 @@ set `renotify` to true.
 
 <% include('../../demo/web-app/notification-ui/notification-ui.js', 'renotifyNotification') %>
 
-// TODO Screenshot of first icon to two paths. One with Vibration + sound icon
-// One with no sound of vibration icon.
-
 Plesae note that renotify is **only used** when a notification is replacing
 another notification due to matching tags.
 
@@ -102,16 +117,14 @@ following error:
 ### Silent
 
 This option allows you to show a new notification but prevent the default
-behaviour of device vibration and sound.
+behavior of device vibration, sound and turning on a devices display.
 
 This is ideal if your notification doesn't require immediate attention
 from the user.
 
 <% include('../../demo/web-app/notification-ui/notification-ui.js', 'silentNotification') %>
 
-// TODO: Test if this causes the screen to wake up.
-
-// TODO What happens if both renoty and silent are set?
+**Note:** If you define both *silent* and *renotify*, silent will take precedence.
 
 ### Requires Interaction
 
@@ -128,19 +141,3 @@ until the user dismisses your notification.
 The important thing to consider when using this option is if you really have
 to use it, showing a notification and forcing the user to stop what they are
 doing can be pretty frustrating.
-
-### Actions
-
-Actions allow you to give users another level of interaction with your users.
-
-In the previous section you saw how to define actions:
-
-<% include('../../demo/web-app/notification-ui/notification-ui.js', 'actionsNotification') %>
-
-The behaviour of an action press is up to you, simply listen for the notification
-click event and check the event.action value, which will contain the 'action' value
-associated with the button.
-
-<% include('../../demo/web-app/service-worker.js', 'notificationClickEvent') %>
-
-![Logs for action button clicks and notification click.](/images/notification-screenshots/action-button-click-logs.png)

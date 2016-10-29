@@ -1,3 +1,0 @@
-function() {
-  // Do codez here
-}
