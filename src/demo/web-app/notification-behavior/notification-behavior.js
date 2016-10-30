@@ -1,7 +1,16 @@
 const NOTIFICATION_DELAY = 2500;
+let messageIndex = 0;
+const fakeMessages = [
+  'Heyo',
+  'Hows it goin?',
+  'What you been up to?',
+  'These aren\'t real messages.',
+];
+const userIcon = '/images/matt-512x512.png';
+const userName = 'Matt';
 
 function registerServiceWorker() {
-  return navigator.serviceWorker.register('/service-worker.js')
+  return navigator.serviceWorker.register('/notification-behavior/service-worker.js')
   .then(function(registration) {
     console.log('Service worker successfully registered.');
     return registration;
@@ -12,22 +21,120 @@ function registerServiceWorker() {
 }
 
 function openWindow(registration) {
-  console.log('TODO Open Window');
+  const options = {
+    body: 'Clicking on this notification will open a new tab / window.',
+    tag: 'open-window'
+  };
+  registration.showNotification('Open a Window', options);
 }
 
 function focusWindow(registration) {
-  console.log('TODO focus Window');
+  const options = {
+    body: 'Clicking on this notification will focus on an open window ' +
+      'otherwise open a new one.',
+    tag: 'focus-window'
+  };
+  registration.showNotification('Focus or Open a Window', options);
 }
 
 function cachePage(registration) {
   console.log('TODO cache page');
 }
 
+function dataNotification(registration) {
+  /**** START addNotificationData ****/
+  const options = {
+    body: 'This notification has data attached to it that is printed ' +
+      'to the console when it\'s clicked.',
+    tag: 'data-notification',
+    data: {
+      time: new Date(Date.now()).toString(),
+      message: 'Hello, World!'
+    }
+  };
+  registration.showNotification('Notification with Data', options);
+  /**** END addNotificationData ****/
+}
+
 function mergeNotification(registration) {
-  console.log('TODO merge notification');
+  const userMessage = fakeMessages[messageIndex];
+  /**** START getNotifications ****/
+  return registration.getNotifications()
+  .then(notifications => {
+    let currentNotification;
+
+    for(let i = 0; i < notifications.length; i++) {
+      if (notifications[i].data &&
+        notifications[i].data.userName === userName) {
+        currentNotification = notifications[i];
+      }
+    }
+
+    return currentNotification;
+  })
+  /**** END getNotifications ****/
+  /**** START manipulateNotification ****/
+  .then((currentNotification) => {
+    let notificationTitle;
+    const options = {
+      icon: userIcon,
+    }
+
+    if (currentNotification) {
+      // We have an open notification, let's so something with it.
+      const messageCount = currentNotification.data.newMessageCount + 1;
+
+      options.body = `You have ${messageCount} new messages from ${userName}.`;
+      options.data = {
+        userName: userName,
+        newMessageCount: messageCount
+      };
+      notificationTitle = `New Messages from ${userName}`;
+
+      currentNotification.close();
+    } else {
+      options.body = `"${userMessage}"`;
+      options.data = {
+        userName: userName,
+        newMessageCount: 1
+      };
+      notificationTitle = `New Message from ${userName}`;
+    }
+
+    return registration.showNotification(
+      notificationTitle,
+      options
+    );
+  });
+  /**** END manipulateNotification ****/
+}
+
+function mustShowNotification(registration) {
+  setTimeout(() => {
+    const serviceWorker = registration.install || registration.waiting ||
+      registration.active;
+    serviceWorker.postMessage('must-show-notification-demo');
+  }, 4000);
+}
+
+function sendMessageToPage(registration) {
+  setTimeout(() => {
+    const serviceWorker = registration.install || registration.waiting ||
+      registration.active;
+    serviceWorker.postMessage('send-message-to-page-demo');
+  }, 4000);
+}
+
+function setUpSWMessageListener() {
+  /**** START swMessageListener ****/
+  navigator.serviceWorker.addEventListener('message', function(event) {
+    console.log('Received a message from service worker: ', event.data);
+  });
+  /**** END swMessageListener ****/
 }
 
 const setUpNotificationButtons = function() {
+  setUpSWMessageListener();
   const configs = [
     {
       className: 'js-open-window',
@@ -42,60 +149,29 @@ const setUpNotificationButtons = function() {
       cb: cachePage
     },
     {
+      className: 'js-data-notification',
+      cb: dataNotification
+    },
+    {
       className: 'js-merge-notification',
-      cb: mergeNotification
+      cb: (reg) => {
+        mergeNotification(reg)
+        .then(() => {
+          messageIndex++;
+
+          if (messageIndex >= fakeMessages.length) {
+            messageIndex = 0;
+          }
+        })
+      }
     },
     {
-      className: 'js-notification-image',
-      cb: imageNotification
+      className: 'js-must-show-notification',
+      cb: mustShowNotification
     },
     {
-      className: 'js-notification-vibrate',
-      cb: vibrateNotification
-    },
-    {
-      className: 'js-notification-sound',
-      cb: soundNotification
-    },
-    {
-      className: 'js-notification-dir-ltr',
-      cb: dirLTRNotification
-    },
-    {
-      className: 'js-notification-actions',
-      cb: actionsNotification
-    },
-    {
-      className: 'js-notification-dir-rtl',
-      cb: dirRTLNotification
-    },
-    {
-      className: 'js-notification-timestamp',
-      cb: timestampNotification
-    },
-    {
-      className: 'js-notification-overview',
-      cb: overviewNotification
-    },
-    {
-      className: 'js-notification-tag',
-      cb: notificationTag
-    },
-    {
-      className: 'js-notification-renotify',
-      cb: renotifyNotification
-    },
-    {
-      className: 'js-notification-default',
-      cb: defaultNotification
-    },
-    {
-      className: 'js-notification-silent',
-      cb: silentNotification
-    },
-    {
-      className: 'js-notification-require-interaction',
-      cb: requiresInteractionNotification
+      className: 'js-send-message-to-page',
+      cb: sendMessageToPage
     }
   ];
 

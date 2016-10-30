@@ -1,11 +1,17 @@
 ---
-title: Browser Differences
+title: Non-Standards Browsers
 ---
-# Browser Differences
+# Non-Standards Browsers
 
-If you run the code in the previous section, at the time of writing, it will
-only work in Firefox. The reason for which is a little messy, so bare with
-me through this next section.
+We've been using the application server key throughout this book because
+it's the Web Standards approach of implementing push. In older
+versions of Chrome (version 51 and before), Opera for Android and the
+Samsung Internet Browser required a `gcm_sender_id` because the application
+server key was supported (it was event spec'd when these browsers were
+supporting push).
+
+In this section we are going to look at how you support these browsers
+with a `gcm_sender_id`.
 
 ## Google Cloud Messaging
 
