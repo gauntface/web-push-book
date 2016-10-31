@@ -43,12 +43,12 @@ with these older browsers is the easiest / best way to support them.
 
 The first step is to create a new Firebase project on [https://console.firebase.google.com](https://console.firebase.google.com).
 
-![Firebase Console Page](/images/firebase-setup/01-firbease-console.png)
+![Firebase Console Page](/images/firebase-setup/01-firebase-console.png)
 
 Creating a new project is simple, just fill in your project name and select
 your country.
 
-![Firebase Create Project](/images/firebase-setup/02-firbease-create-project.png)
+![Firebase Create Project](/images/firebase-setup/02-firebase-create-project.png)
 
 Once you've created your project, you'll find all the important push specific
 bits in settings, which can be find but hovering / clicking the cog next
