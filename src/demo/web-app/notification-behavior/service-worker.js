@@ -153,7 +153,7 @@ self.addEventListener('notificationclick', function(event) {
       dataNotification(event);
       break;
     default:
-
+      // NOOP
       break;
   }
 });

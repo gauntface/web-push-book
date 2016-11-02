@@ -8,6 +8,49 @@ bake into your web app when a notification is clicked.
 
 This will be using a number of API's that are available in the service worker.
 
+## Notification Click Event
+
+When a user clicks on a notification the default behaviour is for nothing
+to happen, but the common practice is for the notification to close and
+perhaps perform some other logic (i.e. open a window or make some API
+call that will do some remotely).
+
+To this, we just need to define a 'notificationclick' event listener
+that will be called when ever a notification is clicked.
+
+<% include('../../demo/web-app/service-worker.js', 'simpleNotification') %>
+
+From this we can access the notification via 'event.notification'.
+
+## Notification Close Event
+
+This event isn't particularly useful for many things, but it is super helpful
+for analytics to detect if a user has dismissed your notification vs interacted
+with it.
+
+It's the same as the `notificationclick` event, just a different event name:
+
+<% include('../../demo/web-app/service-worker.js', 'notificationCloseEvent') %>
+
+## The Exception to Showing a Notification
+
+Throughout this book I've been stating that you **must** show a notification
+when you receive a push and this is true *except* for one scenario, at least
+until the [Budget API](https://beverloo.github.io/budget-api/) is spec'd and
+implemented.
+
+The exception is that *if* the user has your site open and currently focused,
+you don't have to show a notification.
+
+You could basically use the following code to detect if you need to
+show a notification or not:
+
+<% include('../../demo/web-app/notification-behavior/service-worker.js', 'showNotificationRequired') %>
+
+When a push message is received we would get the current window clients,
+check if any of the window clients are focused and if one of them is, we don't
+need to show a notification.
+
 ## Open a Window
 
 One of the most common actions of clicking on a notification is to open a
@@ -131,25 +174,6 @@ then we can collapse the notifications resulting in:
 The nice thing with this approach is that if your user witnesses the
 notifications appearing one over the other, it'll look / feel more cohesive
 than just replacing with the latest message.
-
-## The Exception to Showing a Notification
-
-Throughout this book I've been stating that you **must** show a notification
-when you receive a push and this is true *except* for one scenario, at least
-until the [Budget API](https://beverloo.github.io/budget-api/) is spec'd and
-implemented.
-
-The exception is that *if* the user has your site open and currently focused,
-you don't have to show a notification.
-
-You could basically use the following code to detect if you need to
-show a notification or not:
-
-<% include('../../demo/web-app/notification-behavior/service-worker.js', 'showNotificationRequired') %>
-
-When a push message is received we would get the current window clients,
-check if any of the window clients are focused and if one of them is, we don't
-need to show a notification.
 
 ## Message Page from a Push Event
 

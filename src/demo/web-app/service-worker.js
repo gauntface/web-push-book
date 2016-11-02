@@ -22,3 +22,9 @@ self.addEventListener('notificationclick', function(event) {
   // Do something as the result of the notification click
 });
 /**** END simpleNotification ****/
+
+/**** START notificationCloseEvent ****/
+self.addEventListener('notificationclick', function(event) {
+  // TODO: Make analytics API call.
+});
+/**** END notificationCloseEvent ****/
