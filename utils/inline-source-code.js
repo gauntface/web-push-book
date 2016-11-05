@@ -107,6 +107,7 @@ const parseSingleFile = (filePath, ebookBuildPath, jekyllBuildPath) => {
   fs.writeFileSync(jekyllOutputPath, inlinedContents);
 
   // This warps all images to use 'images/' instead of '/images/'
+  inlinedContents = inlinedContents.replace(/\/images\/svgs\/(.*)\.svg/g, '/images/png-version/$1.png');
   inlinedContents = inlinedContents.replace(/\/images\//g, 'build/images/');
 
   // Write new File

@@ -154,7 +154,7 @@ endpoint to the browser.
 1. The endpoint will then be used to form part of the *PushSubscription* which is then passed
 back to your web app as the result of the *subscribe()* call.
 
-![Illustration of the public application server key is used in subscribe method.](/images/png-version/application-server-key-subscribe.png)
+![Illustration of the public application server key is used in subscribe method.](/images/svgs/application-server-key-subscribe.svg)
 
 When you later want to send a push message to a *PushSubscription*, you'll
 need to create an **Authorization** header which is a set of information
@@ -165,7 +165,7 @@ the decryption step worked, the push service knows that it must have come from
 the application server with the **matching private key**. It's basically a
 security measure that prevents anyone else sending messages to your users.
 
-![Illustration of how the private application server key is used when sending a message.](/images/png-version/application-server-key-send.png)
+![Illustration of how the private application server key is used when sending a message.](/images/svgs/application-server-key-send.svg)
 
 Technically, the `applicationServerKey` is optional. However, the easiest
 implementation on Chrome requires it and other browsers may require it in

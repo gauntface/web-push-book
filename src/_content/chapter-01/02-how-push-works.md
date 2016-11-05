@@ -31,7 +31,7 @@ The application server keys, also known as VAPID keys, are unique to your server
 
 Once you've subscribed the user and have a `PushSubscription` you'll need to send it to your backend / server.  On your server, you'll save this subscription to a database and use it to send a push message to that user.
 
-![Make sure you send the PushSubscription to your backend.](/images/png-version/browser-to-server.png)
+![Make sure you send the PushSubscription to your backend.](/images/svgs/browser-to-server.svg)
 
 ## Step 2: Send a Push Message
 
@@ -87,7 +87,7 @@ The instructions include details like:
 
 - Give a push message a "topic" name that will replace a pending message with a new push.
 
-![When your server wishes to send a push message, it makes a web push protocol request to a push service.](/images/png-version/server-to-push-service.png)
+![When your server wishes to send a push message, it makes a web push protocol request to a push service.](/images/svgs/server-to-push-service.svg)
 
 ## Step 3: Push Event on the Users Device
 
@@ -102,6 +102,6 @@ A service worker is a "special" JavaScript file. The browser can execute this Ja
 
 It's inside the service worker's 'push' event that you can perform any background tasks. You can make analytics calls, cache pages offline or show notifications.
 
-![When a push message is sent from a push service to a users device, your service worker receives a push event.](/images/png-version/push-service-to-sw-event.png)
+![When a push message is sent from a push service to a users device, your service worker receives a push event.](/images/svgs/push-service-to-sw-event.svg)
 
 That's the whole flow for push messaging. Lets go through each step in more detail.

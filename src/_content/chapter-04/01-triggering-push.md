@@ -37,7 +37,7 @@ Sending a push message is nothing more than an API call. You send a message
 to a push service and that push service will make sure it gets to the end
 user.
 
-![Diagram of sending a push message from your server to a push service.](/images/png-version/server-to-push-service.png)
+![Diagram of sending a push message from your server to a push service.](/images/svgs/server-to-push-service.svg)
 
 The format of the network request is known as the [Web Push Protocol](https://tools.ietf.org/html/draft-ietf-webpush-protocol). This
 protocol is a standard that all push services must adhere to.
@@ -172,7 +172,7 @@ Previously we saw this diagram of how the private application server key (or
 private VAPID key) is used to "Sign an Authorization header", that's what
 we're going to look at now.
 
-![Illustration of how the private application server key is used when sending a message.](/images/png-version/application-server-key-send.png)
+![Illustration of how the private application server key is used when sending a message.](/images/svgs/application-server-key-send.svg)
 
 ##### Authorization
 
@@ -191,7 +191,7 @@ doing the signing for you and I'd recommend you do that where you can.
 A signed JWT is just a string, but if you look at it, you'll notice it can
 be split into three strings joined by dots.
 
-![A illustration of the strings in a JSON Web Token](/images/png-version/authorization-jwt-diagram-header.png)
+![A illustration of the strings in a JSON Web Token](/images/svgs/authorization-jwt-diagram-header.svg)
 
 The first string is information about the JWT itself so anyone reading it can
 tell it's a JWT and what algorithm was used to sign it.

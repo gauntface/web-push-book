@@ -13,7 +13,7 @@ GENERATED_PNGS="$IMAGES_PATH/png-version"
 
 # Create PNG versions of SVGs
 mkdir -p "${GENERATED_PNGS}"
-for file in $IMAGES_PATH/*.svg
+for file in $IMAGES_PATH/svgs/*.svg
 do
     filename=$(basename $file)
     # Setting dpi/ppi to 600 as safety for ipad max dpi of 324: http://dpi.lv/
