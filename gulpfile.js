@@ -14,6 +14,8 @@ const cssimport = require('gulp-cssimport');
 const cssnext = require('postcss-cssnext');
 const cssnano = require('cssnano');
 const imagemin = require('gulp-imagemin');
+const imageResize = require('gulp-image-resize');
+const changed = require('gulp-changed');
 
 const parseContent = require('./utils/inline-source-code');
 
@@ -31,19 +33,41 @@ gulp.task('copy', () => {
   .pipe(gulp.dest(BUILD_OUTPUT_PATH));
 });
 
-gulp.task('images', () => {
-  let stream = gulp.src([
-    SRC_PATH + '/**/*.{png,jpg,jpeg,svg,gif}',
-    `!${SRC_PATH}/{demo,demo/**}`,
-  ]);
-  if (prodBuild) {
-    stream = stream.pipe(imagemin({
-      progressive: true,
-      interlaced: true
-    }));
-  }
-  return stream.pipe(gulp.dest(BUILD_OUTPUT_PATH));
+gulp.task('images-svg', () => {
+  const optimisedImagePath = BUILD_OUTPUT_PATH + '/images';
+  return gulp.src([
+    SRC_PATH + '/images/**/*.svg'
+  ])
+  .pipe(changed(optimisedImagePath))
+  .pipe(imagemin({
+    progressive: true,
+    interlaced: true,
+    svgoPlugins: [{removeViewBox: false}],
+  }))
+  .pipe(gulp.dest(optimisedImagePath));
 });
+
+gulp.task('images-other', () => {
+  const optimisedImagePath = BUILD_OUTPUT_PATH + '/images';
+  return gulp.src([
+    SRC_PATH + '/images/**/*.{png,jpg,jpeg,gif}'
+  ])
+  .pipe(changed(optimisedImagePath))
+  .pipe(imageResize({
+    width : 800,
+    quality: 0.8,
+    imageMagick: true,
+    flatten: true,
+  }))
+  .pipe(imagemin({
+    progressive: true,
+    interlaced: true,
+    svgoPlugins: [{removeViewBox: false}],
+  }))
+  .pipe(gulp.dest(optimisedImagePath));
+});
+
+gulp.task('images', gulp.parallel('images-other', 'images-svg'));
 
 gulp.task('styles', () => {
   const browserSupport = ['last 2 versions'];

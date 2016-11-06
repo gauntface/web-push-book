@@ -272,5 +272,5 @@ main > h1:first-of-type {
   right: 0;
   width: 100px;
   height: 100px;
-  background-image: url('/jekyll/images/alpha-banner.svg');
+  background-image: url('/images/jekyll/alpha-banner.svg');
 }
