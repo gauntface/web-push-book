@@ -33,7 +33,7 @@ pandoc $EBOOK_TRANSFORM_MD/**/*.md -o $DOWNLOADS_PATH/web-push-book.pdf --latex-
 # Build ePub File
 pandoc $EBOOK_TRANSFORM_MD/**/*.md -o $DOWNLOADS_PATH/web-push-book.epub --epub-metadata $CONTENT_PATH/_epub-metadata.yaml --epub-cover-image $IMAGES_PATH/cover-photo.png --latex-engine=xelatex
 # Build Kindle Format
-$PWD/third_party/kindlegen/kindlegen $DOWNLOADS_PATH/push-book.epub -o web-push-book.mobi
+$PWD/third_party/kindlegen/kindlegen $DOWNLOADS_PATH/web-push-book.epub -o web-push-book.mobi
 
 
 # Run Jekyll to build site + downloads
