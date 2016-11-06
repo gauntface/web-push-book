@@ -164,12 +164,12 @@ were no notifications, it simply creates a new notification with a
 
 The end result is that the first message would look like this:
 
-![First notification without merging.](/images/notification-screenshots/desktop/merge-notification-first.png)
+![First notification without merging.](/images/notification-screenshots/desktop/merge-notification-first.png){: .center-image }
 
 If a second notification was shown before the previous notification was closed,
 then we can collapse the notifications resulting in:
 
-![Second notification with merging.](/images/notification-screenshots/desktop/merge-notification-second.png)
+![Second notification with merging.](/images/notification-screenshots/desktop/merge-notification-second.png){: .center-image }
 
 The nice thing with this approach is that if your user witnesses the
 notifications appearing one over the other, it'll look / feel more cohesive

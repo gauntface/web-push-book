@@ -43,24 +43,24 @@ with these older browsers is the easiest / best way to support them.
 
 The first step is to create a new Firebase project on [https://console.firebase.google.com](https://console.firebase.google.com).
 
-![Firebase Console Page](/images/firebase-setup/01-firebase-console.png)
+![Firebase Console Page](/images/firebase-setup/01-firebase-console.png){: .center-image }
 
 Creating a new project is simple, just fill in your project name and select
 your country.
 
-![Firebase Create Project](/images/firebase-setup/02-firebase-create-project.png)
+![Firebase Create Project](/images/firebase-setup/02-firebase-create-project.png){: .center-image }
 
 Once you've created your project, you'll find all the important push specific
 bits in settings, which can be find but hovering / clicking the cog next
 to your projects name.
 
-![Firebase Settings Pop Up](/images/firebase-setup/05-firebase-project-settings-pop-up-highlight.png)
+![Firebase Settings Pop Up](/images/firebase-setup/05-firebase-project-settings-pop-up-highlight.png){: .center-image }
 
 In settings, click on the "Cloud Messaging" tab and here you'll find a "Server
 key" and a "Sender ID". This are the two pieces of information we'll need later
 on in this section.
 
-![Firebase Cloud Messaging Settings](/images/firebase-setup/07-firebase-cloud-settings.png)
+![Firebase Cloud Messaging Settings](/images/firebase-setup/07-firebase-cloud-settings.png){: .center-image }
 
 Now that we've got a sender ID, let's look at how we use it.
 
@@ -118,7 +118,7 @@ Chrome DevTools, select the **Application** pane, select the **Manifest** tab
 and click the 'Add to homescreen' link, this will force Chrome to get the
 manifest and parse it.
 
-![DevTools Manifest Check](/images/devtools/manifest-check.png)
+![DevTools Manifest Check](/images/devtools/manifest-check.png){: .center-image }
 
 ## Using the Server Key
 

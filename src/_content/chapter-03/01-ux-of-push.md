@@ -54,18 +54,18 @@ web site.
 The first example is of the **bad UX**, requesting permission as soon as a user
 lands on an airlines website.
 
-![Owen Campbell-Moore's example of bad UX for push.](/images/ux-examples/owen/owen-bad-ux.png)
+![Owen Campbell-Moore's example of bad UX for push.](/images/ux-examples/owen/owen-bad-ux.png){: .device-image .center-image }
 
 The alternative is to offer a value proposition, like asking the user if they
 want notifications in case of flight delays.
 
-![Owen Campbell-Moore's example of good UX for push.](/images/ux-examples/owen/owen-good-example.png)
+![Owen Campbell-Moore's example of good UX for push.](/images/ux-examples/owen/owen-good-example.png){: .device-image .center-image }
 
 Finally, a nice example of managing the user experience by covering up the
 sites content with a semi-transparent cover forces the user to focus on the
 permission prompt.
 
-![Owen Campbell-Moore's example of good UX for the permission prompt.](/images/ux-examples/owen/owen-permission-prompt.png)
+![Owen Campbell-Moore's example of good UX for the permission prompt.](/images/ux-examples/owen/owen-permission-prompt.png){: .device-image .center-image }
 
 ### Double Permission
 
@@ -107,17 +107,17 @@ the permission dialog is shown.
 When you first load up the Google I/O site, you aren't asked to do anything,
 the user is left to explore the site.
 
-![When you first load the page, no prompt, just calm on Google IO.](/images/ux-examples/google-io/google-io-first-load.png)
+![When you first load the page, no prompt, just calm on Google IO.](/images/ux-examples/google-io/google-io-first-load.png){: .device-image .center-image }
 
 Click the menu item on the right reveals the panel for setting up and managing
 notifications.
 
-![Settings panel on Google IO's web app for push messaging.](/images/ux-examples/google-io/google-io-settings-panel.png)
+![Settings panel on Google IO's web app for push messaging.](/images/ux-examples/google-io/google-io-settings-panel.png){: .device-image .center-image }
 
 Click on the checkbox displays the permission prompt, which you'd expect given
 the explanation around the checkbox, no hidden surprises.
 
-![Google IO's web app displaying the permission prompt.](/images/ux-examples/google-io/google-io-permission-prompt.png)
+![Google IO's web app displaying the permission prompt.](/images/ux-examples/google-io/google-io-permission-prompt.png){: .device-image .center-image }
 
 After that the UI is simple checked and the user is good to go. The great thing
 about this UX is that it's the same location to disable push as it is to sign

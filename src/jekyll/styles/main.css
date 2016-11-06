@@ -4,6 +4,7 @@
 @import "./components/page-header.css";
 @import "./components/site-header.css";
 @import "./components/footer.css";
+@import "./components/images.css";
 @import "./components/code-styles.css";
 
 html {

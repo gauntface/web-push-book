@@ -25,7 +25,7 @@ If you compare the two Chrome icons in the following dock, the one on the left
 is running, highlighted by the marking under the icon, where as the Chrome
 on the right is **not running**, hence the lack of the marking underneath.
 
-![Example of OS X](/images/faq/os-x-dock.png)
+![Example of OS X](/images/faq/os-x-dock.png){: .center-image }
 
 In the context of receiving push messages on desktop, you will receive messages
 when the browser is running, i.e. has the marking underneath the icon.
@@ -49,7 +49,7 @@ On Chrome for Android a web app can be added to the home screen and when
 the web app is opened from the homescreen, it can launch in a fullscreen
 mode without the URL bar, as shown below.
 
-![Homescreen Icon to Fullscreen](/images/faq/gauntface-homescreen-to-fullscreen.png)
+![Homescreen Icon to Fullscreen](/images/faq/gauntface-homescreen-to-fullscreen.png){: .center-image }
 
 To keep this experience consistent, developers want their notifications that
 result in opening their web app, to be opened in fullscreen as well.

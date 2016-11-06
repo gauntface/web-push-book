@@ -1,0 +1,9 @@
+.device-image {
+    max-width: 400px;
+}
+
+.center-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -49,7 +49,8 @@ Where the title is a string and options can be the following:
 
 First let's look at the visual options.
 
-![Dissection of the UI of a Notification](/images/notification-ui.png)
+![Dissection of the UI of a Notification](/images/notification-ui.png){: .center-image }
+
 
 ### Title and Body Options
 
@@ -61,23 +62,23 @@ With the following code:
 
 We'll get the following notification:
 
-![Notification with Title and Body Text on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-title-body.png)
+![Notification with Title and Body Text on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-title-body.png){: .center-image }
 
 Firefox on Linux will have this look:
 
-![Notification with Title and Body Text on Firefox on Linux.](/images/notification-screenshots/desktop/firefox-title-body.png)
+![Notification with Title and Body Text on Firefox on Linux.](/images/notification-screenshots/desktop/firefox-title-body.png){: .center-image }
 
 If we add too much desktop Chrome will truncate the text.
 
-![Notification with Long Title and Body Text on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-long-title-body.png)
+![Notification with Long Title and Body Text on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-long-title-body.png){: .center-image }
 
 Interestingly with Firefox on Linux the body text is collapsed until you hover it, causing the notification to expand.
 
 The following images are of the longer pieces of text for title and body with before and after hovering the notification.
 
-![Notification with Long Title and Body Text on Firefox on Linux.](/images/notification-screenshots/desktop/firefox-long-title-body.png)
+![Notification with Long Title and Body Text on Firefox on Linux.](/images/notification-screenshots/desktop/firefox-long-title-body.png){: .center-image }
 
-![Notification with Long Title and Body Text on Firefox on Linux while hovering over the notification with the mouse cursor.](/images/notification-screenshots/desktop/firefox-long-title-body-expanded.png)
+![Notification with Long Title and Body Text on Firefox on Linux while hovering over the notification with the mouse cursor.](/images/notification-screenshots/desktop/firefox-long-title-body-expanded.png){: .center-image }
 
 ### Icon
 
@@ -87,11 +88,11 @@ The "icon" option is essentially a small image you can show next to the title an
 
 On Chrome we get this notification on Linux:
 
-![Notification with Icon on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-icon.png)
+![Notification with Icon on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-icon.png){: .center-image }
 
 and on Firefox:
 
-![Notification with Icon on Firefox on Linux.](/images/notification-screenshots/desktop/firefox-icon.png)
+![Notification with Icon on Firefox on Linux.](/images/notification-screenshots/desktop/firefox-icon.png){: .center-image }
 
 Sadly there aren't any solid guidelines for what size image to use for an icon.
 
@@ -107,11 +108,11 @@ The badge is a small monochrome icon that is generally used when your icon is co
 
 The badge is only used on Chrome for Android at the time of writing.
 
-![Notification with Badge on Chrome for Android.](/images/notification-screenshots/mobile/chrome-badge.png)
+![Notification with Badge on Chrome for Android.](/images/notification-screenshots/mobile/chrome-badge.png){: .center-image }
 
 On other browsers (or Chrome without the badge), you'll see an icon of the browser.
 
-![Notification with Badge on Firefox for Android.](/images/notification-screenshots/mobile/firefox-badge.png)
+![Notification with Badge on Firefox for Android.](/images/notification-screenshots/mobile/firefox-badge.png){: .center-image }
 
 As with the icon, there are no real guidelines on what size to use.
 
@@ -127,11 +128,11 @@ The "image" option can be used to display a large image to the user. This is par
 
 On desktop the notification will look like this:
 
-![Notification with Image on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-image.png)
+![Notification with Image on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-image.png){: .center-image }
 
 On Android the ratio is different.
 
-![Notification with Image on Chrome for Android.](/images/notification-screenshots/mobile/chrome-image.png)
+![Notification with Image on Chrome for Android.](/images/notification-screenshots/mobile/chrome-image.png){: .center-image }
 
 Given the differences in ratio between desktop and mobile it's extremely hard to suggest guidelines.
 
@@ -149,7 +150,7 @@ Actions allow you to define buttons that are displayed with the notification and
 
 At the time of writing only Chrome and Opera for Android support actions.
 
-![Notification with Actions on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-actions.png)
+![Notification with Actions on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-actions.png){: .center-image }
 
 For each action you can define a title, an "action" (which is essentially an ID) and an icon.
 
@@ -159,7 +160,7 @@ In the image above the icons are colored differently. The coffee icon is colored
 
 Why do two colors? Because on Android Marshmallow the icons colored to match the system like so:
 
-![Notification with Actions on Chrome for Android.](/images/notification-screenshots/mobile/chrome-actions-m.png)
+![Notification with Actions on Chrome for Android.](/images/notification-screenshots/mobile/chrome-actions-m.png){: .center-image }
 
 In Android Nougat the action icons aren't shown at all.
 
@@ -188,11 +189,11 @@ The parameter should be set to either `auto`, `ltr` or `rtl`.
 
 A right-to-left language used on Chrome on Linux looks like this:
 
-![Notification with Right-to-Left Language on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-rtl.png)
+![Notification with Right-to-Left Language on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-rtl.png){: .center-image }
 
 On Firefox (while hovering over it) you'll get this:
 
-![Notification with Right-to-Left Language on Firefox on Linux.](/images/notification-screenshots/desktop/firefox-rtl-expanded.png)
+![Notification with Right-to-Left Language on Firefox on Linux.](/images/notification-screenshots/desktop/firefox-rtl-expanded.png){: .center-image }
 
 ### Vibrate
 

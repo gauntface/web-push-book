@@ -53,7 +53,7 @@ contain the 'action' parameter you passed into `showNotification()`.
 
 <% include('../../demo/web-app/service-worker.js', 'notificationClickEvent') %>
 
-![Logs for action button clicks and notification click.](/images/notification-screenshots/action-button-click-logs.png)
+![Logs for action button clicks and notification click.](/images/notification-screenshots/action-button-click-logs.png){: .center-image }
 
 ### Tag
 
@@ -68,7 +68,7 @@ Let's display a notification and give it a tag, a string ID, of
 
 This will show our first notification.
 
-![First notification with tag of message group 1.](/images/notification-screenshots/desktop/chrome-first-tag.png)
+![First notification with tag of message group 1.](/images/notification-screenshots/desktop/chrome-first-tag.png){: .center-image }
 
 If we then display a second notification with a tag of 'message-group-2', we'll
 get a second notification.
@@ -77,7 +77,7 @@ get a second notification.
 
 Here's our two notifications.
 
-![Two notifications where the second tag is message group 2.](/images/notification-screenshots/desktop/chrome-second-tag.png)
+![Two notifications where the second tag is message group 2.](/images/notification-screenshots/desktop/chrome-second-tag.png){: .center-image }
 
 Now if we show a new notification with a tag of 'message-group-1', the first
 notification we displayed will go away and get replaced with this new, third
@@ -88,7 +88,7 @@ notification.
 Now we have 2 notifications even though we displayed called show 3
 notifications.
 
-![Two notifications where the first notification is replaced by a third notification.](/images/notification-screenshots/desktop/chrome-third-tag.png)
+![Two notifications where the first notification is replaced by a third notification.](/images/notification-screenshots/desktop/chrome-third-tag.png){: .center-image }
 
 A subtlety to the notification tag is that by default the browser will replace
 a notification with a new notification without the same sound and vibration
