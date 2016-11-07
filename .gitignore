@@ -1,5 +1,5 @@
 node_modules/
 build/
 .vscode/
-src/demo/node-server/subscription-store.db
+src/demos/node-server/subscription-store.db
 src/images/png-version/

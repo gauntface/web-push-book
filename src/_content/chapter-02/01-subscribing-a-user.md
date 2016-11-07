@@ -15,7 +15,7 @@ Before we ask the user for permission, we should check if the current browser
 supports push messaging or not. The main things we need to check for are
 the *serviceWorker* API in *navigator* and *PushManager* in *window*.
 
-<% include('../../demo/web-app/app.js', 'feature-detect') %>
+<% include('../../demos/web-app/app.js', 'feature-detect') %>
 
 While browser support is growing quickly for both service worker and
 push messaging support, it's always a good idea to feature detect and
@@ -31,7 +31,7 @@ You'd create a file JavaScript on your web server and simply call
 `navigator.serviceWorker.register()` passing in the path to your file,
 like so:
 
-<% include('../../demo/web-app/app.js', 'register-sw') %>
+<% include('../../demos/web-app/app.js', 'register-sw') %>
 
 This code tells the browser that you have a service worker file and where
 its located, in this case `/service-worker.js`. Behind the scenes
@@ -62,7 +62,7 @@ the API [recently changed from taking a callback to returning a Promise](
 The problem is that we can't tell what version of the API will be supported,
 so you have to implement both and handle both.
 
-<% include('../../demo/web-app/app.js', 'request-permission') %>
+<% include('../../demos/web-app/app.js', 'request-permission') %>
 
 We call `Notification.requestPermission()`, which displays a notification prompt
 as shown below.
@@ -90,7 +90,7 @@ We'll look more into the UX of asking for permission later on.
 Using your new service worker registration and permission granted we can
 subscribe a user for push by calling `registration.pushManager.subscribe()`.
 
-<% include('../../demo/web-app/app.js', 'subscribe-user') %>
+<% include('../../demos/web-app/app.js', 'subscribe-user') %>
 
 When we call the `subscribe()` method we pass in a *options* object. Some of
 these fields are required and some of them are optional.
@@ -188,7 +188,7 @@ want more control (and I think most developers will), stick to the
 We've called `subscribe()` and passed the options that we want and this will
 return a promise that resolves to a `PushSubscription`.
 
-<% include('../../demo/web-app/app.js', 'subscribe-user') %>
+<% include('../../demos/web-app/app.js', 'subscribe-user') %>
 
 This `PushSubscription` object contains all required information needed to
 send a push messages to that user. If you print
@@ -238,7 +238,7 @@ subscription to our node server that stores the subscription in a database.
 
 Sending the subscription is done like so:
 
-<% include('../../demo/web-app/app.js', 'send-subscription-to-server') %>
+<% include('../../demos/web-app/app.js', 'send-subscription-to-server') %>
 
 With the `PushSubscription` details on our server we are good to send our user
 a message.

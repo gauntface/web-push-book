@@ -75,7 +75,7 @@ MDN docs](https://developer.mozilla.org/en-US/docs/Web/Manifest).
 For push, all we need is a JSON file with the field "gcm_sender_id"
 in it and assign the Sender ID from our Firebase project, like this:
 
-<% include('../../demo/web-app/manifest.json') %>
+<% include('../../demos/web-app/manifest.json') %>
 
 Save this JSON as a file on your site, the demo for this site has a file
 called 'manifest.json' at the root of the site, i.e. '/manifest.json'.

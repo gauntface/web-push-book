@@ -66,6 +66,10 @@ button, .button {
   cursor: pointer;
 }
 
+button:disabled {
+  background-color: var(--primary-font-color);
+}
+
 img {
   max-width: 100%;
 }

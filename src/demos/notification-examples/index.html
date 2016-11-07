@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#222222">
+
+  <title>Notification Examples | Web Push Book</title>
+  <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
+
+  <!-- Stylesheet -->
+  <link href="/jekyll/styles/main.css" rel="stylesheet" type="text/css">
+  <link href="/jekyll/styles/components/nav-drawer.css" rel="stylesheet" type="text/css">
+  <link href="styles/demo.css" rel="stylesheet" type="text/css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700|Open+Sans|Inconsolata" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>Notification Examples</h1>
+  </header>
+
+  <main>
+    <p>This page contains a set of example notifications that you can interact
+    with to see what is possible with notifications.</p>
+
+    <p>Clicking on the buttons below will show one notification to
+    demonstrate a particular options in the notification API.</p>
+
+    <p>If you just want to see what a notification looks like in your browser
+    with all the UI options set, click the 'All the Options' button.</p>
+
+    <p>
+      <button class="js-notification-overview">All the Options</button>
+    </p>
+
+    <p>The buttons will be enabled if the browser has support for the feature.
+    If the button is grey, then it's not supported on your browser.</p>
+
+    <h3>Desktop &amp; Mobile</h3>
+
+    <h6>Title &amp; Body</h6>
+    <p>Basic example of a notification with a basic title and body.</p>
+    <p>
+      <button class="js-notification-title-body" disabled>Title &amp; Body</button>
+      <button class="js-notification-long-title-body">Long Title &amp; Body</button>
+    </p>
+
+    <h6>Notification Icon</h6>
+    <p>The icon on a notification is the image on the left of the title and
+    body. This is normally an image relevant to the tweet being sent.</p>
+    <p>
+      <button class="js-notification-icon">Icon</button>
+    </p>
+
+    <h6>Notification Image</h6>
+    <p>Setting an image means the notification can display a large image
+    in with the notification. At the time of writing this is behind the
+    experimental web platform features in Chrome and the results vary between
+    Android and Desktop.</p>
+    <p>
+      <button class="js-notification-image">Image</button>
+    </p>
+
+    <h6>Action Buttons</h6>
+    <p>If you want to offer multiple actions to your user from the notification
+    then you can define "actions", which add buttons to the notification that
+    you can respond to.</p>
+    <p>
+      <button class="js-notification-actions">Actions</button>
+    </p>
+
+    <h6>Language Direction</h6>
+    <p>You can set a "dir" option to indicate if the test should be displayed
+    "left-to-right" or "right-to-left".</p>
+    <p>
+      <button class="js-notification-dir-ltr">Direction: LTR</button>
+      <button class="js-notification-dir-rtl">Direction: RTL</button>
+    </p>
+
+    <h6>Tag</h6>
+    <p>Defining a tag for a notification means that when a new Notification
+    is shown with the same tag, any old notifications with that tag are
+    removed before the new notification is shown.</p>
+    <p>
+      <button class="js-notification-tag">Tag</button>
+    </p>
+
+    <h6>Renotify</h6>
+    <p>When you use the tag option, the default behavior of a new notification
+    replacing an existing one is that there is no sound, vibration and the
+    screen is kept asleep.</p>
+    <p>Renotify is an option that will play a sound, vibrate the device and
+    wake up the users device when a tagged notification is replaced. This means
+    replacing notifications is the same behavior as a completely new
+    notification.</p>
+    <p>
+      <button class="js-notification-renotify">Renotify</button>
+    </p>
+
+    <h6>Silent</h6>
+    <p>When a new notification arrives, it plays a sound, vibrates the users
+    device and wakes up the screen. Setting the silent option means that
+    the notification is displayed, but there is none of the default behaviors
+    like sound, vibration and screen wake.</p>
+    <p>
+      <button class="js-notification-silent">Silent</button>
+    </p>
+
+    <h6>Require Interaction</h6>
+    <p>On desktop a notification is only displayed for a short period of time,
+    whereas Android devices will show the notification until the user
+    does something with it.</p>
+    <p>To get the same behaviour on desktop and mobile you can set the
+    "require-interaction" option to true.</p>
+    <p>
+      <button class="js-notification-require-interaction">Require Interaction</button>
+    </p>
+
+    <h6>Timestamp</h6>
+    <p></p>
+    <p>
+      <button class="js-notification-timestamp">Timestamp</button>
+    </p>
+
+
+    <h3>Mobile Only</h3>
+
+    <p>These fields aren't <i>strictly</i> mobile only. A desktop browser
+    <i>could</i> use these fields if it want to, but at the moment
+    they don't. For this reason, you'll need to use a mobile device to
+    see what the options do.</p>
+
+    <h6>Notification Badge</h6>
+    <p>Notification badges are only being used on mobile, at least at the time
+    of writing. It's used to replace the browser icon that is shown by default.
+    </p>
+    <p>
+      <button class="js-notification-badge">Badge</button>
+    </p>
+
+    <h6>Vibration</h6>
+    <p>You can define a pattern of vibrations to make a tune. This only
+    applies to mobile devices since laptops tend not to vibrate.</p>
+    <p>
+      <button class="js-notification-vibrate">Vibrate</button>
+    </p>
+
+    <h3>Not Implemented Anywhere Yet</h3>
+    <p>The following options are defined in the spec, but haven't been
+    implemented anywhere at the time of writing. If the button is enabled,
+    click it and see.</p>
+
+    <h6>Sound</h6>
+    <p>The sound option has been defined, but at the time of writing no browser
+    has implemented it yet.</p>
+    <p>
+      <button class="js-notification-sound">Sound</button>
+    </p>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <section class="footer-bottom-row">
+        <p><a href="https://web-push-book.gauntface.com/">Web Push Book</a> by <a href="https://gauntface.com/">Matt Gaunt</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.</p>
+        <p><a href="https://github.com/gauntface/web-push-book">Source Hosted on Github</a></p>
+      </section>
+    </div>
+  </footer>
+
+  <script src="notification-examples.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-77119321-4', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>

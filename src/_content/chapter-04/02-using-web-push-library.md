@@ -21,12 +21,12 @@ web-push library:
 
 Then in your javascript file import it in like so:
 
-<% include('../../demo/node-server/index.js', 'web-push-require') %>
+<% include('../../demos/node-server/index.js', 'web-push-require') %>
 
 Now we can start getting ready for push. You'll want to set up your application
 server keys (or VAPID keys).
 
-<% include('../../demo/node-server/index.js', 'web-push-vapid') %>
+<% include('../../demos/node-server/index.js', 'web-push-vapid') %>
 
 Then we'll need a user's subscription, normally pulled from a database on
 your server, but for now let's assume we just copied and pasted a
@@ -94,14 +94,14 @@ demo that stores and retrieves subscriptions in Node.
 
 The API that receives a subscription and saves it in the database is this.
 
-<% include('../../demo/node-server/index.js', 'save-sub-api') %>
+<% include('../../demos/node-server/index.js', 'save-sub-api') %>
 
 This code has a method `saveSubscriptionToDatabase()` which saves a
 subscription in a database, in this case [nedb](https://github.com/louischatriot/nedb).
 
 The following line of code:
 
-<% include('../../demo/node-server/index.js', 'save-sub-api-post') %>
+<% include('../../demos/node-server/index.js', 'save-sub-api-post') %>
 
 Tell's the *express* web server to create an endpoint for 'POST' requests
 on at `/api/save-subscription/`. This endpoint then calls the
