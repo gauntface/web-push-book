@@ -2,7 +2,7 @@ source: ./build
 destination: ./build/_site/
 layouts_dir: ./jekyll/_layouts/
 includes_dir: ./jekyll/_includes/
-live_domain: https://web-push-book.gauntface.com
+baseurl: https://web-push-book.gauntface.com
 
 exclude:
   - _content/chapter-01/00-info.md
@@ -19,6 +19,3 @@ collections:
   content:
     output: true
     permalink: /:path/
-
-gems:
-  - jekyll-sitemap
