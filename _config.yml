@@ -19,3 +19,6 @@ collections:
   content:
     output: true
     permalink: /:path/
+
+gems:
+  - jekyll-sitemap

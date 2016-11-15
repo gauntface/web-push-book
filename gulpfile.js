@@ -81,8 +81,10 @@ gulp.task('styles', () => {
     `!${SRC_PATH}/{demo,demo/**}`,
   ]);
   if (prodBuild) {
-    stream = stream.pipe(cssimport({}))
-      .pipe(postcss(processors));
+    stream = stream.pipe(cssimport({
+      extensions: ["css"]
+    }))
+    .pipe(postcss(processors));
   }
 
   return stream.pipe(gulp.dest(BUILD_OUTPUT_PATH));

@@ -58,7 +58,7 @@ The Title and body options are exactly as they sound, two different pieces of te
 
 With the following code:
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'titleAndBodySimple') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'titleAndBodySimple') %>
 
 We'll get the following notification:
 
@@ -84,7 +84,7 @@ The following images are of the longer pieces of text for title and body with be
 
 The "icon" option is essentially a small image you can show next to the title and body text.
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'iconNotification') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'iconNotification') %>
 
 On Chrome we get this notification on Linux:
 
@@ -104,7 +104,7 @@ Given the highest pixel ratio for a device 3, an icon size of >= 192px is a safe
 
 The badge is a small monochrome icon that is generally used when your icon is collapsed.
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'badgeNotification') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'badgeNotification') %>
 
 The badge is only used on Chrome for Android at the time of writing.
 
@@ -124,7 +124,7 @@ Meaning an image of >= 72px should be good.
 
 The "image" option can be used to display a large image to the user. This is particularly useful to display a preview of an image to the user.
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'imageNotification') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'imageNotification') %>
 
 On desktop the notification will look like this:
 
@@ -146,7 +146,7 @@ An image of width >= 1350px would be a good bet.
 
 Actions allow you to define buttons that are displayed with the notification and can be interacted with by the user.
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'actionsNotification') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'actionsNotification') %>
 
 At the time of writing only Chrome and Opera for Android support actions.
 
@@ -183,7 +183,7 @@ In testing it seemed that the direction was largely determined by the text rathe
 
 Probably best to define if you can, otherwise the browser should do the right thing.
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'dirRTLNotification') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'dirRTLNotification') %>
 
 The parameter should be set to either `auto`, `ltr` or `rtl`.
 
@@ -202,7 +202,7 @@ The vibrate option allows you to define a vibration pattern on a user's devices 
 The format of the vibrate option should be an
 array of numbers that describe the number of milliseconds the device should vibrate followed by the number of milliseconds the device should *not* vibrate.
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'vibrateNotification') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'vibrateNotification') %>
 
 This only affects devices that support vibration.
 
@@ -212,7 +212,7 @@ The sound parameter allows you to define a sounds to play when the notification 
 
 Sadly at the time of writing no browser has support for the sound option.
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'soundNotification') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'soundNotification') %>
 
 ### Timestamp
 
@@ -221,7 +221,7 @@ Timestamp allows you to alter the time displayed on the notification.
 The timestamp should be the number of milliseconds since 00:00:00 UTC on
 1 January 1970 (i.e. the unix epoch).
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'timestampNotification') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'timestampNotification') %>
 
 This information is not always shown but on older versions of Android it's
 displayed like so:

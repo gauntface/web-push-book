@@ -45,7 +45,7 @@ you don't have to show a notification.
 You could basically use the following code to detect if you need to
 show a notification or not:
 
-<% include('../../demos/web-app/notification-behavior/service-worker.js', 'showNotificationRequired') %>
+<% include('../../demos/notification-examples/service-worker.js', 'showNotificationRequired') %>
 
 When a push message is received we would get the current window clients,
 check if any of the window clients are focused and if one of them is, we don't
@@ -56,7 +56,7 @@ need to show a notification.
 One of the most common actions of clicking on a notification is to open a
 window and the code for this is very simple.
 
-<% include('../../demos/web-app/notification-behavior/service-worker.js', 'notificationOpenWindow') %>
+<% include('../../demos/notification-examples/service-worker.js', 'notificationOpenWindow') %>
 
 There are few scenarios that this ignores:
 
@@ -79,14 +79,14 @@ Taking the previous example where we open
 '/notification-behavior/example-page.html', and this time focus on an open tab
 otherwise open a new one.
 
-<% include('../../demos/web-app/notification-behavior/service-worker.js', 'notificationFocusWindow') %>
+<% include('../../demos/notification-examples/service-worker.js', 'notificationFocusWindow') %>
 
 Let's step through the code.
 
 First we get a list of the "WindowClients", which are just a list of tabs /
 windows currently open (remember this if tabs for your origin only).
 
-<% include('../../demos/web-app/notification-behavior/service-worker.js', 'clientsMatchAll') %>
+<% include('../../demos/notification-examples/service-worker.js', 'clientsMatchAll') %>
 
 The options passed into `matchAll` just inform the browser that we only want
 to search for 'window' type clients (i.e. tabs and windows, not web workers).
@@ -102,7 +102,7 @@ the clients URL to the URL we want to open. If we find a match we call
 `matchingClient.focus()`. If we can't find a matching client then we
 open a new window, same as in the previous section.
 
-<% include('../../demos/web-app/notification-behavior/service-worker.js', 'searchClients') %>
+<% include('../../demos/notification-examples/service-worker.js', 'searchClients') %>
 
 **Note:** We are returning the promise for `matchingClient.focus()` and
 `clients.openWindow()` so that the promises are accounted for in our promise
@@ -121,12 +121,12 @@ the notification.
 The easiest way to do this is to add data to a notification in the options for
 `showNotification()` like this:
 
-<% include('../../demos/web-app/notification-behavior/notification-behavior.js', 'addNotificationData') %>
+<% include('../../demos/notification-examples/notification-common-practices.js', 'addNotificationData') %>
 
 Then, inside your click handler you can get the notification, and it's data,
 with `event.notification.data`.
 
-<% include('../../demos/web-app/notification-behavior/service-worker.js', 'printNotificationData') %>
+<% include('../../demos/notification-examples/service-worker.js', 'printNotificationData') %>
 
 ## Merging notifications
 
@@ -144,7 +144,7 @@ the currently visible notifications from your web app.
 First let's look at how we can get the currently opened notifications and loop
 through to pick out an existing notification:
 
-<% include('../../demos/web-app/notification-behavior/notification-behavior.js', 'getNotifications') %>
+<% include('../../demos/notification-examples/notification-common-practices.js', 'getNotifications') %>
 
 A call to `getNotifications()` and a for loop to step through each notification,
 here we are looking for a parameter in the notifications data, but this could be
@@ -155,7 +155,7 @@ Next step is to replace the notification.
 In the example of a fake message app, we can track the number of new messages
 in our notifications data and then increase them with each new notification.
 
-<% include('../../demos/web-app/notification-behavior/notification-behavior.js', 'manipulateNotification') %>
+<% include('../../demos/notification-examples/notification-common-practices.js', 'manipulateNotification') %>
 
 This code checks if for the new notification and if it exists it bumps the
 message count and changes the notification title and body message. If there
@@ -187,12 +187,12 @@ for a focused window to see if we need to show a notification or not. If we
 don't need to show a notification then we can "post a message" to each open
 page, like this:
 
-<% include('../../demos/web-app/notification-behavior/service-worker.js', 'sendPageMessage') %>
+<% include('../../demos/notification-examples/service-worker.js', 'sendPageMessage') %>
 
 In our pages, we can listen for this messages by adding a message event
 listener:
 
-<% include('../../demos/web-app/notification-behavior/notification-behavior.js', 'swMessageListener') %>
+<% include('../../demos/notification-examples/notification-common-practices.js', 'swMessageListener') %>
 
 In this message listener you could do anything you want, show a toast, a
 notification bubble or completely ignore the message.

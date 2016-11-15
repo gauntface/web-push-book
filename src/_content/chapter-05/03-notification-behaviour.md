@@ -45,7 +45,7 @@ over just clicking the notification.
 In the previous section you saw how to define actions when calling
 `showNotification()`:
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'actionsNotification') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'actionsNotification') %>
 
 The behavior of an action press is up to you, simply listen for the notification
 click event (just like above) and check the `event.action` value, which will
@@ -64,7 +64,7 @@ are displayed to the user. This is easiest to explain with an example.
 Let's display a notification and give it a tag, a string ID, of
 'message-group-1'.
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'tagNotificationOne') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'tagNotificationOne') %>
 
 This will show our first notification.
 
@@ -73,7 +73,7 @@ This will show our first notification.
 If we then display a second notification with a tag of 'message-group-2', we'll
 get a second notification.
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'tagNotificationTwo') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'tagNotificationTwo') %>
 
 Here's our two notifications.
 
@@ -83,7 +83,7 @@ Now if we show a new notification with a tag of 'message-group-1', the first
 notification we displayed will go away and get replaced with this new, third
 notification.
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'tagNotificationThree') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'tagNotificationThree') %>
 
 Now we have 2 notifications even though we displayed called show 3
 notifications.
@@ -104,7 +104,7 @@ There are scenarios where you might want a replacing notification to notify
 the user, chat applications for example. In this case you just need to
 set `renotify` to true.
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'renotifyNotification') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'renotifyNotification') %>
 
 Plesae note that renotify is **only used** when a notification is replacing
 another notification due to matching tags.
@@ -122,7 +122,7 @@ behavior of device vibration, sound and turning on a devices display.
 This is ideal if your notification doesn't require immediate attention
 from the user.
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'silentNotification') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'silentNotification') %>
 
 **Note:** If you define both *silent* and *renotify*, silent will take precedence.
 
@@ -136,7 +136,7 @@ If your notification requires interaction from the user than you can define
 the `requireInteraction` option. This will show the notification permanently
 until the user dismisses your notification.
 
-<% include('../../demos/web-app/notification-ui/notification-ui.js', 'requireInteraction') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'requireInteraction') %>
 
 The important thing to consider when using this option is if you really have
 to use it, showing a notification and forcing the user to stop what they are
