@@ -185,6 +185,16 @@
         }
       ]
     };
+
+    const maxVisibleActions = Notification.maxActions;
+    if (maxVisibleActions < 4) {
+      options.body = `This notification will only display ` +
+        `${maxVisibleActions} actions.`;
+    } else {
+      options.body = `This notification can display up to ` +
+        `${maxVisibleActions} actions.`;
+    }
+
     registration.showNotification(title, options);
     /**** END actionsNotification ****/
   };
