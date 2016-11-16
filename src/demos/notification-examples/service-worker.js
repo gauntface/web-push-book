@@ -147,9 +147,9 @@ self.addEventListener('message', function(event) {
       }));
       break;
     case 'send-message-to-page-demo':
-    self.dispatchEvent(new PushEvent('push', {
-      data: 'send-message-to-page'
-    }));
+      self.dispatchEvent(new PushEvent('push', {
+        data: 'send-message-to-page'
+      }));
       break;
     default:
       console.warn('Unknown message received in service-worker.js');

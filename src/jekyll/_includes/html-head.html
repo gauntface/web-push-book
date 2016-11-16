@@ -8,7 +8,7 @@
   <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
 
   <!-- The docs server over HTTPS, but site.github.url points to HTTP resouce causing mixed content -->
-  <link rel="canonical" href="{{ site.baseurl }}{{ page.url | replace:'index.html','' }}">
+  <link rel="canonical" href="{{ site.url }}{{ page.url | replace:'index.html','' }}">
 
   <!-- Stylesheet -->
   <link href="/jekyll/styles/main.css" rel="stylesheet" type="text/css">

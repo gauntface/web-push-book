@@ -166,46 +166,65 @@
 
     <h2>Notification Common Practices</h2>
 
-    <p></p>
+    <p>The following links are examples of common patterns on the web.
+    For example, a common use case is for a web page to be opened when
+    a user clicks on a notification.</p>
 
     <h6>Open a Window</h6>
-    <p></p>
+    <p>This example simply demonstrates opening a URL after the user has
+    clicked on a notification.</p>
     <p>
       <button class="js-open-window" disabled>Open Window</button>
     </p>
 
     <h6>Focus a Window or Open</h6>
-    <p></p>
+    <p>This example is similar to "Open a Window", except that it checks
+    if there is already a window open at that URL and if not, it opens
+    it.</p>
     <p>
       <button class="js-focus-window" disabled>Focus a Window OR Open</button>
     </p>
 
-    <h6>Cache a Page and Open</h6>
-    <p></p>
-    <p>
-      <button class="js-cache-page" disabled>Cache a Page and Open</button>
-    </p>
-
     <h6>Adding Data to a Notification</h6>
-    <p></p>
+    <p>This is a trivial example. When the notification is shown it is given
+    a <code>data</code> parameter in the <code>showNotification()</code>
+    options. When this notification is clicked, it prints this data to the
+    console.</p>
+    <p>This is a trivial example of adding data to a notification but it has
+    a wide range of uses.</p>
     <p>
       <button class="js-data-notification" disabled>Adding Data to Notification</button>
     </p>
 
     <h6>Merging Notifications Programmatically</h6>
-    <p></p>
+    <p>In the above section there are examples of how the <code>tag</code>
+    parameter affects displaying multiple notifications. But there may
+    be scenarios where you want to manage notifications with different logic.
+    </p>
+    <p>This example demonstrates how notifications can be iterated over and
+    then have their data collapsed.</p>
     <p>
       <button class="js-merge-notification" disabled>Merge Notification</button>
     </p>
 
     <h6>Must show a Notification</h6>
-    <p></p>
+    <p>Throughout the <a href="https://web-push-book.gauntface.com">Web Push
+    Book</a> there are references to "having to show a notification". This is
+    almost completely true. The one scenario where you <strong>don't</strong>
+    need to show a notification is if the user is currently looking at your
+    site.</p>
+    <p>This example waits for 4 seconds and then iterates over the current
+    windows checking to see if one of them is <i>focused</i>. If one is,
+    we print to the console, otherwise we show a notification.</p>
     <p>
       <button class="js-must-show-notification" disabled>Must Show Notification (4s Delay)</button>
     </p>
 
     <h6>Send a Message to the Page</h6>
-    <p></p>
+    <p>Once a notification is received you may want to send data to any
+    of pages that are currently open. This example will wait 4s before
+    triggering a fake push event. Then the push event will post a message
+    to the page, which is printed to the console.</p>
     <p>
       <button class="js-send-message-to-page" disabled>Send Message to Page (4s Delay)</button>
     </p>
