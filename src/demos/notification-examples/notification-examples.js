@@ -17,14 +17,14 @@
     const options = {
       body: 'This would be the body text of the notification.\n' +
         'It can hold two lines of text.',
-      icon: '/images/icon-512x512.png',
-      badge: '/images/badge-128x128.png',
-      image: '/images/unsplash-farzad-nazifi-1600x1100.jpg',
+      icon: '/images/demos/icon-512x512.png',
+      badge: '/images/demos/badge-128x128.png',
+      image: '/images/demos/unsplash-farzad-nazifi-1600x1100.jpg',
       actions: [
         {
           action: 'download-book-action',
           title: 'Download Book',
-          icon: '/images/action-download-book-128x128.png'
+          icon: '/images/demos/action-download-book-128x128.png'
         }
       ]
     };
@@ -63,7 +63,7 @@
     /**** START iconNotification ****/
     const title = 'Icon Notification';
     const options = {
-      icon: '/images/icon-512x512.png'
+      icon: '/images/demos/icon-512x512.png'
     };
     registration.showNotification(title, options);
     /**** END iconNotification ****/
@@ -73,7 +73,7 @@
     /**** START badgeNotification ****/
     const title = 'Badge Notification';
     const options = {
-      badge: '/images/badge-128x128.png'
+      badge: '/images/demos/badge-128x128.png'
     };
     registration.showNotification(title, options);
     /**** END badgeNotification ****/
@@ -83,7 +83,7 @@
     /**** START imageNotification ****/
     const title = 'Image Notification';
     const options = {
-      image: '/images/Unsplash-Farzad Nazifi-1600x1100.jpg'
+      image: '/images/demos/Unsplash-Farzad Nazifi-1600x1100.jpg'
     };
     registration.showNotification(title, options);
     /**** END imageNotification ****/
@@ -166,22 +166,22 @@
         {
           action: 'coffee-action',
           title: 'Coffee',
-          icon: '/images/action-1-128x128.png'
+          icon: '/images/demos/action-1-128x128.png'
         },
         {
           action: 'doughnut-action',
           title: 'Doughnut',
-          icon: '/images/action-2-128x128.png'
+          icon: '/images/demos/action-2-128x128.png'
         },
         {
           action: 'gramophone-action',
           title: 'gramophone',
-          icon: '/images/action-3-128x128.png'
+          icon: '/images/demos/action-3-128x128.png'
         },
         {
           action: 'atom-action',
           title: 'Atom',
-          icon: '/images/action-4-128x128.png'
+          icon: '/images/demos/action-4-128x128.png'
         }
       ]
     };
