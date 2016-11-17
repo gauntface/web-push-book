@@ -8,8 +8,13 @@ the visual aspects (this one) and one that explains the behavioural aspects
 of notifications.
 
 The reason for this is that every developer will need to be worried about the
-visual aspects but the behavioural aspects will be more detailed and more
+visual aspects but the behavioural aspects will depend on your
 specific to your use case.
+
+All of the source code for these demo's is taken from a demo page. If you want
+to test them out for yourself, just click the button below.
+
+<a class="button" href="/demos/notification-examples/">Notification Demos</a>
 
 ## Visual Options
 
@@ -154,7 +159,10 @@ At the time of writing only Chrome and Opera for Android support actions.
 
 For each action you can define a title, an "action" (which is essentially an ID) and an icon.
 
-I've defined 4 actions in the sample code above to illustrate that only two actions are shown.
+I've defined 4 actions in the sample code above to illustrate that you can
+define more actions than will be displayed. If you want to know the number
+actions that will be displayed ahead of time you can check using
+`Notification.maxActions`.
 
 In the image above the icons are colored differently. The coffee icon is colored to match the text of Chrome's text, #333333, while the doughnut icon is bright pink.
 

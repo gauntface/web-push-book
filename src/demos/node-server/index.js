@@ -146,7 +146,7 @@ app.all('/api/trigger-push-msg/', function (req, res) {
   };
 
   webpush.setVapidDetails(
-    'mailto:web-push-book@gaunt.io',
+    'mailto:web-push-book@gauntface.com',
     vapidKeys.publicKey,
     vapidKeys.privateKey
   );

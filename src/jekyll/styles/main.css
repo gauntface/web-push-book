@@ -62,6 +62,7 @@ button, .button {
   letter-spacing: 0;
   text-align: center;
   line-height: 36px;
+  text-decoration: none;
 
   cursor: pointer;
 }
