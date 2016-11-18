@@ -3,101 +3,87 @@ title: Subscribing a User
 ---
 # Subscribing a User
 
-The first step we need to take is getting permission for the user to send
-them push messages and then our hands on a `PushSubscription`.
+The first step we need to take, is gett permission for the user to send
+them push messages. Once we have permission, we can get our hands on a `PushSubscription`.
 
-The JavaScript API to do this is pretty straight forward, so let's go through
-the flow.
+The JavaScript API to do this is pretty straight forward, so let's go through the flow.
 
 ## Feature Detection
 
-Before we ask the user for permission, we should check if the current browser
-supports push messaging or not. The main things we need to check for are
-the *serviceWorker* API in *navigator* and *PushManager* in *window*.
+The first we need to do is check if the current browser supports push messaging or not. We can check push is support with two simple checks.
+
+1. Check the *serviceWorker* API on the *navigator*.
+1. Check *PushManager* on  the *window*.
 
 <% include('../../demos/web-app/app.js', 'feature-detect') %>
 
 While browser support is growing quickly for both service worker and
-push messaging support, it's always a good idea to feature detect and
-progressively enhance like this.
+push messaging support, it's always a good idea to feature detect for both and
+[progressively enhance](https://en.wikipedia.org/wiki/Progressive_enhancement).
 
 ## Register a Service Worker
 
-Knowing that service worker and Push is supported, we need to tell the browser
-where our special service worker file is (this is the JavaScript file
-that will be called when a message is received).
+With the feature detect we knowing that service workers and Push are supported. The next step is to "register" our service worker.
 
-You'd create a file JavaScript on your web server and simply call
-`navigator.serviceWorker.register()` passing in the path to your file,
-like so:
+When we register a service worker, we are telling the browser what file to use for push events. The file is still just JavaScript, but the browser will "give it access" to the service worker APIs. To be more exact, the browser runs the file in a service worker context.
+
+To register a service worker, call `navigator.serviceWorker.register()`, passing in the path to our file. Like so:
 
 <% include('../../demos/web-app/app.js', 'register-sw') %>
 
-This code tells the browser that you have a service worker file and where
-its located, in this case `/service-worker.js`. Behind the scenes
-the browser will download your service worker file, run it and if everything
-went well, the promise it returns will resolve. If there are any errors, of
-any kind, the promise will reject. If your service worker does reject, double
-check your JavaScript and make sure nothing is causing an error to be thrown.
+This code above tells the browser that we have a service worker file and where its located. In this case, the service worker file is at `/service-worker.js`. Behind the scenes the browser will take the following steps after calling `register()`:
 
-Once `register()` resolves, it returns a `ServiceWorkerRegistration` which
-we'll use to get the `PushSubscription`.
+1. Download the service worker file.
+
+1. Run the JavaScript.
+
+1. If everything ran correctly and there were no error, the promise returned by `register()` will resolve. If there are errors of
+any kind, the promise will reject.
+
+> If `register()` does reject, double check your JavaScript for typos / errors in Chrome DevTools.
+
+When `register()` does resolve, it returns a `ServiceWorkerRegistration`. With this registration, we have access to the `PushManager` API.
 
 ## Requesting Permission
 
-With our service worker registered and we know there aren't any problems there,
-we need to get permissions.
-
-As with any API that gives special privileges to a web app, like geolocation and
-access to the camera, you need to ask the user for permission first.
-
-Browsers require every web app to show a notification to the user
-whenever a push message is received. To display a notification,
-you need permission from the user, without this permission we can't get
-a `PushSubscription`.
+The next step to take is to get permission from the user to show notifications.
 
 The API for getting permission is relatively simple, the only downside is that
 the API [recently changed from taking a callback to returning a Promise](
     https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission).
-The problem is that we can't tell what version of the API will be supported,
-so you have to implement both and handle both.
+
+The problem with this, is that we can't tell what version of the API will be supported by the current browser, so you have to implement both and handle both.
 
 <% include('../../demos/web-app/app.js', 'request-permission') %>
 
-We call `Notification.requestPermission()`, which displays a notification prompt
-as shown below.
-
+In the above code, this important bit is the call to `Notification.requestPermission()`. This method will display a prompt to the user:
 
 ![Permission Prompt on Desktop and Mobile Chrome.](/images/permission-prompt.png)
 
 Once the permission has been accepted, closed (i.e. clicking the cross on the
-pop-up) or blocked, we'll be given the result as a string of 'granted',
+pop-up) or blocked, we'll be given the result as a string: 'granted',
 'default' or 'denied'.
 
-In the sample above the promise only resolves if the permission is granted,
+In the sample above, the promise only resolves if the permission is granted,
 otherwise we throw an error making the promise reject.
 
-The important thing to remember is that if the user clicks 'Block', your web
-app will not be able to ask the user for the Notification permission again until
-they reset the permission state, so think carefully about how you
-ask the user. The good news is that most users are happy to give permission as
+The important thing to remember is that if the user clicks the 'Block' button, your web app will not be able to ask the user for the Notification permission again until the user "unblocks" / changes the permissions in a buried settings panel. Think carefully about how and when you ask the user for permission. The good news is that most users are happy to give permission as
 long as it's asked in a way that they *know* why the permission is being asked.
 
-We'll look more into the UX of asking for permission later on.
+We'll look at how some popular sites ask for permission later on.
 
 ## Subscribe a User with PushManager
 
-Using your new service worker registration and permission granted we can
-subscribe a user for push by calling `registration.pushManager.subscribe()`.
+Once the permission is granted and we have our service worker registration we can subscribe a user by calling `registration.pushManager.subscribe()`.
 
 <% include('../../demos/web-app/app.js', 'subscribe-user') %>
 
-When we call the `subscribe()` method we pass in a *options* object. Some of
+When we call the `subscribe()` method, we pass in a *options* object. Some of
 these fields are required and some of them are optional.
 
 Lets look at both of the options we've passed in.
 
-### userVisibleOnly Option
+### userVisibleOnly
 
 When push was first added to browsers there was uncertainty about whether
 developers should be able to send a push message and not let the user know
