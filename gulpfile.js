@@ -57,7 +57,6 @@ gulp.task('images-other', () => {
     width : 800,
     quality: 0.8,
     imageMagick: true,
-    flatten: true,
   }))
   .pipe(imagemin({
     progressive: true,
