@@ -258,11 +258,13 @@ Luckily, you can feature detect support for notification features by looking at 
 
 Let's say we wanted to know if a notification has support action buttons, we'd do the following:
 
-    if ('actions' in Notification.prototype) {
-      // Action buttons are supported.
-    } else {
-      // Action buttons are NOT supported.
-    }
+```javascript
+if ('actions' in Notification.prototype) {
+  // Action buttons are supported.
+} else {
+  // Action buttons are NOT supported.
+}
+```
 
 With this, we could change the notification we display to our users.
 
