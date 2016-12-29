@@ -249,3 +249,21 @@ To be honest, it's easy to see examples and think "I'll never make that mistake"
     ![Screenshot of a Facebook Message Notification](/images/notification-screenshots/desktop/facebook-message.png)  
 
     It has information on the user who sent the message, the message content and the users profile photo, making the notification more relevant to the user.
+
+## Browsers and Features
+
+At the time of writing there is a pretty big disparity between Chrome and Firefox in terms of feature support for notifications.
+
+Luckily, you can feature detect support for notification features by looking at the notification prototype.
+
+Let's say we wanted to know if a notification has support action buttons, we'd do the following:
+
+    if ('actions' in Notification.prototype) {
+      // Action buttons are supported.
+    } else {
+      // Action buttons are NOT supported.
+    }
+
+With this, we could change the notification we display to our users.
+
+For other parameters you pass in to `showNotification`, just do the same as above, replacing 'actions' with the desired parameter names.
