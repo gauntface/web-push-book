@@ -1,8 +1,10 @@
+@import "../../../jekyll/styles/variables/colors.css";
+
 pre.is-hidden {
   display: none;
 }
 
-.demo-btns {
-  display: flex;
-  justify-content: space-between;
+.details-btn {
+  background-color: transparent;
+  color: var(--primary-link-color);
 }

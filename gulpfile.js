@@ -36,7 +36,7 @@ gulp.task('copy', () => {
 
 gulp.task('images-svg', () => {
   const optimisedImagePath = BUILD_OUTPUT_PATH + '/images';
-  const stream = gulp.src([
+  let stream = gulp.src([
     SRC_PATH + '/images/**/*.svg'
   ])
   .pipe(changed(optimisedImagePath));
@@ -55,7 +55,7 @@ gulp.task('images-svg', () => {
 
 gulp.task('images-other', () => {
   const optimisedImagePath = BUILD_OUTPUT_PATH + '/images';
-  const stream = gulp.src([
+  let stream = gulp.src([
     SRC_PATH + '/images/**/*.{png,jpg,jpeg,gif}'
   ])
   .pipe(changed(optimisedImagePath));

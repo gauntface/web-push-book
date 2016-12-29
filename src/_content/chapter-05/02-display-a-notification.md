@@ -47,7 +47,7 @@ Where the title is a string and options can be the following:
   "//": "Both Visual & Behavioural Options",
   "actions": "<Array of Strings>",
 
-  "//": "???????????????",
+  "//": "Doesn't seem to affect any visual aspect of the notification.",
   "timestamp": "<Long>"
 }
 ```
@@ -224,17 +224,12 @@ Sadly at the time of writing no browser has support for the sound option.
 
 ### Timestamp
 
-Timestamp allows you to alter the time displayed on the notification.
+Timestamp allows you to tell the platform the time the notification was intended for (i.e. when the event the notification relates to occured).
 
 The timestamp should be the number of milliseconds since 00:00:00 UTC on
 1 January 1970 (i.e. the unix epoch).
 
 <% include('../../demos/notification-examples/notification-examples.js', 'timestampNotification') %>
-
-This information is not always shown but on older versions of Android it's
-displayed like so:
-
-// Need screenshot for Android M
 
 ## UX Best Practices
 

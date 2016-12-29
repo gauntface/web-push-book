@@ -416,7 +416,6 @@
       {
         className: 'js-notification-title-body',
         cb: titleAndBodyNotification,
-        codeSample: titleAndBodyNotification,
         enabled: () => {
           return ('title' in Notification.prototype) &&
             ('body' in Notification.prototype);
@@ -425,7 +424,6 @@
       {
         className: 'js-notification-long-title-body',
         cb: longTitleAndBodyNotification,
-        codeSample: longTitleAndBodyNotification,
         enabled: () => {
           return ('title' in Notification.prototype) &&
             ('body' in Notification.prototype);
@@ -434,7 +432,6 @@
       {
         className: 'js-notification-icon',
         cb: iconNotification,
-        codeSample: iconNotification,
         enabled: () => {
           return ('icon' in Notification.prototype);
         }
@@ -442,7 +439,6 @@
       {
         className: 'js-notification-badge',
         cb: badgeNotification,
-        codeSample: badgeNotification,
         enabled: () => {
           return ('badge' in Notification.prototype);
         }
@@ -450,7 +446,6 @@
       {
         className: 'js-notification-image',
         cb: imageNotification,
-        codeSample: imageNotification,
         enabled: () => {
           return ('image' in Notification.prototype);
         }
@@ -458,7 +453,6 @@
       {
         className: 'js-notification-vibrate',
         cb: vibrateNotification,
-        codeSample: vibrateNotification,
         enabled: () => {
           return ('vibrate' in Notification.prototype);
         }
@@ -466,7 +460,6 @@
       {
         className: 'js-notification-sound',
         cb: soundNotification,
-        codeSample: soundNotification,
         enabled: () => {
           return ('sound' in Notification.prototype);
         }
@@ -474,7 +467,6 @@
       {
         className: 'js-notification-dir-ltr',
         cb: dirLTRNotification,
-        codeSample: dirLTRNotification,
         enabled: () => {
           return ('dir' in Notification.prototype);
         }
@@ -482,7 +474,6 @@
       {
         className: 'js-notification-actions',
         cb: actionsNotification,
-        codeSample: actionsNotification,
         enabled: () => {
           return ('actions' in Notification.prototype);
         }
@@ -490,7 +481,6 @@
       {
         className: 'js-notification-dir-rtl',
         cb: dirRTLNotification,
-        codeSample: dirRTLNotification,
         enabled: () => {
           return ('dir' in Notification.prototype);
         }
@@ -498,7 +488,6 @@
       {
         className: 'js-notification-timestamp',
         cb: timestampNotification,
-        codeSample: timestampNotification,
         enabled: () => {
           return ('timestamp' in Notification.prototype);
         }
@@ -506,7 +495,6 @@
       {
         className: 'js-notification-overview',
         cb: allOptionsNotification,
-        codeSample: allOptionsNotification,
         enabled: () => {
           return true;
         },
@@ -514,7 +502,6 @@
       {
         className: 'js-notification-tag',
         cb: notificationTag,
-        codeSample: notificationTag,
         enabled: () => {
           return ('tag' in Notification.prototype);
         }
@@ -522,7 +509,6 @@
       {
         className: 'js-notification-renotify',
         cb: renotifyNotification,
-        codeSample: renotifyNotification,
         enabled: () => {
           return ('renotify' in Notification.prototype);
         }
@@ -530,7 +516,6 @@
       {
         className: 'js-notification-silent',
         cb: silentNotification,
-        codeSample: silentNotification,
         enabled: () => {
           return ('silent' in Notification.prototype);
         }
@@ -538,7 +523,6 @@
       {
         className: 'js-notification-require-interaction',
         cb: requiresInteractionNotification,
-        codeSample: requiresInteractionNotification,
         enabled: () => {
           return ('requireInteraction' in Notification.prototype);
         }
@@ -614,31 +598,8 @@
           }
         });
         button.disabled = !config.enabled();
-
-        if (config.codeSample) {
-          const container = button.parentElement;
-          const codeButton = document.createElement('button');
-          codeButton.classList.add('show-code-btn');
-          codeButton.textContent = 'Show Code';
-          container.appendChild(codeButton);
-
-          const codeSampleElement = document.createElement('code');
-          codeSampleElement.innerHTML = config.codeSample;
-          const preElement = document.createElement('pre');
-          preElement.classList.add('is-hidden');
-          preElement.appendChild(codeSampleElement);
-          container.parentElement.insertBefore(preElement, container.nextSibling);
-
-          codeButton.addEventListener('click', function() {
-            preElement.classList.toggle('is-hidden');
-          });
-        }
       });
     });
-  };
-
-  const displayNoPermissionError = function() {
-
   };
 
   window.addEventListener('load', function() {
