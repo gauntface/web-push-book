@@ -8,7 +8,8 @@
   <meta name="theme-color" content="#222222">
 
   <title>Notification Examples | Web Push Book</title>
-  <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
+  <meta name="description" content="This is a set of example notifications that
+  are referenced throughout the web push book content.">
 
   <!-- Stylesheet -->
   <link href="/jekyll/styles/main.css" rel="stylesheet" type="text/css">
@@ -36,7 +37,7 @@
     <p>If you just want to see what a notification looks like in your browser
     with <strong>all</strong> the UI options set, click the button below.</p>
 
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-overview" disabled>Example Notification</button>
     </p>
 
@@ -51,15 +52,17 @@
 
     <h6>Title &amp; Body</h6>
     <p>Basic example of a notification with a basic title and body.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-title-body" disabled>Title &amp; Body</button>
+    </p>
+    <p class="demo-btns">
       <button class="js-notification-long-title-body" disabled>Long Title &amp; Body</button>
     </p>
 
     <h6>Notification Icon</h6>
     <p>The icon on a notification is the image to the left of the title and
     body text.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-icon" disabled>Icon</button>
     </p>
 
@@ -68,7 +71,7 @@
       main body of the notification. At the time of writing this is behind the
       experimental web platform feature in Chrome and the results vary between
       Android and Desktop.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-image" disabled>Image</button>
     </p>
 
@@ -78,15 +81,17 @@
     <p>At the time of writing, Android will make the icons (if defined)
       a color that matches the current UI. Desktop Chrome will display the icon
       as is.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-actions" disabled>Actions</button>
     </p>
 
     <h6>Language Direction</h6>
     <p>You can set a "dir" option to indicate if the test should be displayed
     "left-to-right" or "right-to-left".</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-dir-ltr" disabled>Direction: LTR</button>
+    </p>
+    <p class="demo-btns">
       <button class="js-notification-dir-rtl" disabled>Direction: RTL</button>
     </p>
 
@@ -94,7 +99,7 @@
     <p>Defining a tag for a notification means that when a new Notification
     is shown with the same tag, any old notifications with that tag are
     removed before the new notification is shown.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-tag" disabled>Tag</button>
     </p>
 
@@ -110,7 +115,7 @@
     <p><i>Note:</i> There is no
     visible affect on desktop, but on mobile, vibration and sound will be
     affected.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-renotify" disabled>Renotify</button>
     </p>
 
@@ -119,7 +124,7 @@
     and wakes up the screen. Setting the silent parameter means that
     the notification is displayed, but there is none of the default behaviors
     like sound, vibration and screen wake.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-silent" disabled>Silent</button>
     </p>
 
@@ -129,7 +134,7 @@
     <p>To get the same behaviour on desktop and mobile you can set the
     "require-interaction" option to true, which means the user
     <strong>must</strong> click or dismiss the notification.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-require-interaction" disabled>Require Interaction</button>
     </p>
 
@@ -145,34 +150,29 @@
     <p>Notification badges are only being used on mobile, at least at the time
     of writing. It's used to replace the browser icon that is shown by default.
     </p>
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-badge" disabled>Badge</button>
     </p>
 
     <h6>Vibration</h6>
     <p>You can define a pattern of vibrations to make a tune. This only
     applies to mobile devices since laptops tend not to vibrate.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-vibrate" disabled>Vibrate</button>
     </p>
 
-    <h3>Non-Visible</h3>
+    <h3>Other Options</h3>
     <h6>Timestamp</h6>
     <p>At the time of writing, there is no visible affect to notifications
     with a custom timestamp.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-timestamp" disabled>Timestamp</button>
     </p>
-
-    <h3>Not Implemented Anywhere Yet</h3>
-    <p>The following options are defined in the spec, but haven't been
-    implemented anywhere at the time of writing. If the button is enabled,
-    click it and see.</p>
 
     <h6>Sound</h6>
     <p>The sound option has been defined, but at the time of writing no browser
     has implemented it yet.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-notification-sound" disabled>Sound</button>
     </p>
 
@@ -185,7 +185,7 @@
     <h6>Open a Window</h6>
     <p>This example simply demonstrates opening a URL after the user has
     clicked on a notification.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-open-window" disabled>Open Window</button>
     </p>
 
@@ -199,7 +199,7 @@
       notification and notice that the originally open window will be
       focused rather than open a new window.</p>
 
-    <p>
+    <p class="demo-btns">
       <button class="js-focus-window" disabled>Focus a Window OR Open</button>
     </p>
 
@@ -211,7 +211,7 @@
     <p>This data attribute is incredibly useful for passing information
       from the time when a notification is shown, to when a notification is
       clicked.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-data-notification" disabled>Adding Data to Notification</button>
     </p>
 
@@ -224,7 +224,7 @@
     then have their data collapsed.</p>
     <p>Click the button multiple times and close / click the notifications
     to see what it does.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-merge-notification" disabled>Merge Notification</button>
     </p>
 
@@ -238,7 +238,7 @@
     windows for this site, checking to see if one of them is <i>focused</i>.
     If one is, we print a message to the console, otherwise we show a
     notification.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-must-show-notification" disabled>Must Show Notification (4s Delay)</button>
     </p>
 
@@ -247,7 +247,7 @@
     of pages that are currently open. This example will wait 4s before
     triggering a fake push event. Then the push event will post a message
     to the page, which is printed to the console.</p>
-    <p>
+    <p class="demo-btns">
       <button class="js-send-message-to-page" disabled>Send Message to Page (4s Delay)</button>
     </p>
   </main>

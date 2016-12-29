@@ -1,0 +1,8 @@
+pre.is-hidden {
+  display: none;
+}
+
+.demo-btns {
+  display: flex;
+  justify-content: space-between;
+}
