@@ -30,40 +30,51 @@ gulp.task('copy', () => {
     SRC_PATH + '/**/*.{html,js}',
     './node_modules/anchor-js/anchor.min.js'
   ])
+  .pipe(changed(BUILD_OUTPUT_PATH))
   .pipe(gulp.dest(BUILD_OUTPUT_PATH));
 });
 
 gulp.task('images-svg', () => {
   const optimisedImagePath = BUILD_OUTPUT_PATH + '/images';
-  return gulp.src([
+  const stream = gulp.src([
     SRC_PATH + '/images/**/*.svg'
   ])
-  .pipe(changed(optimisedImagePath))
-  .pipe(imagemin({
-    progressive: true,
-    interlaced: true,
-    svgoPlugins: [{removeViewBox: false}],
-  }))
-  .pipe(gulp.dest(optimisedImagePath));
+  .pipe(changed(optimisedImagePath));
+
+  if (prodBuild) {
+    stream = stream.pipe(changed(optimisedImagePath))
+    .pipe(imagemin({
+      progressive: true,
+      interlaced: true,
+      svgoPlugins: [{removeViewBox: false}],
+    }));
+  }
+
+  return stream.pipe(gulp.dest(optimisedImagePath));
 });
 
 gulp.task('images-other', () => {
   const optimisedImagePath = BUILD_OUTPUT_PATH + '/images';
-  return gulp.src([
+  const stream = gulp.src([
     SRC_PATH + '/images/**/*.{png,jpg,jpeg,gif}'
   ])
-  .pipe(changed(optimisedImagePath))
-  .pipe(imageResize({
-    width : 800,
-    quality: 0.8,
-    imageMagick: true,
-  }))
-  .pipe(imagemin({
-    progressive: true,
-    interlaced: true,
-    svgoPlugins: [{removeViewBox: false}],
-  }))
-  .pipe(gulp.dest(optimisedImagePath));
+  .pipe(changed(optimisedImagePath));
+
+  if (prodBuild) {
+    stream = stream.pipe(changed(optimisedImagePath))
+    .pipe(imageResize({
+      width : 800,
+      quality: 0.8,
+      imageMagick: true,
+    }))
+    .pipe(imagemin({
+      progressive: true,
+      interlaced: true,
+      svgoPlugins: [{removeViewBox: false}],
+    }));
+  }
+
+  return stream.pipe(gulp.dest(optimisedImagePath));
 });
 
 gulp.task('images', gulp.parallel('images-other', 'images-svg'));
@@ -78,7 +89,9 @@ gulp.task('styles', () => {
   let stream = gulp.src([
     SRC_PATH + '/**/*.css',
     `!${SRC_PATH}/{demo,demo/**}`,
-  ]);
+  ])
+  .pipe(changed(BUILD_OUTPUT_PATH));
+
   if (prodBuild) {
     stream = stream.pipe(cssimport({
       extensions: ["css"]
@@ -119,7 +132,6 @@ gulp.task('build:prod',
 
 gulp.task('build:dev',
   gulp.series(
-    'clean',
     makeDevBuild,
     gulp.parallel(
       'styles',
@@ -132,4 +144,4 @@ gulp.task('build:dev',
   )
 );
 
-gulp.task('default', gulp.series('build:dev', gulp.parallel('watch', 'jekyll')))
+gulp.task('default', gulp.series('clean', 'build:dev', gulp.parallel('watch', 'jekyll')))

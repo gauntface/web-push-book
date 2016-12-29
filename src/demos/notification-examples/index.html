@@ -34,16 +34,20 @@
     demonstrate a particular options in the notification API.</p>
 
     <p>If you just want to see what a notification looks like in your browser
-    with all the UI options set, click the 'All the Options' button.</p>
+    with <strong>all</strong> the UI options set, click the button below.</p>
 
     <p>
-      <button class="js-notification-overview" disabled>All the Options</button>
+      <button class="js-notification-overview" disabled>Example Notification</button>
     </p>
 
-    <p>The buttons will be enabled if the browser has support for the feature.
-    If the button is grey, then it's not supported on your browser.</p>
+    <p>The buttons will be enabled if the browser has support for the feature
+      being demonstrated. If the button is grey, then it's not supported on
+      your browser.</p>
 
     <h3>Desktop &amp; Mobile</h3>
+
+    <p>The following examples are known to work on both Desktop and Mobile in
+      Chrome.</p>
 
     <h6>Title &amp; Body</h6>
     <p>Basic example of a notification with a basic title and body.</p>
@@ -53,25 +57,27 @@
     </p>
 
     <h6>Notification Icon</h6>
-    <p>The icon on a notification is the image on the left of the title and
-    body. This is normally an image relevant to the tweet being sent.</p>
+    <p>The icon on a notification is the image to the left of the title and
+    body text.</p>
     <p>
       <button class="js-notification-icon" disabled>Icon</button>
     </p>
 
     <h6>Notification Image</h6>
-    <p>Setting an image means the notification can display a large image
-    in with the notification. At the time of writing this is behind the
-    experimental web platform features in Chrome and the results vary between
-    Android and Desktop.</p>
+    <p>A notification image should be used to display a larger image in the the
+      main body of the notification. At the time of writing this is behind the
+      experimental web platform feature in Chrome and the results vary between
+      Android and Desktop.</p>
     <p>
       <button class="js-notification-image" disabled>Image</button>
     </p>
 
     <h6>Action Buttons</h6>
-    <p>If you want to offer multiple actions to your user from the notification
-    then you can define "actions", which add buttons to the notification that
-    you can respond to.</p>
+    <p>Actions allow you to add buttons to a notification so multiple
+      actions can be performed by your user.</p>
+    <p>At the time of writing, Android will make the icons (if defined)
+      a color that matches the current UI. Desktop Chrome will display the icon
+      as is.</p>
     <p>
       <button class="js-notification-actions" disabled>Actions</button>
     </p>
@@ -96,17 +102,21 @@
     <p>When you use the tag option, the default behavior of a new notification
     replacing an existing one is that there is no sound, vibration and the
     screen is kept asleep.</p>
-    <p>Renotify is an option that will play a sound, vibrate the device and
-    wake up the users device when a tagged notification is replaced. This means
-    replacing notifications is the same behavior as a completely new
-    notification.</p>
+
+    <p>With `renotify: true` a new notification will play a sound, vibrate
+    and wake up the users device. This means replacing notifications have
+    the same behavior as a completely new notification.</p>
+
+    <p><i>Note:</i> There is no
+    visible affect on desktop, but on mobile, vibration and sound will be
+    affected.</p>
     <p>
       <button class="js-notification-renotify" disabled>Renotify</button>
     </p>
 
     <h6>Silent</h6>
-    <p>When a new notification arrives, it plays a sound, vibrates the users
-    device and wakes up the screen. Setting the silent option means that
+    <p>When a new notification arrives, by default, it plays a sound, vibrates
+    and wakes up the screen. Setting the silent parameter means that
     the notification is displayed, but there is none of the default behaviors
     like sound, vibration and screen wake.</p>
     <p>
@@ -114,19 +124,13 @@
     </p>
 
     <h6>Require Interaction</h6>
-    <p>On desktop a notification is only displayed for a short period of time,
-    whereas Android devices will show the notification until the user
-    does something with it.</p>
+    <p>On desktop, a notification is only displayed for a short period of time.
+    On Android, notifications are shown until the user interacts with it.</p>
     <p>To get the same behaviour on desktop and mobile you can set the
-    "require-interaction" option to true.</p>
+    "require-interaction" option to true, which means the user
+    <strong>must</strong> click or dismiss the notification.</p>
     <p>
       <button class="js-notification-require-interaction" disabled>Require Interaction</button>
-    </p>
-
-    <h6>Timestamp</h6>
-    <p></p>
-    <p>
-      <button class="js-notification-timestamp" disabled>Timestamp</button>
     </p>
 
 
@@ -150,6 +154,14 @@
     applies to mobile devices since laptops tend not to vibrate.</p>
     <p>
       <button class="js-notification-vibrate" disabled>Vibrate</button>
+    </p>
+
+    <h3>Non-Visible</h3>
+    <h6>Timestamp</h6>
+    <p>At the time of writing, there is no visible affect to notifications
+    with a custom timestamp.</p>
+    <p>
+      <button class="js-notification-timestamp" disabled>Timestamp</button>
     </p>
 
     <h3>Not Implemented Anywhere Yet</h3>
@@ -181,6 +193,12 @@
     <p>This example is similar to "Open a Window", except that it checks
     if there is already a window open at that URL and if not, it opens
     it.</p>
+
+    <p>To see this, try clicking the button below, then clicking the
+      notification to open a new window. Repeat clicking the button and
+      notification and notice that the originally open window will be
+      focused rather than open a new window.</p>
+
     <p>
       <button class="js-focus-window" disabled>Focus a Window OR Open</button>
     </p>
@@ -188,21 +206,24 @@
     <h6>Adding Data to a Notification</h6>
     <p>This is a trivial example. When the notification is shown it is given
     a <code>data</code> parameter in the <code>showNotification()</code>
-    options. When this notification is clicked, it prints this data to the
+    options. When the notification is clicked, it prints this data to the
     console.</p>
-    <p>This is a trivial example of adding data to a notification but it has
-    a wide range of uses.</p>
+    <p>This data attribute is incredibly useful for passing information
+      from the time when a notification is shown, to when a notification is
+      clicked.</p>
     <p>
       <button class="js-data-notification" disabled>Adding Data to Notification</button>
     </p>
 
     <h6>Merging Notifications Programmatically</h6>
-    <p>In the above section there are examples of how the <code>tag</code>
-    parameter affects displaying multiple notifications. But there may
-    be scenarios where you want to manage notifications with different logic.
-    </p>
+    <p>In the <code>tag</code> example above, we saw how it affects
+    multiple notifications being shown (i.e. replacing notifications with
+    the same tag). But there may be scenarios where you want to manage
+    the merging / collapsing of notifications with custom logic.</p>
     <p>This example demonstrates how notifications can be iterated over and
     then have their data collapsed.</p>
+    <p>Click the button multiple times and close / click the notifications
+    to see what it does.</p>
     <p>
       <button class="js-merge-notification" disabled>Merge Notification</button>
     </p>
@@ -210,12 +231,13 @@
     <h6>Must show a Notification</h6>
     <p>Throughout the <a href="https://web-push-book.gauntface.com">Web Push
     Book</a> there are references to "having to show a notification". This is
-    almost completely true. The one scenario where you <strong>don't</strong>
-    need to show a notification is if the user is currently looking at your
-    site.</p>
+    <i>almost</i> completely true. The one scenario where you
+    <strong>don't</strong> need to show a notification is if the user
+    is currently looking at your site.</p>
     <p>This example waits for 4 seconds and then iterates over the current
-    windows checking to see if one of them is <i>focused</i>. If one is,
-    we print to the console, otherwise we show a notification.</p>
+    windows for this site, checking to see if one of them is <i>focused</i>.
+    If one is, we print a message to the console, otherwise we show a
+    notification.</p>
     <p>
       <button class="js-must-show-notification" disabled>Must Show Notification (4s Delay)</button>
     </p>
@@ -240,7 +262,6 @@
   </footer>
 
   <script src="notification-examples.js"></script>
-  <script src="notification-common-practices.js"></script>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

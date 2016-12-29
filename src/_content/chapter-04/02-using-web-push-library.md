@@ -3,9 +3,9 @@ title: Web Push Node Library
 ---
 # Web Push Node Library
 
-There libraries to make sending push messages easier and it makes sense to
-look at one of these libraries just to show how it can manage all the encryption
-steps for you.
+There are libraries that make sending web push messages super easy and it makes
+sense to look at one of these libraries just to show how it can manage all the
+encryption steps for you.
 
 [web-push](https://github.com/web-push-libs/web-push) is a popular Node.js
 library for sending push messages to browsers and for full-disclosure
@@ -14,17 +14,25 @@ I've committed code to this project and it's totes the best.
 > **Remember**: If you want a library for a different language, be sure to
 > checkout the [web-push-libs org on Github](https://github.com/web-push-libs/).
 
-To use it in a new node project, create a file `index.js` and install the
-web-push library:
+To install it run the following comment::
 
     npm install web-push --save
 
-Then in your javascript file import it in like so:
+Create a new javascript file `index.js` and require in the `web-push` module
+like so:
 
 <% include('../../demos/node-server/index.js', 'web-push-require') %>
 
-Now we can start getting ready for push. You'll want to set up your application
-server keys (or VAPID keys).
+We'll need to tell the web-push library what our application server keys are.
+You can generate new keys using the `web-push` CLI:
+
+    npm install -g web-push
+    web-push generate-vapid-keys
+
+Or, you can quickly [grab a set from here](https://web-push-codelab.appspot.com/).
+
+Then drop them in your `index.js` file like so (remember application server
+keys and VAPID keys are the same thing.):
 
 <% include('../../demos/node-server/index.js', 'web-push-vapid') %>
 
@@ -45,17 +53,6 @@ webpush.sendNotification(subscriptionObject, 'hello')
   console.log('Message sent successfully.');
 })
 .catch(function(err) {
-  console.log('Message wasn\'t sent successfully.');
-});
-```
-
-> **TIP:** If you do actually copy a subscription from your browser be careful
-> that the browser doesn't add '...' somewhere in the middle of the values.
-> This has happened to me and others far too many times.
-
-We can now run your script with:
-
-    node index.js
 
 This will run the above JavaScript using Node.js and send a message to
 that user's browser, which will wake up the service worker and dispatch

@@ -165,40 +165,36 @@ The number of sites that simply ask for permission as soon as the page loads
 and as a result have no UI in their web app to disable push notifications
 is astounding.
 
-[Vice news](https://news.vice.com/) is an example of this practice. (p.s. sorry
+[Vice News](https://news.vice.com/) is an example of this practice. (p.s. sorry
 Vice for using you as an example, you were first site I recalled doing this.)
 
-When you land on Vice news you'll get the permission prompt. This isn't the end
+When you land on Vice News you'll get the permission prompt. This isn't the end
 of the world, but it does offend the senses if your just browsing.
 
 ![Vice news instantly asks for permission.](/images/ux-examples/vice/vice-instant-notification.png)
 
-*If* you allow notifications, where do you go to disable them? The UI after
-click allow changes in no way shape or form.
+*If* you allow notifications, where would you go to disable them? The websites UI changes in no way after a user grants permission.
 
 ![Vice news after granting permission.](/images/ux-examples/vice/vice-no-opt-out.png)
 
 This bad UX pushes the responsibility onto the browser, which frankly has an
-awful UX, well in Chromes at least.
-As a result, your brand is getting users signed up, then forcing them to
-trial and error their way through the browser UX to disable notifications.
+awful UX in Chrome.
 
-The UX for disabling permission while your web page is open is OK, but it's
-hidden and I doubt many users will be able to find it.
+As a result, your brand is getting users signed up, then forcing them to
+trial and error their way through the browser UX to disable notifications. This
+can't be good for anyone.
+
+If your curious what the Browser UX is, the desktop has two options. You can
+visit the web page and select the 'i' button in the URL bar.
 
 ![Chrome Notification Permissions from URL Bar.](/images/ux-examples/vice/vice-disable-url-bar.png)
 
-The more common approach will be users clicking the cog on a notification,
+If the web page is closed, users can click the cog on a notification,
 which takes the user to this page.
 
 ![Chrome Notification Permissions from URL Bar.](/images/ux-examples/vice/vice-disable-in-chrome.png)
 
-Explaing how users can disable push via a settings panel or some other
-common location should be something you offer. Again the alternative is
-the user taking the nuclear option and revoking permissions, which is
-the worst experience for the user and reflects poorly on the brand / service.
+Neither of these options are particularly pleasant for the user.
 
-All I ask of you is not to call `registration.subscribe()`
-or `Notification.requestPermission()` as soon the page loads up and to
-offer an easy way for users to opt out of notifications if they
-change their minds.
+Your site should explain to your users how they can disable push. If you don't,
+users are likely to take the nuclear option and block permission permanently.

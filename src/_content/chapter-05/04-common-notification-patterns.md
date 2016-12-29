@@ -121,7 +121,7 @@ the notification.
 The easiest way to do this is to add data to a notification in the options for
 `showNotification()` like this:
 
-<% include('../../demos/notification-examples/notification-common-practices.js', 'addNotificationData') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'addNotificationData') %>
 
 Then, inside your click handler you can get the notification, and it's data,
 with `event.notification.data`.
@@ -144,7 +144,7 @@ the currently visible notifications from your web app.
 First let's look at how we can get the currently opened notifications and loop
 through to pick out an existing notification:
 
-<% include('../../demos/notification-examples/notification-common-practices.js', 'getNotifications') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'getNotifications') %>
 
 A call to `getNotifications()` and a for loop to step through each notification,
 here we are looking for a parameter in the notifications data, but this could be
@@ -155,7 +155,7 @@ Next step is to replace the notification.
 In the example of a fake message app, we can track the number of new messages
 in our notifications data and then increase them with each new notification.
 
-<% include('../../demos/notification-examples/notification-common-practices.js', 'manipulateNotification') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'manipulateNotification') %>
 
 This code checks if for the new notification and if it exists it bumps the
 message count and changes the notification title and body message. If there
@@ -192,7 +192,7 @@ page, like this:
 In our pages, we can listen for this messages by adding a message event
 listener:
 
-<% include('../../demos/notification-examples/notification-common-practices.js', 'swMessageListener') %>
+<% include('../../demos/notification-examples/notification-examples.js', 'swMessageListener') %>
 
 In this message listener you could do anything you want, show a toast, a
 notification bubble or completely ignore the message.

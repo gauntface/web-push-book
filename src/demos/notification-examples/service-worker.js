@@ -45,8 +45,12 @@ function focusWindow(event) {
 function dataNotification(event) {
   /**** START printNotificationData ****/
   const notificationData = event.notification.data;
-  console.log(notificationData.time);
-  console.log(notificationData.message);
+  console.log('');
+  console.log('The data notification had the following parameters:');
+  Object.keys(notificationData).forEach((key) => {
+    console.log(`  ${key}: ${notificationData[key]}`);
+  });
+  console.log('');
   /**** END printNotificationData ****/
 }
 
@@ -118,6 +122,22 @@ function demoSendMessageToPage(event) {
   /**** END sendPageMessage ****/
 }
 
+self.addEventListener('push', function(event) {
+  if (event.data) {
+    switch(event.data.text()) {
+      case 'must-show-notification':
+        demoMustShowNotificationCheck(event);
+        break;
+      case 'send-message-to-page':
+        demoSendMessageToPage(event);
+        break;
+      default:
+        console.warn('Unsure of how to handle push event: ', event.data);
+        break;
+    }
+  }
+});
+
 /**** START notificationClickEvent ****/
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
@@ -140,6 +160,7 @@ self.addEventListener('notificationclick', function(event) {
 /**** END notificationClickEvent ****/
 
 self.addEventListener('message', function(event) {
+  console.log('Received message from page.', event.data);
   switch(event.data) {
     case 'must-show-notification-demo':
       self.dispatchEvent(new PushEvent('push', {
