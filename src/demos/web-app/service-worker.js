@@ -1,4 +1,5 @@
 function handlePushEvent(event) {
+  const DEFAULT_TAG = 'web-push-book-example-site'
   return Promise.resolve()
   .then(() => {
     return event.data.json();
@@ -6,8 +7,8 @@ function handlePushEvent(event) {
   .then((data) => {
     const title = data.notification.title;
     const options = data.notification;
-    if (options.tag) {
-      options.tag = 'web-push-book-example-site';
+    if (!options.tag) {
+      options.tag = DEFAULT_TAG;
     }
     return registration.showNotification(title, options);
   })
@@ -17,7 +18,7 @@ function handlePushEvent(event) {
     const title = 'Message Received';
     const options = {
       body: event.data.text(),
-      tag: 'web-push-book-example-site'
+      tag: DEFAULT_TAG
     };
     return registration.showNotification(title, options);
   });
