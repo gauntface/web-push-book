@@ -25,11 +25,32 @@
   </header>
 
   <main>
-    <p>You'd want this to be restricted some how, perhaps by login or could be
-    a restricted application then triggers pushes locally.</p>
+    <p>You'd want this page to be restricted some how, perhaps by login or
+    could be a restricted application then is only accessible locally.</p>
 
-    <p>This is just an example that gets all the subscriptions and allows
+    <p>This page is just an example that gets all the subscriptions and allows
     triggering of pushes to demostrate a rough implementation.</p>
+
+    <h2>Send Push Message</h2>
+
+    <p>Clicking "Trigger Push Message" will make
+      an API request to "/api/trigger-push-msg" (i.e. an API call to our
+      node backend) and that will trigger a push message to all our users.
+    </p>
+
+    <p>Feel free to change the text to anything you want.</p>
+
+    <div class="push-data">
+      <textarea rows="10" class="js-push-content push-content-text" disabled>{
+  "notification": {
+    "title": "Example Title",
+    "body": "This will be the body text for the notification.",
+    "icon": "/images/icon.png"
+  }
+}</textarea>
+
+      <button class="js-trigger-push-msg" disabled>Trigger Push Message</button>
+    </div>
 
     <h2>Subscriber List</h2>
 
@@ -42,9 +63,6 @@
 
       </tbody>
     </table>
-
-    <h2>Send Push Message</h2>
-
   </main>
 
   <script src="admin.js" async defer></script>

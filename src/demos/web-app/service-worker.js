@@ -1,6 +1,30 @@
+function handlePushEvent(event) {
+  return Promise.resolve()
+  .then(() => {
+    return event.data.json();
+  })
+  .then((data) => {
+    const title = data.notification.title;
+    const options = data.notification;
+    if (options.tag) {
+      options.tag = 'web-push-book-example-site';
+    }
+    return registration.showNotification(title, options);
+  })
+  .catch((err) => {
+    console.error('Push event caused an error: ', err);
+
+    const title = 'Message Received';
+    const options = {
+      body: event.data.text(),
+      tag: 'web-push-book-example-site'
+    };
+    return registration.showNotification(title, options);
+  });
+}
+
 self.addEventListener('push', function(event) {
-  console.log('Push Event Received.');
-  event.waitUntil(Promise.resolve());
+  event.waitUntil(handlePushEvent(event));
 });
 
 /**** START notificationClickEvent ****/

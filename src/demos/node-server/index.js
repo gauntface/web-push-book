@@ -27,6 +27,20 @@ function getSubscriptionsFromDatabase() {
 const app = express();
 app.use(express.static(path.join(__dirname, '..', 'web-app')));
 app.use(bodyParser.json());
+app.use(bodyParser.text());
+
+function deleteSubscriptionFromDatabase(subscriptionId) {
+  return new Promise(function(resolve, reject) {
+  db.remove({_id: subscriptionId }, {}, function(err) {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      resolve();
+    });
+  });
+}
 
 /**** START save-sub-api ****/
 function saveSubscriptionToDatabase(subscription) {
@@ -106,13 +120,9 @@ app.all('/api/get-subscriptions/', function (req, res) {
   });
 });
 
-/**
- *
- *
- */
-
-app.all('/api/trigger-push-msg/', function (req, res) {
-  // TODO: This endpoint should be secured, restricting access
+app.post('/api/trigger-push-msg/', function (req, res) {
+  // NOTE: This API endpoint should be secure (i.e. protected with a login
+  // check OR not publicly available.)
 
   /**** START web-push-gcm ****/
   const gcmServerKey = 'AIzaSyC5itnz9jHmpvQRhq8sJUCFUy2SYUPanGs';
@@ -135,27 +145,21 @@ app.all('/api/trigger-push-msg/', function (req, res) {
   return getSubscriptionsFromDatabase()
   .then(function(subscriptions) {
     const sendPromises = subscriptions.map(function(subscription) {
-      const payload = {
-        from: 'web-push-book',
-        time: Date.now()
-      };
-      return webpush.sendNotification(subscription, JSON.stringify(payload))
-      .then(function() {
-        console.log('Subscription was valid.');
-      },function(err) {
-        console.log('Subscription is no longer valid.');
+      return webpush.sendNotification(subscription, JSON.stringify(req.body))
+      .catch((err) => {
+        if (err.statusCode === 410) {
+          return deleteSubscriptionFromDatabase(subscription._id);
+        } else {
+          console.log('Subscription is no longer valid: ', err);
+        }
       });
     });
 
     return Promise.all(sendPromises);
   })
   .then(() => {
-    if (req.method === 'GET') {
-      res.send('<h1>Everything was sent</h1>');
-    } else {
-      res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify({ data: { success: true } }));
-    }
   })
   .catch(function(err) {
     res.status(500);

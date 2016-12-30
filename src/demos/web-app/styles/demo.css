@@ -72,3 +72,9 @@
 td.endpoint {
   word-break: break-all;
 }
+
+.push-content-text {
+  display: block;
+  width: 100%;
+  margin-bottom: 16px;
+}
