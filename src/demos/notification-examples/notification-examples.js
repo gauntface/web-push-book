@@ -125,7 +125,7 @@
     /**** START soundNotification ****/
     const title = 'Sound Notification';
     const options = {
-      sound: '/audio/notification-sound.mp3'
+      sound: '/demos/notification-examples/audio/notification-sound.mp3'
     };
     registration.showNotification(title, options);
     /**** END soundNotification ****/

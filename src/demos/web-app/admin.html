@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#222222">
+
+  <title>Example Site | Web Push Book</title>
+  <meta name="description" content="This the example node project that
+    accompanies the web push book.">
+
+  <!-- Stylesheet -->
+  <link href="styles/push-book-styles.css" rel="stylesheet" type="text/css">
+  <link href="styles/demo.css" rel="stylesheet" type="text/css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700|Open+Sans|Inconsolata" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>Admin | Example Site</h1>
+  </header>
+
+  <main>
+    <p>You'd want this to be restricted some how, perhaps by login or could be
+    a restricted application then triggers pushes locally.</p>
+
+    <p>This is just an example that gets all the subscriptions and allows
+    triggering of pushes to demostrate a rough implementation.</p>
+
+    <h2>Subscriber List</h2>
+
+    <table>
+      <thead>
+        <th>Database ID</th>
+        <th>Endpoint</th>
+      </thead>
+      <tbody class="js-subscriber-table-body">
+
+      </tbody>
+    </table>
+
+    <h2>Send Push Message</h2>
+
+  </main>
+
+  <script src="admin.js" async defer></script>
+</body>
+</html>

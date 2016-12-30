@@ -84,35 +84,15 @@ app.all('/api/get-subscriptions/', function (req, res) {
 
   return getSubscriptionsFromDatabase()
   .then(function(subscriptions) {
-    if (req.method === 'GET') {
-      console.log(subscriptions);
-      const tableHeading = '<tr><th>ID</th><th>Endpoint</th><th>p256dh Key</th><th>Auth Secret</th></tr>';
-      let tableContent = '';
-      for (let i = 0; i < subscriptions.length; i++) {
-        const subscription = subscriptions[i];
-        tableContent += '<tr>\n';
-        tableContent += '<td>' + subscription._id + '</td>\n';
-        tableContent += '<td>' + subscription.endpoint + '</td>\n';
-
-        if (subscription.keys && subscription.keys.p256dh) {
-          tableContent += '<td>' + subscription.keys.p256dh + '</td>\n';
-        } else {
-          tableContent += '<td>No Key</td>\n';
-        }
-
-        if (subscription.keys && subscription.keys.auth) {
-          tableContent += '<td>' + subscription.keys.auth + '</td>\n';
-        } else {
-          tableContent += '<td>No Auth</td>\n';
-        }
-
-        tableContent += '</tr>\n\n';
+    const reducedSubscriptions = subscriptions.map((subscription) => {
+      return {
+        id: subscription._id,
+        endpoint: subscription.endpoint
       }
-      res.send('<table>' + tableHeading + tableContent + '</table>');
-    } else {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify({ data: { subscriptions: subscriptions } }));
-    }
+    });
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({ data: { subscriptions: reducedSubscriptions } }));
   })
   .catch(function(err) {
     res.status(500);
