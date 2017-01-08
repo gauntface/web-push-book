@@ -18,7 +18,7 @@ call that will do some remotely).
 To this, we just need to define a 'notificationclick' event listener
 that will be called when ever a notification is clicked.
 
-<% include('../../demos/web-app/service-worker.js', 'simpleNotification') %>
+<% include('../../demos/node-server/frontend/service-worker.js', 'simpleNotification') %>
 
 From this we can access the notification via 'event.notification'.
 
@@ -30,7 +30,7 @@ with it.
 
 It's the same as the `notificationclick` event, just a different event name:
 
-<% include('../../demos/web-app/service-worker.js', 'notificationCloseEvent') %>
+<% include('../../demos/node-server/frontend/service-worker.js', 'notificationCloseEvent') %>
 
 ## The Exception to Showing a Notification
 

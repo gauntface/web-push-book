@@ -15,7 +15,7 @@ The first we need to do is check if the current browser supports push messaging 
 1. Check the *serviceWorker* API on the *navigator*.
 1. Check *PushManager* on  the *window*.
 
-<% include('../../demos/web-app/app.js', 'feature-detect') %>
+<% include('../../demos/node-server/frontend/app.js', 'feature-detect') %>
 
 While browser support is growing quickly for both service worker and
 push messaging support, it's always a good idea to feature detect for both and
@@ -29,7 +29,7 @@ When we register a service worker, we are telling the browser what file to use f
 
 To register a service worker, call `navigator.serviceWorker.register()`, passing in the path to our file. Like so:
 
-<% include('../../demos/web-app/app.js', 'register-sw') %>
+<% include('../../demos/node-server/frontend/app.js', 'register-sw') %>
 
 This code above tells the browser that we have a service worker file and where its located. In this case, the service worker file is at `/service-worker.js`. Behind the scenes the browser will take the following steps after calling `register()`:
 
@@ -54,7 +54,7 @@ the API [recently changed from taking a callback to returning a Promise](
 
 The problem with this, is that we can't tell what version of the API will be supported by the current browser, so you have to implement both and handle both.
 
-<% include('../../demos/web-app/app.js', 'request-permission') %>
+<% include('../../demos/node-server/frontend/app.js', 'request-permission') %>
 
 In the above code, the important snippet of code is the call to `Notification.requestPermission()`. This method will display a prompt to the user:
 
@@ -76,7 +76,7 @@ We'll look at how some popular sites ask for permission later on.
 
 Once the permission is granted and we have our service worker registration we can subscribe a user by calling `registration.pushManager.subscribe()`.
 
-<% include('../../demos/web-app/app.js', 'subscribe-user') %>
+<% include('../../demos/node-server/frontend/app.js', 'subscribe-user') %>
 
 When calling the `subscribe()` method, we pass in an *options* object, which has required and optional parameters.
 
@@ -156,7 +156,7 @@ That's all of the subscribe options, but there is one last side effect of callin
 
 We've called `subscribe()`, passed in some options and in return we get a promise that resolves to a `PushSubscription`.
 
-<% include('../../demos/web-app/app.js', 'subscribe-user') %>
+<% include('../../demos/node-server/frontend/app.js', 'subscribe-user') %>
 
 This `PushSubscription` object contains all the required information needed to
 send a push messages to that user. If you print
@@ -202,7 +202,7 @@ subscription to our node server that stores the subscription in a database.
 
 Sending the subscription is done like so:
 
-<% include('../../demos/web-app/app.js', 'send-subscription-to-server') %>
+<% include('../../demos/node-server/frontend/app.js', 'send-subscription-to-server') %>
 
 With the `PushSubscription` details on our server we are good to send our user
 a message whenever we want.

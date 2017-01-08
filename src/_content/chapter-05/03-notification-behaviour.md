@@ -33,7 +33,7 @@ call that will do some remotely).
 To this, we just need to define a 'notificationclick' event listener
 that will be called when ever a notification is clicked.
 
-<% include('../../demos/web-app/service-worker.js', 'simpleNotification') %>
+<% include('../../demos/node-server/frontend/service-worker.js', 'simpleNotification') %>
 
 From this we can access the notification via 'event.notification'.
 
@@ -51,7 +51,7 @@ The behavior of an action press is up to you, simply listen for the notification
 click event (just like above) and check the `event.action` value, which will
 contain the 'action' parameter you passed into `showNotification()`.
 
-<% include('../../demos/web-app/service-worker.js', 'notificationClickEvent') %>
+<% include('../../demos/node-server/frontend/service-worker.js', 'notificationClickEvent') %>
 
 ![Logs for action button clicks and notification click.](/images/notification-screenshots/action-button-click-logs.png){: .center-image }
 

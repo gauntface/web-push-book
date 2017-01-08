@@ -1,10 +1,10 @@
 ---
-title: UX of Push on the Web
+title: Permission UX
 ---
-# UX of Push on the Web
+# Permission UX
 
 Before we move on to how to trigger a push message we should look at some
-best practice for the UX of requesting permission for a user.
+best practice for the UX of requesting permission from a user.
 
 ## The Worst UX
 

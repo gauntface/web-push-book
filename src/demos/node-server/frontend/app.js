@@ -111,8 +111,7 @@ function sendSubscriptionToBackEnd(subscription) {
     body: JSON.stringify(subscription)
   })
   .then(function(response) {
-    if (response.status !== 200) {
-      // Bad server response
+    if (!response.ok) {
       throw new Error('Bad status code from server.');
     }
 
