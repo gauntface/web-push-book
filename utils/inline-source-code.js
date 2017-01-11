@@ -110,6 +110,10 @@ const parseSingleFile = (filePath, ebookBuildPath, jekyllBuildPath) => {
   inlinedContents = inlinedContents.replace(/\/images\/svgs\/(.*)\.svg/g, '/images/png-version/$1.png');
   inlinedContents = inlinedContents.replace(/\/images\//g, 'build/images/');
 
+  // This fixes a latex issue when dealing with '\0' where backslash has
+  // special meaning in latext
+  inlinedContents = inlinedContents.replace(/'\\0\'/g, `'\textbackslash'`);
+
   // Write new File
   log(chalk.blue('  Ebook Output Path:') + ' ' + ebookOutputPath);
   mkdirp.sync(path.parse(ebookOutputPath).dir);
