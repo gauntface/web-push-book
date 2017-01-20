@@ -72,16 +72,8 @@ function deleteSubscriptionFromDatabase(subscriptionId) {
   });
 }
 
-const app = express();
-app.use(express.static(path.join(__dirname, 'frontend')));
-app.use(bodyParser.json());
-app.use(bodyParser.text());
-
-// This is the API that receives a push subscription and saves it.
-/**** START save-sub-api-post ****/
-app.post('/api/save-subscription/', function (req, res) {
-/**** END save-sub-api-post ****/
-  /**** START save-sub-api-validate ****/
+/**** START save-sub-api-validate ****/
+const isValidSaveRequest = (request, res) => {
   // Check the request body has at least an endpoint.
   if (!req.body || !req.body.endpoint) {
     // Not a valid subscription.
@@ -93,15 +85,31 @@ app.post('/api/save-subscription/', function (req, res) {
         message: 'Subscription must have an endpoint.'
       }
     }));
+    return false;
+  }
+  return true;
+};
+/**** END save-sub-api-validate ****/
+
+const app = express();
+app.use(express.static(path.join(__dirname, 'frontend')));
+app.use(bodyParser.json());
+app.use(bodyParser.text());
+
+// This is the API that receives a push subscription and saves it.
+/**** START save-sub-example ****/
+/**** START save-sub-api-post ****/
+app.post('/api/save-subscription/', function (req, res) {
+/**** END save-sub-api-post ****/
+  if (!isValidSaveRequest(req, res)) {
     return;
   }
-  /**** END save-sub-api-validate ****/
 
   /**** START save-sub-api-save-subscription ****/
   return saveSubscriptionToDatabase(req.body)
   .then(function(subscriptionId) {
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({ data: { success: true, id: subscriptionId } }));
+    res.send(JSON.stringify({ data: { success: true } }));
   })
   .catch(function(err) {
     res.status(500);
@@ -115,6 +123,7 @@ app.post('/api/save-subscription/', function (req, res) {
   });
   /**** END save-sub-api-save-subscription ****/
 });
+/**** END save-sub-example ****/
 
 app.post('/api/get-subscriptions/', function (req, res) {
   // TODO: This should be secured / not available publicly.

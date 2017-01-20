@@ -15,34 +15,8 @@ function urlBase64ToUint8Array(base64String) {
   return outputArray;
 }
 
-// TODO: Is this needed? Spec suggests subscribe will wait for this anyway,
-// so while manually wait for it?
-/** function waitForServiceWorkerToBeActive(registration) {
-  const serviceWorker = registration.installing || registration.waiting ||
-    registration.active;
-
-  return new Promise(function(resolve, reject) {
-    if (serviceWorker.state === 'activated') {
-      resolve(registration);
-      return;
-    }
-
-    let stateChangeListener = function() {
-      if (serviceWorker.state === 'activated') {
-        resolve(registration);
-      } else if (serviceWorker.state === 'redundant') {
-        reject(new Error('Registration has a redundant service worker.'));
-      } else {
-        return;
-      }
-      serviceWorker.removeEventListener('statechange', stateChangeListener);
-    };
-    serviceWorker.addEventListener('statechange', stateChangeListener);
-  });
-}**/
-
+/**** START register-sw ****/
 function registerServiceWorker() {
-  /**** START register-sw ****/
   return navigator.serviceWorker.register('service-worker.js')
   .then(function(registration) {
     console.log('Service worker successfully registered.');
@@ -51,8 +25,8 @@ function registerServiceWorker() {
   .catch(function(err) {
     console.error('Unable to register service worker.', err);
   });
-  /**** END register-sw ****/
 }
+/**** END register-sw ****/
 
 // This is just to make sample code eaier to read.
 // TODO: Move into a variable rather than register each time.
@@ -138,9 +112,9 @@ function subscribeUserToPush() {
 
     return registration.pushManager.subscribe(subscribeOptions);
   })
-  .then(function(subscription) {
-    console.log('Received subscription: ', JSON.stringify(subscription));
-    return subscription;
+  .then(function(pushSubscription) {
+    console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
+    return pushSubscription;
   });
 }
 /**** END subscribe-user ****/
