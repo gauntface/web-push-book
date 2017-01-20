@@ -72,7 +72,7 @@ The API call requires certain headers to be set and the data to be a stream of b
 
 The API provides a way to send a message to a user, with / without data, and provide instructions of *how* to send the message.
 
-The data you send with a push message must be encrypted. The reason for this is that it prevents push services, who could be anyone, from being able to view the data sent with the push message. This is important given that it's the browser who decides which push service to use, which could opene the door to browsers using a push service that isn't safe or secure.
+The data you send with a push message must be encrypted. The reason for this is that it prevents push services, who could be anyone, from being able to view the data sent with the push message. This is important given that it's the browser who decides which push service to use, which could open the door to browsers using a push service that isn't safe or secure.
 
 When you trigger a push message, the push service will receive the API call and queue the message. This message will remain queued until the users device comes online and the push service can deliver the messages. The instructions you can give to the push service define how the push message is queued.
 
