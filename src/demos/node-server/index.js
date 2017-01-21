@@ -73,7 +73,7 @@ function deleteSubscriptionFromDatabase(subscriptionId) {
 }
 
 /**** START save-sub-api-validate ****/
-const isValidSaveRequest = (request, res) => {
+const isValidSaveRequest = (req, res) => {
   // Check the request body has at least an endpoint.
   if (!req.body || !req.body.endpoint) {
     // Not a valid subscription.
@@ -153,29 +153,40 @@ app.post('/api/get-subscriptions/', function (req, res) {
   });
 });
 
+/**** START trig-push-send-notification ****/
+const triggerPushMsg = function(subscription, dataToSend) {
+  return webpush.sendNotification(subscription, dataToSend)
+  .catch((err) => {
+    if (err.statusCode === 410) {
+      return deleteSubscriptionFromDatabase(subscription._id);
+    } else {
+      console.log('Subscription is no longer valid: ', err);
+    }
+  });
+};
+/**** END trig-push-send-notification ****/
+
 /**** START trig-push-api-post ****/
 app.post('/api/trigger-push-msg/', function (req, res) {
 /**** END trig-push-api-post ****/
   // NOTE: This API endpoint should be secure (i.e. protected with a login
   // check OR not publicly available.)
 
+  const dataToSend = JSON.stringify(req.body);
+
   /**** START trig-push-send-push ****/
   return getSubscriptionsFromDatabase()
   .then(function(subscriptions) {
-    const sendPromises = subscriptions.map(function(subscription) {
-      /**** START trig-push-send-notification ****/
-      return webpush.sendNotification(subscription, JSON.stringify(req.body))
-      .catch((err) => {
-        if (err.statusCode === 410) {
-          return deleteSubscriptionFromDatabase(subscription._id);
-        } else {
-          console.log('Subscription is no longer valid: ', err);
-        }
-      });
-      /**** END trig-push-send-notification ****/
-    });
+    const promiseChain = Promise.resolve();
 
-    return Promise.all(sendPromises);
+    for (let i = 0; i < subscriptions.length; i++) {
+      const subscription = subscriptions[i];
+      promiseChain = promiseChain.then(() => {
+        return triggerPushMsg(subscription, dataToSend);
+      });
+    }
+
+    return promiseChain;
   })
   /**** END trig-push-send-push ****/
   /**** START trig-push-return-response ****/

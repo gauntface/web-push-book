@@ -124,6 +124,17 @@ Whenever you read something referring to *"application server keys"* or
 
 Those are the only subscribe option.
 
+#### How to Create Application Server Keys
+
+You can create a public and private set of application server keys by visiting this web site [web-push-codelab.appspot.com](https://web-push-codelab.appspot.com/) or you can use the [web-push](https://github.com/web-push-libs/web-push#command-line) to generate keys by doing the following:
+
+    $ npm install -g web-push
+    $ web-push generate-vapid-keys
+
+You only need to create these keys once for your application, just make sure you keep the private key private....yeah I just said that.
+
+## Permisions and subscribe()
+
 There is one side effect of calling `subscribe()`. If your web app doesn't have permissions for showing notifications at the time of calling `subscribe()`, the browser will request the permissions for you. This is useful if your UI works with this flow, but if you want more control (and I think most developers will), stick to the `Notification.requestPermission()` API that we used earlier.
 
 ## What is a PushSubscription?
