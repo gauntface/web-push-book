@@ -28,28 +28,19 @@ self.addEventListener('push', function(event) {
   event.waitUntil(handlePushEvent(event));
 });
 
-/**** START notificationClickEvent ****/
-self.addEventListener('notificationclick', function(event) {
-  if (event.action) {
-    console.log('Action Button Click.', event.action);
-  } else {
-    console.log('Notification Click.');
-  }
-});
-/**** END notificationClickEvent ****/
+const doSomething = () => {
+  return Promise.resolve();
+};
 
 // This is here just to highlight the simple version of notification click.
 // Normally you would only have one notification click listener.
 /**** START simpleNotification ****/
 self.addEventListener('notificationclick', function(event) {
-  event.notification.close();
+  const clickedNotification = event.notification;
+  clickedNotification.close();
 
   // Do something as the result of the notification click
+  const promiseChain = doSomething();
+  event.waitUntil(promiseChain);
 });
 /**** END simpleNotification ****/
-
-/**** START notificationCloseEvent ****/
-self.addEventListener('notificationclick', function(event) {
-  // TODO: Make analytics API call.
-});
-/**** END notificationCloseEvent ****/

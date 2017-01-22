@@ -282,7 +282,6 @@
     /**** START silentNotification ****/
     const title = 'Silent Notification';
     const options = {
-      body: 'With "silent: \'true\'".',
       silent: true
     };
     registration.showNotification(title, options);
@@ -335,7 +334,7 @@
   const mergeNotification = function(registration) {
     const userMessage = fakeMessages[messageIndex];
     /**** START getNotifications ****/
-    return registration.getNotifications()
+    const promiseChain = registration.getNotifications()
     .then(notifications => {
       let currentNotification;
 
@@ -357,7 +356,7 @@
       }
 
       if (currentNotification) {
-        // We have an open notification, let's so something with it.
+        // We have an open notification, let's do something with it.
         const messageCount = currentNotification.data.newMessageCount + 1;
 
         options.body = `You have ${messageCount} new messages from ${userName}.`;
@@ -367,6 +366,7 @@
         };
         notificationTitle = `New Messages from ${userName}`;
 
+        // Remember to close the old notification.
         currentNotification.close();
       } else {
         options.body = `"${userMessage}"`;

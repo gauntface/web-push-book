@@ -9,6 +9,7 @@ Huge thank you to all these wonderful people for their help.
 - [Tal Ater](https://talater.com)
 - [Avakov Denis](https://github.com/Den3er)
 - [Peter Beverloo](http://peter.sh/)
+- [Michael van Tricht](https://swordbeta.com/)
 
 # Attribution
 

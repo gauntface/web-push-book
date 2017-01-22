@@ -2,15 +2,17 @@ const examplePage = '/demos/notification-examples/example-page.html';
 
 function openWindow(event) {
   /**** START notificationOpenWindow ****/
-  event.waitUntil(
-    clients.openWindow(examplePage)
-  );
+  const examplePage = '/demos/notification-examples/example-page.html';
+  const promiseChain = clients.openWindow(examplePage);
+  event.waitUntil(promiseChain);
   /**** END notificationOpenWindow ****/
 }
 
 function focusWindow(event) {
   /**** START notificationFocusWindow ****/
-  const urlToOpen = self.location.origin + examplePage;
+  /**** START urlToOpen ****/
+  const urlToOpen = new URL(examplePage, self.location.origin).href;
+  /**** END urlToOpen ****/
 
   /**** START clientsMatchAll ****/
   const promiseChain = clients.matchAll({
@@ -54,31 +56,40 @@ function dataNotification(event) {
   /**** END printNotificationData ****/
 }
 
-function demoMustShowNotificationCheck(event) {
-  /**** START showNotificationRequired ****/
-  const promiseChain = clients.matchAll({
+/**** START isClientFocused ****/
+function isClientFocused() {
+  return clients.matchAll({
     type: 'window',
     includeUncontrolled: true
   })
   .then((windowClients) => {
-    let mustShowNotification = true;
+    let clientIsFocused = false;
 
     for (let i = 0; i < windowClients.length; i++) {
       const windowClient = windowClients[i];
       if (windowClient.focused) {
-        mustShowNotification = false;
+        clientIsFocused = true;
         break;
       }
     }
 
-    return mustShowNotification;
-  })
-  .then((mustShowNotification) => {
-    if (mustShowNotification) {
-      return self.registration.showNotification('Had to show a notification.');
-    } else {
+    return clientIsFocused;
+  });
+}
+/**** END isClientFocused ****/
+
+function demoMustShowNotificationCheck(event) {
+  /**** START showNotificationRequired ****/
+  const promiseChain = isClientFocused()
+  .then((clientIsFocused) => {
+    if (clientIsFocused) {
       console.log('Don\'t need to show a notification.');
+      return;
+
     }
+
+    // Client isn't focused, we need to show a notification.
+    return self.registration.showNotification('Had to show a notification.');
   });
 
   event.waitUntil(promiseChain);
@@ -87,24 +98,9 @@ function demoMustShowNotificationCheck(event) {
 
 function demoSendMessageToPage(event) {
   /**** START sendPageMessage ****/
-  const promiseChain = clients.matchAll({
-    type: 'window',
-    includeUncontrolled: true
-  })
-  .then((windowClients) => {
-    let mustShowNotification = true;
-
-    for (let i = 0; i < windowClients.length; i++) {
-      const windowClient = windowClients[i];
-      if (windowClient.focused) {
-        return windowClients;
-      }
-    }
-
-    return null;
-  })
-  .then((windowClients) => {
-    if (windowClients) {
+  const promiseChain = isClientFocused()
+  .then((clientIsFocused) => {
+    if (clientIsFocused) {
       windowClients.forEach((windowClient) => {
         windowClient.postMessage({
           message: 'Received a push message.',
@@ -138,6 +134,34 @@ self.addEventListener('push', function(event) {
   }
 });
 
+/**** START notificationActionClickEvent ****/
+self.addEventListener('notificationclick', function(event) {
+  if (!event.action) {
+    // Was a normal notification click
+    console.log('Notification Click.');
+    return;
+  }
+
+  switch (event.action) {
+    case 'coffee-action':
+      console.log('User ❤️️\'s coffee.');
+      break;
+    case 'doughnut-action':
+      console.log('User ❤️️\'s doughnuts.');
+      break;
+    case 'gramophone-action':
+      console.log('User ❤️️\'s music.');
+      break;
+    case 'atom-action':
+      console.log('User ❤️️\'s science.');
+      break;
+    default:
+      console.log(`Unknown action clicked: '${event.action}'`);
+      break;
+  }
+});
+/**** END notificationActionClickEvent ****/
+
 /**** START notificationClickEvent ****/
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
@@ -158,6 +182,19 @@ self.addEventListener('notificationclick', function(event) {
   }
 });
 /**** END notificationClickEvent ****/
+
+const notificationCloseAnalytics = () => {
+  return Promise.resolve();
+};
+
+/**** START notificationCloseEvent ****/
+self.addEventListener('notificationclose', function(event) {
+  const dismissedNotification = event.notification;
+
+  const promiseChain = notificationCloseAnalytics();
+  event.waitUntil(promiseChain);
+});
+/**** END notificationCloseEvent ****/
 
 self.addEventListener('message', function(event) {
   console.log('Received message from page.', event.data);
