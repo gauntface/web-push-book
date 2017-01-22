@@ -383,6 +383,8 @@
       );
     });
     /**** END manipulateNotification ****/
+
+    return promiseChain;
   };
 
   const mustShowNotification = function(registration) {

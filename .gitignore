@@ -3,3 +3,4 @@ build/
 .vscode/
 src/demos/node-server/subscription-store.db
 src/images/png-version/
+npm-debug.log

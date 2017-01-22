@@ -3,9 +3,10 @@ dist: trusty
 cache:
   directories:
     - node_modules
+    - ~/.selenium-assistant
 language: node_js
 node_js:
-  - "6"
+  - "stable"
 
 addons:
   apt_packages:
