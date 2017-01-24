@@ -29,9 +29,10 @@ mkdir -p "${DOWNLOADS_PATH}"
 # Build PDF File
 pandoc $EBOOK_TRANSFORM_MD/**/*.md -o $DOWNLOADS_PATH/web-push-book.pdf --latex-engine=xelatex
 # Build ePub File
-pandoc $EBOOK_TRANSFORM_MD/**/*.md -o $DOWNLOADS_PATH/web-push-book.epub --epub-metadata $CONTENT_PATH/_epub-metadata.yaml --epub-cover-image $BUILD_PATH/images/book/cover-photo.png --latex-engine=xelatex
+# Explore: --epub-stylesheet=stylesheet.css
+pandoc $EBOOK_TRANSFORM_MD/**/*.md -o $DOWNLOADS_PATH/web-push-book.epub --epub-metadata $CONTENT_PATH/_epub-metadata.yaml --epub-cover-image $BUILD_PATH/images/book/cover-photo.png --toc --toc-depth=2 --latex-engine=xelatex
 # Build Kindle Format
-$PWD/third_party/kindlegen/kindlegen $DOWNLOADS_PATH/web-push-book.epub -o web-push-book.mobi
+$PWD/third_party/kindlegen/kindlegen $DOWNLOADS_PATH/web-push-book.epub -o web-push-book.mobi -c2
 
 
 # Run Jekyll to build site + downloads
