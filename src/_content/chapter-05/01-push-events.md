@@ -7,7 +7,7 @@ By this point covered subscribing a user for push sending them a message. The ne
 
 ## The Push Event
 
-When a message is received, it'll result in a push event being dispatched in you service worker.
+When a message is received, it'll result in a push event being dispatched in your service worker.
 
 The code for setting up a push event listener should be pretty similar to any other event listener you'd write in JavaScript:
 
