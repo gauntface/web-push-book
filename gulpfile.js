@@ -18,6 +18,7 @@ const imageResize = require('gulp-image-resize');
 const changed = require('gulp-changed');
 
 const parseContent = require('./utils/inline-source-code');
+const buildWFVersion = require('./utils/web-fundamentals-build');
 
 gulp.task('clean', () => {
   return del([BUILD_OUTPUT_PATH]);
@@ -141,6 +142,20 @@ gulp.task('build:dev',
         BUILD_OUTPUT_PATH + '/_ebook', BUILD_OUTPUT_PATH + '/_content')
         .catch(err => console.log('Error Building Content: ', err))
     )
+  )
+);
+
+gulp.task('build:wf',
+  gulp.series(
+    /** 'clean',**/
+    /** gulp.parallel(
+      'styles',
+      'images',
+      'copy',
+      () => parseContent(
+        BUILD_OUTPUT_PATH + '/_ebook', BUILD_OUTPUT_PATH + '/_content')
+    ),**/
+    () => buildWFVersion()
   )
 );
 
