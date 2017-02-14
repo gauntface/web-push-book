@@ -15,6 +15,16 @@ Otherwise get <a href="https://web-push-book.gauntface.com ">early access here.<
 Cheers,
 Matt
 
+# Running Node Demo
+
+If you wish to run the node demo you'll first need to ensure you have the NPM dependencies installed:
+
+    npm install
+
+Then start the node app by running:
+
+    node src/demos/node-server/index.js
+
 # Running Site Locally
 
 If you want to run the site locally you'll need to install a number of dependencies for Jekyll and NPM.
