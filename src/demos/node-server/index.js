@@ -211,5 +211,5 @@ app.post('/api/trigger-push-msg/', function (req, res) {
 const port = process.env.PORT || 9012;
 
 const server = app.listen(port, function () {
-  console.log('Running on ' + server.address().port + ' port');
+  console.log('Running on http://localhost:' + port);
 });
