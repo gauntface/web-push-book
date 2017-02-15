@@ -11,6 +11,7 @@ Huge thank you to all these wonderful people for their help.
 - [Peter Beverloo](http://peter.sh/)
 - [Michael van Tricht](https://swordbeta.com/)
 - [Barnabas Makonda](https://github.com/MAKOSCAFEE)
+- [Alexey Rodionov](https://github.com/FluorescentHallucinogen)
 
 # Attribution
 
