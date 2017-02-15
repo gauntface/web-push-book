@@ -208,6 +208,8 @@ app.post('/api/trigger-push-msg/', function (req, res) {
   /**** END trig-push-return-response ****/
 });
 
-const server = app.listen(9012, function () {
-  console.log('Running on http://localhost:' + server.address().port);
+const port = process.env.PORT || 9012;
+
+const server = app.listen(port, function () {
+  console.log('Running on ' + server.address().port + ' port');
 });
