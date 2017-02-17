@@ -33,8 +33,8 @@ const db = new Datastore({
 
 /**** START save-sub-function ****/
 function saveSubscriptionToDatabase(subscription) {
-  return new Promise(function(resolve, reject) {
-    db.insert(subscription, function(err, newDoc) {
+  return new Promise((resolve, reject) => {
+    db.insert(subscription, (err, newDoc) => {
       if (err) {
         reject(err);
         return;
@@ -43,12 +43,12 @@ function saveSubscriptionToDatabase(subscription) {
       resolve(newDoc._id);
     });
   });
-};
+}
 /**** END save-sub-function ****/
 
 function getSubscriptionsFromDatabase() {
-  return new Promise(function(resolve, reject) {
-    db.find({}, function(err, docs) {
+  return new Promise((resolve, reject) => {
+    db.find({}, (err, docs) => {
       if (err) {
         reject(err);
         return;
@@ -60,8 +60,8 @@ function getSubscriptionsFromDatabase() {
 }
 
 function deleteSubscriptionFromDatabase(subscriptionId) {
-  return new Promise(function(resolve, reject) {
-  db.remove({_id: subscriptionId }, {}, function(err) {
+  return new Promise((resolve, reject) => {
+  db.remove({_id: subscriptionId }, {}, err => {
       if (err) {
         reject(err);
         return;
@@ -99,7 +99,7 @@ app.use(bodyParser.text());
 // This is the API that receives a push subscription and saves it.
 /**** START save-sub-example ****/
 /**** START save-sub-api-post ****/
-app.post('/api/save-subscription/', function (req, res) {
+app.post('/api/save-subscription/', (req, res) => {
 /**** END save-sub-api-post ****/
   if (!isValidSaveRequest(req, res)) {
     return;
@@ -107,11 +107,11 @@ app.post('/api/save-subscription/', function (req, res) {
 
   /**** START save-sub-api-save-subscription ****/
   return saveSubscriptionToDatabase(req.body)
-  .then(function(subscriptionId) {
+  .then(subscriptionId => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({ data: { success: true } }));
   })
-  .catch(function(err) {
+  .catch(err => {
     res.status(500);
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({
@@ -125,12 +125,12 @@ app.post('/api/save-subscription/', function (req, res) {
 });
 /**** END save-sub-example ****/
 
-app.post('/api/get-subscriptions/', function (req, res) {
+app.post('/api/get-subscriptions/', (req, res) =>
   // TODO: This should be secured / not available publicly.
   //       this is for demo purposes only.
 
-  return getSubscriptionsFromDatabase()
-  .then(function(subscriptions) {
+  getSubscriptionsFromDatabase()
+  .then(subscriptions => {
     const reducedSubscriptions = subscriptions.map((subscription) => {
       return {
         id: subscription._id,
@@ -141,7 +141,7 @@ app.post('/api/get-subscriptions/', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({ data: { subscriptions: reducedSubscriptions } }));
   })
-  .catch(function(err) {
+  .catch(err => {
     res.status(500);
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({
@@ -150,12 +150,12 @@ app.post('/api/get-subscriptions/', function (req, res) {
         message: 'We were unable to get the subscriptions from our database.'
       }
     }));
-  });
-});
+  })
+);
 
 /**** START trig-push-send-notification ****/
-const triggerPushMsg = function(subscription, dataToSend) {
-  return webpush.sendNotification(subscription, dataToSend)
+const triggerPushMsg = (subscription, dataToSend) =>
+  webpush.sendNotification(subscription, dataToSend)
   .catch((err) => {
     if (err.statusCode === 410) {
       return deleteSubscriptionFromDatabase(subscription._id);
@@ -163,11 +163,10 @@ const triggerPushMsg = function(subscription, dataToSend) {
       console.log('Subscription is no longer valid: ', err);
     }
   });
-};
 /**** END trig-push-send-notification ****/
 
 /**** START trig-push-api-post ****/
-app.post('/api/trigger-push-msg/', function (req, res) {
+app.post('/api/trigger-push-msg/', (req, res) => {
 /**** END trig-push-api-post ****/
   // NOTE: This API endpoint should be secure (i.e. protected with a login
   // check OR not publicly available.)
@@ -176,11 +175,10 @@ app.post('/api/trigger-push-msg/', function (req, res) {
 
   /**** START trig-push-send-push ****/
   return getSubscriptionsFromDatabase()
-  .then(function(subscriptions) {
+  .then(subscriptions => {
     let promiseChain = Promise.resolve();
 
-    for (let i = 0; i < subscriptions.length; i++) {
-      const subscription = subscriptions[i];
+    for (const subscription of subscriptions) {
       promiseChain = promiseChain.then(() => {
         return triggerPushMsg(subscription, dataToSend);
       });
@@ -194,7 +192,7 @@ app.post('/api/trigger-push-msg/', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify({ data: { success: true } }));
   })
-  .catch(function(err) {
+  .catch(err => {
     res.status(500);
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({
@@ -210,6 +208,6 @@ app.post('/api/trigger-push-msg/', function (req, res) {
 
 const port = process.env.PORT || 9012;
 
-const server = app.listen(port, function () {
-  console.log('Running on http://localhost:' + port);
-});
+const server = app.listen(port, () => {
+  console.log(`Running on http://localhost:${port}`);
+}); 

@@ -18,11 +18,11 @@ function urlBase64ToUint8Array(base64String) {
 /**** START register-sw ****/
 function registerServiceWorker() {
   return navigator.serviceWorker.register('service-worker.js')
-  .then(function(registration) {
+  .then(registration => {
     console.log('Service worker successfully registered.');
     return registration;
   })
-  .catch(function(err) {
+  .catch(err => {
     console.error('Unable to register service worker.', err);
   });
 }
@@ -36,8 +36,8 @@ function getSWRegistration() {
 
 /**** START request-permission ****/
 function askPermission() {
-  return new Promise(function(resolve, reject) {
-    const permissionResult = Notification.requestPermission(function(result) {
+  return new Promise((resolve, reject) => {
+    const permissionResult = Notification.requestPermission(result => {
       resolve(result);
     });
 
@@ -45,7 +45,7 @@ function askPermission() {
       permissionResult.then(resolve, reject);
     }
   })
-  .then(function(permissionResult) {
+  .then(permissionResult => {
     if (permissionResult !== 'granted') {
       throw new Error('We weren\'t granted permission.');
     }
@@ -55,20 +55,20 @@ function askPermission() {
 
 function unsubscribeUserFromPush() {
   return registerServiceWorker()
-    .then(function(registration) {
+    .then(registration =>
       // Service worker is active so now we can subscribe the user.
-      return registration.pushManager.getSubscription();
-    })
-    .then(function(subscription) {
+      registration.pushManager.getSubscription()
+    )
+    .then(subscription => {
       if (subscription) {
         return subscription.unsubscribe();
       }
     })
-    .then(function(subscription) {
+    .then(subscription => {
       pushCheckbox.disabled = false;
       pushCheckbox.checked = false;
     })
-    .catch(function(err) {
+    .catch(err => {
       console.error('Failed to subscribe the user.', err);
       pushCheckbox.disabled = Notification.permission === 'denied';
       pushCheckbox.checked = false;
@@ -84,14 +84,14 @@ function sendSubscriptionToBackEnd(subscription) {
     },
     body: JSON.stringify(subscription)
   })
-  .then(function(response) {
+  .then(response => {
     if (!response.ok) {
       throw new Error('Bad status code from server.');
     }
 
     return response.json();
   })
-  .then(function(responseData) {
+  .then(responseData => {
     if (!(responseData.data && responseData.data.success)) {
       throw new Error('Bad response from server.');
     }
@@ -102,7 +102,7 @@ function sendSubscriptionToBackEnd(subscription) {
 /**** START subscribe-user ****/
 function subscribeUserToPush() {
   return getSWRegistration()
-  .then(function(registration) {
+  .then(registration => {
     const subscribeOptions = {
       userVisibleOnly: true,
       applicationServerKey: urlBase64ToUint8Array(
@@ -112,7 +112,7 @@ function subscribeUserToPush() {
 
     return registration.pushManager.subscribe(subscribeOptions);
   })
-  .then(function(pushSubscription) {
+  .then(pushSubscription => {
     console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
     return pushSubscription;
   });
@@ -121,13 +121,13 @@ function subscribeUserToPush() {
 
 function setUpPush() {
   return registerServiceWorker()
-  .then(function(registration) {
+  .then(registration => {
     if (Notification.permission === 'denied') {
       console.warn('The notification permission has been blocked. Nothing we can do.');
       return;
     }
 
-    pushCheckbox.addEventListener('change', function(event) {
+    pushCheckbox.addEventListener('change', event => {
       // Disable UI until we've handled what to do.
       event.target.disabled = true;
 
@@ -141,23 +141,21 @@ function setUpPush() {
 
         promiseChain
           .then(subscribeUserToPush)
-          .then(function(subscription) {
+          .then(subscription => {
             if (subscription) {
               return sendSubscriptionToBackEnd(subscription)
-              .then(function() {
-                return subscription;
-              });
+              .then(() => subscription);
             }
 
             return subscription;
           })
-          .then(function(subscription) {
+          .then(subscription => {
             // We got a subscription AND it was sent to our backend,
             // re-enable our UI and set up state.
             pushCheckbox.disabled = false;
             pushCheckbox.checked = subscription !== null;
           })
-          .catch(function(err) {
+          .catch(err => {
             console.error('Failed to subscribe the user.', err);
 
             // An error occured while requestion permission, getting a
@@ -178,17 +176,17 @@ function setUpPush() {
     }
 
     return registration.pushManager.getSubscription()
-    .then(function(subscription) {
+    .then(subscription => {
       pushCheckbox.checked = subscription !== null;
       pushCheckbox.disabled = false;
     });
   })
-  .catch(function(err) {
-    console.log('Unable to register the service worker: ' + err);
+  .catch(err => {
+    console.log(`Unable to register the service worker: ${err}`);
   });
 }
 
-window.onload = function() {
+window.onload = () => {
   /**** START feature-detect ****/
   if (!('serviceWorker' in navigator)) {
     // Service Worker isn't supported on this browser, disable or hide UI.
