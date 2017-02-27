@@ -59,7 +59,7 @@ Once the permission has been accepted / allowed, closed (i.e. clicking the cross
 
 In the sample code above, the promise returned by `askPermission()` resolves if the permission is granted, otherwise we throw an error making the promise reject.
 
-One edge case that you need to handle is if the user clicks the 'Block' button. If this happens, your web app will not be able to ask the user for permission again. They'll have to manually "unblock" you app by changing the permission state of your web app, which is buried in a settings panel. Think carefully about how and when you ask the user for permission, because if they click block, it's not an easy way to reverse that decision.
+One edge case that you need to handle is if the user clicks the 'Block' button. If this happens, your web app will not be able to ask the user for permission again. They'll have to manually "unblock" your app by changing the permission state of your web app, which is buried in a settings panel. Think carefully about how and when you ask the user for permission, because if they click block, it's not an easy way to reverse that decision.
 
 The good news is that most users are happy to give permission as long as it's asked in a way that they *know* why the permission is being asked.
 
