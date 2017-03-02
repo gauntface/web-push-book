@@ -60,3 +60,47 @@ This issue will be worked on further.
 
 The reason web push is preferable is that a service worker can be brought to
 life, when the browser window is closed. A web socket will only live as long as the browser and web page is kept open.
+
+## What is the deal with GCM, FCM, Web Push and Chrome?
+
+This question has a number of facets to it and the easiest way to explain is to
+step through the history of web push and Chrome (Don't worry it's short).
+
+##### December 2014
+When Chrome first implemented web push, Chrome used Google Cloud Messaging (or GCM as it's known) to power the sending of push messages from the server to the browser.
+
+This **was not web push**. There are a few reasons this early set-up of Chrome and GCM wasn't "real" web push.
+
+1. GCM requires developers to set up an account on the Google Developers Console.
+1. Chrome + GCM needed a special sender ID to be shared by a web app to be able to set up messaging correctly.
+1. GCM's servers accepted a custom API request that wasn't a web standard.
+
+##### July 2016
+In July a new feature in web push landed - Application Server Keys (or VAPID as the spec is known). When Chrome added support for this new API, anyone who used it will get Chrome to use Firebase Cloud Messaging (also known as FCM) instead of GCM. This is important for a few reasons.
+
+1. Chrome + Application Sever Keys **do not** need any kind of project to be setup with Google or Firebase, it'll just work.
+1. FCM supports the *web push protocol*, which is the API that all web push services will support. This means that regardless of what push service a browser uses, you just make the same kind of request and it'll send the message.
+
+##### Why is it confusing today?
+There is a large amount of confusion now that content has been written on the topic of web push, much of which references GCM or FCM. If content references GCM, you should probably treat it as a sign that it's either old content OR it's focusing too much on Chrome (I'm guilty of doing this in a number of old posts).
+
+Instead, think of web push as consisting of a browser, which uses a push service to manage sending and receiving message, where the push service will accept a "web push protocol" request. If you think in these terms, you can ignore which browser and which push service it's using and get to work.
+
+This book has been written to focus on the standards approach of web push and purposefully ignores anything else.
+
+The *only* time you should care about this back story is if and when you want to support older versions of Chrome, Samsung Internet browser and / or Opera for Android, all of whom use the older GCM trick / proprietary API's / hacks. If you want to support these browsers you'll need to implement this older GCM API which is [documented in the non-standrards / legacy section of this book here](/chapter-06/01-non-standards-browsers/).
+
+## Firebase has a JavaScript SDK. What and Why?
+
+For those of you who have found the Firebase web SDK and noticed is has a messaging API for JavaScript, you may be wondering how it differs from web push.
+
+The messaging SDK (known as Firebase Cloud Messaging JS SDK) does a few tricks behind the scenes to make it easier to implement web push.
+
+1. Instead of worrying about PushSubscriptions and the various fields, you only need to worry about an FCM Token (A string).
+1. Using the tokens for each user, you can use the proprietary FCM API to trigger push messages. This API doesn't require encrypting payloads, you can send plain payload in a POST request body.
+1. FCM's proprietary API supports custom features, for example [FCM Topics](https://firebase.google.com/docs/cloud-messaging/android/topic-messaging) (It does work on web too - just poorly documented).
+1. Finally FCM supports Android, iOS and web, so for some teams is easier to work with in existing projects.
+
+This uses web push behind the scenes, but it's goal is to abstract it away.
+
+Like a said in the previous question, if you consider web push as just a browser and push service, then you can consider the Messaging SDK in Firebase as a library to try and simplify implementing web push.

@@ -177,7 +177,7 @@ app.post('/api/trigger-push-msg/', function (req, res) {
   /**** START trig-push-send-push ****/
   return getSubscriptionsFromDatabase()
   .then(function(subscriptions) {
-    const promiseChain = Promise.resolve();
+    let promiseChain = Promise.resolve();
 
     for (let i = 0; i < subscriptions.length; i++) {
       const subscription = subscriptions[i];
@@ -199,14 +199,17 @@ app.post('/api/trigger-push-msg/', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({
       error: {
-        id: 'unable-to-get-subscriptions',
-        message: 'We were unable to get the subscriptions from our database.'
+        id: 'unable-to-send-messages',
+        message: `We were unable to send messages to all subscriptions : ` +
+          `'${err.message}'`
       }
     }));
   });
   /**** END trig-push-return-response ****/
 });
 
-const server = app.listen(9012, function () {
-  console.log('Running on http://localhost:' + server.address().port);
+const port = process.env.PORT || 9012;
+
+const server = app.listen(port, function () {
+  console.log('Running on http://localhost:' + port);
 });

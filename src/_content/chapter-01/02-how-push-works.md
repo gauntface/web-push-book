@@ -56,7 +56,7 @@ Below is an example of the values you'll get from a **PushSubscription**:
 
 <% include('./code-samples/example-subscription.json') %>
 
-The **endpoint** in this case is *https://random-push-service.com/some-kind-of-unique-id-1234/v2/*. The push service would be 'random-push-service.com' and each endpoint is unique to a user, indicated with 'some-kind-of-uniqie-ud-1234'. As you start working with push you'll notice this pattern.
+The **endpoint** in this case is *https://random-push-service.com/some-kind-of-unique-id-1234/v2/*. The push service would be 'random-push-service.com' and each endpoint is unique to a user, indicated with 'some-kind-of-unique-id-1234'. As you start working with push you'll notice this pattern.
 
 We'll cover what the **keys** value is for later on.
 

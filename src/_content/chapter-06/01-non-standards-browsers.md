@@ -11,7 +11,7 @@ In these browsers they required a `gcm_sender_id` parameter to be added to a [we
 
 This was completely proprietary and only required since the application server key / VAPID spec had not been defined.
 
-In this section we are going to look at we can add support for these browsers. Please note that this isn't recommended, but if you have a large audience on any of these browsers / browser versions, you should consider this.
+In this section we are going to look at how we can add support for these browsers. Please note that this isn't recommended, but if you have a large audience on any of these browsers / browser versions, you should consider this.
 
 ## What is gcm_sender_id?
 
