@@ -18,7 +18,7 @@ const imageResize = require('gulp-image-resize');
 const changed = require('gulp-changed');
 
 const parseContent = require('./utils/inline-source-code');
-const buildWFVersion = require('./utils/web-fundamentals-build');
+const buildWFVersion = require('./webfundamentals/web-fundamentals-build');
 
 gulp.task('clean', () => {
   return del([BUILD_OUTPUT_PATH]);
