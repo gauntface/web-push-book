@@ -56,6 +56,8 @@ With this approach you display a custom permission prompt in your web app which 
 A good example of this is [Slack](https://slack.com/). They show a prompt at
 the top of their page once you've signed in asking if you'd like to enable notifications.
 
+<% START_WF_EXCLUSION %>
+
 ![Example of slack.com showing custom banner for permission to show notifications.](/images/ux-examples/slack/slack-permission-banner.png)
 
 If the user clicks accept, the actual permission prompt is shown:
@@ -65,6 +67,8 @@ If the user clicks accept, the actual permission prompt is shown:
 I was also a big fan of Slacks first notification when you allow the permission.
 
 ![Cute "It's working" notification from slack.com.](/images/ux-examples/slack/slack-welcome-notification.png)
+
+<% END_WF_EXCLUSION %>
 
 ### Settings Panel
 
@@ -87,11 +91,15 @@ Clicking on the checkbox displays the permission prompt, no hidden surprises.
 
 After the permission has been granted the checkbox is checked and the user is good to go. The great thing about this UX is that the location to sign up for push is the same location to disable push.
 
+<% START_WF_EXCLUSION %>
+
 Slack also does a good job at giving users control over their notifications. They offer a host of options allowing users to customise the notifications they receive.
 
 ![The notification preferences on slack.com easily found under settings drop down.](/images/ux-examples/slack/slack-prefs-dropdown.png)
 
 ![The settings panel for notifications on slack.com.](/images/ux-examples/slack/slack-notification-settings.png)
+
+<% END_WF_EXCLUSION %>
 
 ### Passive Approach
 
@@ -129,6 +137,8 @@ Aside from considering the UX to subscribe a user to push, **please** consider h
 
 The number of sites that ask for permission as soon as the page load and then offer no UI for disabling push notifications is astounding.
 
+<% START_WF_EXCLUSION %>
+
 [Vice News](https://news.vice.com/) is an example of this practice. (p.s. sorry
 Vice for using you as an example, you were first site I recalled doing this, although I believe it's fixed now.)
 
@@ -155,5 +165,7 @@ which takes the user to this page in the settings of Chrome.
 ![Chrome Notification Permissions from URL Bar.](/images/ux-examples/vice/vice-disable-in-chrome.png)
 
 Neither of these options are particularly pleasant for the user.
+
+<% END_WF_EXCLUSION %>
 
 Your site should explain to your users how they can disable push. If you don't, users are likely to take the nuclear option and block permission permanently.

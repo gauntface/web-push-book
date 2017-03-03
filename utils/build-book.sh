@@ -40,5 +40,3 @@ bundle exec jekyll build
 
 npm install -g sitemap-generator-cli
 sitemap-generator https://web-push-book.gauntface.com > build/_site/sitemap.xml
-
-gulp build:wf

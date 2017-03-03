@@ -5,6 +5,9 @@ const fs = require('fs');
 const glob = require('glob');
 const mkdirp = require('mkdirp');
 const chalk = require('chalk');
+const yamlFrontMatter = require('yaml-front-matter');
+const mustache = require('mustache');
+const moment = require('moment');
 
 const DEBUG = false;
 const seperator = chalk.grey('------------------------------------------');
@@ -82,13 +85,115 @@ const inlineSourceCode = (relativePath, fileContents) => {
   return fileContents;
 }
 
-const parseSingleFile = (filePath, ebookBuildPath, jekyllBuildPath) => {
+const removeWFTags = (contents, keepContent = true) => {
+  const regex = /<%\s*START_WF_EXCLUSION\s*%>((?:(?:[a-z]*)\n(?:[\s\S]*?))*)<%\s*END_WF_EXCLUSION\s*%>/g
+  return contents.replace(regex, (match, insideTags) => {
+    if (!keepContent) {
+      return '';
+    }
+
+    return insideTags;
+  });
+};
+
+const writeJekyllVersion = (filePath, contents) => {
+  log(chalk.blue('  Jekyll Output Path:') + ' ' + filePath);
+
+  // Remove WF_EXTRACT THING
+  contents = removeWFTags(contents);
+
+  mkdirp.sync(path.parse(filePath).dir);
+  fs.writeFileSync(filePath, contents);
+};
+
+const writeWFVersion = (filePath, contents) => {
+  log(chalk.blue('  WF Output Path:') + ' ' + filePath);
+
+  const parsedContent = yamlFrontMatter.loadFront(contents);
+  const frontMatterTmpl = fs.readFileSync(path.join(__dirname, '..', 'webfundamentals', 'front-matter.tmpl'));
+  const frontMatterString = mustache.render(frontMatterTmpl.toString(), {
+    title: parsedContent.title,
+    updatedOnDate: moment().format('YYYY-MM-DD'),
+    author: 'mattgaunt'
+  })
+
+  let markdownContent = parsedContent.__content;
+
+  // This swaps github backticks for four space indentation
+  const githubCodeRegex = /```\s?([a-z]*)\n([\s\S]*?)\n```/g;
+  const result = githubCodeRegex.exec(markdownContent);
+  markdownContent = markdownContent.replace(githubCodeRegex, (match, language, code) => {
+    const codeLines = code.split('\n');
+    const codeWithSpaces = '\n    ' + codeLines.join('\n    ') + '\n';
+    return codeWithSpaces;
+  });
+
+  // This swaps out /images/....jpg to ./images/.....jpg
+  const imageRegex = /(!\[.*\]\()\/images\/(.*\))/g;
+  markdownContent = markdownContent.replace(imageRegex, (match, imgStart, imgEnd) => {
+    return `${imgStart}./images/${imgEnd}`;
+  });
+
+  let markdownLines = markdownContent.split('\n');
+  markdownLines = markdownLines.map((line) => {
+    if (line.length < 100) {
+      return line;
+    }
+
+    const words = line.split(' ');
+    let returnedResponse = '';
+    let currentLine = words[0];
+    for(let i = 1; i < words.length; i++) {
+      const word = words[i];
+      if (currentLine.length + word.length > 100) {
+        returnedResponse += currentLine + '\n';
+        currentLine = '';
+      }
+
+      currentLine += ' ' + words[i];
+    }
+
+    return returnedResponse + currentLine;
+  });
+  markdownContent = markdownLines.join('\n');
+
+  markdownContent = removeWFTags(markdownContent, false);
+
+  mkdirp.sync(path.parse(filePath).dir);
+  fs.writeFileSync(filePath, `${frontMatterString}${markdownContent}`);
+};
+
+
+const writeEbookVersion = (filePath, contents) => {
+  // Remove WF_EXTRACT THING
+  contents = removeWFTags(contents);
+
+  // This warps all images to use 'images/' instead of '/images/'
+  contents = contents.replace(/\/images\/svgs\/(.*)\.svg/g, '/images/png-version/$1.png');
+  contents = contents.replace(/\/images\//g, 'build/images/');
+
+  // This fixes a latex issue when dealing with '\0' where backslash has
+  // special meaning in latext
+  contents = contents.replace(/'\\0\'/g, `'\textbackslash'`);
+
+  // Write new File
+  log(chalk.blue('  Ebook Output Path:') + ' ' + filePath);
+  mkdirp.sync(path.parse(filePath).dir);
+  fs.writeFileSync(filePath, contents);
+};
+
+const parseSingleFile = (filePath, ebookBuildPath, jekyllBuildPath, wfBuildPath) => {
   const fileContents = fs.readFileSync(filePath).toString();
   const relativePath = path.parse(path.relative(rootOfProject, filePath)).dir;
   const contentsRelativePath = path.relative(contentPath, filePath);
 
   const ebookOutputPath = path.join(ebookBuildPath, contentsRelativePath);
   const jekyllOutputPath = path.join(jekyllBuildPath, contentsRelativePath);
+
+  // Remove integers for WF.
+  const fileName = path.basename(contentsRelativePath);
+  const result = /\d\d-(.*)/g.exec(fileName);
+  const wfOutputPath = path.join(wfBuildPath, result[1]);
 
   if (ebookOutputPath === filePath) {
     throw new Error('[inline-source-code.js] EBook output path is the same as the ' +
@@ -100,32 +205,27 @@ const parseSingleFile = (filePath, ebookBuildPath, jekyllBuildPath) => {
       'source file.');
   }
 
+  if (wfOutputPath === filePath) {
+    throw new Error('[inline-source-code.js] WF output path is the same as the ' +
+      'source file.');
+  }
+
   let inlinedContents = inlineSourceCode(relativePath, fileContents);
 
-  log(chalk.blue('  Jekyll Output Path:') + ' ' + jekyllOutputPath);
-  mkdirp.sync(path.parse(jekyllOutputPath).dir);
-  fs.writeFileSync(jekyllOutputPath, inlinedContents);
+  writeJekyllVersion(jekyllOutputPath, inlinedContents);
 
-  // This warps all images to use 'images/' instead of '/images/'
-  inlinedContents = inlinedContents.replace(/\/images\/svgs\/(.*)\.svg/g, '/images/png-version/$1.png');
-  inlinedContents = inlinedContents.replace(/\/images\//g, 'build/images/');
+  writeEbookVersion(ebookOutputPath, inlinedContents);
 
-  // This fixes a latex issue when dealing with '\0' where backslash has
-  // special meaning in latext
-  inlinedContents = inlinedContents.replace(/'\\0\'/g, `'\textbackslash'`);
-
-  // Write new File
-  log(chalk.blue('  Ebook Output Path:') + ' ' + ebookOutputPath);
-  mkdirp.sync(path.parse(ebookOutputPath).dir);
-  fs.writeFileSync(ebookOutputPath, inlinedContents);
+  writeWFVersion(wfOutputPath, inlinedContents);
 
   log();
 };
 
-const parseContent = (ebookBuildPath, jekyllBuildPath) => {
+const parseContent = (ebookBuildPath, jekyllBuildPath, wfBuildPath) => {
   console.log();
   console.log(chalk.magenta('EBook Build Path: ') + ebookBuildPath);
   console.log(chalk.magenta('Jekyll Build Path: ') + jekyllBuildPath);
+  console.log(chalk.magenta('WF Build Path: ') + wfBuildPath);
   console.log();
   console.log();
 
@@ -138,7 +238,7 @@ const parseContent = (ebookBuildPath, jekyllBuildPath) => {
       log(chalk.blue('  File Path:') + ' ' + filePath);
       log();
 
-      parseSingleFile(filePath, ebookBuildPath, jekyllBuildPath);
+      parseSingleFile(filePath, ebookBuildPath, jekyllBuildPath, wfBuildPath);
 
       log(seperator);
     });

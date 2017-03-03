@@ -243,17 +243,23 @@ To be honest, it's easy to see examples and think "I'll never make that mistake"
 Some common pitfalls to avoid:
 
 1. Don't put your website in the title or the body. Browsers include your domain in the notification so **don't duplicate it**.
+   <% START_WF_EXCLUSION %>
    Here's an example of Facebook's fallback message (you can use the DevTools 'push' button to display it yourself). Even if there is no data in the push, the important information is that there's a new notification, not "Facebook".
 
     ![Screenshot of Facebook's Default Notification](/images/notification-screenshots/desktop/facebook-fallback-notification.png)
+    <% END_WF_EXCLUSION %>
 
 1. Use all information you have available to you. If you send a push message because someone sent a message to a user, rather than using a title of 'New Message' and body of 'Click here to read it.' use a title of 'John just sent a new message' and set the body of the notification to part of the message.
+
+    <% START_WF_EXCLUSION %>
 
     Here's an example from a Facebook message.
 
     ![Screenshot of a Facebook Message Notification](/images/notification-screenshots/desktop/facebook-message.png)
 
     It contains information on who sent the message, the message content and the users profile photo, making the notification more relevant to the user.
+
+    <% END_WF_EXCLUSION %>
 
 ## Browsers and Feature Detection
 
