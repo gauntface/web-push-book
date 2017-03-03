@@ -124,6 +124,12 @@ const writeWFVersion = (filePath, contents) => {
 
   let markdownContent = parsedContent.__content;
 
+  // Remove first heading (Its added via the front matter tmpl)
+  const firstTitleRegex = /#\s?.*/;
+  markdownContent = markdownContent.replace(firstTitleRegex, (match) => {
+    return '';
+  });
+
   // This swaps github backticks for four space indentation
   const githubCodeRegex = /```\s?([a-z]*)\n([\s\S]*?)\n```/g;
   const result = githubCodeRegex.exec(markdownContent);
@@ -150,7 +156,9 @@ const writeWFVersion = (filePath, contents) => {
     let currentLine = words[0];
     for(let i = 1; i < words.length; i++) {
       const word = words[i];
-      if (currentLine.length + word.length > 100) {
+      // Made it 94 just to accommodate for new lines and frankly
+      // wanting fewer errors.
+      if (currentLine.length + word.length > 94) {
         returnedResponse += currentLine + '\n';
         currentLine = '';
       }
