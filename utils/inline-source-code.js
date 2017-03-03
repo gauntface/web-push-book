@@ -132,7 +132,7 @@ const writeWFVersion = (filePath, contents) => {
 
   // Replace markdown developers.google.com/web/ links
   const devsiteRegex = /\(https:\/\/developers.google.com\/web\//g;
-    markdownContent = markdownContent.replace(firstTitleRegex, (match) => {
+    markdownContent = markdownContent.replace(devsiteRegex, (match) => {
       return '(/web/';
     });
 
