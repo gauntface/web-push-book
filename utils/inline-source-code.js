@@ -130,6 +130,12 @@ const writeWFVersion = (filePath, contents) => {
     return '';
   });
 
+  // Replace markdown developers.google.com/web/ links
+  const devsiteRegex = /\(https:\/\/developers.google.com\/web\//g;
+    markdownContent = markdownContent.replace(firstTitleRegex, (match) => {
+      return '(/web/';
+    });
+
   // This swaps github backticks for four space indentation
   const githubCodeRegex = /```\s?([a-z]*)\n([\s\S]*?)\n```/g;
   const result = githubCodeRegex.exec(markdownContent);
