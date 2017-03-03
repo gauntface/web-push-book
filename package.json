@@ -15,12 +15,17 @@
   },
   "devDependencies": {
     "chalk": "^1.1.3",
+    "fs-promise": "^2.0.0",
+    "gfm-code-block-regex": "^0.2.3",
     "glob": "^7.0.5",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-changed": "^1.3.2",
     "gulp-image-resize": "^0.10.0",
+    "moment": "^2.17.1",
+    "mustache": "^2.3.0",
     "selenium-assistant": "^5.0.4",
     "serve-index": "^1.8.0",
-    "serve-static": "^1.11.1"
+    "serve-static": "^1.11.1",
+    "yaml-front-matter": "^3.4.0"
   }
 }

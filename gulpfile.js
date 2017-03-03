@@ -125,7 +125,10 @@ gulp.task('build:prod',
       'images',
       'copy',
       () => parseContent(
-        BUILD_OUTPUT_PATH + '/_ebook', BUILD_OUTPUT_PATH + '/_content')
+        BUILD_OUTPUT_PATH + '/_ebook',
+        BUILD_OUTPUT_PATH + '/_content',
+        BUILD_OUTPUT_PATH + '/_webfundamentals'
+      )
     )
   )
 );
@@ -138,7 +141,10 @@ gulp.task('build:dev',
       'images',
       'copy',
       () => parseContent(
-        BUILD_OUTPUT_PATH + '/_ebook', BUILD_OUTPUT_PATH + '/_content')
+        BUILD_OUTPUT_PATH + '/_ebook',
+        BUILD_OUTPUT_PATH + '/_content',
+        BUILD_OUTPUT_PATH + '/_webfundamentals'
+      )
         .catch(err => console.log('Error Building Content: ', err))
     )
   )
