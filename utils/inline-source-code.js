@@ -109,6 +109,11 @@ const writeJekyllVersion = (filePath, contents) => {
 const writeWFVersion = (filePath, contents) => {
   log(chalk.blue('  WF Output Path:') + ' ' + filePath);
 
+  if (path.basename(filePath) === 'introduction.md') {
+    // WF has it's own index.md file - so exclude introcution.md
+    return;
+  }
+
   const parsedContent = yamlFrontMatter.loadFront(contents);
   const frontMatterTmpl = fs.readFileSync(path.join(__dirname, '..', 'webfundamentals', 'front-matter.tmpl'));
   const frontMatterString = mustache.render(frontMatterTmpl.toString(), {
