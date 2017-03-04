@@ -142,15 +142,6 @@ const writeWFVersion = (filePath, contents) => {
     return 'https://web-push-book.gauntface.com';
   });
 
-  // This swaps github backticks for four space indentation
-  const githubCodeRegex = /```\s?([a-z]*)\n([\s\S]*?)\n```/g;
-  const result = githubCodeRegex.exec(markdownContent);
-  markdownContent = markdownContent.replace(githubCodeRegex, (match, language, code) => {
-    const codeLines = code.split('\n');
-    const codeWithSpaces = '\n    ' + codeLines.join('\n    ') + '\n';
-    return codeWithSpaces;
-  });
-
   // This swaps out /images/....jpg to ./images/.....jpg
   const imageRegex = /(!\[.*\]\()\/images\/(.*\))/g;
   markdownContent = markdownContent.replace(imageRegex, (match, imgStart, imgEnd) => {
@@ -160,6 +151,13 @@ const writeWFVersion = (filePath, contents) => {
   let markdownLines = markdownContent.split('\n');
   markdownLines = markdownLines.map((line) => {
     if (line.length < 100) {
+      return line;
+    }
+
+    // Split on photos with class name regex
+    const imgWithClass = /!\[.*\]\(.*\)\{:.*\}/g;
+    const match = imgWithClass.exec(line);
+    if (match) {
       return line;
     }
 
