@@ -23,11 +23,11 @@ message.
 
 ## Saving Subscriptions
 
-Saving and querying PushSubscriptions from a database will vary depending on
+Saving and querying `PushSubscriptions` from a database will vary depending on
 your server side language and database choice but it might be useful to see
 an example of how it could be done.
 
-In the demo web page the PushSubscription is sent to our backend by making a simple POST request:
+In the demo web page the `PushSubscription` is sent to our backend by making a simple POST request:
 
 <% include('../../demos/node-server/frontend/app.js', 'send-subscription-to-server') %>
 
@@ -52,7 +52,7 @@ This demo uses [nedb](https://github.com/louischatriot/nedb) to store the subscr
 
 ## Sending Push Messages
 
-When it comes to sending a push message we ultimately need some event to trigger the process of sending a message to users. A common approach would be creating an admin page that let's you configure and trigger the push message. But you could create a program to run locally or any other approach that allows accessing the list of PushSubscriptions and running the code to trigger the push message.
+When it comes to sending a push message we ultimately need some event to trigger the process of sending a message to users. A common approach would be creating an admin page that let's you configure and trigger the push message. But you could create a program to run locally or any other approach that allows accessing the list of `PushSubscriptions` and running the code to trigger the push message.
 
 Our demo has an "admin like" page that lets you trigger a push. Since it's just a demo it's a public page.
 
@@ -60,7 +60,11 @@ I'm going to go through each step involved in getting the demo working, these wi
 
 When we discussed subscribing a user we covered adding an `applicationServerKey` to the `subscribe()` options. It's on the back end that we'll need the private key.
 
-> Remember you can use the web-push tool to generate application server keys or use web-push-codelab.appspot.com to generate some application server keys. See ["How to Create Application Server Keys"](http://localhost:4000/chapter-02/01-subscribing-a-user/#how-to-create-application-server-keys) for more details.
+<% START_WF_EXCLUSION %>
+
+> Remember you can use the web-push tool to generate application server keys or use web-push-codelab.appspot.com to generate some application server keys. See ["How to Create Application Server Keys"](/chapter-02/01-subscribing-a-user/#how-to-create-application-server-keys) for more details.
+
+<% END_WF_EXCLUSION %>
 
 In the demo these values are added to our node app like so (boring code I know, but just want you to know there is no magic):
 
