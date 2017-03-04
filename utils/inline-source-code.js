@@ -171,9 +171,11 @@ const writeWFVersion = (filePath, contents) => {
       if (currentLine.length + word.length > 94) {
         returnedResponse += currentLine + '\n';
         currentLine = '';
+      } else {
+        currentLine += ' ';
       }
 
-      currentLine += ' ' + words[i];
+      currentLine += words[i];
     }
 
     return returnedResponse + currentLine;
