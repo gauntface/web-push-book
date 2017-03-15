@@ -24,7 +24,7 @@ function handlePushEvent(event) {
   });
 }
 
-self.addEventListener('push', function(event) {
+self.addEventListener('push', event => {
   event.waitUntil(handlePushEvent(event));
 });
 
@@ -35,7 +35,7 @@ const doSomething = () => {
 // This is here just to highlight the simple version of notification click.
 // Normally you would only have one notification click listener.
 /**** START simpleNotification ****/
-self.addEventListener('notificationclick', function(event) {
+self.addEventListener('notificationclick', event => {
   const clickedNotification = event.notification;
   clickedNotification.close();
 

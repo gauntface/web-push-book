@@ -1,4 +1,4 @@
-(function() {
+(() => {
   const NOTIFICATION_DELAY = 2500;
 
   let messageIndex = 0;
@@ -11,27 +11,26 @@
   const userIcon = '/images/demos/matt-512x512.png';
   const userName = 'Matt';
 
-  const promiseTimeout = function(cb, timeout) {
-    return new Promise((resolve) => {
+  const promiseTimeout = (cb, timeout) =>
+    new Promise((resolve) => {
       setTimeout(() => {
         cb();
         resolve();
       }, timeout);
     });
-  };
 
   function registerServiceWorker() {
     return navigator.serviceWorker.register('service-worker.js')
-    .then(function(registration) {
+    .then(registration => {
       console.log('Service worker successfully registered.');
       return registration;
     })
-    .catch(function(err) {
+    .catch(err => {
       console.error('Unable to register service worker.', err);
     });
   }
 
-  const allOptionsNotification = function(registration) {
+  const allOptionsNotification = registration => {
     const title = 'Web Push Book';
     const options = {
       body: 'This would be the body text of the notification.\n' +
@@ -51,7 +50,7 @@
     registration.showNotification(title, options);
   };
 
-  const titleAndBodyNotification = function(registration) {
+  const titleAndBodyNotification = registration => {
     /**** START titleAndBodySimple ****/
     const title = 'Simple Title';
     const options = {
@@ -61,7 +60,7 @@
     /**** END titleAndBodySimple ****/
   };
 
-  const longTitleAndBodyNotification = function(registration) {
+  const longTitleAndBodyNotification = registration => {
     /**** START longTitleAndBodySimple ****/
     const title = 'Ice cream dragée croissant gingerbread topping carrot cake ' +
       'cookie biscuit macaroon. Chocolate bonbon sweet roll pastry. ' +
@@ -79,7 +78,7 @@
     /**** END longTitleAndBodySimple ****/
   };
 
-  const iconNotification = function(registration) {
+  const iconNotification = registration => {
     /**** START iconNotification ****/
     const title = 'Icon Notification';
     const options = {
@@ -89,7 +88,7 @@
     /**** END iconNotification ****/
   };
 
-  const badgeNotification = function(registration) {
+  const badgeNotification = registration => {
     /**** START badgeNotification ****/
     const title = 'Badge Notification';
     const options = {
@@ -99,7 +98,7 @@
     /**** END badgeNotification ****/
   };
 
-  const imageNotification = function(registration) {
+  const imageNotification = registration => {
     /**** START imageNotification ****/
     const title = 'Image Notification';
     const options = {
@@ -109,7 +108,7 @@
     /**** END imageNotification ****/
   };
 
-  const vibrateNotification = function(registration) {
+  const vibrateNotification = registration => {
     /**** START vibrateNotification ****/
     const title = 'Vibrate Notification';
     const options = {
@@ -121,7 +120,7 @@
     /**** END vibrateNotification ****/
   };
 
-  const soundNotification = function(registration) {
+  const soundNotification = registration => {
     /**** START soundNotification ****/
     const title = 'Sound Notification';
     const options = {
@@ -131,7 +130,7 @@
     /**** END soundNotification ****/
   };
 
-  const dirLTRNotification = function(registration) {
+  const dirLTRNotification = registration => {
     /**** START dirLTRNotification ****/
     const title = 'Direction LTR Notification';
     const options = {
@@ -149,7 +148,7 @@
     /**** END dirLTRNotification ****/
   };
 
-  const dirRTLNotification = function(registration) {
+  const dirRTLNotification = registration => {
     /**** START dirRTLNotification ****/
     const title = 'المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ولكن بفضل هؤ.';
     const options = {
@@ -167,7 +166,7 @@
     /**** END dirRTLNotification ****/
   };
 
-  const timestampNotification = function(registration) {
+  const timestampNotification = registration => {
     /**** START timestampNotification ****/
     const title = 'Timestamp Notification';
     const options = {
@@ -178,7 +177,7 @@
     /**** END timestampNotification ****/
   };
 
-  const actionsNotification = function(registration) {
+  const actionsNotification = registration => {
     /**** START actionsNotification ****/
     const title = 'Actions Notification';
     const options = {
@@ -219,7 +218,7 @@
     /**** END actionsNotification ****/
   };
 
-  const notificationTag = function(registration) {
+  const notificationTag = registration => {
     /**** START tagNotificationOne ****/
     const title = 'Notification 1 of 3';
     const options = {
@@ -256,7 +255,7 @@
     });
   };
 
-  const renotifyNotification = function(registration) {
+  const renotifyNotification = registration => {
     const title = 'Notification 1 of 2';
     const options = {
       tag: 'renotify'
@@ -278,7 +277,7 @@
     });
   };
 
-  const silentNotification = function(registration) {
+  const silentNotification = registration => {
     /**** START silentNotification ****/
     const title = 'Silent Notification';
     const options = {
@@ -288,7 +287,7 @@
     /**** END silentNotification ****/
   };
 
-  const requiresInteractionNotification = function(registration) {
+  const requiresInteractionNotification = registration => {
     /**** START requireInteraction ****/
     const title = 'Require Interaction Notification';
     const options = {
@@ -299,7 +298,7 @@
     /**** END requireInteraction ****/
   };
 
-  const openWindow = function(registration) {
+  const openWindow = registration => {
     const options = {
       body: 'Clicking on this notification will open a new tab / window.',
       tag: 'open-window'
@@ -307,7 +306,7 @@
     registration.showNotification('Open a Window', options);
   };
 
-  const focusWindow = function(registration) {
+  const focusWindow = registration => {
     const options = {
       body: 'Clicking on this notification will focus on an open window ' +
         'otherwise open a new one.',
@@ -316,7 +315,7 @@
     registration.showNotification('Focus or Open a Window', options);
   };
 
-  const dataNotification = function(registration) {
+  const dataNotification = registration => {
     /**** START addNotificationData ****/
     const options = {
       body: 'This notification has data attached to it that is printed ' +
@@ -331,7 +330,7 @@
     /**** END addNotificationData ****/
   };
 
-  const mergeNotification = function(registration) {
+  const mergeNotification = registration => {
     const userMessage = fakeMessages[messageIndex];
     /**** START getNotifications ****/
     const promiseChain = registration.getNotifications()
@@ -387,31 +386,29 @@
     return promiseChain;
   };
 
-  const mustShowNotification = function(registration) {
-    return promiseTimeout(() => {
+  const mustShowNotification = registration =>
+    promiseTimeout(() => {
       const serviceWorker = registration.install || registration.waiting ||
         registration.active;
       serviceWorker.postMessage('must-show-notification-demo');
     }, 4000);
-  };
 
-  const sendMessageToPage = function(registration) {
-    return promiseTimeout(() => {
+  const sendMessageToPage = registration =>
+    promiseTimeout(() => {
       const serviceWorker = registration.install || registration.waiting ||
         registration.active;
       serviceWorker.postMessage('send-message-to-page-demo');
     }, 4000);
-  };
 
-  const setUpSWMessageListener = function() {
+  const setUpSWMessageListener = () => {
     /**** START swMessageListener ****/
-    navigator.serviceWorker.addEventListener('message', function(event) {
+    navigator.serviceWorker.addEventListener('message', event => {
       console.log('Received a message from service worker: ', event.data);
     });
     /**** END swMessageListener ****/
   };
 
-  const setUpNotificationButtons = function() {
+  const setUpNotificationButtons = () => {
     setUpSWMessageListener();
 
     const configs = [
@@ -583,14 +580,14 @@
     ];
 
     return registerServiceWorker()
-    .then(function(registration) {
-      configs.forEach(function(config) {
+    .then(registration => {
+      configs.forEach(config => {
         const button = document.querySelector(`.${config.className}`);
         if (!button) {
           console.error('No button found with classname: ', config.className);
           return;
         }
-        button.addEventListener('click', function() {
+        button.addEventListener('click', () => {
           const promiseResult = config.cb(registration);
           if (promiseResult) {
             button.disabled = true;
@@ -604,7 +601,7 @@
     });
   };
 
-  window.addEventListener('load', function() {
+  window.addEventListener('load', () => {
     if (!('serviceWorker' in navigator)) {
       // Service Worker isn't supported on this browser, disable or hide UI.
       return;

@@ -24,8 +24,7 @@ function focusWindow(event) {
   .then((windowClients) => {
     let matchingClient = null;
 
-    for (let i = 0; i < windowClients.length; i++) {
-      const windowClient = windowClients[i];
+    for (const windowClient of windowClients) {
       if (windowClient.url === urlToOpen) {
         matchingClient = windowClient;
         break;
@@ -65,8 +64,7 @@ function isClientFocused() {
   .then((windowClients) => {
     let clientIsFocused = false;
 
-    for (let i = 0; i < windowClients.length; i++) {
-      const windowClient = windowClients[i];
+    for (const windowClient of windowClients) {
       if (windowClient.focused) {
         clientIsFocused = true;
         break;
@@ -118,7 +116,7 @@ function demoSendMessageToPage(event) {
   /**** END sendPageMessage ****/
 }
 
-self.addEventListener('push', function(event) {
+self.addEventListener('push', event => {
   if (event.data) {
     switch(event.data.text()) {
       case 'must-show-notification':
@@ -135,7 +133,7 @@ self.addEventListener('push', function(event) {
 });
 
 /**** START notificationActionClickEvent ****/
-self.addEventListener('notificationclick', function(event) {
+self.addEventListener('notificationclick', event => {
   if (!event.action) {
     // Was a normal notification click
     console.log('Notification Click.');
@@ -163,7 +161,7 @@ self.addEventListener('notificationclick', function(event) {
 /**** END notificationActionClickEvent ****/
 
 /**** START notificationClickEvent ****/
-self.addEventListener('notificationclick', function(event) {
+self.addEventListener('notificationclick', event => {
   event.notification.close();
 
   switch(event.notification.tag) {
@@ -188,7 +186,7 @@ const notificationCloseAnalytics = () => {
 };
 
 /**** START notificationCloseEvent ****/
-self.addEventListener('notificationclose', function(event) {
+self.addEventListener('notificationclose', event => {
   const dismissedNotification = event.notification;
 
   const promiseChain = notificationCloseAnalytics();
@@ -196,7 +194,7 @@ self.addEventListener('notificationclose', function(event) {
 });
 /**** END notificationCloseEvent ****/
 
-self.addEventListener('message', function(event) {
+self.addEventListener('message', event => {
   console.log('Received message from page.', event.data);
   switch(event.data) {
     case 'must-show-notification-demo':
