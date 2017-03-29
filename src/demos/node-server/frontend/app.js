@@ -53,6 +53,25 @@ function askPermission() {
 }
 /**** END request-permission ****/
 
+/**
+ * Using `Notification.permission` directly can be slow (locks on the main
+ * thread). Using the permission API with a fallback to
+ * `Notification.permission` is preferable.
+ * @return {Promise<String>} Returns a promise that resolves to a notification
+ * permission state string.
+ */
+/**** START get-permission-state ****/
+function getNotificationPermissionState() {
+  if (navigator.permissions) {
+    return navigator.permissions.query({name: 'notifications'});
+  }
+
+  return new Promise((resolve) => {
+    resolve(Notification.permission);
+  });
+}
+/**** END get-permission-state ****/
+
 function unsubscribeUserFromPush() {
   return registerServiceWorker()
     .then(function(registration) {
@@ -70,8 +89,11 @@ function unsubscribeUserFromPush() {
     })
     .catch(function(err) {
       console.error('Failed to subscribe the user.', err);
-      pushCheckbox.disabled = Notification.permission === 'denied';
-      pushCheckbox.checked = false;
+      getNotificationPermissionState()
+      .then((permissionState) => {
+        pushCheckbox.disabled = permissionState === 'denied';
+        pushCheckbox.checked = false;
+      });
     });
 }
 
@@ -120,9 +142,14 @@ function subscribeUserToPush() {
 /**** END subscribe-user ****/
 
 function setUpPush() {
-  return registerServiceWorker()
-  .then(function(registration) {
-    if (Notification.permission === 'denied') {
+  return Promise.all([
+    registerServiceWorker(),
+    getNotificationPermissionState()
+  ])
+  .then(function(results) {
+    const registration = results[0];
+    const currentPermissionState = results[1];
+    if (currentPermissionState === 'denied') {
       console.warn('The notification permission has been blocked. Nothing we can do.');
       return;
     }
@@ -135,7 +162,7 @@ function setUpPush() {
         // Just been checked meaning we need to subscribe the user
         // Do we need to wait for permission?
         let promiseChain = Promise.resolve();
-        if (Notification.permission !== 'granted') {
+        if (currentPermissionState !== 'granted') {
           promiseChain = askPermission();
         }
 
@@ -162,7 +189,7 @@ function setUpPush() {
 
             // An error occured while requestion permission, getting a
             // subscription or sending it to our backend. Re-set state.
-            pushCheckbox.disabled = Notification.permission === 'denied';
+            pushCheckbox.disabled = currentPermissionState === 'denied';
             pushCheckbox.checked = false;
           });
       } else {
@@ -171,7 +198,7 @@ function setUpPush() {
       }
     });
 
-    if (Notification.permission !== 'granted') {
+    if (currentPermissionState !== 'granted') {
       // If permission isn't granted than we can't be subscribed for Push.
       pushCheckbox.disabled = false;
       return;
