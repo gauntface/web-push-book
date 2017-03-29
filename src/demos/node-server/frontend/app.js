@@ -63,7 +63,10 @@ function askPermission() {
 /**** START get-permission-state ****/
 function getNotificationPermissionState() {
   if (navigator.permissions) {
-    return navigator.permissions.query({name: 'notifications'});
+    return navigator.permissions.query({name: 'notifications'})
+    .then((result) => {
+      return result.state;
+    });
   }
 
   return new Promise((resolve) => {
@@ -149,8 +152,10 @@ function setUpPush() {
   .then(function(results) {
     const registration = results[0];
     const currentPermissionState = results[1];
+
     if (currentPermissionState === 'denied') {
       console.warn('The notification permission has been blocked. Nothing we can do.');
+      pushCheckbox.disabled = true;
       return;
     }
 
