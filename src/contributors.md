@@ -12,6 +12,7 @@ Huge thank you to all these wonderful people for their help.
 - [Michael van Tricht](https://swordbeta.com/)
 - [Barnabas Makonda](https://github.com/MAKOSCAFEE)
 - [Jeremy Nagel](https://github.com/jeznag)
+- [Tim-Lars Schnehage](https://github.com/Tallon1252)
 
 # Attribution
 
