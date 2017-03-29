@@ -13,7 +13,8 @@
 ###### (i.e. expected outcome vs actual outcome)
 
 
-
+## Affected Browsers
+###### (Does this apply to multiple browsers? If so which and which versions.)
 
 
 
