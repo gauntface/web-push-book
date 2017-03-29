@@ -65,6 +65,17 @@ The good news is that most users are happy to give permission as long as it's as
 
 We'll look at how some popular sites ask for permission later on.
 
+**Note:** You might notice that when checking what the current state of the
+notification permission is, a function `getNotificationPermissionState()`. This
+function uses the
+[Permission API](https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API)
+to get the permission state, falling back to `Notification.permission` if
+the Permission API is not supported. This is done for performance reasons.
+Calling `Notification.permision` locks up the main thread in Chrome and calling
+it repeatedly is a bad idea.
+
+<% include('../../demos/node-server/frontend/app.js', 'get-permission-state') %>
+
 ## Subscribe a User with PushManager
 
 Once we have our service worker registered and we've got permission, we can subscribe a user by calling `registration.pushManager.subscribe()`.
