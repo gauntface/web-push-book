@@ -13,6 +13,7 @@ Huge thank you to all these wonderful people for their help.
 - [Barnabas Makonda](https://github.com/MAKOSCAFEE)
 - [Jeremy Nagel](https://github.com/jeznag)
 - [Tim-Lars Schnehage](https://github.com/Tallon1252)
+- [Joe Medley](https://github.com/jpmedley)
 
 # Attribution
 
