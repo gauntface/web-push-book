@@ -3,22 +3,12 @@
 > If it's an issue involving code, please raise an issue first to discuss
 > any changes before raising a PR.
 
-## Type of Issue
+cc @gauntface
 
-- [ ] Demo
-- [ ] Content (i.e. typo's, displayed poorly, ...)
-- [ ] Content Request (i.e. please write more content on XYZ)
+## Type of Issue
+> Is this an issue with the demos, the content or is this a content request?
+
 
 ## Details....
-###### (i.e. expected outcome vs actual outcome)
-
-
-## Affected Browsers
-###### (Does this apply to multiple browsers? If so which and which versions.)
-
-
-
-
-
-
-cc @gauntface
+> If a bug with the demo What was the expected outcome vs actual outcome
+> and what browsers are affect, please include versions.
