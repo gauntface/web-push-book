@@ -14,6 +14,7 @@ Huge thank you to all these wonderful people for their help.
 - [Alexey Rodionov](https://github.com/FluorescentHallucinogen)
 - [Jeremy Nagel](https://github.com/jeznag)
 - [Tim-Lars Schnehage](https://github.com/Tallon1252)
+- [Joe Medley](https://github.com/jpmedley)
 
 # Attribution
 

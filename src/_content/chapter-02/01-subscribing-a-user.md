@@ -11,8 +11,8 @@ The JavaScript API to do this is reasonably straight forward, so let's step thro
 
 First we need check if the current browser actually supports push messaging. We can check if push is supported with two simple checks.
 
-1. Check the *serviceWorker* API on the *navigator*.
-1. Check *PushManager* on  the *window*.
+1. Check for `serviceWorker` on `navigator`.
+1. Check for `PushManager` on `window`.
 
 <% include('../../demos/node-server/frontend/app.js', 'feature-detect') %>
 
@@ -22,7 +22,7 @@ push messaging support, it's always a good idea to feature detect for both and
 
 ## Register a Service Worker
 
-With the feature detect we know that both service workers and Push is supported. The next step is to "register" our service worker.
+With the feature detect we know that both service workers and Push are supported. The next step is to "register" our service worker.
 
 When we register a service worker, we are telling the browser where our service worker file is. The file is still just JavaScript, but the browser will "give it access" to the service worker APIs, including push. To be more exact, the browser runs the file in a service worker environment.
 
@@ -30,7 +30,7 @@ To register a service worker, call `navigator.serviceWorker.register()`, passing
 
 <% include('../../demos/node-server/frontend/app.js', 'register-sw') %>
 
-This code above tells the browser that we have a service worker file and where its located. In this case, the service worker file is at `/service-worker.js`. Behind the scenes the browser will take the following steps after calling `register()`:
+This code above tells the browser that we have a service worker file and where it's located. In this case, the service worker file is at `/service-worker.js`. Behind the scenes the browser will take the following steps after calling `register()`:
 
 1. Download the service worker file.
 
@@ -44,7 +44,7 @@ When `register()` does resolve, it returns a `ServiceWorkerRegistration`. We'll 
 
 ## Requesting Permission
 
-We've registered our service worker and ready to subscribe the user, the next step is to get permission from the user to send them push messages.
+We've registered our service worker and are ready to subscribe the user, the next step is to get permission from the user to send them push messages.
 
 The API for getting permission is relatively simple, the downside is that
 the API [recently changed from taking a callback to returning a Promise](https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission). The problem with this, is that we can't tell what version of the API is implemented by the current browser, so you have to implement both and handle both.
@@ -55,13 +55,13 @@ In the above code, the important snippet of code is the call to `Notification.re
 
 ![Permission Prompt on Desktop and Mobile Chrome.](/images/permission-prompt.png)
 
-Once the permission has been accepted / allowed, closed (i.e. clicking the cross on the pop-up) or blocked, we'll be given the result as a string: 'granted', 'default' or 'denied'.
+Once the permission has been accepted / allowed, closed (i.e. clicking the cross on the pop-up), or blocked, we'll be given the result as a string: 'granted', 'default' or 'denied'.
 
 In the sample code above, the promise returned by `askPermission()` resolves if the permission is granted, otherwise we throw an error making the promise reject.
 
-One edge case that you need to handle is if the user clicks the 'Block' button. If this happens, your web app will not be able to ask the user for permission again. They'll have to manually "unblock" your app by changing the permission state of your web app, which is buried in a settings panel. Think carefully about how and when you ask the user for permission, because if they click block, it's not an easy way to reverse that decision.
+One edge case that you need to handle is if the user clicks the 'Block' button. If this happens, your web app will not be able to ask the user for permission again. They'll have to manually "unblock" your app by changing its permission state of your web app, which is buried in a settings panel. Think carefully about how and when you ask the user for permission, because if they click block, it's not an easy way to reverse that decision.
 
-The good news is that most users are happy to give permission as long as it's asked in a way that they *know* why the permission is being asked.
+The good news is that most users are happy to give permission as long as they *know* why the permission is being asked.
 
 We'll look at how some popular sites ask for permission later on.
 
@@ -99,7 +99,7 @@ At the moment you **must** pass in a value of `true`. If you don't include the
 
 > Chrome currently only supports the Push API for subscriptions that will result in user-visible messages. You can indicate this by calling `pushManager.subscribe({userVisibleOnly: true})` instead. See [https://goo.gl/yqv4Q4](https://goo.gl/yqv4Q4) for more details.
 
-It's currently looking like blanket silent push will never be implemented in Chrome. Instead, spec authors are exploring the notion of a budget API which will be allow web apps a certain number of silent push messages based on the usage of a web app.
+It's currently looking like blanket silent push will never be implemented in Chrome. Instead, spec authors are exploring the notion of a budget API which will allow web apps a certain number of silent push messages based on the usage of a web app.
 
 <% START_WF_EXCLUSION %>
 
@@ -109,27 +109,27 @@ Firefox doesn't require `userVisibleOnly`, however Firefox does have some notion
 
 ### applicationServerKey Option
 
-We briefly mentioned the notion "application server keys" in the previous section. "Application server keys" are used by a push service to identify the application subscribing a user and ensuring that the same application is messaging that user.
+We briefly mentioned the notion "application server keys" in the previous section. "Application server keys" are used by a push service to identify the application subscribing a user and ensure that the same application is messaging that user.
 
 Application server keys are a public and private key pair that are unique to your application. The private key should be kept a secret to your application and the public key can be shared freely.
 
-The `applicationServerKey` option passed into the `subscribe()` call is the applications public key. The browser passes this onto a push service when subscribing the user, meaning the push service can tie your applications public key to the users `PushSubscription`.
+The `applicationServerKey` option passed into the `subscribe()` call is the application's public key. The browser passes this onto a push service when subscribing the user, meaning the push service can tie your application's public key to the user's `PushSubscription`.
 
 The diagram below illustrates these steps.
 
-1. You web app is loaded in a browser and you call `subscribe()` passing in your public application server key.
+1. Your web app is loaded in a browser and you call `subscribe()`, passing in your public application server key.
 1. The browser then makes a network request to a push service who will generate an endpoint, associate this endpoint with the applications public key and return the endpoint to the browser.
-1. The browser will add this endpoint to the `PushSubscription` which is returned via the `subscribe()` promise.
+1. The browser will add this endpoint to the `PushSubscription`, which is returned via the `subscribe()` promise.
 
 ![Illustration of the public application server key is used in subscribe method.](/images/svgs/application-server-key-subscribe.svg)
 
 When you later want to send a push message, you'll need to create an **Authorization** header which will contain information signed with your application server's **private key**. When the push service
-receives a request to send a push message, it can validate this signed **Authorization** header by looking up the public key linked to the endpoint receiving the request. If the signature is valid the push service knows that it must have come from the application server with the **matching private key**. It's basically a security measure that prevents anyone else sending messages to an applications users.
+receives a request to send a push message, it can validate this signed **Authorization** header by looking up the public key linked to the endpoint receiving the request. If the signature is valid the push service knows that it must have come from the application server with the **matching private key**. It's basically a security measure that prevents anyone else sending messages to an application's users.
 
 ![Illustration of how the private application server key is used when sending a message.](/images/svgs/application-server-key-send.svg)
 
 Technically, the `applicationServerKey` is optional. However, the easiest
-implementation on Chrome requires it and other browsers may require it in
+implementation on Chrome requires it, and other browsers may require it in
 the future. It's optional on Firefox.
 
 The specification that defines *what* the application server key should be is
@@ -137,16 +137,14 @@ the [VAPID spec](https://tools.ietf.org/html/draft-thomson-webpush-vapid).
 Whenever you read something referring to *"application server keys"* or
 *"VAPID keys"*, just remember that they are the same thing.
 
-Those are the only subscribe option.
-
 #### How to Create Application Server Keys
 
-You can create a public and private set of application server keys by visiting this web site [web-push-codelab.appspot.com](https://web-push-codelab.appspot.com/) or you can use the [web-push](https://github.com/web-push-libs/web-push#command-line) to generate keys by doing the following:
+You can create a public and private set of application server keys by visiting [web-push-codelab.appspot.com](https://web-push-codelab.appspot.com/) or you can use the [web-push command line](https://github.com/web-push-libs/web-push#command-line) to generate keys by doing the following:
 
     $ npm install -g web-push
     $ web-push generate-vapid-keys
 
-You only need to create these keys once for your application, just make sure you keep the private key private....yeah I just said that.
+You only need to create these keys once for your application, just make sure you keep the private key private. (Yeah I just said that.)
 
 ## Permisions and subscribe()
 
@@ -154,7 +152,7 @@ There is one side effect of calling `subscribe()`. If your web app doesn't have 
 
 ## What is a PushSubscription?
 
-We call `subscribe()`, pass in some options, in return we get a promise that resolves to a `PushSubscription` resulting in some code like so:
+We call `subscribe()`, pass in some options, and in return we get a promise that resolves to a `PushSubscription` resulting in some code like so:
 
 <% include('../../demos/node-server/frontend/app.js', 'subscribe-user') %>
 
@@ -170,13 +168,13 @@ The `PushSubscription` object contains all the required information needed to se
 }
 ```
 
-The `endpoint` is the push services URL, you make a POST request to this URL to trigger a push message.
+The `endpoint` is the push services URL. To trigger a push message, make a POST request to this URL.
 
 The `keys` object contains the values used to encrypt message data sent with a push message (which we'll discuss later on in this book).
 
 ## Send a Subscription to Your Server
 
-Once you have a push subscription you'll want to send it to your server. It's up to you how you do that but a tiny tip is to use `JSON.stringify()` to get all the necessary data out of the subscription object, otherwise you can piece together the same result manually:
+Once you have a push subscription you'll want to send it to your server. It's up to you how you do that but a tiny tip is to use `JSON.stringify()` to get all the necessary data out of the subscription object. Alternatively you can piece together the same result manually like so:
 
 ```javascript
 const subscriptionObject = {
@@ -192,7 +190,9 @@ const subscriptionObject = {
 const subscriptionObjectToo = JSON.stringify(pushSubscription);
 ```
 
-In [the demo used throughout this book](https://github.com/gauntface/web-push-book/tree/master/src/demos/node-server), we make a POST request to send a subscription to our node server that stores the subscription in a database.
+<% START_WF_EXCLUSION %>
+In [the demo referenced throughout this book](https://github.com/gauntface/web-push-book/tree/master/src/demos/node-server), we make a POST request to send a subscription to our node server that stores the subscription in a database.
+<% END_WF_EXCLUSION %>
 
 Sending the subscription is done in the web page like so:
 
@@ -219,7 +219,7 @@ to retrieve the details that make up the *PushSubscription*.
 
 All push services will expect the same API.
 
-This common API is called the `Web Push Protocol` and describes the network request / API call your application will need to make to trigger a push message.
+This common API is called the [Web Push Protocol](https://tools.ietf.org/html/draft-ietf-webpush-protocol) and describes the network request your application will need to make to trigger a push message.
 
 > If I subscribe a user on their desktop, are they subscribed on their phone
 as well?
