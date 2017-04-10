@@ -3,7 +3,7 @@ title: Push Events
 ---
 # Push Events
 
-By this point covered subscribing a user for push sending them a message. The next step is to receive this push message on the users device and display a notification (as well as any other work we might want to do).
+By this point covered subscribing a user for push sending them a message. The next step is to receive this push message on the user's device and display a notification (as well as any other work we might want to do).
 
 ## The Push Event
 
@@ -13,7 +13,7 @@ The code for setting up a push event listener should be pretty similar to any ot
 
 <% include('./code-samples/push-event-only.js') %>
 
-The weirdest bit of this code to most developers who are new to service workers is the `self` variable. `self` is commonly used in Web Workers, which a service worker is. `self` refers to the global scope, kind of like `window` in a web page, but for a Web Worker / Service Worker, self refers to the the worker itself.
+The weirdest bit of this code to most developers who are new to service workers is the `self` variable. `self` is commonly used in Web Workers, which a service worker is. `self` refers to the global scope, kind of like `window` in a web page. But for web workers and service workers, `self` refers to the the worker itself.
 
 In the example above `self.addEventListener()` can be thought of as adding an event listener to the service worker itself.
 
@@ -57,19 +57,19 @@ A more complicated example with a network request for data and tracking the push
 
 <% include('./code-samples/complex-notification-sample.js') %>
 
-Here we are calling a function that returns a promise `pushReceivedTracking()`, which we can pretend will make a network request to our analytics provider.
+Here we are calling a function that returns a promise `pushReceivedTracking()`, which, for the sake of the example, we can pretend will make a network request to our analytics provider.
 We are also making a network request, getting the response and showing a
 notification using the responses data for the title and message of the notification.
 
-We can ensure the service worker is kept alive while both of these tasks are done by combining these promises with `Promise.all()`. The resulting promise is passed into `event.waitUntil()` meaning the browser will wait until both promises have finished before checking a notification has been displayed and terminating the service worker.
+We can ensure the service worker is kept alive while both of these tasks are done by combining these promises with `Promise.all()`. The resulting promise is passed into `event.waitUntil()` meaning the browser will wait until both promises have finished before checking that a notification has been displayed and terminating the service worker.
 
 > **Tip:** If you ever find your promise chains confusing or a little messy
-> I find that breaking things into functions help to reduce complication.
+> I find that breaking things into functions helps to reduce complexity.
 > I'd also recommend
 > [this blog post by Philip Walton on untangling promise chains](https://philipwalton.com/articles/untangling-deeply-nested-promise-chains/).
 > The main point to take away is that you should experiment with how promises can be written and chained to find a style that works for you.
 
-The reason we should be concerned about `waitUntil()` and how to use it is that one of the most common issues developers face is that when the promise chain is incorrect / broken, Chrome will show this "default" notification:
+The reason we should be concerned about `waitUntil()` and how to use it is that one of the most common issues developers face is that when the promise chain is incorrect or broken, Chrome will show this "default" notification:
 
 ![An Image of the default notification in Chrome](/images/default-notification-mobile.png)
 
@@ -108,4 +108,4 @@ You can see how it's an easy thing to miss.
 
 Just remember - if you see that notification, check your promise chains and `event.waitUntil()`.
 
-In the next section we're going to look at what we can do in terms of styling notifications / what content we can display.
+In the next section we're going to look at what we can do to style notifications and what content we can display.
