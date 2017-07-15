@@ -88,6 +88,99 @@ Instead, think of web push as consisting of a browser, which uses a push service
 
 This book has been written to focus on the standards approach of web push and purposefully ignores anything else. The *only* time you should care about this back story is if and when you want to support older versions of Chrome, Samsung Internet browser or Opera for Android, all of whom use the older GCM trick which requires supporting the proprietary GCM API. If you want to support these browsers you'll need to implement the older GCM API which is [documented in the non-standrards browser section of this book here](/chapter-06/01-non-standards-browsers/).
 
+## Why do I get the "This site has been updated in the background"?
+
+More often than not, developers will spot a notification displayed by Chrome with
+the message "This site has been updated in the background", looks like this:
+
+![Example Chrome Notification for "This site has been updated in the background"](/images/faq/chrome-site-updated-in-background.png){: .center-image }
+
+Chrome will show this message if **your site fails to show a notification at
+the expected point in time after a push message is received**.
+
+If you simply never show a notification, you'll get this error message if a push
+is received and you need to show a notification (i.e. your site isn't currently
+focused by the user).
+
+One subtlety is that if you *try* to show a notification, but the promise
+you pass in to `event.waitUntil()` resolves **before** the notification is
+shown, Chrome will think you haven't shown a notification. To give you an
+example, consider the following code:
+
+```javascript
+const exampleBadPromise = new Promise((resolve, reject) => {
+  // Show a notification in 5 seconds.
+  setTimeout(() => {
+    self.registration.showNotification('Hello');
+  }, 5 * 1000);
+
+  // Resolve promise immediately will cause the "updated" notification
+  resolve();
+});
+
+event.waitUntil(exampleBadPromise);
+```
+
+Notice that we are going to show a notification, but the `exampleBadPromise`
+will resolve before the notification is shown.
+
+A working example would wait for the notification to display, before resolving:
+
+```javascript
+const exampleGoodPromise = new Promise((resolve, reject) => {
+  // Show a notification in 5 seconds.
+  setTimeout(() => {
+    self.registration.showNotification('Hello')
+    .then(() => {
+      // Resolve promise AFTER the notification is displayed
+      resolve();
+    });
+  }, 5 * 1000);
+});
+
+event.waitUntil(exampleGoodPromise);
+```
+
+While this example is non-sense, it's easy to mix up a promise chain when you
+start making API calls with `fetch()` and attempt to perform other async
+tasks.
+
+The other scenario that you may see this notification is if there is an error
+in your code that results in your not showing a notification. In the following
+example, `showNotification()` will never be called:
+
+```javascript
+const exampleBadPromise = fetch('/api/some-api')
+.then(() => {
+  throw new Error('Something bad happened');
+})
+.then(() => {
+  return self.registration.showNotification('Hello');
+});
+
+event.waitUntil(exampleBadPromise);
+```
+You should always provide a fallback notification to avoid the default
+notification:
+
+```javascript
+const exampleGoodPromise = fetch('/api/some-api')
+.then(() => {
+  throw new Error('Something bad happened');
+})
+.then(() => {
+  return self.registration.showNotification('Hello');
+})
+.catch(() => {
+  return self.registration.showNotification('Insert generic message here :)');
+});
+
+event.waitUntil(exampleGoodPromise);
+```
+
+In short - if you see this notification, check your promise chains and make
+sure you are handling errors.
+
 ## Firebase has a JavaScript SDK. What and Why?
 
 For those of you who have found the Firebase web SDK and noticed is has a messaging API for JavaScript, you may be wondering how it differs from web push.
