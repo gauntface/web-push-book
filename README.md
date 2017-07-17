@@ -2,6 +2,8 @@
 
 # web-push-book
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/gauntface/web-push-book.svg)](https://greenkeeper.io/)
+
 A book on implementing push notifications in a web site / web app (Whatever
 you want to call it).
 
