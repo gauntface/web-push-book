@@ -3,7 +3,7 @@
     "test": "gulp build:prod && jekyll build && node ./test/utils/download-browsers.js && mocha"
   },
   "dependencies": {
-    "anchor-js": "^4.0.0",
+    "anchor-js": "^4.1.0",
     "cssnano": "^3.7.6",
     "del": "^3.0.0",
     "express": "^4.14.0",
