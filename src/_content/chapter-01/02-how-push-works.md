@@ -46,7 +46,7 @@ Some questions you might be asking yourself:
 
 ### Who and What is the Push Service?
 
-A push service recieves a network request, validates it and delivers a push message to the appropriate browser. If the browser is offline, the message is queued until the the browser comes online.
+A push service receives a network request, validates it and delivers a push message to the appropriate browser. If the browser is offline, the message is queued until the the browser comes online.
 
 Each browser can use any push service they want, it's something developers have no control over. This isn't a problem because every push service expects the **same** API call. Meaning you don't have to care who the push service is. You just need to make sure that your API call is valid.
 

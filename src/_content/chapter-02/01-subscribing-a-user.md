@@ -71,7 +71,7 @@ function uses the
 [Permission API](https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API)
 to get the permission state, falling back to `Notification.permission` if
 the Permission API is not supported. This is done for performance reasons.
-Calling `Notification.permision` locks up the main thread in Chrome and calling
+Calling `Notification.permission` locks up the main thread in Chrome and calling
 it repeatedly is a bad idea.
 
 <% include('../../demos/node-server/frontend/app.js', 'get-permission-state') %>
@@ -146,7 +146,7 @@ You can create a public and private set of application server keys by visiting [
 
 You only need to create these keys once for your application, just make sure you keep the private key private. (Yeah I just said that.)
 
-## Permisions and subscribe()
+## Permissions and subscribe()
 
 There is one side effect of calling `subscribe()`. If your web app doesn't have permissions for showing notifications at the time of calling `subscribe()`, the browser will request the permissions for you. This is useful if your UI works with this flow, but if you want more control (and I think most developers will), stick to the `Notification.requestPermission()` API that we used earlier.
 
