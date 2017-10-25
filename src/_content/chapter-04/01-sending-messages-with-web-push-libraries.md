@@ -60,7 +60,7 @@ When we discussed subscribing a user we covered adding an `applicationServerKey`
 
 <% START_WF_EXCLUSION %>
 
-> Remember you can use the web-push tool to generate application server keys or use web-push-codelab.appspot.com to generate some application server keys. See ["How to Create Application Server Keys"](/chapter-02/01-subscribing-a-user/#how-to-create-application-server-keys) for more details.
+> Remember you can use the web-push tool to generate application server keys or use https://web-push-codelab.glitch.me to generate some application server keys. See ["How to Create Application Server Keys"](/chapter-02/01-subscribing-a-user/#how-to-create-application-server-keys) for more details.
 
 <% END_WF_EXCLUSION %>
 
