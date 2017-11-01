@@ -15,11 +15,13 @@ function urlBase64ToUint8Array(base64String) {
   return outputArray;
 }
 
+var serviceWorkerRegistration = null;
 /**** START register-sw ****/
 function registerServiceWorker() {
   return navigator.serviceWorker.register('service-worker.js')
   .then(function(registration) {
     console.log('Service worker successfully registered.');
+    serviceWorkerRegistration = registration;
     return registration;
   })
   .catch(function(err) {
@@ -28,10 +30,17 @@ function registerServiceWorker() {
 }
 /**** END register-sw ****/
 
-// This is just to make sample code eaier to read.
-// TODO: Move into a variable rather than register each time.
+/**
+ * Returns a service worker registration saved at registerServiceWorker function
+ */
 function getSWRegistration() {
-  return navigator.serviceWorker.register('service-worker.js');
+  return new Promise(function(resolve, reject) {
+    if (serviceWorkerRegistration) {
+      resolve(serviceWorkerRegistration);
+    } else {
+      reject('Service worker not yet registered');
+    }
+  });
 }
 
 /**** START request-permission ****/
