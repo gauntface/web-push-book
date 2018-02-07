@@ -25,7 +25,7 @@
     "mustache": "^2.3.0",
     "selenium-assistant": "^5.0.4",
     "serve-index": "^1.8.0",
-    "serve-static": "^1.11.1",
+    "serve-static": "1.13.1",
     "yaml-front-matter": "^3.4.0"
   }
 }
