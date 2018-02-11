@@ -14,7 +14,7 @@
     "postcss-cssnext": "^3.0.2"
   },
   "devDependencies": {
-    "chalk": "^2.0.1",
+    "chalk": "2.3.0",
     "fs-promise": "^2.0.0",
     "gfm-code-block-regex": "^1.0.0",
     "glob": "^7.0.5",
