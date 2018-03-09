@@ -26,6 +26,6 @@
     "selenium-assistant": "^5.0.4",
     "serve-index": "^1.8.0",
     "serve-static": "^1.11.1",
-    "yaml-front-matter": "^3.4.0"
+    "yaml-front-matter": "^4.0.0"
   }
 }
