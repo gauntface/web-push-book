@@ -215,7 +215,7 @@ No. The push service is selected by the browser and as we saw with the
 `subscribe()` call, the browser will make network requests to the push service
 to retrieve the details that make up the *PushSubscription*.
 
-> Each browser uses a different Push Service, don't they have different API's?
+> Each browser uses a different Push Service, don't they have different APIs?
 
 All push services will expect the same API.
 

@@ -5,7 +5,7 @@ title: Common Notification Patterns
 
 We're going to look at some common implementation patterns for web push.
 
-This will involve using a few different API's that are available in the service worker.
+This will involve using a few different APIs that are available in the service worker.
 
 ## Notification Close Event
 

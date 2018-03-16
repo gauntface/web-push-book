@@ -5,7 +5,7 @@ title: "Introduction"
 
 This book is for anyone looking to learn about push notifications on the web.
 
-I started working on web push when Chrome first added support. There have been quite a few changes since then but the API's have stabilised across Chrome and Firefox so it's the perfect time for people to learn about push on the web.
+I started working on web push when Chrome first added support. There have been quite a few changes since then but the APIs have stabilised across Chrome and Firefox so it's the perfect time for people to learn about push on the web.
 
 This site / book covers everything I've learnt and will be updated with anything new I learn in the future.
 

@@ -3,7 +3,7 @@ title: How Push Works
 ---
 # How Push Works
 
-Before getting into the API, let's look at push from a highlevel, start to finish. Then as we step through individual topics or API's later on, you'll have an idea of how and why it's important.
+Before getting into the API, let's look at push from a highlevel, start to finish. Then as we step through individual topics or APIs later on, you'll have an idea of how and why it's important.
 
 The three key steps to implementing push are:
 
@@ -95,7 +95,7 @@ Once we've sent a push message, the push service will keep your message on its s
 
 When the push service does deliver a message, the browser will receive the message, decrypt any data and dispatch a `push` event in your service worker.
 
-A [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) is a "special" JavaScript file. The browser can execute this JavaScript without your page being open. It can even execute this JavaScript when the browser is closed. A service worker also has API's, like push, that aren't available in the web page (i.e. API's that aren't available out of a service worker script).
+A [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) is a "special" JavaScript file. The browser can execute this JavaScript without your page being open. It can even execute this JavaScript when the browser is closed. A service worker also has APIs, like push, that aren't available in the web page (i.e. APIs that aren't available out of a service worker script).
 
 It's inside the service worker's 'push' event that you can perform any background tasks. You can make analytics calls, cache pages offline and show notifications.
 

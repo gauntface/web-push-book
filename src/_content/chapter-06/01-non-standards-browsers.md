@@ -130,7 +130,7 @@ if (isGCM) {
 
 ### Opera for Desktop
 
-One thing to call out with Opera is that at the time of writing push is supported on their Android browser. On Desktop the API's are visible, but once you call subscribe, it will reject. There is no obvious way of feature detecting this sadly.
+One thing to call out with Opera is that at the time of writing push is supported on their Android browser. On Desktop the APIs are visible, but once you call subscribe, it will reject. There is no obvious way of feature detecting this sadly.
 
 You'll need to either detect you are in Opera on desktop via user agent sniffing or simply let users go through your UI to enable push and fail at the last step.
 
