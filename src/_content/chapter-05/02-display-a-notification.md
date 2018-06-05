@@ -152,7 +152,7 @@ Using this guideline, an image of width 1350px or more would be a good bet.
 
 ### Actions
 
-You can defined `actions` to display buttons with a notification.
+You can define `actions` to display buttons with a notification.
 
 <% include('../../demos/notification-examples/notification-examples.js', 'actionsNotification') %>
 
