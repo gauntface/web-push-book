@@ -180,8 +180,8 @@ Once you have a push subscription you'll want to send it to your server. It's up
 const subscriptionObject = {
   endpoint: pushSubscription.endpoint,
   keys: {
-    p256dh: pushSubscription.getKeys('p256dh'),
-    auth: pushSubscription.getKeys('auth')
+    p256dh: pushSubscription.getKey('p256dh'),
+    auth: pushSubscription.getKey('auth')
   }
 };
 
