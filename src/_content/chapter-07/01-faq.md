@@ -78,7 +78,7 @@ This **was not web push**. There are a few reasons this early set-up of Chrome a
 ##### July 2016
 In July a new feature in web push landed - Application Server Keys (or VAPID, as the spec is known). When Chrome added support for this new API, it used Firebase Cloud Messaging (also known as FCM) instead of GCM as its push service. This is important for a few reasons:
 
-- Chrome and Application Sever Keys **do not** need any kind of project to be set up with Google or Firebase. It'll just work.
+- Chrome and Application Server Keys **do not** need any kind of project to be set up with Google or Firebase. It'll just work.
 - FCM supports the *web push protocol*, which is the API that all web push services will support. This means that regardless of what push service a browser uses, you just make the same kind of request and it'll send the message.
 
 ##### Why is it confusing today?
