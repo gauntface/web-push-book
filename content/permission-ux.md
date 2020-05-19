@@ -1,5 +1,6 @@
 ---
 title: Permission UX
+weight: 4
 ---
 # Permission UX
 

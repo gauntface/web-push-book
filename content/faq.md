@@ -1,5 +1,6 @@
 ---
 title: FAQ
+weight: 12
 ---
 # FAQ
 

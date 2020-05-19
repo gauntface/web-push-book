@@ -15,6 +15,7 @@
    "languageCode": "en-us",
    "title": "Web Push Book",
    "theme": [
+      "web-push-book",
       "hopin-base-theme"
    ],
    "summaryLength": 45,

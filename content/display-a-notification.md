@@ -1,5 +1,6 @@
 ---
 title: Displaying a Notification
+weight: 8
 ---
 # Displaying a Notification
 

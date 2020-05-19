@@ -1,5 +1,6 @@
 ---
 title: Push Events
+weight: 7
 ---
 # Push Events
 

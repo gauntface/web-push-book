@@ -1,5 +1,6 @@
 ---
 title: The Web Push Protocol
+weight: 6
 ---
 # The Web Push Protocol
 

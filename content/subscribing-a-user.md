@@ -1,5 +1,6 @@
 ---
 title: Subscribing a User
+weight: 3
 ---
 # Subscribing a User
 
@@ -13,6 +14,10 @@ First we need check if the current browser actually supports push messaging. We 
 
 1. Check for `serviceWorker` on `navigator`.
 1. Check for `PushManager` on `window`.
+
+```js
+{{< inline-file "demos/node-server/frontend/app.js" >}}
+```
 
 <% include('../../demos/node-server/frontend/app.js', 'feature-detect') %>
 

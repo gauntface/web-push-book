@@ -1,5 +1,6 @@
 ---
 title: Sending Messages with Web Push Libraries
+weight: 5
 ---
 
 # Sending Messages with Web Push Libraries

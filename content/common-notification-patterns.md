@@ -1,5 +1,6 @@
 ---
 title: Common Notification Patterns
+weight: 10
 ---
 # Common Notification Patterns
 

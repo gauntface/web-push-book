@@ -1,5 +1,6 @@
 ---
 title: How Push Works
+weight: 2
 ---
 # How Push Works
 
@@ -54,7 +55,9 @@ To get the appropriate URL to trigger a push message (i.e. the URL for the push 
 
 Below is an example of the values you'll get from a **PushSubscription**:
 
-<% include('./code-samples/example-subscription.json') %>
+```json
+{{< inline-file "code-samples/example-subscription.json" >}}
+```
 
 The **endpoint** in this case is *https://random-push-service.com/some-kind-of-unique-id-1234/v2/*. The push service would be 'random-push-service.com' and each endpoint is unique to a user, indicated with 'some-kind-of-unique-id-1234'. As you start working with push you'll notice this pattern.
 
