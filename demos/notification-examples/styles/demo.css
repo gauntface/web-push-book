@@ -1,0 +1,10 @@
+@import "../../../jekyll/styles/variables/colors.css";
+
+pre.is-hidden {
+  display: none;
+}
+
+.details-btn {
+  background-color: transparent;
+  color: var(--primary-link-color);
+}

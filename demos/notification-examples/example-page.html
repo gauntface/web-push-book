@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#222222">
+
+  <title>Example Page | Web Push Book</title>
+  <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
+
+  <!-- Stylesheet -->
+  <link href="/jekyll/styles/main.css" rel="stylesheet" type="text/css">
+  <link href="/jekyll/styles/components/nav-drawer.css" rel="stylesheet" type="text/css">
+  <link href="styles/demo.css" rel="stylesheet" type="text/css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700|Open+Sans|Inconsolata" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>Example Page</h1>
+  </header>
+
+  <main>
+    <p>I was opened because you clicked on a notification.</p>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <section class="footer-bottom-row">
+        <p><a href="https://web-push-book.gauntface.com/">Web Push Book</a> by <a href="https://gauntface.com/">Matt Gaunt</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.</p>
+        <p><a href="https://github.com/gauntface/web-push-book">Source Hosted on Github</a></p>
+      </section>
+    </div>
+  </footer>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-77119321-4', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>

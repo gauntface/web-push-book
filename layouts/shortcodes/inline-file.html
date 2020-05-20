@@ -1,1 +1,10 @@
-{{readFile (.Get 0) }}
+{{ $contents := readFile (.Get 0) }}
+{{- if gt (len .Params) 1 -}}
+  {{- $r := printf "/\\*\\*\\*\\* START %s \\*\\*\\*\\*\\/[\\n]?((?:.|\\n)*)\\/\\*\\*\\*\\* END %s \\*\\*\\*\\*\\/[\\n]?" (.Get 1) (.Get 1) -}}
+  {{- $m := findRE $r $contents -}}
+  {{- $contents = index $m 0 -}}
+  {{- $s := printf "/\\*\\*\\*\\* ((START)|(END)) %s \\*\\*\\*\\*\\/[\\n]?" (.Get 1) -}}
+  {{- replaceRE $s "" $contents -}}
+{{- else -}}
+  {{ $contents }}
+{{- end -}}

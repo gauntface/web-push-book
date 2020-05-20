@@ -16,7 +16,7 @@ First we need check if the current browser actually supports push messaging. We 
 1. Check for `PushManager` on `window`.
 
 ```js
-{{< inline-file "demos/node-server/frontend/app.js" >}}
+{{< inline-file "demos/node-server/frontend/app.js" "feature-detect" >}}
 ```
 
 <% include('../../demos/node-server/frontend/app.js', 'feature-detect') %>
