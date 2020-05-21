@@ -28,26 +28,35 @@ an example of how it could be done.
 
 In the demo web page the `PushSubscription` is sent to our backend by making a simple POST request:
 
-<% include('../../demos/node-server/frontend/app.js', 'send-subscription-to-server') %>
-
+```javascript
+{{< inline-file "demos/node-server/frontend/app.js" "send-subscription-to-server" >}}
+```
 The [Express](http://expressjs.com/) server in our demo has a matching request listener for `/api/save-subscription/` endpoint:
 
-<% include('../../demos/node-server/index.js', 'save-sub-api-post') %>
+```javascript
+{{< inline-file "demos/node-server/index.js" "save-sub-api-post" >}}
+```
 
 In this route we validate the subscription, just to make sure the request is ok and not full of garbage:
 
-<% include('../../demos/node-server/index.js', 'save-sub-api-validate') %>
+```javascript
+{{< inline-file "demos/node-server/index.js" "save-sub-api-validate" >}}
+```
 
 > In this route we only check for an endpoint. If you **require** payload support, make sure you check for the auth and p256dh keys as well.
 
 If the subscription is valid, we need to save it and return an appropriate
 JSON response:
 
-<% include('../../demos/node-server/index.js', 'save-sub-api-save-subscription') %>
+```javascript
+{{< inline-file "demos/node-server/index.js" "save-sub-api-save-subscription" >}}
+```
 
 This demo uses [nedb](https://github.com/louischatriot/nedb) to store the subscriptions, it's a simple file based database, but you could use any database you chose. We are only using this as it requires zero set-up. For production you'd want to use something more reliable (I tend to stick with good old MySQL).
 
-<% include('../../demos/node-server/index.js', 'save-sub-function') %>
+```javascript
+{{< inline-file "demos/node-server/index.js" "save-sub-function" >}}
+```
 
 ## Sending Push Messages
 
@@ -67,7 +76,9 @@ When we discussed subscribing a user we covered adding an `applicationServerKey`
 
 In the demo these values are added to our Node app like so (boring code I know, but just want you to know there is no magic):
 
-<% include('../../demos/node-server/index.js', 'vapid-keys') %>
+```javascript
+{{< inline-file "demos/node-server/index.js" "vapid-keys" >}}
+```
 
 Next we need to install the `web-push` module for our Node server:
 
@@ -76,11 +87,15 @@ Next we need to install the `web-push` module for our Node server:
 Then in our Node script we require in the `web-push` module
 like so:
 
-<% include('../../demos/node-server/index.js', 'web-push-require') %>
+```javascript
+{{< inline-file "demos/node-server/index.js" "web-push-require" >}}
+```
 
 Now we can start to use the `web-push` module. First we need to tell the web-push module about our application server keys (remember they are also known as VAPID keys because that's the name of the spec).
 
-<% include('../../demos/node-server/index.js', 'web-push-vapid') %>
+```javascript
+{{< inline-file "demos/node-server/index.js" "web-push-vapid" >}}
+```
 
 We also include a "mailto:" string as well. This string needs to be either a URL or a mailto email address. This piece of information will actually be sent to web push service as part of the request to trigger a push. The reason this is done is so that if a web push service needs to get in touch, they have some information that will enable them to.
 
@@ -92,16 +107,22 @@ The demo uses the pretend admin panel to trigger push messages.
 
 Clicking the "Trigger Push Message" button will make a POST request to `/api/trigger-push-msg/` which is the signal for our backend to start send push messages, so we create the route in express for this endpoint:
 
-<% include('../../demos/node-server/index.js', 'trig-push-api-post') %>
+```javascript
+{{< inline-file "demos/node-server/index.js" "trig-push-api-post" >}}
+```
 
 When this request is received, we grab the subscriptions from the database and
 for each one, we trigger a push message.
 
-<% include('../../demos/node-server/index.js', 'trig-push-send-push') %>
+```javascript
+{{< inline-file "demos/node-server/index.js" "trig-push-send-push" >}}
+```
 
 The function `triggerPushMsg()` can then use the web-push library to send a message to the provided subscription.
 
-<% include('../../demos/node-server/index.js', 'trig-push-send-notification') %>
+```javascript
+{{< inline-file "demos/node-server/index.js" "trig-push-send-notification" >}}
+```
 
 The call to `webpush.sendNotification()` will return a promise. If the message was sent successfully the promise will resolve and there is nothing we need to do. If the promise rejects, you need to examine the error as it'll inform you as to whether the PushSubscription is still valid or not.
 
@@ -115,7 +136,9 @@ We'll cover some of the other status codes in the next section when we look at t
 
 After looping through the subscriptions, we need to return a JSON response.
 
-<% include('../../demos/node-server/index.js', 'trig-push-return-response') %>
+```javascript
+{{< inline-file "demos/node-server/index.js" "trig-push-return-response" >}}
+```
 
 We've gone over the major implementation steps.
 

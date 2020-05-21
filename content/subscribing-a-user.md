@@ -19,8 +19,6 @@ First we need check if the current browser actually supports push messaging. We 
 {{< inline-file "demos/node-server/frontend/app.js" "feature-detect" >}}
 ```
 
-<% include('../../demos/node-server/frontend/app.js', 'feature-detect') %>
-
 While browser support is growing quickly for both service worker and
 push messaging support, it's always a good idea to feature detect for both and
 [progressively enhance](https://en.wikipedia.org/wiki/Progressive_enhancement).
@@ -33,7 +31,9 @@ When we register a service worker, we are telling the browser where our service 
 
 To register a service worker, call `navigator.serviceWorker.register()`, passing in the path to our file. Like so:
 
-<% include('../../demos/node-server/frontend/app.js', 'register-sw') %>
+```js
+{{< inline-file "demos/node-server/frontend/app.js" "register-sw" >}}
+```
 
 This code above tells the browser that we have a service worker file and where it's located. In this case, the service worker file is at `/service-worker.js`. Behind the scenes the browser will take the following steps after calling `register()`:
 
@@ -54,7 +54,9 @@ We've registered our service worker and are ready to subscribe the user, the nex
 The API for getting permission is relatively simple, the downside is that
 the API [recently changed from taking a callback to returning a Promise](https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission). The problem with this, is that we can't tell what version of the API is implemented by the current browser, so you have to implement both and handle both.
 
-<% include('../../demos/node-server/frontend/app.js', 'request-permission') %>
+```js
+{{< inline-file "demos/node-server/frontend/app.js" "request-permission" >}}
+```
 
 In the above code, the important snippet of code is the call to `Notification.requestPermission()`. This method will display a prompt to the user:
 
@@ -79,13 +81,17 @@ the Permission API is not supported. This is done for performance reasons.
 Calling `Notification.permission` locks up the main thread in Chrome and calling
 it repeatedly is a bad idea.
 
-<% include('../../demos/node-server/frontend/app.js', 'get-permission-state') %>
+```js
+{{< inline-file "demos/node-server/frontend/app.js" "get-permission-state" >}}
+```
 
 ## Subscribe a User with PushManager
 
 Once we have our service worker registered and we've got permission, we can subscribe a user by calling `registration.pushManager.subscribe()`.
 
-<% include('../../demos/node-server/frontend/app.js', 'subscribe-user') %>
+```js
+{{< inline-file "demos/node-server/frontend/app.js" "subscribe-user" >}}
+```
 
 When calling the `subscribe()` method, we pass in an *options* object, which consists of both required and optional parameters.
 
@@ -159,7 +165,9 @@ There is one side effect of calling `subscribe()`. If your web app doesn't have 
 
 We call `subscribe()`, pass in some options, and in return we get a promise that resolves to a `PushSubscription` resulting in some code like so:
 
-<% include('../../demos/node-server/frontend/app.js', 'subscribe-user') %>
+```js
+{{< inline-file "demos/node-server/frontend/app.js" "subscribe-user" >}}
+```
 
 The `PushSubscription` object contains all the required information needed to send a push messages to that user. If you print out the contents using `JSON.stringify()`, you'll see the following:
 
@@ -201,11 +209,15 @@ In [the demo referenced throughout this book](https://github.com/gauntface/web-p
 
 Sending the subscription is done in the web page like so:
 
-<% include('../../demos/node-server/frontend/app.js', 'send-subscription-to-server') %>
+```js
+{{< inline-file "demos/node-server/frontend/app.js" "send-subscription-to-server" >}}
+```
 
 The node server receives this request and saves the data to a database for use later on.
 
-<% include('../../demos/node-server/index.js', 'save-sub-example') %>
+```js
+{{< inline-file "demos/node-server/index.js" "save-sub-example" >}}
+```
 
 With the `PushSubscription` details on our server we are good to send our user
 a message whenever we want.

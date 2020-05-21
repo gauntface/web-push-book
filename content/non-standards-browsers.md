@@ -64,7 +64,9 @@ The non-standards browsers will look for your sender ID in a web app manifest. F
 
 For push, all we need is a JSON file with the field "gcm_sender_id" and we'll give it a value of the Sender ID from our Firebase project, like this:
 
-<% include('../../demos/node-server/frontend/manifest.json') %>
+```json
+{{< inline-file "demos/node-server/frontend/manifest.json" >}}
+```
 
 Save this JSON as a file on your site, the demo for this site has a file
 called 'manifest.json' at the root of the site, i.e. '/manifest.json'.

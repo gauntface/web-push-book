@@ -24,7 +24,9 @@ The common practice for a notification click is for it to close and perform some
 
 To achieve this we need to add a 'notificationclick' event listener to our service worker. This will be called when ever a notification is clicked.
 
-<% include('../../demos/node-server/frontend/service-worker.js', 'simpleNotification') %>
+```javascript
+{{< inline-file "demos/node-server/frontend/service-worker.js" "simpleNotification" >}}
+```
 
 As you can see in this example, the notification that was clicked can be accessed via the `event.notification` parameter. From this we can access the notifications properties and methods. In this case we call its `close()` method and perform additional work.
 
@@ -38,7 +40,9 @@ over just clicking the notification.
 In the previous section you saw how to define actions when calling
 `showNotification()`:
 
-<% include('../../demos/notification-examples/notification-examples.js', 'actionsNotification') %>
+```javascript
+{{< inline-file "demos/notification-examples/notification-examples.js" "actionsNotification" >}}
+```
 
 If the user clicks an action button, check the `event.action` value in the `noticationclick` event to tell which action button was clicked.
 
@@ -46,7 +50,9 @@ If the user clicks an action button, check the `event.action` value in the `noti
 
 With this we would detect notification clicks or action clicks like so:
 
-<% include('../../demos/notification-examples/service-worker.js', 'notificationActionClickEvent') %>
+```javascript
+{{< inline-file "demos/notification-examples/service-worker.js" "notificationActionClickEvent" >}}
+```
 
 ![Logs for action button clicks and notification click.](/images/notification-screenshots/action-button-click-logs.png){: .center-image }
 
@@ -57,7 +63,9 @@ The *tag* option is a string ID that "groups" notifications together, providing 
 Let's display a notification and give it a tag, of
 'message-group-1'. We'd display the notification with this code:
 
-<% include('../../demos/notification-examples/notification-examples.js', 'tagNotificationOne') %>
+```javascript
+{{< inline-file "demos/notification-examples/notification-examples.js" "tagNotificationOne" >}}
+```
 
 Which will show our first notification.
 
@@ -65,7 +73,9 @@ Which will show our first notification.
 
 Let's display a second notification with a new tag of 'message-group-2', like so:
 
-<% include('../../demos/notification-examples/notification-examples.js', 'tagNotificationTwo') %>
+```javascript
+{{< inline-file "demos/notification-examples/notification-examples.js" "tagNotificationTwo" >}}
+```
 
  This will display a second notification to the user.
 
@@ -73,7 +83,9 @@ Let's display a second notification with a new tag of 'message-group-2', like so
 
 Now let's show a third notification but re-use the first tag of 'message-group-1'. Doing this will close the first notification and replace it with our new notification.
 
-<% include('../../demos/notification-examples/notification-examples.js', 'tagNotificationThree') %>
+```javascript
+{{< inline-file "demos/notification-examples/notification-examples.js" "tagNotificationThree" >}}
+```
 
 Now we have two notifications even though `showNotification()` was called three times.
 
@@ -91,7 +103,9 @@ This largely applies to mobile devices at the time of writing. Setting this opti
 
 There are scenarios where you might want a replacing notification to notify the user rather than silently update. Chat applications are a good example. In this case you should set `tag` and `renotify` to true.
 
-<% include('../../demos/notification-examples/notification-examples.js', 'renotifyNotification') %>
+```javascript
+{{< inline-file "demos/notification-examples/notification-examples.js" "renotifyNotification" >}}
+```
 
 **Note:** If you set `renotify: true` on a notification without a tag, you'll get the following error:
 
@@ -105,7 +119,9 @@ behavior of vibration, sound and turning on the device's display.
 This is ideal if your notifications don't require immediate attention
 from the user.
 
-<% include('../../demos/notification-examples/notification-examples.js', 'silentNotification') %>
+```javascript
+{{< inline-file "demos/notification-examples/notification-examples.js" "silentNotification" >}}
+```
 
 **Note:** If you define both *silent* and *renotify*, silent will take precedence.
 
@@ -115,7 +131,9 @@ Chrome on desktop will show notifications for a set time period before hiding th
 
 To force a notification to stay visible until the user interacts with it add the `requireInteraction` option. This will show the notification until the user dismisses or clicks your notification.
 
-<% include('../../demos/notification-examples/notification-examples.js', 'requireInteraction') %>
+```javascript
+{{< inline-file "demos/notification-examples/notification-examples.js" "requireInteraction" >}}
+```
 
 Please use this option with consideration. Showing a notification and forcing the user to stop what they are doing to dismiss your notification can be frustrating.
 
