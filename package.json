@@ -2,7 +2,7 @@
   "private": true,
   "name": "web-push-book",
   "dependencies": {
-    "@hopin/hugo-base-theme": "0.0.313"
+    "@hopin/hugo-base-theme": "0.0.316"
   },
   "devDependencies": {
     "fs-extra": "^9.0.0",

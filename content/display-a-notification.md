@@ -10,7 +10,7 @@ The reason for this is that every developer will need to be worried about the vi
 
 All of the source code for these demo's is taken from a demo page I put together. If you want to test them out for yourself then click the button below.
 
-<a class="button" href="{{site.url}}/demos/notification-examples/" target="\_blank">Notification Demos</a>
+<a class="c-button" href="{{site.url}}/demos/notification-examples/" target="\_blank">Notification Demos</a>
 
 ## Visual Options
 
@@ -22,7 +22,7 @@ The API for showing a notification is simply:
 
 Where the title is a string and options can be any of the following:
 
-```
+```json
 {
   "//": "Visual Options",
   "body": "<String>",
@@ -50,8 +50,9 @@ Where the title is a string and options can be any of the following:
 
 First let's look at the visual options.
 
-![Dissection of the UI of a Notification](/images/notification-ui.png){: .center-image }
-
+<p class="u-center">
+  <img src="/images/notification-ui.png" alt="Dissection of the UI of a Notification" class="u-center" />
+</p>
 
 ### Title and Body Options
 
@@ -60,32 +61,46 @@ The title and body options are exactly as they sound, two different pieces of te
 If we ran the following code:
 
 ```javascript
-{{< inline-file "demos/notification-examples/notification-examples.js" "titleAndBodySimple" >}}
+{{< inline-file "static/demos/notification-examples/notification-examples.js" "titleAndBodySimple" >}}
 ```
 
 We'd get this notification on Chrome:
 
-![Notification with title and body text on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-title-body.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/chrome-title-body.png" alt="Notification with title and body text on Chrome on Linux." />
+</p>
 
 On Firefox on Linux it would look like this:
 
-![Notification with title and body text on Firefox on Linux.](/images/notification-screenshots/desktop/firefox-title-body.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/firefox-title-body.png" alt="Notification with title and body text on Firefox on Linux." />
+</p>
 
 I was curious about what would happen if I added lots of text and this was the result:
 
-![Notification with long title and body text on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-long-title-body.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/chrome-long-title-body.png" alt="Notification with long title and body text on Chrome on Linux." />
+</p>
 
 Interestingly, Firefox on Linux collapses the body text until you hover the notification, causing the notification to expand.
 
-![Notification with long title and body text on Firefox on Linux.](/images/notification-screenshots/desktop/firefox-long-title-body.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/firefox-long-title-body.png" alt="Notification with long title and body text on Firefox on Linux." />
+</p>
 
-![Notification with long title and body text on Firefox on Linux while hovering over the notification with the mouse cursor.](/images/notification-screenshots/desktop/firefox-long-title-body-expanded.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/firefox-long-title-body-expanded.png" alt="Notification with long title and body text on Firefox on Linux while hovering over the notification with the mouse cursor." />
+</p>
 
 The reason I've included these examples is twofold. There will be differences between browsers. Just looking at text, Firefox and Chrome look and act differently. Secondly there are differences across platforms. Chrome has a custom UI for all platforms whereas Firefox uses the system notifications on my Linux machine. The same notifications on Windows with Firefox look like this:
 
-![Notification with title and body text on Firefox on Windows.](/images/notification-screenshots/desktop/firefox-title-body-windows.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/firefox-title-body-windows.png" alt="Notification with title and body text on Firefox on Windows." />
+</p>
 
-![Notification with long title and body text on Firefox on Windows.](/images/notification-screenshots/desktop/firefox-long-title-body-windows.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/firefox-long-title-body-windows.png" alt="Notification with long title and body text on Firefox on Windows." />
+</p>
 
 ### Icon
 
@@ -94,16 +109,20 @@ The `icon` option is essentially a small image you can show next to the title an
 In your code you just need to provide a URL to the image you'd like to load.
 
 ```javascript
-{{< inline-file "demos/notification-examples/notification-examples.js" "iconNotification" >}}
+{{< inline-file "static/demos/notification-examples/notification-examples.js" "iconNotification" >}}
 ```
 
 On Chrome we get this notification on Linux:
 
-![Notification with ccon on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-icon.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/chrome-icon.png" alt="Notification with ccon on Chrome on Linux." />
+</p>
 
 and on Firefox:
 
-![Notification with tcon on Firefox on Linux.](/images/notification-screenshots/desktop/firefox-icon.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/firefox-icon.png" alt="Notification with tcon on Firefox on Linux." />
+</p>
 
 Sadly there aren't any solid guidelines for what size image to use for an icon.
 
@@ -118,16 +137,20 @@ If we assume the highest pixel ratio for a device will be 3, an icon size of 192
 The `badge` is a small monochrome icon that is used to portray a little more information to the user about where the notification is from.
 
 ```javascript
-{{< inline-file "demos/notification-examples/notification-examples.js" "badgeNotification" >}}
+{{< inline-file "static/demos/notification-examples/notification-examples.js" "badgeNotification" >}}
 ```
 
 At the time of writing the badge is only used on Chrome for Android.
 
-![Notification with badge on Chrome for Android.](/images/notification-screenshots/mobile/chrome-badge.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/mobile/chrome-badge.png" alt="Notification with badge on Chrome for Android." />
+</p>
 
 On other browsers (or Chrome without the badge), you'll see an icon of the browser.
 
-![Notification with badge on Firefox for Android.](/images/notification-screenshots/mobile/firefox-badge.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/mobile/firefox-badge.png" alt="Notification with badge on Firefox for Android." />
+</p>
 
 As with the `icon` option, there are no real guidelines on what size to use.
 
@@ -140,16 +163,20 @@ Meaning an image of 72px or more should be good (assuming a max device pixel rat
 The `image` option can be used to display a larger image to the user. This is particularly useful to display a preview image to the user.
 
 ```javascript
-{{< inline-file "demos/notification-examples/notification-examples.js" "imageNotification" >}}
+{{< inline-file "static/demos/notification-examples/notification-examples.js" "imageNotification" >}}
 ```
 
 On desktop the notification will look like this:
 
-![Notification with image on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-image.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/chrome-image.png" alt="Notification with image on Chrome on Linux." />
+</p>
 
 On Android the cropping and ratio are different.
 
-![Notification with image on Chrome for Android.](/images/notification-screenshots/mobile/chrome-image.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/mobile/chrome-image.png" alt="Notification with image on Chrome for Android." />
+</p>
 
 Given the differences in ratio between desktop and mobile it's extremely hard to suggest guidelines.
 
@@ -164,12 +191,14 @@ Using this guideline, an image of width 1350px or more would be a good bet.
 You can defined `actions` to display buttons with a notification.
 
 ```javascript
-{{< inline-file "demos/notification-examples/notification-examples.js" "actionsNotification" >}}
+{{< inline-file "static/demos/notification-examples/notification-examples.js" "actionsNotification" >}}
 ```
 
 At the time of writing only Chrome and Opera for Android support actions.
 
-![Notification with actions on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-actions.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/chrome-actions.png" alt="Notification with actions on Chrome on Linux." />
+</p>
 
 For each action you can define a title, an "action" (which is essentially an ID) and an icon. The title and icon is what you can see in the notification. The ID is used when detecting that the action button had been clicked (We'll look into this more in the next section).
 
@@ -179,7 +208,9 @@ On desktop the action button icons display their colors (See the pink doughtnut 
 
 On Android Marshmallow the icons are colored to match the system color scheme:
 
-![Notification with actions on Chrome for Android.](/images/notification-screenshots/mobile/chrome-actions-m.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/mobile/chrome-actions-m.png" alt="Notification with actions on Chrome for Android." />
+</p>
 
 Chrome will hopefully change it's behavior on desktop to match android (i.e. apply the appropriate color scheme to make the icons match the system look and feel). In the meantime you can match Chrome's text color by making your icons have a color of "#333333"..
 
@@ -208,7 +239,7 @@ It's recommended to define `dir` if you can, although the browser should do the 
 
 <% START_WF_EXCLUSION %>
 ```javascript
-{{< inline-file "demos/notification-examples/notification-examples.js" "dirRTLNotification" >}}
+{{< inline-file "static/demos/notification-examples/notification-examples.js" "dirRTLNotification" >}}
 ```
 <% END_WF_EXCLUSION %>
 
@@ -216,11 +247,15 @@ The parameter should be set to either `auto`, `ltr` or `rtl`.
 
 A right-to-left language used on Chrome on Linux looks like this:
 
-![Notification with right-to-left language on Chrome on Linux.](/images/notification-screenshots/desktop/chrome-rtl.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/chrome-rtl.png" alt="Notification with right-to-left language on Chrome on Linux." />
+</p>
 
 On Firefox (while hovering over the notification) you'll get this:
 
-![Notification with right-to-left language on Firefox on Linux.](/images/notification-screenshots/desktop/firefox-rtl-expanded.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/firefox-rtl-expanded.png" alt="Notification with right-to-left language on Firefox on Linux." />
+</p>
 
 ### Vibrate
 
@@ -229,7 +264,7 @@ The vibrate option allows you to define a vibration pattern that'll run when a n
 The format of the vibrate option should be an array of numbers that describe the number of milliseconds the device should vibrate followed by the number of milliseconds the device should *not* vibrate.
 
 ```javascript
-{{< inline-file "demos/notification-examples/notification-examples.js" "vibrateNotification" >}}
+{{< inline-file "static/demos/notification-examples/notification-examples.js" "vibrateNotification" >}}
 ```
 
 This only affects devices that support vibration.
@@ -241,7 +276,7 @@ The sound parameter allows you to define a sound to play when the notification i
 At the time of writing no browser has support for this option.
 
 ```javascript
-{{< inline-file "demos/notification-examples/notification-examples.js" "soundNotification" >}}
+{{< inline-file "static/demos/notification-examples/notification-examples.js" "soundNotification" >}}
 ```
 
 ### Timestamp
@@ -251,7 +286,7 @@ Timestamp allows you to tell the platform the time when an event occurred that r
 The `timestamp` should be the number of milliseconds since 00:00:00 UTC, which is 1 January 1970 (i.e. the unix epoch).
 
 ```javascript
-{{< inline-file "demos/notification-examples/notification-examples.js" "timestampNotification" >}}
+{{< inline-file "static/demos/notification-examples/notification-examples.js" "timestampNotification" >}}
 ```
 
 ## UX Best Practices

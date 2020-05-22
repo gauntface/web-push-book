@@ -92,7 +92,7 @@ call the "unsigned token", and signing it.
 
 The signing process requires encrypting the "unsigned token" using ES256. According to the [JWT spec](https://tools.ietf.org/html/rfc7519), ES256 is short for "ECDSA using the P-256 curve and the SHA-256 hash algorithm". Using web crypto you can create the signature like so:
 
-```
+```javascript
 // Utility function for UTF-8 encoding a string to an ArrayBuffer.
 const utf8Encoder = new TextEncoder('utf-8');
 
@@ -178,7 +178,7 @@ easy to generate these keys.
 
 In node we'd do the following:
 
-```
+```javascript
 const keyCurve = crypto.createECDH('prime256v1');
 keyCurve.generateKeys();
 
@@ -205,7 +205,7 @@ and the resulting keys for HKDF in web push should be no longer than 256 bits
 
 In node this could be implemented like so:
 
-```
+```javascript
 // Simplified HKDF, returning keys up to 32 bytes long
 function hkdf(salt, ikm, info, length) {
   // Extract
@@ -243,7 +243,7 @@ When we want to send a push message to a user with a payload, there are three in
 
 We've seen the `auth` and `p256dh` values being retreieved from a `PushSubscription` but for a quick reminder, given a subscription we'd need these values:
 
-```
+```javascript
 subscription.joJSON().keys.auth
 subscription.joJSON().keys.p256dh
 
@@ -261,7 +261,7 @@ These three values, `auth`, `p256dh` and `payload` are needed as inputs and the 
 
 The salt needs to be 16 bytes of random data. In NodeJS, we'd do the following to create a salt:
 
-```
+```javascript
 const salt = crypto.randomBytes(16);
 ```
 
@@ -270,7 +270,7 @@ const salt = crypto.randomBytes(16);
 The public and private keys should be generated using a P-256 elliptic curve,
 which we'd do in Node like so:
 
-```
+```javascript
 const localKeysCurve = crypto.createECDH('prime256v1');
 localKeysCurve.generateKeys();
 
@@ -286,7 +286,7 @@ With the payload, auth secret and subscription public key as inputs and with a n
 
 The first step is to create a shared secret using the subscription public key and our new private key (remember the ECDH explanation with Alice and Bob? Just like that).
 
-```
+```javascript
 const sharedSecret = localKeysCurve.computeSecret(
   subscription.keys.p256dh, 'base64');
 ```
@@ -297,7 +297,7 @@ This is used in the next step to calculate the Pseudo Random Key (PRK).
 
 The Pseudo Random Key (PRK) is the combination of the push subscription's auth secret, and the shared secret we just created.
 
-```
+```javascript
 const authEncBuff = new Buffer('Content-Encoding: auth\0', 'utf8');
 const prk = hkdf(subscription.keys.auth, sharedSecret, authEncBuff, 32);
 ```
@@ -310,7 +310,7 @@ Our Pseudo Random Key is simply running the auth, shared secret and a piece of e
 
 The "context" is a set of bytes that is used to calculate two values later on in the encryption browser. It's essentially an array of bytes containing the subscription public key and the local public key.
 
-```
+```javascript
 const keyLabel = new Buffer('P-256\0', 'utf8');
 
 // Convert subscription public key into a buffer.
@@ -345,7 +345,7 @@ The content encryption key (CEK) is the key that will ultimately be used to encr
 
 First we need to create the bytes of data for the nonce and CEK, which is simply a content encoding string followed by the context buffer we just calculated:
 
-```
+```javascript
 const nonceEncBuffer = new Buffer('Content-Encoding: nonce\0', 'utf8');
 const nonceInfo = Buffer.concat([nonceEncBuffer, contextBuffer]);
 
@@ -355,7 +355,7 @@ const cekInfo = Buffer.concat([cekEncBuffer, contextBuffer]);
 
 This information is run through HKDF combining the salt and PRK with the nonceInfo and cekInfo:
 
-```
+```javascript
 // The nonce should be 12 bytes long
 const nonce = hkdf(salt, prk, nonceInfo, 12);
 
@@ -374,7 +374,7 @@ as the key and the nonce is an initialization vector.
 
 In Node this is done like so:
 
-```
+```javascript
 const cipher = crypto.createCipheriv(
   'id-aes128-GCM', contentEncryptionKey, nonce);
 ```
@@ -385,7 +385,7 @@ You must add two bytes of padding to indicate the length of any additional paddi
 
 For example, if you added no padding, you'd have two bytes with value 0, i.e. no padding exists, after these two bytes you'll be reading the payload. If you added 5 bytes of padding, the first two bytes will have a value of 5, so the consumer will then read an additional five bytes and then start reading the payload.
 
-```
+```javascript
 const padding = new Buffer(2 + paddingLength);
 // The buffer must be only zeros, except the length
 padding.fill(0);
@@ -394,7 +394,7 @@ padding.writeUInt16BE(paddingLength, 0);
 
 We then run our padding and payload through this cipher.
 
-```
+```javascript
 const result = cipher.update(Buffer.concat(padding, payload));
 cipher.final();
 
@@ -450,7 +450,7 @@ With these headers set, we need to send the encrypted payload as the body of our
 
 In NodeJS we would do this like so:
 
-```
+```javascript
 const pushRequest = https.request(httpsOptions, function(pushResponse) {
 pushRequest.write(encryptedPayload);
 pushRequest.end();

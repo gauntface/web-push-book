@@ -13,7 +13,13 @@ When a message is received, it'll result in a push event being dispatched in you
 The code for setting up a push event listener should be pretty similar to any other event listener you'd write in JavaScript:
 
 ```javascript
-{{< inline-file "./code-samples/push-event-only.js" >}}
+self.addEventListener('push', function(event) {
+  if (event.data) {
+    console.log('This push event has data: ', event.data.text());
+  } else {
+    console.log('This push event has no data.');
+  }
+});
 ```
 
 The weirdest bit of this code to most developers who are new to service workers is the `self` variable. `self` is commonly used in Web Workers, which a service worker is. `self` refers to the global scope, kind of like `window` in a web page. But for web workers and service workers, `self` refers to the the worker itself.
@@ -51,7 +57,11 @@ With push events there is an additional requirement that you must display a noti
 Here's a basic example of showing a notification:
 
 ```javascript
-{{< inline-file "./code-samples/notification-wait-until.js" >}}
+self.addEventListener('push', function(event) {
+  const promiseChain = self.registration.showNotification('Hello, World.');
+  
+  event.waitUntil(promiseChain);
+});
 ```
 
 Calling `self.registration.showNotification()` is the method that displays a notification to the user and it returns a promise that will resolve once the notification has been displayed.
@@ -61,7 +71,28 @@ For the sake of keeping this example as clear as possible I've assigned this pro
 A more complicated example with a network request for data and tracking the push event with analytics could look like this:
 
 ```javascript
-{{< inline-file "./code-samples/complex-notification-sample.js" >}}
+self.addEventListener('push', function(event) {
+  const analyticsPromise = pushReceivedTracking();
+  const pushInfoPromise = fetch('/api/get-more-data')
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(response) {
+      const title = response.data.userName + ' says...';
+      const message = response.data.message;
+
+      return self.registration.showNotification(title, {
+        body: message
+      });
+    });
+
+  const promiseChain = Promise.all([
+    analyticsPromise,
+    pushInfoPromise
+  ]);
+
+  event.waitUntil(promiseChain);
+});
 ```
 
 Here we are calling a function that returns a promise `pushReceivedTracking()`, which, for the sake of the example, we can pretend will make a network request to our analytics provider.

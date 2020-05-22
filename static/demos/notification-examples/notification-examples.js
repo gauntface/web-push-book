@@ -8,7 +8,7 @@
     'What you been up to?',
     'These aren\'t real messages.',
   ];
-  const userIcon = '/images/demos/matt-512x512.png';
+  const userIcon = '/demos/notification-examples/images/matt-512x512.png';
   const userName = 'Matt';
 
   const promiseTimeout = function(cb, timeout) {
@@ -21,7 +21,7 @@
   };
 
   function registerServiceWorker() {
-    return navigator.serviceWorker.register('service-worker.js')
+    return navigator.serviceWorker.register('/demos/service-worker.js')
     .then(function(registration) {
       console.log('Service worker successfully registered.');
       return registration;
@@ -36,15 +36,15 @@
     const options = {
       body: 'This would be the body text of the notification.\n' +
         'It can hold two lines of text.',
-      icon: '/images/demos/icon-512x512.png',
-      badge: '/images/demos/badge-128x128.png',
-      image: '/images/demos/unsplash-farzad-nazifi-1600x1100.jpg',
+      icon: '/demos/notification-examples/images/icon-512x512.png',
+      badge: '/demos/notification-examples/images/badge-128x128.png',
+      image: '/demos/notification-examples/images/unsplash-farzad-nazifi-1600x1100.jpg',
       tag: 'example-notification',
       actions: [
         {
           action: 'download-book-action',
           title: 'Download Book',
-          icon: '/images/demos/action-download-book-128x128.png'
+          icon: '/demos/notification-examples/images/action-download-book-128x128.png'
         }
       ]
     };
@@ -83,7 +83,7 @@
     /**** START iconNotification ****/
     const title = 'Icon Notification';
     const options = {
-      icon: '/images/demos/icon-512x512.png'
+      icon: '/demos/notification-examples/images/icon-512x512.png'
     };
     registration.showNotification(title, options);
     /**** END iconNotification ****/
@@ -93,7 +93,7 @@
     /**** START badgeNotification ****/
     const title = 'Badge Notification';
     const options = {
-      badge: '/images/demos/badge-128x128.png'
+      badge: '/demos/notification-examples/images/badge-128x128.png'
     };
     registration.showNotification(title, options);
     /**** END badgeNotification ****/
@@ -103,7 +103,7 @@
     /**** START imageNotification ****/
     const title = 'Image Notification';
     const options = {
-      image: '/images/demos/unsplash-farzad-nazifi-1600x1100.jpg'
+      image: '/demos/notification-examples/images/unsplash-farzad-nazifi-1600x1100.jpg'
     };
     registration.showNotification(title, options);
     /**** END imageNotification ****/
@@ -186,22 +186,22 @@
         {
           action: 'coffee-action',
           title: 'Coffee',
-          icon: '/images/demos/action-1-128x128.png'
+          icon: '/demos/notification-examples/images/action-1-128x128.png'
         },
         {
           action: 'doughnut-action',
           title: 'Doughnut',
-          icon: '/images/demos/action-2-128x128.png'
+          icon: '/demos/notification-examples/images/action-2-128x128.png'
         },
         {
           action: 'gramophone-action',
           title: 'gramophone',
-          icon: '/images/demos/action-3-128x128.png'
+          icon: '/demos/notification-examples/images/action-3-128x128.png'
         },
         {
           action: 'atom-action',
           title: 'Atom',
-          icon: '/images/demos/action-4-128x128.png'
+          icon: '/demos/notification-examples/images/action-4-128x128.png'
         }
       ]
     };
@@ -603,6 +603,10 @@
       });
     });
   };
+
+  const displayNoPermissionError = function() {
+    console.error('Permission not granted.')
+  }
 
   window.addEventListener('load', function() {
     if (!('serviceWorker' in navigator)) {
