@@ -10,7 +10,7 @@ The reason for this is that every developer will need to be worried about the vi
 
 All of the source code for these demo's is taken from a demo page I put together. If you want to test them out for yourself then click the button below.
 
-<a class="c-button" href="{{site.url}}/demos/notification-examples/" target="\_blank">Notification Demos</a>
+<a class="c-button" href="/demos/notification-examples/" target="\_blank">Notification Demos</a>
 
 ## Visual Options
 
