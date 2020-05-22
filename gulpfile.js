@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const path = require('path');
+const browserSync = require('browser-sync').create();
 const basetheme = require('@hopin/hugo-base-theme');
 const booktheme = require('@gauntface/web-push-book-theme');
 const hugo = require('@gauntface/hugo-node');
@@ -91,3 +92,53 @@ gulp.task('build', gulp.series(
   'minify-html',
   'copy-verification',
 ))
+
+/**
+ * Watch Prod
+ */
+gulp.task('watch-site-theme-prod', () => {
+  const opts = {
+    ignoreInitial: true,
+  };
+  return gulp.watch(
+    [path.join(__dirname, 'node_modules', '@gauntface/web-push-book-theme', '**', '*')],
+    opts,
+    gulp.series('themes', 'build'),
+  );
+});
+
+gulp.task('watch-any', () => {
+  const opts = {
+    delay: 500,
+    ignoreInitial: true,
+  };
+  return gulp.watch(
+    [
+      path.posix.join(__dirname, 'archetypes', '**', '*'),
+      path.posix.join(__dirname, 'content', '**', '*'),
+      path.posix.join(__dirname, 'static', '**', '*'),
+      path.posix.join(__dirname, 'vertification', '**', '*'),
+    ],
+    opts,
+    gulp.series('build', async () => browserSync.reload()),
+  );
+});
+
+gulp.task('browser-sync', function() {
+  browserSync.init({
+      server: {
+          baseDir: "./public/",
+      }
+  });
+});
+
+gulp.task('watch-prod',
+  gulp.series(
+    'build',
+    gulp.parallel(
+      'browser-sync',
+      'watch-site-theme-prod',
+      'watch-any',
+    ),
+  ),
+);

@@ -54,7 +54,9 @@ With this we would detect notification clicks or action clicks like so:
 {{< inline-file "static/demos/notification-examples/service-worker.js" "notificationActionClickEvent" >}}
 ```
 
-![Logs for action button clicks and notification click.](/images/notification-screenshots/action-button-click-logs.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/action-button-click-logs.png" alt="Logs for action button clicks and notification click." />
+</p>
 
 ### Tag
 
@@ -69,7 +71,9 @@ Let's display a notification and give it a tag, of
 
 Which will show our first notification.
 
-![First notification with tag of message group 1.](/images/notification-screenshots/desktop/chrome-first-tag.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/chrome-first-tag.png" alt="First notification with tag of message group 1." />
+</p>
 
 Let's display a second notification with a new tag of 'message-group-2', like so:
 
@@ -79,7 +83,9 @@ Let's display a second notification with a new tag of 'message-group-2', like so
 
  This will display a second notification to the user.
 
-![Two notifications where the second tag is message group 2.](/images/notification-screenshots/desktop/chrome-second-tag.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/chrome-second-tag.png" alt="Two notifications where the second tag is message group 2." />
+</p>
 
 Now let's show a third notification but re-use the first tag of 'message-group-1'. Doing this will close the first notification and replace it with our new notification.
 
@@ -89,7 +95,9 @@ Now let's show a third notification but re-use the first tag of 'message-group-1
 
 Now we have two notifications even though `showNotification()` was called three times.
 
-![Two notifications where the first notification is replaced by a third notification.](/images/notification-screenshots/desktop/chrome-third-tag.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/chrome-third-tag.png" alt="Two notifications where the first notification is replaced by a third notification." />
+</p>
 
 The `tag` option is simply a way of grouping messages so that any old notifications that are currently displayed will be closed if they have the same tag as a new notification.
 

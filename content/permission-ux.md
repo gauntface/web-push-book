@@ -30,17 +30,23 @@ is a clear value proposition for them to enable push notifications.
 
 After the user has booked a flight it asks if the user would like notifications in case of flight delays.
 
-![Owen Campbell-Moore's example of good UX for push.](/images/ux-examples/owen/owen-good-example.png){: .device-image .center-image }
+<p class="u-center">
+  <img src="/images/ux-examples/owen/owen-good-example.png" alt="Owen Campbell-Moore's example of good UX for push." class="u-device-image" />
+</p>
 
 Note that this is a custom UI from the website.
 
 Another nice touch to Owen's demo is that if the user clicks to enable notifications, the site adds a semi-transparent overlay over the entire page when it shows the permission prompt. This draws the users attention to the permission prompt.
 
-![Owen Campbell-Moore's example of good UX for the permission prompt.](/images/ux-examples/owen/owen-permission-prompt.png){: .device-image .center-image }
+<p class="u-center">
+  <img src="/images/ux-examples/owen/owen-permission-prompt.png" alt="Owen Campbell-Moore's example of good UX for the permission prompt." class="u-device-image" />
+</p>
 
 The alternative to this example, the **bad UX** for asking permission, is to request permission as soon as a user lands on the airline's site.
 
-![Owen Campbell-Moore's example of bad UX for push.](/images/ux-examples/owen/owen-bad-ux.png){: .device-image .center-image }
+<p class="u-center">
+  <img src="/images/ux-examples/owen/owen-bad-ux.png" alt="Owen Campbell-Moore's example of bad UX for push." class="u-device-image" />
+</p>
 
 This approach provides no context as to why notifications are needed or useful to the user. The user is also blocked from achieving their original task (i.e. book a flight) by this permission prompt.
 
@@ -57,8 +63,6 @@ With this approach you display a custom permission prompt in your web app which 
 A good example of this is [Slack](https://slack.com/). They show a prompt at
 the top of their page once you've signed in asking if you'd like to enable notifications.
 
-<% START_WF_EXCLUSION %>
-
 ![Example of slack.com showing custom banner for permission to show notifications.](/images/ux-examples/slack/slack-permission-banner.png)
 
 If the user clicks accept, the actual permission prompt is shown:
@@ -69,8 +73,6 @@ I was also a big fan of Slacks first notification when you allow the permission.
 
 ![Cute "It's working" notification from slack.com.](/images/ux-examples/slack/slack-welcome-notification.png)
 
-<% END_WF_EXCLUSION %>
-
 ### Settings Panel
 
 You can move notifications into a settings panel, giving users an easy way
@@ -80,27 +82,29 @@ web app's UI.
 A good example of this is [Google I/O's 2016 site](https://events.google.com/io2016/). When you first load up the Google I/O site, you aren't asked to do anything,
 the user is left to explore the site.
 
-![When you first load the page, no prompt, just calm on Google IO.](/images/ux-examples/google-io/google-io-first-load.png){: .device-image .center-image }
+<p class="u-center">
+  <img src="/images/ux-examples/google-io/google-io-first-load.png" alt="When you first load the page, no prompt, just calm on Google IO." class="u-device-image" />
+</p>
 
 After a few visits, clicking the menu item on the right reveals a settings panel allowing the user to set up and manage notifications.
 
-![Settings panel on Google IO's web app for push messaging.](/images/ux-examples/google-io/google-io-settings-panel.png){: .device-image .center-image }
+<p class="u-center">
+  <img src="/images/ux-examples/google-io/google-io-settings-panel.png" alt="Settings panel on Google IO's web app for push messaging." class="u-device-image" />
+</p>
 
 Clicking on the checkbox displays the permission prompt. No hidden surprises.
 
-![Google IO's web app displaying the permission prompt.](/images/ux-examples/google-io/google-io-permission-prompt.png){: .device-image .center-image }
+<p class="u-center">
+  <img src="/images/ux-examples/google-io/google-io-permission-prompt.png" alt="Google IO's web app displaying the permission prompt." class="u-device-image" />
+</p>
 
 After the permission has been granted the checkbox is checked and the user is good to go. The great thing about this UI is that users can enable and disable notifications from one location on the website.
-
-<% START_WF_EXCLUSION %>
 
 Slack also does a good job at giving users control over their notifications. They offer a host of options allowing users to customise the notifications they receive.
 
 ![The notification preferences on slack.com easily found under settings drop down.](/images/ux-examples/slack/slack-prefs-dropdown.png)
 
 ![The settings panel for notifications on slack.com.](/images/ux-examples/slack/slack-notification-settings.png)
-
-<% END_WF_EXCLUSION %>
 
 ### Passive Approach
 
@@ -138,8 +142,6 @@ In addition to considering the UX to subscribe a user to push, **please** consid
 
 The number of sites that ask for permission as soon as the page load and then offers no UI for disabling push notifications is astounding.
 
-<% START_WF_EXCLUSION %>
-
 [Vice News](https://news.vice.com/) is an example of this practice. (p.s. sorry
 Vice for using you as an example, you were first site I recalled doing this, although I believe it's fixed now.)
 
@@ -166,7 +168,5 @@ which takes the user to this page in the settings of Chrome.
 ![Chrome Notification Permissions from URL Bar.](/images/ux-examples/vice/vice-disable-in-chrome.png)
 
 Neither of these options are particularly pleasant for the user.
-
-<% END_WF_EXCLUSION %>
 
 Your site should explain to your users how they can disable push. If you don't, users are likely to take the nuclear option and block permission permanently.

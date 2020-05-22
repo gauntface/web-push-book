@@ -68,11 +68,7 @@ I'm going to go through each step involved in getting the demo working. These wi
 
 When we discussed subscribing a user we covered adding an `applicationServerKey` to the `subscribe()` options. It's on the back end that we'll need the private key.
 
-<% START_WF_EXCLUSION %>
-
 > Remember you can use the web-push tool to generate application server keys or use https://web-push-codelab.glitch.me to generate some application server keys. See ["How to Create Application Server Keys"](/chapter-02/01-subscribing-a-user/#how-to-create-application-server-keys) for more details.
-
-<% END_WF_EXCLUSION %>
 
 In the demo these values are added to our Node app like so (boring code I know, but just want you to know there is no magic):
 

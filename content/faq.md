@@ -24,7 +24,9 @@ If you compare the two Chrome icons in the following dock, the one on the left
 is running, illustrated by the marking under the icon, whereas the Chrome
 on the right is **not running**, hence the lack of the marking underneath.
 
-![Example of OS X](/images/faq/os-x-dock.png){: .center-image }
+<p class="u-center">
+  <img src="/images/faq/os-x-dock.png" alt="Example of OS X" />
+</p>
 
 In the context of receiving push messages on desktop, you will receive messages
 when the browser is running, i.e. has the marking underneath the icon.
@@ -37,7 +39,9 @@ The only time a push won't be received is if the browser is completely closed, i
 
 On Chrome for Android, a web app can be added to the home screen and when the web app is opened from the home screen, it can launch in fullscreen mode without the URL bar, as shown below.
 
-![Home screen icon to fullscreen](/images/faq/gauntface-homescreen-to-fullscreen.png){: .center-image }
+<p class="u-center">
+  <img src="/images/faq/gauntface-homescreen-to-fullscreen.png" alt="Home screen icon to fullscreen" />
+</p>
 
 To keep this experience consistent, developers want their clicked notifications to open their web app in fullscreen as well.
 
@@ -55,9 +59,7 @@ What this means is that unless your user is visiting your site through the home 
 
 This issue will be worked on further.
 
-<% START_WF_EXCLUSION %>
 **Note:** This is just the behavior of Chrome. Other browsers may behave differently. Feel free to [raise an issue](https://github.com/gauntface/web-push-book/issues) if you have anything you have anything to add to this discussion.
-<% END_WF_EXCLUSION %>
 
 ## Why is this Any Better than Web Sockets?
 
@@ -94,7 +96,9 @@ This book has been written to focus on the standards approach of web push and pu
 More often than not, developers will spot a notification displayed by Chrome with
 the message "This site has been updated in the background", looks like this:
 
-![Example Chrome Notification for "This site has been updated in the background"](/images/faq/chrome-site-updated-in-background.png){: .center-image }
+<p class="u-center">
+  <img src="/images/faq/chrome-site-updated-in-background.png" alt="Example Chrome Notification for 'This site has been updated in the background'" />
+</p>
 
 Chrome will show this message if **your site fails to show a notification at
 the expected point in time after a push message is received**.

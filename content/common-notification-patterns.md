@@ -125,11 +125,15 @@ were no notifications, we create a new notification with a `newMessageCount` of 
 
 The result is that the first message would look like this:
 
-![First notification without merging.](/images/notification-screenshots/desktop/merge-notification-first.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/merge-notification-first.png" alt="First notification without merging." />
+</p>
 
 A second notification would collapse the notifications into this:
 
-![Second notification with merging.](/images/notification-screenshots/desktop/merge-notification-second.png){: .center-image }
+<p class="u-center">
+  <img src="/images/notification-screenshots/desktop/merge-notification-second.png" alt="Second notification with merging." />
+</p>
 
 The nice thing with this approach is that if your user witnesses the notifications appearing one over the other, it'll look and feel more cohesive than just replacing with notification with the latest message.
 

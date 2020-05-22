@@ -112,11 +112,7 @@ At the moment you **must** pass in a value of `true`. If you don't include the
 
 It's currently looking like blanket silent push will never be implemented in Chrome. Instead, spec authors are exploring the notion of a budget API which will allow web apps a certain number of silent push messages based on the usage of a web app.
 
-<% START_WF_EXCLUSION %>
-
 Firefox doesn't require `userVisibleOnly`, however Firefox does have some notion of a budget behind the scenes but there isn't much detail beyond it expiring `PushSubscription`'s if the budget it gets too low. This is most likely calculated by the number of interactions a user has with notifications displayed.
-
-<% END_WF_EXCLUSION %>
 
 ### applicationServerKey Option
 
@@ -203,9 +199,7 @@ const subscriptionObject = {
 const subscriptionObjectToo = JSON.stringify(pushSubscription);
 ```
 
-<% START_WF_EXCLUSION %>
 In [the demo referenced throughout this book](https://github.com/gauntface/web-push-book/tree/master/src/demos/node-server), we make a POST request to send a subscription to our node server that stores the subscription in a database.
-<% END_WF_EXCLUSION %>
 
 Sending the subscription is done in the web page like so:
 

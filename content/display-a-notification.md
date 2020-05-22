@@ -51,7 +51,7 @@ Where the title is a string and options can be any of the following:
 First let's look at the visual options.
 
 <p class="u-center">
-  <img src="/images/notification-ui.png" alt="Dissection of the UI of a Notification" class="u-center" />
+  <img src="/images/notification-ui.png" alt="Dissection of the UI of a Notification" />
 </p>
 
 ### Title and Body Options
@@ -237,11 +237,9 @@ In testing it seemed that the direction was largely determined by the text rathe
 
 It's recommended to define `dir` if you can, although the browser should do the right thing according to the text supplied.
 
-<% START_WF_EXCLUSION %>
 ```javascript
 {{< inline-file "static/demos/notification-examples/notification-examples.js" "dirRTLNotification" >}}
 ```
-<% END_WF_EXCLUSION %>
 
 The parameter should be set to either `auto`, `ltr` or `rtl`.
 
@@ -298,23 +296,18 @@ You should consider why you sent the push message in the first place and make su
 To be honest, it's easy to see examples and think "I'll never make that mistake". But it's easier to fall into that trap than you might think.
 
 - Don't put your website in the title or the body. Browsers include your domain in the notification so **don't duplicate it**.
-   <% START_WF_EXCLUSION %>
+
    Here's an example of Facebook's fallback message (you can use the DevTools 'push' button to display it yourself). Even if there is no data in the push, the important information is that there's a new notification, not "Facebook".
 
     ![Screenshot of Facebook's default notification](/images/notification-screenshots/desktop/facebook-fallback-notification.png)
-    <% END_WF_EXCLUSION %>
 
 - Use all information you have available to you. If you send a push message because someone sent a message to a user, rather than using a title of 'New Message' and body of 'Click here to read it.' use a title of 'John just sent a new message' and set the body of the notification to part of the message.
-
-    <% START_WF_EXCLUSION %>
 
     Here's an example from a Facebook message.
 
     ![Screenshot of a Facebook message notification](/images/notification-screenshots/desktop/facebook-message.png)
 
     It contains information on who sent the message, the message content and the users profile photo, making the notification more relevant to the user.
-
-    <% END_WF_EXCLUSION %>
 
 ## Browsers and Feature Detection
 

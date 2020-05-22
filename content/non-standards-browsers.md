@@ -40,23 +40,31 @@ Cloud Messaging. For this reason we can use details from a Firebase project to w
 
 The first step is to create a new Firebase project on [https://console.firebase.google.com](https://console.firebase.google.com).
 
-![Firebase Console Page](/images/firebase-setup/01-firebase-console.png){: .center-image }
+<p class="u-center">
+  <img src="/images/firebase-setup/01-firebase-console.png" alt="Firebase Console Page" />
+</p>
 
 Creating a new project is simple, just fill in your project name and select
 your country.
 
-![Firebase Create Project](/images/firebase-setup/02-firebase-create-project.png){: .center-image }
+<p class="u-center">
+  <img src="/images/firebase-setup/02-firebase-create-project.png" alt="Firebase Create Project" />
+</p>
 
 Once you've created your project, you'll find all the important push specific
 info in settings, which can be found by hovering / clicking the cog next
 to your projects name.
 
-![Firebase Settings Pop Up](/images/firebase-setup/05-firebase-project-settings-pop-up-highlight.png){: .center-image }
+<p class="u-center">
+  <img src="/images/firebase-setup/05-firebase-project-settings-pop-up-highlight.png" alt="Firebase Settings Pop Up" />
+</p>
 
 In settings, click on the "Cloud Messaging" tab and here you'll find a "Server
 key" and a "Sender ID". We'll need these two pieces of information shortly.
 
-![Firebase Cloud Messaging Settings](/images/firebase-setup/07-firebase-cloud-settings.png){: .center-image }
+<p class="u-center">
+  <img src="/images/firebase-setup/07-firebase-cloud-settings.png" alt="Firebase Cloud Messaging Settings" />
+</p>
 
 ## Adding a Web App Manifest
 
@@ -101,7 +109,9 @@ If this happens, make sure your manifest is valid JSON and make sure you have th
 
 If you are still stumped as to what the problem could be go into Chrome DevTools, select the **Application** pane, select the **Manifest** tab and click the 'Add to homescreen' link, this will force Chrome to get the manifest and parse it. This can often give a more helpful error message if there is a problem.
 
-![DevTools Manifest Check](/images/devtools/manifest-check.png){: .center-image }
+<p class="u-center">
+  <img src="/images/devtools/manifest-check.png" alt="DevTools Manifest Check" />
+</p>
 
 In Chrome, you can test whether your `gcm_sender_id` works or not by removing the *applicationServerKey* from your `subscribe()` options. This will result on Chrome using the `gcm_sender_id` as a fallback.
 
