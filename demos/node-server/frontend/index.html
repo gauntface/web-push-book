@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#222222">
+
+  <title>Example Site | Web Push Book</title>
+  <meta name="description" content="This the example node project that
+    accompanies the web push book.">
+
+  <!-- Stylesheet -->
+  <link href="styles/push-book-styles.css" rel="stylesheet" type="text/css">
+  <link href="styles/demo.css" rel="stylesheet" type="text/css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700|Open+Sans|Inconsolata" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>Example Site</h1>
+  </header>
+
+  <main>
+    <p>This page is being returned by a minimal Node server. All it does is
+    server some status files (HTML, JavaScript and CSS) and has an API
+    receive new users subscribing for push messages and a set of pages that
+    allow sending push messages to those users, via an API.</p>
+
+    <h2>Subscribe for Push</h2>
+
+    <p>This is an example page that would allow any user to sign up for push.
+    </p>
+
+    <div class="enable-push">
+      <div class="toggle-switch">
+        <input id="enable-push-checkbox" class="js-push-toggle-checkbox" type="checkbox" disabled></input>
+        <label for="enable-push-checkbox"></label>
+      </div>
+      <div class="message">Enable Notifications</div>
+    </div>
+
+    <h2>Admin Panel</h2>
+
+    <p>Once users have signed up, you'd need admin panel to view
+    the subscribed users and trigger push messages to them.</p>
+
+    <p><a class="button" href="/admin.html" target="blank">Open Admin Panel</a></p>
+  </main>
+
+  <script src="app.js" async defer></script>
+</body>
+</html>

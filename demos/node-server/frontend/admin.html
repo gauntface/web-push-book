@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#222222">
+
+  <title>Example Site | Web Push Book</title>
+  <meta name="description" content="This the example node project that
+    accompanies the web push book.">
+
+  <!-- Stylesheet -->
+  <link href="styles/push-book-styles.css" rel="stylesheet" type="text/css">
+  <link href="styles/demo.css" rel="stylesheet" type="text/css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700|Open+Sans|Inconsolata" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>Admin | Example Site</h1>
+  </header>
+
+  <main>
+    <p>This page is just an example that gets all the subscriptions and allows
+    triggering of pushes to demostrate a basic implementation.</p>
+
+    <h2>Send Push Message</h2>
+
+    <p>Clicking "Trigger Push Message" will make
+      an API request to "/api/trigger-push-msg" (i.e. an API call to our
+      node backend) and that will trigger a push message to all our users.
+    </p>
+
+    <p>Feel free to change the text to anything you want.</p>
+
+    <div class="push-data">
+      <textarea rows="10" class="js-push-content push-content-text" disabled>{
+  "notification": {
+    "title": "Example Title",
+    "body": "This will be the body text for the notification.",
+    "icon": "/images/icon-512x512.png"
+  }
+}</textarea>
+
+      <button class="js-trigger-push-msg" disabled>Trigger Push Message</button>
+    </div>
+
+    <h2>Subscriber List</h2>
+
+    <table>
+      <thead>
+        <th>Database ID</th>
+        <th>Endpoint</th>
+      </thead>
+      <tbody class="js-subscriber-table-body">
+
+      </tbody>
+    </table>
+
+    <h3>Please Note</h3>
+
+    <p>You'd want this page to be restricted some how, perhaps by login or
+    could be a restricted application then is only accessible locally.</p>
+  </main>
+
+  <script src="admin.js" async defer></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+name: Publish
+
+# Run every Sunday @ 13:30 UTC => 6:30 PST
+on:
+  schedule:
+    - cron:  '30 13 * * 0'
+
+jobs:
+  publish:
+    runs-on: ubuntu-18.04
+    steps:
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.69.2'
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '^1.13.1'
+
+      - name: Install go-html-asset-manager
+        run: |
+          go get -u github.com/gauntface/go-html-asset-manager/cmds/htmlassets/
+          go get -u github.com/gauntface/go-html-asset-manager/cmds/genimgs/
+
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+
+      - name: Run publish script
+        run: ./publish.sh

@@ -1,12 +1,21 @@
 {
   "private": true,
   "name": "web-push-book",
+  "scripts": {
+    "build": "gulp build",
+    "test": "echo 'No tests in project'"
+  },
   "dependencies": {
     "@hopin/hugo-base-theme": "0.0.316"
   },
   "devDependencies": {
+    "@gauntface/html-asset-manager": "^1.0.4",
+    "@gauntface/hugo-node": "^1.0.7",
+    "@gauntface/web-push-book-theme": "^1.0.2",
+    "@hopin/wbt-clean": "0.0.122",
     "fs-extra": "^9.0.0",
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "gulp-htmlmin": "^5.0.1"
   },
   "license": "Apache-2.0"
 }

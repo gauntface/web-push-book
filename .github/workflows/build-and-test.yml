@@ -1,0 +1,31 @@
+name: Build and Test
+
+on: push
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: '0.70.0'
+
+    - name: Setup Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '^1.13.1'
+
+    - name: Get go-html-asset-manager
+      run: |
+        go get -u github.com/gauntface/go-html-asset-manager/cmds/htmlassets/
+        go get -u github.com/gauntface/go-html-asset-manager/cmds/genimgs/
+
+    - uses: actions/checkout@v2
+    
+    - name: Install
+      run: npm install
+    
+    - name: Build
+      run: npm run build
