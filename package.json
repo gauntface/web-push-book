@@ -1,31 +1,22 @@
 {
+  "private": true,
+  "name": "web-push-book",
   "scripts": {
-    "test": "gulp build:prod && jekyll build && node ./test/utils/download-browsers.js && mocha"
+    "build": "gulp build",
+    "test": "echo 'No tests in project'"
   },
   "dependencies": {
-    "anchor-js": "^4.0.0",
-    "cssnano": "^3.7.6",
-    "del": "^3.0.0",
-    "express": "^4.14.0",
-    "gulp-cssimport": "^6.0.0",
-    "gulp-imagemin": "^3.0.3",
-    "gulp-postcss": "^7.0.0",
-    "mkdirp": "^0.5.1",
-    "postcss-cssnext": "^3.0.2"
+    "@hopin/hugo-base-theme": "0.0.319"
   },
   "devDependencies": {
-    "chalk": "^2.0.1",
-    "fs-promise": "^2.0.0",
-    "gfm-code-block-regex": "^1.0.0",
-    "glob": "^7.0.5",
-    "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-changed": "^3.1.0",
-    "gulp-image-resize": "^0.13.0",
-    "moment": "^2.17.1",
-    "mustache": "^2.3.0",
-    "selenium-assistant": "^5.0.4",
-    "serve-index": "^1.8.0",
-    "serve-static": "^1.11.1",
-    "yaml-front-matter": "^3.4.0"
-  }
+    "@gauntface/html-asset-manager": "1.0.4",
+    "@gauntface/hugo-node": "1.0.9",
+    "@gauntface/web-push-book-theme": "1.0.9",
+    "@hopin/wbt-clean": "0.0.126",
+    "browser-sync": "2.26.7",
+    "fs-extra": "9.0.0",
+    "gulp": "4.0.2",
+    "gulp-htmlmin": "5.0.1"
+  },
+  "license": "Apache-2.0"
 }

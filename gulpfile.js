@@ -1,153 +1,144 @@
-'use strict';
-
-const BUILD_OUTPUT_PATH = './build';
-const SRC_PATH = './src';
-
-let prodBuild = true;
-
-const spawn = require('child_process').spawn;
-
 const gulp = require('gulp');
-const del = require('del');
-const postcss = require('gulp-postcss');
-const cssimport = require('gulp-cssimport');
-const cssnext = require('postcss-cssnext');
-const cssnano = require('cssnano');
-const imagemin = require('gulp-imagemin');
-const imageResize = require('gulp-image-resize');
-const changed = require('gulp-changed');
+const path = require('path');
+const browserSync = require('browser-sync').create();
+const basetheme = require('@hopin/hugo-base-theme');
+const booktheme = require('@gauntface/web-push-book-theme');
+const hugo = require('@gauntface/hugo-node');
+const clean = require('@hopin/wbt-clean');
+const htmlmin = require('gulp-htmlmin');
+const ham = require('@gauntface/html-asset-manager');
 
-const parseContent = require('./utils/inline-source-code');
+const desiredHugoVersion = 'v0.70.0';
 
-gulp.task('clean', () => {
-  return del([BUILD_OUTPUT_PATH]);
-});
+/**
+ * Themes
+ */
+gulp.task('hopin-base-theme', () => {
+  return basetheme.copyTheme(path.join(__dirname, `themes`, 'hopin-base-theme'));
+})
+gulp.task('web-push-book-theme', () => {
+  return booktheme.copyTheme(path.join(__dirname, `themes`, 'web-push-book'));
+})
+gulp.task('themes', gulp.parallel(
+  'hopin-base-theme',
+  'web-push-book-theme',
+))
 
-gulp.task('copy', () => {
-  return gulp.src([
-    SRC_PATH + '/*.md',
-    SRC_PATH + '/*.ico',
-    SRC_PATH + '/**/*.{html,js}',
-    './node_modules/anchor-js/anchor.min.js'
-  ])
-  .pipe(changed(BUILD_OUTPUT_PATH))
-  .pipe(gulp.dest(BUILD_OUTPUT_PATH));
-});
-
-gulp.task('images-svg', () => {
-  const optimisedImagePath = BUILD_OUTPUT_PATH + '/images';
-  let stream = gulp.src([
-    SRC_PATH + '/images/**/*.svg'
-  ])
-  .pipe(changed(optimisedImagePath));
-
-  if (prodBuild) {
-    stream = stream.pipe(changed(optimisedImagePath))
-    .pipe(imagemin({
-      progressive: true,
-      interlaced: true,
-      svgoPlugins: [{removeViewBox: false}],
-    }));
+/**
+ * Build the site
+ */
+gulp.task('check-hugo-version', async () => {
+  const v = await hugo.version();
+  if (v != desiredHugoVersion) {
+    throw new Error(`Wrong hugo version; got ${v}, want ${desiredHugoVersion}`)
   }
+})
 
-  return stream.pipe(gulp.dest(optimisedImagePath));
-});
+gulp.task('clean', gulp.series(
+  clean.gulpClean([
+    path.join(__dirname, 'public'),
+    path.join(__dirname, 'themes'),
+  ]),
+))
 
-gulp.task('images-other', () => {
-  const optimisedImagePath = BUILD_OUTPUT_PATH + '/images';
-  let stream = gulp.src([
-    SRC_PATH + '/images/**/*.{png,jpg,jpeg,gif}'
-  ])
-  .pipe(changed(optimisedImagePath));
+gulp.task('hugo-build', async () => {
+  await hugo.build(__dirname);
+})
 
-  if (prodBuild) {
-    stream = stream.pipe(changed(optimisedImagePath))
-    .pipe(imageResize({
-      width : 800,
-      quality: 0.8,
-      imageMagick: true,
-    }))
-    .pipe(imagemin({
-      progressive: true,
-      interlaced: true,
-      svgoPlugins: [{removeViewBox: false}],
-    }));
-  }
+gulp.task('genimgs', () => {
+  return ham.generateImages({
+    config: path.join(__dirname, 'asset-manager.json'),
+    output: true,
+  });
+})
 
-  return stream.pipe(gulp.dest(optimisedImagePath));
-});
-
-gulp.task('images', gulp.parallel('images-other', 'images-svg'));
-
-gulp.task('styles', () => {
-  const browserSupport = ['last 2 versions'];
-  const processors = [
-    cssnext({browsers: browserSupport, warnForDuplicates: false}),
-    cssnano()
-  ];
-
-  let stream = gulp.src([
-    SRC_PATH + '/**/*.css',
-    `!${SRC_PATH}/{demo,demo/**}`,
-  ])
-  .pipe(changed(BUILD_OUTPUT_PATH));
-
-  if (prodBuild) {
-    stream = stream.pipe(cssimport({
-      extensions: ["css"]
-    }))
-    .pipe(postcss(processors));
-  }
-
-  return stream.pipe(gulp.dest(BUILD_OUTPUT_PATH));
-});
-
-gulp.task('watch', () => {
-  gulp.watch(SRC_PATH + '/**/*', gulp.series('build:dev'));
-});
-
-gulp.task('jekyll', () => {
-  spawn('jekyll', ['serve', '--incremental', '--force_polling'], {
-    stdio: 'inherit'
+gulp.task('html-assetmanager', () => {
+  return ham.manageAssets({
+    config: path.join(__dirname, 'asset-manager.json'),
+    vimeo: process.env['VIMEO_TOKEN'],
+    debug: 'static-site-hosting-on-aws',
+    output: true,
   });
 });
 
-const makeDevBuild = () => {
-  prodBuild = false;
-  return Promise.resolve();
-};
+gulp.task('minify-html', () => {
+  return gulp.src(path.join(__dirname, 'public', '**', '*.html'))
+    .pipe(htmlmin({
+      collapseWhitespace: true,
+      removeComments: true,
+      minifyCSS: true,
+      minifyJS: true,
+      minifyURLs: true,
+    }))
+    .pipe(gulp.dest(path.join(__dirname, 'public')));
+})
 
-gulp.task('build:prod',
+gulp.task('copy-verification',() => {
+  return gulp.src(path.join(__dirname, 'verification', '**', '*'))
+    .pipe(gulp.dest(path.join(__dirname, 'public')));
+})
+
+gulp.task('build-base', gulp.series(
+  'check-hugo-version',
+  'clean',
+  'themes',
+  'hugo-build',
+));
+
+gulp.task('build', gulp.series(
+  'build-base',
+  'genimgs',
+  'html-assetmanager',
+  'minify-html',
+  'copy-verification',
+))
+
+/**
+ * Watch Prod
+ */
+gulp.task('watch-site-theme-prod', () => {
+  const opts = {
+    ignoreInitial: true,
+  };
+  return gulp.watch(
+    [path.join(__dirname, 'node_modules', '@gauntface/web-push-book-theme', '**', '*')],
+    opts,
+    gulp.series('themes', 'build'),
+  );
+});
+
+gulp.task('watch-any', () => {
+  const opts = {
+    delay: 500,
+    ignoreInitial: true,
+  };
+  return gulp.watch(
+    [
+      path.posix.join(__dirname, 'archetypes', '**', '*'),
+      path.posix.join(__dirname, 'content', '**', '*'),
+      path.posix.join(__dirname, 'static', '**', '*'),
+      path.posix.join(__dirname, 'vertification', '**', '*'),
+    ],
+    opts,
+    gulp.series('build', async () => browserSync.reload()),
+  );
+});
+
+gulp.task('browser-sync', function() {
+  browserSync.init({
+      server: {
+          baseDir: "./public/",
+      }
+  });
+});
+
+gulp.task('watch-prod',
   gulp.series(
-    'clean',
+    'build',
     gulp.parallel(
-      'styles',
-      'images',
-      'copy',
-      () => parseContent(
-        BUILD_OUTPUT_PATH + '/_ebook',
-        BUILD_OUTPUT_PATH + '/_content',
-        BUILD_OUTPUT_PATH + '/_webfundamentals'
-      )
-    )
-  )
+      'browser-sync',
+      'watch-site-theme-prod',
+      'watch-any',
+    ),
+  ),
 );
-
-gulp.task('build:dev',
-  gulp.series(
-    makeDevBuild,
-    gulp.parallel(
-      'styles',
-      'images',
-      'copy',
-      () => parseContent(
-        BUILD_OUTPUT_PATH + '/_ebook',
-        BUILD_OUTPUT_PATH + '/_content',
-        BUILD_OUTPUT_PATH + '/_webfundamentals'
-      )
-        .catch(err => console.log('Error Building Content: ', err))
-    )
-  )
-);
-
-gulp.task('default', gulp.series('clean', 'build:dev', gulp.parallel('watch', 'jekyll')))

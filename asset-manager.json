@@ -1,0 +1,26 @@
+{
+  "html-dir": "public/",
+  "base-url": "https://www.gauntface.com",
+  "assets": {
+    "static-dir": "public/",
+    "generated-dir": "public/generated/",
+    "json-dir": "themes/web-push-book/data/hopin/"
+  },
+  "gen-assets": {
+    "static-dir": "static/images/",
+    "output-dir": "static/generated/",
+    "max-width": 800,
+    "max-density": 3
+  },
+  "img-to-picture": [
+    {
+      "id": "l-content",
+      "max-width": 720,
+      "source-sizes": [
+        "(min-width: 720px) 720px",
+        "100vw"
+      ]
+    }
+  ],
+  "ratio-wrapper": []
+}

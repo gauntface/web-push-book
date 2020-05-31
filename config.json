@@ -1,0 +1,31 @@
+{
+   "disableHugoGeneratorInject": true,
+   "markup": {
+      "goldmark": {
+         "renderer": {
+            "unsafe": true
+         }
+      },
+      "highlight": {
+         "codeFences": false
+      }
+   },
+
+   "baseURL": "https://web-push-book.gauntface.com",
+   "languageCode": "en-us",
+   "title": "Web Push Book",
+   "theme": [
+      "web-push-book",
+      "hopin-base-theme"
+   ],
+   "summaryLength": 45,
+   
+   "params": {
+      "shorttitle": "Base Site",
+      "description": "Web push book provides all the information you need to learn about the web push API.",
+      "themecolor": "#222222",
+      "googleanalytics": "UA-166759709-1",
+      "socialimage": "/images/default-social.png",
+      "twittercreator": "@gauntface"
+    }
+}
