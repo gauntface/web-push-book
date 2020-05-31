@@ -2,15 +2,13 @@
 title: Subscribing a User
 weight: 3
 ---
-# Subscribing a User
-
-The first step is to get permission from the user to send them push messages and then we can get our hands on a `PushSubscription`.
+The first step is to get permission from the user to send them push messages, and then we can get our hands on a `PushSubscription`.
 
 The JavaScript API to do this is reasonably straight forward, so let's step through the logic flow.
 
 ## Feature Detection
 
-First we need check if the current browser actually supports push messaging. We can check if push is supported with two simple checks.
+First, we need to check if the current browser actually supports push messaging. We can check if push is supported with two simple checks.
 
 1. Check for `serviceWorker` on `navigator`.
 1. Check for `PushManager` on `window`.
@@ -20,12 +18,12 @@ First we need check if the current browser actually supports push messaging. We 
 ```
 
 While browser support is growing quickly for both service worker and
-push messaging support, it's always a good idea to feature detect for both and
+push messaging support; it's always a good idea to feature detect for both and
 [progressively enhance](https://en.wikipedia.org/wiki/Progressive_enhancement).
 
 ## Register a Service Worker
 
-With the feature detect we know that both service workers and Push are supported. The next step is to "register" our service worker.
+With the feature detect, we know that both service workers and push are supported. The next step is to "register" our service worker.
 
 When we register a service worker, we are telling the browser where our service worker file is. The file is still just JavaScript, but the browser will "give it access" to the service worker APIs, including push. To be more exact, the browser runs the file in a service worker environment.
 
@@ -35,7 +33,7 @@ To register a service worker, call `navigator.serviceWorker.register()`, passing
 {{< inline-file "demos/node-server/frontend/app.js" "register-sw" >}}
 ```
 
-This code above tells the browser that we have a service worker file and where it's located. In this case, the service worker file is at `/service-worker.js`. Behind the scenes the browser will take the following steps after calling `register()`:
+This code above tells the browser that we have a service worker file and where it's located. In this case, the service worker file is at `/service-worker.js`. Behind the scenes, the browser will take the following steps after calling `register()`:
 
 1. Download the service worker file.
 
@@ -49,10 +47,9 @@ When `register()` does resolve, it returns a `ServiceWorkerRegistration`. We'll 
 
 ## Requesting Permission
 
-We've registered our service worker and are ready to subscribe the user, the next step is to get permission from the user to send them push messages.
+We've registered our service worker and are ready to subscribe the user; the next step is to get permission from the user to send them push messages.
 
-The API for getting permission is relatively simple, the downside is that
-the API [recently changed from taking a callback to returning a Promise](https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission). The problem with this, is that we can't tell what version of the API is implemented by the current browser, so you have to implement both and handle both.
+The API for getting permission is relatively simple, although the API [recently changed from taking a callback to returning a Promise](https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission). The problem with this is that we can't tell what version of the API is implemented by the current browser, so you have to implement both and handle both.
 
 ```js
 {{< inline-file "demos/node-server/frontend/app.js" "request-permission" >}}
@@ -62,7 +59,7 @@ In the above code, the important snippet of code is the call to `Notification.re
 
 ![Permission Prompt on Desktop and Mobile Chrome.](/images/permission-prompt.png)
 
-Once the permission has been accepted / allowed, closed (i.e. clicking the cross on the pop-up), or blocked, we'll be given the result as a string: 'granted', 'default' or 'denied'.
+Once the permission has been accepted/allowed, closed (i.e., clicking the cross on the pop-up), or blocked, we'll be given the result as a string: 'granted', 'default' or 'denied'.
 
 In the sample code above, the promise returned by `askPermission()` resolves if the permission is granted, otherwise we throw an error making the promise reject.
 
@@ -95,7 +92,7 @@ Once we have our service worker registered and we've got permission, we can subs
 
 When calling the `subscribe()` method, we pass in an *options* object, which consists of both required and optional parameters.
 
-Lets look at all the options we can pass in.
+Let's look at all the options we can pass in.
 
 ### userVisibleOnly Options
 
@@ -103,35 +100,35 @@ When push was first added to browsers, there was uncertainty about whether devel
 
 The concern was that developers could do nasty things like track a user's location on an ongoing basis without the user knowing.
 
-To avoid this scenario and to give spec authors time to consider how best to support this feature, the `userVisibleOnly` option was added and passing in a value of `true` is a symbolic agreement with the browser that the web app will show a notification every time a push is received (i.e. no silent push).
+To avoid this scenario and to give spec authors time to consider how best to support this feature, the `userVisibleOnly` option was added and passing in a value of `true` is a symbolic agreement with the browser that the web app will show a notification every time a push is received (i.e., no silent push).
 
-At the moment you **must** pass in a value of `true`. If you don't include the
+At the moment, you **must** pass in a value of `true`. If you don't include the
 `userVisibleOnly` key or pass in `false` you'll get the following error:
 
 > Chrome currently only supports the Push API for subscriptions that will result in user-visible messages. You can indicate this by calling `pushManager.subscribe({userVisibleOnly: true})` instead. See [https://goo.gl/yqv4Q4](https://goo.gl/yqv4Q4) for more details.
 
-It's currently looking like blanket silent push will never be implemented in Chrome. Instead, spec authors are exploring the notion of a budget API which will allow web apps a certain number of silent push messages based on the usage of a web app.
+It's currently looking like blanket silent push will never be implemented in Chrome. Instead, spec authors are exploring the notion of a budget API, which will allow web apps a certain number of silent push messages based on the usage of a web app.
 
-Firefox doesn't require `userVisibleOnly`, however Firefox does have some notion of a budget behind the scenes but there isn't much detail beyond it expiring `PushSubscription`'s if the budget it gets too low. This is most likely calculated by the number of interactions a user has with notifications displayed.
+Firefox doesn't require `userVisibleOnly`; however, Firefox does have some notion of a budget behind the scenes, but there isn't much detail beyond it expiring `PushSubscription`'s if the budget it gets too low. This is most likely calculated by the number of interactions a user has with notifications displayed.
 
 ### applicationServerKey Option
 
 We briefly mentioned the notion "application server keys" in the previous section. "Application server keys" are used by a push service to identify the application subscribing a user and ensure that the same application is messaging that user.
 
-Application server keys are a public and private key pair that are unique to your application. The private key should be kept a secret to your application and the public key can be shared freely.
+Application server keys are a public and private key pair that are unique to your application. The private key should be kept a secret to your application, and the public key can be shared freely.
 
 The `applicationServerKey` option passed into the `subscribe()` call is the application's public key. The browser passes this onto a push service when subscribing the user, meaning the push service can tie your application's public key to the user's `PushSubscription`.
 
 The diagram below illustrates these steps.
 
-1. Your web app is loaded in a browser and you call `subscribe()`, passing in your public application server key.
+1. Your web app is loaded in a browser, and you call `subscribe()`, passing in your public application server key.
 1. The browser then makes a network request to a push service who will generate an endpoint, associate this endpoint with the applications public key and return the endpoint to the browser.
 1. The browser will add this endpoint to the `PushSubscription`, which is returned via the `subscribe()` promise.
 
 ![Illustration of the public application server key is used in subscribe method.](/images/svgs/application-server-key-subscribe.svg)
-
-When you later want to send a push message, you'll need to create an **Authorization** header which will contain information signed with your application server's **private key**. When the push service
-receives a request to send a push message, it can validate this signed **Authorization** header by looking up the public key linked to the endpoint receiving the request. If the signature is valid the push service knows that it must have come from the application server with the **matching private key**. It's basically a security measure that prevents anyone else sending messages to an application's users.
+a
+When you later want to send a push message, you'll need to create an **Authorization** header, which will contain information signed with your application server's **private key**. When the push service
+receives a request to send a push message, it can validate this signed **Authorization** header by looking up the public key linked to the endpoint receiving the request. If the signature is valid, the push service knows that it must have come from the application server with the **matching private key**. It's basically a security measure that prevents anyone else from sending messages to an application's users.
 
 ![Illustration of how the private application server key is used when sending a message.](/images/svgs/application-server-key-send.svg)
 
@@ -146,12 +143,12 @@ Whenever you read something referring to *"application server keys"* or
 
 #### How to Create Application Server Keys
 
-You can create a public and private set of application server keys by visiting [web-push-codelab.glitch.me](https://web-push-codelab.glitch.me/) or you can use the [web-push command line](https://github.com/web-push-libs/web-push#command-line) to generate keys by doing the following:
+You can create a public and private set of application server keys by visiting [web-push-codelab.glitch.me](https://web-push-codelab.glitch.me/), or you can use the [web-push command line](https://github.com/web-push-libs/web-push#command-line) to generate keys by doing the following:
 
     $ npm install -g web-push
     $ web-push generate-vapid-keys
 
-You only need to create these keys once for your application, just make sure you keep the private key private. (Yeah I just said that.)
+You only need to create these keys once for your application; just make sure you keep the private key private. (Yeah, I just said that.)
 
 ## Permissions and subscribe()
 
@@ -159,13 +156,13 @@ There is one side effect of calling `subscribe()`. If your web app doesn't have 
 
 ## What is a PushSubscription?
 
-We call `subscribe()`, pass in some options, and in return we get a promise that resolves to a `PushSubscription` resulting in some code like so:
+We call `subscribe()`, pass in some options, and in return, we get a promise that resolves to a `PushSubscription` resulting in some code like so:
 
 ```js
 {{< inline-file "demos/node-server/frontend/app.js" "subscribe-user" >}}
 ```
 
-The `PushSubscription` object contains all the required information needed to send a push messages to that user. If you print out the contents using `JSON.stringify()`, you'll see the following:
+The `PushSubscription` object contains all the required information needed to send a push message to that user. If you print out the contents using `JSON.stringify()`, you'll see the following:
 
 ```json
 {
@@ -183,7 +180,7 @@ The `keys` object contains the values used to encrypt message data sent with a p
 
 ## Send a Subscription to Your Server
 
-Once you have a push subscription you'll want to send it to your server. It's up to you how you do that but a tiny tip is to use `JSON.stringify()` to get all the necessary data out of the subscription object. Alternatively you can piece together the same result manually like so:
+Once you have a push subscription, you'll want to send it to your server. It's up to you how you do that, but a tiny tip is to use `JSON.stringify()` to get all the necessary data out of the subscription object. Alternatively you can piece together the same result manually like so:
 
 ```javascript
 const subscriptionObject = {
@@ -213,7 +210,7 @@ The node server receives this request and saves the data to a database for use l
 {{< inline-file "demos/node-server/index.js" "save-sub-example" >}}
 ```
 
-With the `PushSubscription` details on our server we are good to send our user
+With the `PushSubscription` details on our server, we are good to send our user
 a message whenever we want.
 
 ## FAQs
