@@ -61,7 +61,7 @@ The title and body options are exactly as they sound, two different pieces of te
 If we ran the following code:
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "titleAndBodySimple" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-title-body.js" "titleAndBodySimple" >}}
 ```
 
 We'd get this notification on Chrome:
@@ -109,7 +109,7 @@ The `icon` option is essentially a small image you can show next to the title an
 In your code you just need to provide a URL to the image you'd like to load.
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "iconNotification" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-icon.js" "iconNotification" >}}
 ```
 
 On Chrome we get this notification on Linux:
@@ -137,7 +137,7 @@ If we assume the highest pixel ratio for a device will be 3, an icon size of 192
 The `badge` is a small monochrome icon that is used to portray a little more information to the user about where the notification is from.
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "badgeNotification" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-badge.js" "badgeNotification" >}}
 ```
 
 At the time of writing the badge is only used on Chrome for Android.
@@ -163,7 +163,7 @@ Meaning an image of 72px or more should be good (assuming a max device pixel rat
 The `image` option can be used to display a larger image to the user. This is particularly useful to display a preview image to the user.
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "imageNotification" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-image.js" "imageNotification" >}}
 ```
 
 On desktop the notification will look like this:
@@ -191,7 +191,7 @@ Using this guideline, an image of width 1350px or more would be a good bet.
 You can defined `actions` to display buttons with a notification.
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "actionsNotification" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-actions.js" "actionsNotification" >}}
 ```
 
 At the time of writing only Chrome and Opera for Android support actions.
@@ -238,7 +238,7 @@ In testing it seemed that the direction was largely determined by the text rathe
 It's recommended to define `dir` if you can, although the browser should do the right thing according to the text supplied.
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "dirRTLNotification" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-dir-ltr.js" "dirRTLNotification" >}}
 ```
 
 The parameter should be set to either `auto`, `ltr` or `rtl`.
@@ -262,7 +262,7 @@ The vibrate option allows you to define a vibration pattern that'll run when a n
 The format of the vibrate option should be an array of numbers that describe the number of milliseconds the device should vibrate followed by the number of milliseconds the device should *not* vibrate.
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "vibrateNotification" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-vibrate.js" "vibrateNotification" >}}
 ```
 
 This only affects devices that support vibration.
@@ -274,7 +274,7 @@ The sound parameter allows you to define a sound to play when the notification i
 At the time of writing no browser has support for this option.
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "soundNotification" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-sound.js" "soundNotification" >}}
 ```
 
 ### Timestamp
@@ -284,7 +284,7 @@ Timestamp allows you to tell the platform the time when an event occurred that r
 The `timestamp` should be the number of milliseconds since 00:00:00 UTC, which is 1 January 1970 (i.e. the unix epoch).
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "timestampNotification" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-timestamp.js" "timestampNotification" >}}
 ```
 
 ## UX Best Practices

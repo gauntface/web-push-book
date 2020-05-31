@@ -1,9 +1,8 @@
-const examplePage = '/demos/notification-examples/example-page.html';
+const examplePageURL = '/demos/example-page/';
 
 function openWindow(event) {
   /**** START notificationOpenWindow ****/
-  const examplePage = '/demos/notification-examples/example-page.html';
-  const promiseChain = clients.openWindow(examplePage);
+  const promiseChain = clients.openWindow(examplePageURL);
   event.waitUntil(promiseChain);
   /**** END notificationOpenWindow ****/
 }
@@ -11,7 +10,7 @@ function openWindow(event) {
 function focusWindow(event) {
   /**** START notificationFocusWindow ****/
   /**** START urlToOpen ****/
-  const urlToOpen = new URL(examplePage, self.location.origin).href;
+  const urlToOpen = new URL(examplePageURL, self.location.origin).href;
   /**** END urlToOpen ****/
 
   /**** START clientsMatchAll ****/
@@ -64,7 +63,6 @@ function isClientFocused() {
   })
   .then((windowClients) => {
     let clientIsFocused = false;
-
     for (let i = 0; i < windowClients.length; i++) {
       const windowClient = windowClients[i];
       if (windowClient.focused) {
@@ -78,43 +76,41 @@ function isClientFocused() {
 }
 /**** END isClientFocused ****/
 
-function demoMustShowNotificationCheck(event) {
+// TODO (mattgaunt): This was originally passing in event
+// and using event.WaitUntil(), that now causes an error - investigate
+async function demoMustShowNotificationCheck() {
   /**** START showNotificationRequired ****/
-  const promiseChain = isClientFocused()
-  .then((clientIsFocused) => {
-    if (clientIsFocused) {
-      console.log('Don\'t need to show a notification.');
-      return;
+  if (await isClientFocused()) {
+    console.log('Don\'t need to show a notification.');
+    return;
+  }
 
-    }
-
-    // Client isn't focused, we need to show a notification.
-    return self.registration.showNotification('Had to show a notification.');
-  });
-
-  event.waitUntil(promiseChain);
+  // Client isn't focused, we need to show a notification.
+  return self.registration.showNotification('Had to show a notification.');
   /**** END showNotificationRequired ****/
 }
 
-function demoSendMessageToPage(event) {
+// TODO (mattgaunt): This was originally passing in event
+// and using event.WaitUntil(), that now causes an error - investigate
+async function demoSendMessageToPage() {
   /**** START sendPageMessage ****/
-  const promiseChain = isClientFocused()
-  .then((clientIsFocused) => {
-    if (clientIsFocused) {
-      windowClients.forEach((windowClient) => {
-        windowClient.postMessage({
-          message: 'Received a push message.',
-          time: new Date().toString()
-        });
+  if (await isClientFocused()) {
+    const windowClients = await clients.matchAll({
+      type: 'window',
+      includeUncontrolled: true
+    });
+    windowClients.forEach((windowClient) => {
+      windowClient.postMessage({
+        message: 'Received a push message.',
+        time: new Date().toString()
       });
-    } else {
-      return self.registration.showNotification('No focused windows', {
-        body: 'Had to show a notification instead of messaging each page.'
-      });
-    }
-  });
+    });
+    return;
+  }
 
-  event.waitUntil(promiseChain);
+  return self.registration.showNotification('No focused windows', {
+    body: 'Had to show a notification instead of messaging each page.'
+  });
   /**** END sendPageMessage ****/
 }
 

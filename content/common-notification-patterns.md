@@ -27,7 +27,7 @@ When a push message is received it's common to have data that is only useful if 
 The easiest way to take data from a push event and attach it to a notification is to add a `data` parameter to the options object passed into `showNotification()`, like so:
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "addNotificationData" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-data-notification.js" "addNotificationData" >}}
 ```
 
 Inside a click handler the data can be accessed with `event.notification.data`.
@@ -109,7 +109,7 @@ In our chat app, let's assume each notification has as some data which includes 
 First thing we'll want to do is find any open notifications for a user with a specific username. We'll get `registration.getNotifications()` and loop over them and check the `notification.data` for a specific username:
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "getNotifications" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-merge-notification.js" "getNotifications" >}}
 ```
 
 The next step is to replace this notification with a new notification.
@@ -117,7 +117,7 @@ The next step is to replace this notification with a new notification.
 In this fake message app, we'll track the number of new messages by adding a count to our new notifications data and increment it with each new notification.
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "manipulateNotification" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-merge-notification.js" "manipulateNotification" >}}
 ```
 
 If there is a notification currently display we increment the message count and set the notification title and body message accordingly. If there
@@ -172,7 +172,7 @@ Let's say we've received a push, checked that our web app is currently focused, 
 In each of the pages, we listen for these messages by adding a message event listener:
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "swMessageListener" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-send-message-to-page.js" "swMessageListener" >}}
 ```
 
 In this message listener you could do anything you want, show a custom UI on your page or completely ignore the message.

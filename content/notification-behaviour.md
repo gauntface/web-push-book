@@ -41,7 +41,7 @@ In the previous section you saw how to define actions when calling
 `showNotification()`:
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "actionsNotification" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-actions.js" "actionsNotification" >}}
 ```
 
 If the user clicks an action button, check the `event.action` value in the `noticationclick` event to tell which action button was clicked.
@@ -66,7 +66,7 @@ Let's display a notification and give it a tag, of
 'message-group-1'. We'd display the notification with this code:
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "tagNotificationOne" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-tag.js" "tagNotificationOne" >}}
 ```
 
 Which will show our first notification.
@@ -78,7 +78,7 @@ Which will show our first notification.
 Let's display a second notification with a new tag of 'message-group-2', like so:
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "tagNotificationTwo" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-tag.js" "tagNotificationTwo" >}}
 ```
 
  This will display a second notification to the user.
@@ -90,7 +90,7 @@ Let's display a second notification with a new tag of 'message-group-2', like so
 Now let's show a third notification but re-use the first tag of 'message-group-1'. Doing this will close the first notification and replace it with our new notification.
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "tagNotificationThree" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-tag.js" "tagNotificationThree" >}}
 ```
 
 Now we have two notifications even though `showNotification()` was called three times.
@@ -112,7 +112,7 @@ This largely applies to mobile devices at the time of writing. Setting this opti
 There are scenarios where you might want a replacing notification to notify the user rather than silently update. Chat applications are a good example. In this case you should set `tag` and `renotify` to true.
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "renotifyNotification" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-renotify.js" "renotifyNotification" >}}
 ```
 
 **Note:** If you set `renotify: true` on a notification without a tag, you'll get the following error:
@@ -128,7 +128,7 @@ This is ideal if your notifications don't require immediate attention
 from the user.
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "silentNotification" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-silent.js" "silentNotification" >}}
 ```
 
 **Note:** If you define both *silent* and *renotify*, silent will take precedence.
@@ -140,7 +140,7 @@ Chrome on desktop will show notifications for a set time period before hiding th
 To force a notification to stay visible until the user interacts with it add the `requireInteraction` option. This will show the notification until the user dismisses or clicks your notification.
 
 ```javascript
-{{< inline-file "static/demos/notification-examples/notification-examples.js" "requireInteraction" >}}
+{{< inline-file "static/demos/notification-examples/examples/js-notification-require-interaction.js" "requireInteraction" >}}
 ```
 
 Please use this option with consideration. Showing a notification and forcing the user to stop what they are doing to dismiss your notification can be frustrating.
