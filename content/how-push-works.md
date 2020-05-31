@@ -2,15 +2,13 @@
 title: How Push Works
 weight: 2
 ---
-# How Push Works
+Before getting into the API, let's look at push from a high level, start to finish. Then as we step through specific topics or APIs, you'll understand how it fits into the overall story of web push.
 
-Before getting into the API, let's look at push from a highlevel, start to finish. Then as we step through individual topics or API's later on, you'll have an idea of how and why it's important.
+The three steps to implementing push are:
 
-The three key steps to implementing push are:
-
-1. Adding the client side logic to subscribe a user to push (i.e. the JavaScript and UI in your web app that registers a user to push messages).
-1. The API call from your back-end / application that triggers a push message to a user's device.
-1. The service worker JavaScript file that will receive a "push event" when the push arrives on the device. It's in this JavaScript that you'll be able to show a notification.
+1. Adding the client-side logic to subscribe a user to push (i.e., the JavaScript and UI in your web app that registers a user to push messages).
+1. The API call from your backend/application that triggers a push message to a user's device.
+1. The service worker JavaScript file that receives "push events" when the push arrives on the device. It's in this JavaScript that you'll show a notification.
 
 Let's look at what each of these steps entails in a little more detail.
 
