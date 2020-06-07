@@ -14,7 +14,7 @@
     "@gauntface/web-push-book-theme": "1.0.9",
     "@hopin/wbt-clean": "0.0.126",
     "browser-sync": "2.26.7",
-    "fs-extra": "9.0.0",
+    "fs-extra": "9.0.1",
     "gulp": "4.0.2",
     "gulp-htmlmin": "5.0.1"
   },
