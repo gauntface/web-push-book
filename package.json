@@ -11,7 +11,7 @@
   "devDependencies": {
     "@gauntface/html-asset-manager": "1.0.4",
     "@gauntface/hugo-node": "1.0.15",
-    "@gauntface/web-push-book-theme": "1.0.14",
+    "@gauntface/web-push-book-theme": "1.0.15",
     "@hopin/wbt-clean": "0.0.126",
     "browser-sync": "2.26.7",
     "fs-extra": "9.0.1",
