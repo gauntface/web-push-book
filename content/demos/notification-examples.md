@@ -103,7 +103,7 @@ removed before the new notification is shown.
 
 <p class="demo-btns">
   <button class="c-button js-notification-tag" disabled>Tag</button>
-  <a class="c-button c-button--no-bg" href="/display-a-notification/#tag">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/notification-behaviour/#tag">Details &amp; Code</a>
 </p>
 
 ### Renotify
@@ -122,7 +122,7 @@ affected.
 
 <p class="demo-btns">
   <button class="c-button js-notification-renotify" disabled>Renotify</button>
-  <a class="c-button c-button--no-bg" href="/chapter-05/03-notification-behaviour/#renotify">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/notification-behaviour/#renotify">Details &amp; Code</a>
 </p>
 
 ### Silent
@@ -134,7 +134,7 @@ like sound, vibration and screen wake.
 
 <p class="demo-btns">
   <button class="c-button js-notification-silent" disabled>Silent</button>
-  <a class="c-button c-button--no-bg" href="/chapter-05/03-notification-behaviour/#silent">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/notification-behaviour/#silent">Details &amp; Code</a>
 </p>
 
 ### Require Interaction
@@ -148,7 +148,7 @@ To get the same behaviour on desktop and mobile you can set the
 
 <p class="demo-btns">
   <button class="c-button js-notification-require-interaction" disabled>Require Interaction</button>
-  <a class="c-button c-button--no-bg" href="/chapter-05/03-notification-behaviour/#requires-interaction">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/notification-behaviour/#requires-interaction">Details &amp; Code</a>
 </p>
 
 ### Notification Badge
@@ -158,7 +158,7 @@ of writing. It's used to replace the browser icon that is shown by default.
 
 <p class="demo-btns">
   <button class="c-button js-notification-badge" disabled>Badge</button>
-  <a class="c-button c-button--no-bg" href="/chapter-05/02-display-a-notification/#badge">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/display-a-notification/#badge">Details &amp; Code</a>
 </p>
 
 ### Vibration
@@ -168,7 +168,7 @@ applies to mobile devices since laptops tend not to vibrate.
 
 <p class="demo-btns">
   <button class="c-button js-notification-vibrate" disabled>Vibrate</button>
-  <a class="c-button c-button--no-bg" href="/chapter-05/02-display-a-notification/#vibrate">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/display-a-notification/#vibrate">Details &amp; Code</a>
 </p>
 
 ### Timestamp
@@ -178,7 +178,7 @@ notification was created.
 
 <p class="demo-btns">
   <button class="c-button js-notification-timestamp" disabled>Timestamp</button>
-  <a class="c-button c-button--no-bg" href="/chapter-05/02-display-a-notification/#timestamp">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/display-a-notification/#timestamp">Details &amp; Code</a>
 </p>
 
 ### Sound
@@ -188,7 +188,7 @@ has implemented it yet.
 
 <p class="demo-btns">
   <button class="c-button js-notification-sound" disabled>Sound</button>
-  <a class="c-button c-button--no-bg" href="/chapter-05/02-display-a-notification/#sound">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/display-a-notification/#sound">Details &amp; Code</a>
 </p>
 
 ## Notification common practices
@@ -204,7 +204,7 @@ clicked on a notification.
 
 <p class="demo-btns">
   <button class="c-button js-open-window" disabled>Open Window</button>
-  <a class="c-button c-button--no-bg" href="/chapter-05/04-common-notification-patterns/#open-a-window">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/common-notification-patterns/#open-a-window">Details &amp; Code</a>
 </p>
 
 ### Focus or open a window
@@ -220,7 +220,7 @@ focused rather than open a new window.
 
 <p class="demo-btns">
   <button class="c-button js-focus-window" disabled>Focus a Window OR Open</button>
-  <a class="c-button c-button--no-bg" href="/chapter-05/04-common-notification-patterns/#focus-an-existing-window">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/common-notification-patterns/#focus-an-existing-window">Details &amp; Code</a>
 </p>
 
 ### Adding Data to a Notification
@@ -236,7 +236,7 @@ clicked.
 
 <p class="demo-btns">
   <button class="c-button js-data-notification" disabled>Adding Data to Notification</button>
-  <a class="c-button c-button--no-bg" href="/chapter-05/04-common-notification-patterns/#adding-data-to-a-notification">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/common-notification-patterns/#adding-data-to-a-notification">Details &amp; Code</a>
 </p>
 
 ### Merging Notifications Programmatically
@@ -254,7 +254,7 @@ to see what it does.
 
 <p class="demo-btns">
   <button class="c-button js-merge-notification" disabled>Merge Notification</button>
-  <a class="c-button c-button--no-bg" href="/chapter-05/04-common-notification-patterns/#merging-notifications">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/common-notification-patterns/#merging-notifications">Details &amp; Code</a>
 </p>
 
 ### Must show a Notification
@@ -270,7 +270,7 @@ notification.
 
 <p class="demo-btns">
   <button class="c-button js-must-show-notification" disabled>Must Show Notification (4s Delay)</button>
-  <a class="c-button c-button--no-bg" href="/chapter-05/04-common-notification-patterns/#the-exception-to-showing-a-notification">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/common-notification-patterns/#the-exception-to-the-rule">Details &amp; Code</a>
 </p>
 
 ###### Send a Message to the Page
@@ -282,7 +282,7 @@ to the page, which is printed to the console.
 
 <p class="demo-btns">
   <button class="c-button js-send-message-to-page" disabled>Send Message to Page (4s Delay)</button>
-  <a class="c-button c-button--no-bg" href="/chapter-05/04-common-notification-patterns/#message-page-from-a-push-event">Details &amp; Code</a>
+  <a class="c-button c-button--no-bg" href="/common-notification-patterns/#message-a-page-from-a-push-event">Details &amp; Code</a>
 </p>
 
 </div>

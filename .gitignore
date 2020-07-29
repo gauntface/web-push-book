@@ -2,3 +2,4 @@ public/
 node_modules/
 themes/
 resources/
+demos/node-server/subscription-store.db
