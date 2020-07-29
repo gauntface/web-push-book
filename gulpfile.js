@@ -86,8 +86,8 @@ gulp.task('build-base', gulp.series(
 ));
 
 gulp.task('build', gulp.series(
-  'build-base',
   'genimgs',
+  'build-base',
   'html-assetmanager',
   'minify-html',
   'copy-verification',
