@@ -6,7 +6,7 @@ weight: 9
 
 So far we've looked at the options that alter the visual appearance of a notification. There are also options that alter the behaviour of notifications.
 
-Be default, calling `showNotification()` with just visual options will have the following behaviours:
+By default, calling `showNotification()` with just visual options will have the following behaviours:
 
 - Clicking on the notification does nothing.
 - Each new notification is shown one after the other. The browser will not collapse the notifications in any way.
