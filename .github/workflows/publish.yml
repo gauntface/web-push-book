@@ -9,32 +9,34 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: master
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: '0.70.0'
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: '0.70.0'
 
-      - name: Setup Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: '^1.13.1'
+    - name: Setup Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '^1.13.1'
 
-      - name: Install go-html-asset-manager
-        run: |
-          go get -u github.com/gauntface/go-html-asset-manager/cmds/htmlassets/
-          go get -u github.com/gauntface/go-html-asset-manager/cmds/genimgs/
+    - name: Install go-html-asset-manager
+      run: |
+        go get -u github.com/gauntface/go-html-asset-manager/cmds/htmlassets/
+        go get -u github.com/gauntface/go-html-asset-manager/cmds/genimgs/
 
-      - uses: actions/checkout@v2
-        with:
-          ref: master
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-1
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-1
-
-      - name: Run publish script
-        run: ./publish.sh
+    - name: Publish to AWS
+      uses: gauntface/deploy-static-site-to-aws-action@master
+      with:
+        directory-to-publish: './public/'
+        bucket-name: 'www.gauntface.com'
