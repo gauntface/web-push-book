@@ -2,6 +2,7 @@ name: Publish
 
 # Run every Sunday @ 03:00 UTC => 20:00 PST
 on:
+  workflow_dispatch:
   schedule:
     - cron:  '0 3 * * 0'
 
@@ -9,34 +10,40 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+    # Get the code
     - uses: actions/checkout@v2
       with:
         ref: master
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
-      with:
-        hugo-version: '0.70.0'
-
-    - name: Setup Go
+    # Install dependencies
+    - name: Install Go
       uses: actions/setup-go@v2
       with:
         go-version: '^1.13.1'
-
+    - name: Install Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: '0.74.3'
     - name: Install go-html-asset-manager
       run: |
         go get -u github.com/gauntface/go-html-asset-manager/cmds/htmlassets/
         go get -u github.com/gauntface/go-html-asset-manager/cmds/genimgs/
+    - name: Install NPM Deps
+      run: npm install
 
+    # Build it
+    - name: Build
+      run: npm run build
+      env:
+        VIMEO_TOKEN: ${{ secrets.VIMEO_TOKEN }}
+
+    # Deploy to AWS
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-1
-
     - name: Publish to AWS
-      uses: gauntface/deploy-static-site-to-aws-action@master
-      with:
-        directory-to-publish: './public/'
-        bucket-name: 'www.gauntface.com'
+      run: npx --package @gauntface/cli gauntface aws s3 deploy-static-site --directory="./public/" --bucket_name="web-push-book.gauntface.com"
+      shell: bash
