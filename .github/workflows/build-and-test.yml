@@ -1,3 +1,4 @@
+
 name: Build and Test
 
 on: push
@@ -6,26 +7,25 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
+    # Get the code
+    - uses: actions/checkout@v2
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
-      with:
-        hugo-version: '0.72.0'
-
-    - name: Setup Go
+    # Install dependencies
+    - name: Install Go
       uses: actions/setup-go@v2
       with:
         go-version: '^1.13.1'
-
-    - name: Get go-html-asset-manager
+    - name: Install Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: '0.74.3'
+    - name: Install go-html-asset-manager
       run: |
         go get -u github.com/gauntface/go-html-asset-manager/cmds/htmlassets/
         go get -u github.com/gauntface/go-html-asset-manager/cmds/genimgs/
-
-    - uses: actions/checkout@v2
-    
-    - name: Install
+    - name: Install NPM Deps
       run: npm install
-    
+
+    # Build it
     - name: Build
       run: npm run build
