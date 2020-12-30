@@ -13,6 +13,7 @@ steps look at [.github/workflows/publish.yml](https://github.com/gauntface/web-p
 
 - Node
 - Golang
+- Hugo (specific version enforced by gulp)
 
 ```
 $ go get -u github.com/gauntface/go-html-asset-manager/cmds/htmlassets/
