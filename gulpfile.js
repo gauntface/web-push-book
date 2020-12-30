@@ -8,7 +8,7 @@ const clean = require('@hopin/wbt-clean');
 const htmlmin = require('gulp-htmlmin');
 const ham = require('@gauntface/html-asset-manager');
 
-const desiredHugoVersion = 'v0.74.3';
+const desiredHugoVersion = 'v0.79.0';
 
 /**
  * Themes
