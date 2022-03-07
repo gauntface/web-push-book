@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # Get the code
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     # Install dependencies
     - name: Install Go
