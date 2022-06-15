@@ -1,6 +1,5 @@
 {
-  "automerge": true,
-  "extends": [
-    "config:base"
-  ]
+    "extends": [
+      "local>gauntface/.github:renovate-config"
+    ]
 }
