@@ -6,15 +6,15 @@
     "test": "echo 'No tests in project'"
   },
   "dependencies": {
-    "@hopin/hugo-base-theme": "0.0.342"
+    "@hopin/hugo-base-theme": "0.0.353"
   },
   "devDependencies": {
     "@gauntface/html-asset-manager": "1.0.4",
-    "@gauntface/hugo-node": "1.0.20",
-    "@gauntface/web-push-book-theme": "1.0.35",
+    "@gauntface/hugo-node": "1.0.21",
+    "@gauntface/web-push-book-theme": "1.0.59",
     "@hopin/wbt-clean": "0.0.126",
-    "browser-sync": "2.26.13",
-    "fs-extra": "9.0.1",
+    "browser-sync": "2.29.3",
+    "fs-extra": "11.1.1",
     "gulp": "4.0.2",
     "gulp-htmlmin": "5.0.1"
   },
